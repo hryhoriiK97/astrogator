@@ -1,0 +1,38 @@
+{
+  "name": "astrogator",
+  "version": "1.0.0",
+  "repository": "git@github.com:hryhoriiK97/astrogator.git",
+  "author": "hryhoriiK97 <gregory.moskaliuk@tdsoft.pl>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "bootstrap": "yarn",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\"",
+    "clean": "turbo run clean && rimraf node_modules"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged --concurrent false"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@tdsoft/commitlint-config": "1.0.0",
+    "@tdsoft/prettier-config": "1.0.2",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "2.8.1",
+    "prettier-plugin-organize-imports": "^3.2.1",
+    "rimraf": "3.0.2",
+    "turbo": "latest"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}
