@@ -1,4 +1,7 @@
 import {StyleSheet} from 'react-native';
+import {getRelativeUnits} from '../../utils/getRelativeUnits';
+
+const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   carouselContainer: {
@@ -8,17 +11,17 @@ export const styles = StyleSheet.create({
   imageWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 16,
+    borderRadius: 16 * bp,
     shadowColor: '#000',
     shadowOpacity: 1,
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowRadius: 20,
+    shadowRadius: 20 * bp,
   },
   image: {
     resizeMode: 'cover',
-    borderRadius: 16,
+    borderRadius: 16 * bp,
   },
 });
