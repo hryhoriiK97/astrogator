@@ -2406,7 +2406,7 @@
     resolve-from "^5.0.0"
     ts-dedent "^1.1.0"
 
-"@storybook/theming@6.5.14", "@storybook/theming@^6.5.14":
+"@storybook/theming@6.5.14":
   version "6.5.14"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.5.14.tgz#4cc7e568b9641112f35abe0606cc6925952cb647"
   integrity sha512-3ff6RLZGaIil/AFJ0/BRlE2hhdPrC5v6wGbRfroZVmGldRCxio/7+KAA3LH6cuHnjK5MeBcCBaHuxzXqGmbEFw==

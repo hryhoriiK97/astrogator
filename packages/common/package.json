@@ -2,12 +2,6 @@
   "name": "@astrogator/common",
   "version": "0.0.1",
   "private": true,
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
-  "module": "src/index.ts",
-  "files": [
-    "src/index.ts"
-  ],
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -31,7 +25,6 @@
     "@storybook/addons": "^6.5.14",
     "@storybook/react-native": "^5.3.27",
     "@storybook/react-native-server": "5.3.23",
-    "@storybook/theming": "^6.5.14",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
     "@types/react": "^18.0.21",
