@@ -5,6 +5,6 @@ export const axios = _axios.create({
   timeout: 5000,
   baseURL: NASA_API_URL,
   headers: {
-    key: NASA_API_KEY,
+    api_key: NASA_API_KEY,
   },
 });
