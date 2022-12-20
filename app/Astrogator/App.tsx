@@ -1,11 +1,17 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import RootStack from './src/stacks/Root';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>App</Text>
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={{flex: 1}}>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+      </SafeAreaView>
+    </>
   );
 };
 export default App;

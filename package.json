@@ -39,7 +39,17 @@
       "**/react",
       "**/react-dom",
       "**/react-native",
-      "**/react-native/**"
+      "**/react-native/**",
+      "**/@react-navigation/native",
+      "**/@react-navigation/native/**",
+      "**/react-native-screens",
+      "**/react-native-screens/**",
+      "**/react-native-safe-area-context",
+      "**/react-native-safe-area-context/**",
+      "**/@react-navigation/native-stack",
+      "**/@react-navigation/native-stack/**",
+      "**/@react-navigation/bottom-tabs",
+      "**/@react-navigation/bottom-tabs/**"
     ]
   },
   "engines": {
