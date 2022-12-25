@@ -12,7 +12,11 @@ const HomeStack: FC = () => {
       screenOptions={{headerShown: false}}
       initialRouteName={HomeStackRoutes.HomeScreen}>
       <Stack.Screen name={HomeStackRoutes.HomeScreen} component={HomeScreen} />
-      <Stack.Screen name={HomeStackRoutes.ApodScreen} component={ApodScreen} />
+      <Stack.Screen
+        name={HomeStackRoutes.ApodScreen}
+        options={{headerShown: false}}
+        component={ApodScreen}
+      />
     </Stack.Navigator>
   );
 };

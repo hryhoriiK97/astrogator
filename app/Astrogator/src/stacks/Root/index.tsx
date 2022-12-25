@@ -21,6 +21,7 @@ const RootStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarActiveTintColor: '#F60081',
         tabBarStyle: {
           backgroundColor: '#b3b3b3',
