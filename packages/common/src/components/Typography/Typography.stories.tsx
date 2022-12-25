@@ -1,8 +1,9 @@
 import {storiesOf} from '@storybook/react-native';
 import React from 'react';
 import CenterView from '../../../storybook/utils/CenterView';
-import Button from './Button';
+import Typography from './Typography';
+import {typographyPropsMock} from './Typography.mocks';
 
-storiesOf('Button', module)
+storiesOf('Typography', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('Default', () => <Button />);
+  .add('Default', () => <Typography {...typographyPropsMock} />);

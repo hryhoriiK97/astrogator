@@ -1,2 +1,2 @@
-import './components/Button/Button.stories';
 import './components/CoolCarousel/CoolCarousel.stories';
+import './components/Typography/Typography.stories';
