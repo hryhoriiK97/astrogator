@@ -39,8 +39,6 @@ const ApodScreen: FC = () => {
 
   const apodData: ApodResponse = apodResponse?.data;
 
-  console.log(apodData);
-
   return (
     <>
       <StatusBar barStyle={'light-content'} />
