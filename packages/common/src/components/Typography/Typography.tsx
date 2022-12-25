@@ -6,10 +6,11 @@ import {styles} from './Typography.styled';
 const Typography: React.FC<TypographyProps> = ({
   children,
   variant = SpaceMono.Regular,
+  style: customStyles,
   ...textProps
 }) => {
   return (
-    <Text style={styles(variant).text} {...textProps}>
+    <Text style={[styles(variant).text, customStyles]} {...textProps}>
       {children}
     </Text>
   );

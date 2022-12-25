@@ -29,6 +29,17 @@ export const styles = StyleSheet.create({
     marginBottom: 5 * bp,
   },
   controlsWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: 10 * bp,
+  },
+  pickButton: {
+    backgroundColor: 'red',
+    paddingVertical: 10 * bp,
+    paddingHorizontal: 15 * bp,
+  },
+  pickTitle: {
+    color: '#ffffff',
   },
 });
