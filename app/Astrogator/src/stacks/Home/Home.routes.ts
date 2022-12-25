@@ -2,6 +2,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
+  ApodScreen: undefined;
 };
 
 export type HomeStackNavigationProp =
@@ -11,4 +12,5 @@ export const HomeStackRoutes: {
   [route in keyof HomeStackParamList]: route;
 } = {
   HomeScreen: 'HomeScreen',
+  ApodScreen: 'ApodScreen',
 };

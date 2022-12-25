@@ -1,17 +1,32 @@
+import {
+  SpaceMono,
+  Typography,
+} from '@astrogator/common/src/components/Typography';
+import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
-import {Image, ImageBackground, View} from 'react-native';
-import ApodBackgroundImage from '../../../assets/images/apod-tile.jpg';
+import {Image, ImageBackground, Pressable} from 'react-native';
+import ApodTile from '../../../assets/images/apod-tile.jpg';
+import {
+  HomeStackNavigationProp,
+  HomeStackRoutes,
+} from '../../stacks/Home/Home.routes';
 import {styles} from './Apod.styled';
 
 const Apod: FC = () => {
+  const {navigate} = useNavigation<HomeStackNavigationProp>();
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={() => navigate(HomeStackRoutes.ApodScreen)}
+      style={styles.container}>
       <ImageBackground
         style={styles.imageBackground}
-        source={Image.resolveAssetSource(
-          ApodBackgroundImage,
-        )}></ImageBackground>
-    </View>
+        imageStyle={styles.image}
+        source={Image.resolveAssetSource(ApodTile)}>
+        <Typography variant={SpaceMono.Bold} style={styles.title}>
+          Astronomy Picture of the Day
+        </Typography>
+      </ImageBackground>
+    </Pressable>
   );
 };
 
