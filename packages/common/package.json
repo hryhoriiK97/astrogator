@@ -18,7 +18,8 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-svg": "*"
+    "react-native-svg": "*",
+    "react-native-fast-image": "^8.6.3"
   },
   "dependencies": {
     "react": "18.1.0",
