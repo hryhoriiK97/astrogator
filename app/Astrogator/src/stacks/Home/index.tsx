@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
+import ApodStack from '../Apod';
 import {HomeStackRoutes} from './Home.routes';
 import HomeScreen from './Home.screen';
-import ApodScreen from './screens/Apod/Apod.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,9 +13,9 @@ const HomeStack: FC = () => {
       initialRouteName={HomeStackRoutes.HomeScreen}>
       <Stack.Screen name={HomeStackRoutes.HomeScreen} component={HomeScreen} />
       <Stack.Screen
-        name={HomeStackRoutes.ApodScreen}
+        name={HomeStackRoutes.ApodStack}
         options={{headerShown: false}}
-        component={ApodScreen}
+        component={ApodStack}
       />
     </Stack.Navigator>
   );

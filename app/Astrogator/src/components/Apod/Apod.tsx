@@ -16,7 +16,7 @@ const Apod: FC = () => {
   const {navigate} = useNavigation<HomeStackNavigationProp>();
   return (
     <Pressable
-      onPress={() => navigate(HomeStackRoutes.ApodScreen)}
+      onPress={() => navigate(HomeStackRoutes.ApodStack)}
       style={styles.container}>
       <ImageBackground
         style={styles.imageBackground}

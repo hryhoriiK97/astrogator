@@ -20,7 +20,7 @@ import {useQuery} from 'react-query';
 import {axios} from '../../../../axios';
 import {BackButton} from '../../../../components/BackButton';
 import {ApodResponse} from '../../../../types/Apod';
-import {HomeStackNavigationProp} from '../../Home.routes';
+import {ApodStackNavigationProp} from '../../Apod.routes';
 import {styles} from './Apod.styled';
 
 enum ApodScreenQueryKey {
@@ -31,7 +31,7 @@ const ApodScreen: FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const navigation = useNavigation<HomeStackNavigationProp>();
+  const navigation = useNavigation<ApodStackNavigationProp>();
 
   const {
     data: apodResponse,
@@ -69,7 +69,9 @@ const ApodScreen: FC = () => {
         }
         style={styles.container}
         contentContainerStyle={styles.contentContainerStyle}>
-        <Image style={styles.image} source={{uri: apodData.hdurl}} />
+        <Pressable onLongPress={() => console.log('Long press')}>
+          <Image style={styles.image} source={{uri: apodData.hdurl}} />
+        </Pressable>
         <View style={styles.contentWrapper}>
           <Typography variant={SpaceMono.Bold} style={styles.title}>
             {apodData.title}
