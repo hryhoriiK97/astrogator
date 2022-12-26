@@ -1,7 +1,7 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type ApodStackParamList = {
-  ApodScren: undefined;
+  ApodScreen: undefined;
   FullSizeImageScreen: undefined;
 };
 
@@ -11,6 +11,6 @@ export type ApodStackNavigationProp =
 export const ApodStackRoutes: {
   [route in keyof ApodStackParamList]: route;
 } = {
-  ApodScren: 'ApodScren',
+  ApodScreen: 'ApodScreen',
   FullSizeImageScreen: 'FullSizeImageScreen',
 };

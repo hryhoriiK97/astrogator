@@ -10,8 +10,8 @@ const ApodStack: FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={ApodStackRoutes.ApodScren}>
-      <Stack.Screen name={ApodStackRoutes.ApodScren} component={ApodScreen} />
+      initialRouteName={ApodStackRoutes.ApodScreen}>
+      <Stack.Screen name={ApodStackRoutes.ApodScreen} component={ApodScreen} />
       <Stack.Screen
         name={ApodStackRoutes.FullSizeImageScreen}
         options={{headerShown: false}}
