@@ -8,7 +8,6 @@ import {format, isFuture, isToday} from 'date-fns';
 import React, {FC, useState} from 'react';
 import {
   ActivityIndicator,
-  Image,
   Pressable,
   RefreshControl,
   ScrollView,
@@ -16,6 +15,7 @@ import {
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import FastImage from 'react-native-fast-image';
 import {useQuery} from 'react-query';
 import {axios} from '../../../../axios';
 import {BackButton} from '../../../../components/BackButton';
@@ -30,6 +30,7 @@ enum ApodScreenQueryKey {
 const ApodScreen: FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [indicatorLoadingValue, setIndicatorLoadingValue] = useState(0);
 
   const navigation = useNavigation<ApodStackNavigationProp>();
 
@@ -67,16 +68,37 @@ const ApodScreen: FC = () => {
             }}
           />
         }
-        style={styles.container}
-        contentContainerStyle={styles.contentContainerStyle}>
+        style={styles().container}
+        contentContainerStyle={styles().contentContainerStyle}>
         <Pressable onLongPress={() => console.log('Long press')}>
-          <Image style={styles.image} source={{uri: apodData.hdurl}} />
+          <View style={styles().imageWrapper}>
+            <FastImage
+              style={styles().image}
+              source={{
+                uri: apodData.hdurl,
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.cover}
+              onLoad={() => setIndicatorLoadingValue(100)}
+              onProgress={e => {
+                const value =
+                  (e.nativeEvent.loaded / e.nativeEvent.total) * 100;
+                if (value > 0) {
+                  setIndicatorLoadingValue(value);
+                }
+                // console.log((e.nativeEvent.loaded / e.nativeEvent.total) * 100)
+              }}
+            />
+            <View style={styles().imageIndicatorWrapper}>
+              <View style={styles(indicatorLoadingValue).indicator} />
+            </View>
+          </View>
         </Pressable>
-        <View style={styles.contentWrapper}>
-          <Typography variant={SpaceMono.Bold} style={styles.title}>
+        <View style={styles().contentWrapper}>
+          <Typography variant={SpaceMono.Bold} style={styles().title}>
             {apodData.title}
           </Typography>
-          <View style={styles.imageInfoWrapper}>
+          <View style={styles().imageInfoWrapper}>
             <Typography variant={SpaceMono.Bold}>
               Author: {apodData.copyright || '-'}
             </Typography>
@@ -85,12 +107,12 @@ const ApodScreen: FC = () => {
             </Typography>
           </View>
           <Typography>{apodData.explanation}</Typography>
-          <View style={styles.controlsWrapper}>
+          <View style={styles().controlsWrapper}>
             <BackButton onPress={() => navigation.goBack()} />
             <Pressable
               onPress={() => setShowDatePicker(true)}
-              style={styles.pickButton}>
-              <Typography variant={SpaceMono.Bold} style={styles.pickTitle}>
+              style={styles().pickButton}>
+              <Typography variant={SpaceMono.Bold} style={styles().pickTitle}>
                 Pick APOD Date
               </Typography>
             </Pressable>
