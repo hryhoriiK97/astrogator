@@ -1,7 +1,4 @@
-import {
-  SpaceMono,
-  Typography,
-} from '@astrogator/common/src/components/Typography';
+import {SpaceMono, Typography} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {Image, ImageBackground, Pressable} from 'react-native';

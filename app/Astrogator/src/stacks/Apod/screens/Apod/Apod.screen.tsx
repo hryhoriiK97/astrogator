@@ -1,7 +1,4 @@
-import {
-  SpaceMono,
-  Typography,
-} from '@astrogator/common/src/components/Typography';
+import {SafeImage, SpaceMono, Typography} from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {useNavigation} from '@react-navigation/native';
 import {format, isFuture, isToday} from 'date-fns';
@@ -15,7 +12,6 @@ import {
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import FastImage from 'react-native-fast-image';
 import {useQuery} from 'react-query';
 import {axios} from '../../../../axios';
 import {BackButton} from '../../../../components/BackButton';
@@ -30,7 +26,6 @@ enum ApodScreenQueryKey {
 const ApodScreen: FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [indicatorLoadingValue, setIndicatorLoadingValue] = useState(0);
 
   const navigation = useNavigation<ApodStackNavigationProp>();
 
@@ -70,30 +65,12 @@ const ApodScreen: FC = () => {
         }
         style={styles().container}
         contentContainerStyle={styles().contentContainerStyle}>
-        <Pressable onLongPress={() => console.log('Long press')}>
-          <View style={styles().imageWrapper}>
-            <FastImage
-              style={styles().image}
-              source={{
-                uri: apodData.hdurl,
-                priority: FastImage.priority.normal,
-              }}
-              resizeMode={FastImage.resizeMode.cover}
-              onLoad={() => setIndicatorLoadingValue(100)}
-              onProgress={e => {
-                const value =
-                  (e.nativeEvent.loaded / e.nativeEvent.total) * 100;
-                if (value > 0) {
-                  setIndicatorLoadingValue(value);
-                }
-                // console.log((e.nativeEvent.loaded / e.nativeEvent.total) * 100)
-              }}
-            />
-            <View style={styles().imageIndicatorWrapper}>
-              <View style={styles(indicatorLoadingValue).indicator} />
-            </View>
-          </View>
-        </Pressable>
+        <SafeImage
+          source={{
+            uri: apodData.hdurl,
+          }}
+          defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+        />
         <View style={styles().contentWrapper}>
           <Typography variant={SpaceMono.Bold} style={styles().title}>
             {apodData.title}

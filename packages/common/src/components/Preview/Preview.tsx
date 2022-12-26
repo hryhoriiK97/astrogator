@@ -3,11 +3,11 @@ import {
   Animated,
   Easing,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import {FormArrow} from '../../../assets/svgs/Arrow';
+import {Typography} from '../Typography';
 import {styles} from './Preview.styled';
 
 const Preview: React.FC = () => {
@@ -48,7 +48,7 @@ const Preview: React.FC = () => {
             {opacity: fadeAnim},
             // {transform: [{translateX: fadeAnim}]},
           ]}>
-          <Text style={styles.previewText}>Swap</Text>
+          <Typography style={styles.previewText}>Swap</Typography>
           <Animated.View style={[styles.iconWrapper]}>
             <FormArrow />
           </Animated.View>
