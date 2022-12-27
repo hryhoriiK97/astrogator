@@ -5,4 +5,5 @@ export const safeImagePropsMock: SafeImageProps = {
     uri: 'https://apod.nasa.gov/apod/image/2212/J7A6402-Edit-copy-sharpened.jpg',
   },
   defaultSource: require('../../../assets/imgs/space-shuttle.jpeg'),
+  linearGradientColors: ['red', 'blue'],
 };

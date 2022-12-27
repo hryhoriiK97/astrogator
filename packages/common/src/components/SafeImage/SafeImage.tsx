@@ -1,12 +1,14 @@
 import React, {FC, useState} from 'react';
 import {View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
 import {SafeImageProps} from './SafeImage.props';
 import {styles} from './SafeImage.styled';
 
 const SafeImage: FC<SafeImageProps> = ({
   source,
   defaultSource,
+  linearGradientColors,
   imageStyle,
   imageWrapperStyle,
 }) => {
@@ -28,7 +30,10 @@ const SafeImage: FC<SafeImageProps> = ({
         }}
       />
       <View style={styles().imageIndicatorWrapper}>
-        <View style={styles(indicatorLoadingValue).indicator} />
+        <LinearGradient
+          colors={linearGradientColors}
+          style={styles(indicatorLoadingValue).indicator}
+        />
       </View>
     </View>
   );

@@ -70,6 +70,7 @@ const ApodScreen: FC = () => {
             uri: apodData.hdurl,
           }}
           defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+          linearGradientColors={['#ff00cc', '#333399']}
         />
         <View style={styles().contentWrapper}>
           <Typography variant={SpaceMono.Bold} style={styles().title}>
