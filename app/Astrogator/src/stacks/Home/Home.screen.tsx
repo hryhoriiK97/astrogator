@@ -1,13 +1,18 @@
 import React, {FC} from 'react';
-import {SafeAreaView} from 'react-native';
+import {Image, ImageBackground, SafeAreaView} from 'react-native';
+import BgImage from '../../../assets/images/bg.jpg';
 import {Apod} from '../../components/Apod';
 import {styles} from './Home.styled';
 
 const HomeScreen: FC = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Apod />
-    </SafeAreaView>
+    <ImageBackground
+      source={Image.resolveAssetSource(BgImage)}
+      style={styles.backgroundImage}>
+      <SafeAreaView style={styles.container}>
+        <Apod />
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 

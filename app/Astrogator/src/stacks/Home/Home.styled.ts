@@ -8,4 +8,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 24 * bp,
   },
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
+  },
 });

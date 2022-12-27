@@ -5,7 +5,8 @@ const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: 'white',
+    position: 'relative',
+    backgroundColor: '#ffffff',
     height: Platform.OS === MobilePlatform.Android ? 65 * bp : 80 * bp,
   },
   activeBackground: {
@@ -33,5 +34,12 @@ export const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  blurSvgStyle: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });
