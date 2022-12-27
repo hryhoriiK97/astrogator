@@ -41,6 +41,6 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffff',
-    fontSize: 19 * bp,
+    fontSize: 17 * bp,
   },
 });
