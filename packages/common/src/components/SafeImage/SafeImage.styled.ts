@@ -10,7 +10,7 @@ export const styles = (indicatorValue?: number) =>
     },
     imageIndicatorWrapper: {
       width: '100%',
-      height: 4 * bp,
+      height: 10 * bp,
     },
     indicator: {
       width: `${indicatorValue}%`,

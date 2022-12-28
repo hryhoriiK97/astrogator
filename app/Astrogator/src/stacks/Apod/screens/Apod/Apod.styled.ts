@@ -1,9 +1,10 @@
 import {getRelativeUnits} from '@astrogator/common';
 import {StyleSheet} from 'react-native';
+import {AstrogatorColor} from '../../../../theming/theme';
 
 const {bp} = getRelativeUnits();
 
-export const styles = (indicatorValue?: number) =>
+export const styles = () =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -11,19 +12,24 @@ export const styles = (indicatorValue?: number) =>
     contentContainerStyle: {
       paddingBottom: 40 * bp,
     },
-    imageWrapper: {},
-    imageIndicatorWrapper: {
-      width: '100%',
-      height: 4 * bp,
+    imageWrapper: {
+      position: 'relative',
     },
-    indicator: {
-      width: `${indicatorValue}%`,
-      height: `100%`,
-      backgroundColor: 'red',
+    backButton: {
+      position: 'absolute',
+      top: 20 * bp,
+      left: 0,
+      paddingHorizontal: 8 * bp,
+      paddingTop: 29 * bp,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      zIndex: 3,
     },
-    image: {
-      width: '100%',
-      height: 300 * bp,
+    backButtonTitle: {
+      fontSize: 17 * bp,
+      lineHeight: 22 * bp,
+      color: '#ffffff',
     },
     imageInfoWrapper: {
       marginBottom: 10 * bp,
@@ -34,19 +40,19 @@ export const styles = (indicatorValue?: number) =>
     },
     title: {
       fontSize: 25 * bp,
-      textShadowColor: 'rgba(0, 0, 0, 0.75)',
       textShadowOffset: {width: -1, height: 1},
       textShadowRadius: 4,
       marginBottom: 5 * bp,
     },
-    controlsWrapper: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginTop: 10 * bp,
-    },
     pickButton: {
-      backgroundColor: 'red',
+      width: '100%',
+      marginTop: 15 * bp,
+      alignItems: 'center',
+      borderRadius: 10 * bp,
+      backgroundColor: AstrogatorColor.BlueViolet,
+      borderWidth: 2,
+      borderStyle: 'solid',
+      borderColor: AstrogatorColor.DarkPurple,
       paddingVertical: 10 * bp,
       paddingHorizontal: 15 * bp,
     },

@@ -5,16 +5,20 @@ import {format, isFuture, isToday} from 'date-fns';
 import React, {FC, useState} from 'react';
 import {
   ActivityIndicator,
+  ImageBackground,
   Pressable,
   RefreshControl,
   ScrollView,
   StatusBar,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {useQuery} from 'react-query';
+import ApodBackground from '../../../../../assets/images/bg.jpg';
+import {Arrow} from '../../../../../assets/svgs/Arrow';
 import {axios} from '../../../../axios';
-import {BackButton} from '../../../../components/BackButton';
+import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/Apod';
 import {ApodStackNavigationProp} from '../../Apod.routes';
 import {styles} from './Apod.styled';
@@ -52,7 +56,10 @@ const ApodScreen: FC = () => {
   const apodData: ApodResponse = apodResponse?.data;
 
   return (
-    <>
+    <ImageBackground
+      source={ApodBackground}
+      blurRadius={5}
+      style={{width: '100%', height: '100%'}}>
       <StatusBar barStyle={'light-content'} />
       <ScrollView
         refreshControl={
@@ -65,36 +72,50 @@ const ApodScreen: FC = () => {
         }
         style={styles().container}
         contentContainerStyle={styles().contentContainerStyle}>
-        <SafeImage
-          source={{
-            uri: apodData.hdurl,
-          }}
-          defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
-          linearGradientColors={['#ff00cc', '#333399']}
-        />
+        <View style={styles().imageWrapper}>
+          <SafeImage
+            source={{
+              uri: apodData.hdurl,
+            }}
+            defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+            linearGradientColors={['#000428', '#004e92']}
+          />
+          <TouchableOpacity
+            style={styles().backButton}
+            onPress={() => navigation.goBack()}>
+            <Arrow />
+            <Typography
+              style={styles().backButtonTitle}
+              color={AstrogatorColor.White}>
+              Back
+            </Typography>
+          </TouchableOpacity>
+        </View>
         <View style={styles().contentWrapper}>
-          <Typography variant={SpaceMono.Bold} style={styles().title}>
+          <Typography
+            color={AstrogatorColor.White}
+            variant={SpaceMono.Bold}
+            style={styles().title}>
             {apodData.title}
           </Typography>
           <View style={styles().imageInfoWrapper}>
-            <Typography variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
               Author: {apodData.copyright || '-'}
             </Typography>
-            <Typography variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
               Date: {apodData.date}
             </Typography>
           </View>
-          <Typography>{apodData.explanation}</Typography>
-          <View style={styles().controlsWrapper}>
-            <BackButton onPress={() => navigation.goBack()} />
-            <Pressable
-              onPress={() => setShowDatePicker(true)}
-              style={styles().pickButton}>
-              <Typography variant={SpaceMono.Bold} style={styles().pickTitle}>
-                Pick APOD Date
-              </Typography>
-            </Pressable>
-          </View>
+          <Typography color={AstrogatorColor.White}>
+            {apodData.explanation}
+          </Typography>
+          <Pressable
+            onPress={() => setShowDatePicker(true)}
+            style={styles().pickButton}>
+            <Typography variant={SpaceMono.Bold} style={styles().pickTitle}>
+              Pick APOD Date
+            </Typography>
+          </Pressable>
         </View>
       </ScrollView>
 
@@ -116,7 +137,7 @@ const ApodScreen: FC = () => {
           setShowDatePicker(false);
         }}
       />
-    </>
+    </ImageBackground>
   );
 };
 

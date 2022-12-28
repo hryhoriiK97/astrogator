@@ -10,7 +10,9 @@ const Typography: React.FC<TypographyProps> = ({
   ...textProps
 }) => {
   return (
-    <Text style={[styles(variant).text, customStyles]} {...textProps}>
+    <Text
+      style={[styles(variant, textProps.color).text, customStyles]}
+      {...textProps}>
       {children}
     </Text>
   );
