@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Image, ImageBackground, SafeAreaView} from 'react-native';
-import BgImage from '../../../assets/images/bg.jpg';
+import BgImage from '../../../assets/images/bg-image.png';
 import {Apod} from '../../components/Apod';
 import {styles} from './Home.styled';
 

@@ -14,6 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Svg, {Path} from 'react-native-svg';
+import {AstrogatorColor} from '../../theming/theme';
 import {styles} from './AnimatedTabBar.styled';
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
@@ -68,22 +69,24 @@ const AnimatedTabBar = ({
 
   return (
     <View style={[styles.tabBar, {paddingBottom: bottom}]}>
-      <AnimatedSvg
-        width={110}
-        height={60}
-        viewBox="0 0 110 60"
-        style={[styles.activeBackground, animatedStyles]}>
-        <Path
-          fill="#604AE6"
-          d="M20 0H0c11.046 0 20 8.953 21 20v5c0 19.33 15.67 35 35 35s35-15.67 35-35v-5c0-11.045 8.954-20 20-20H20z"
+      <View>
+        <AnimatedSvg
+          width={110}
+          height={60}
+          viewBox="0 0 110 60"
+          style={[styles.activeBackground, animatedStyles]}>
+          <Path
+            fill={AstrogatorColor.MiddleRedPurple}
+            d="M20 0H0c11.046 0 20 8.953 21 20v5c0 19.33 15.67 35 35 35s35-15.67 35-35v-5c0-11.045 8.954-20 20-20H20z"
+          />
+        </AnimatedSvg>
+        <BlurView
+          style={styles.blurSvgStyle}
+          blurType="light"
+          blurAmount={10}
+          reducedTransparencyFallbackColor="transparent"
         />
-      </AnimatedSvg>
-      <BlurView
-        style={styles.blurSvgStyle}
-        blurType="light"
-        blurAmount={10}
-        reducedTransparencyFallbackColor="transparent"
-      />
+      </View>
 
       <View style={styles.tabBarContainer}>
         {routes.map((route, index) => {

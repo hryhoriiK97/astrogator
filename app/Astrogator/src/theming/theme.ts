@@ -1,8 +1,9 @@
 export enum AstrogatorColor {
   White = '#ffffff',
-  BlueViolet = '#671A8Aff',
-  DarkPurple = '#0E0628ff',
-  Violet = '#210E3Fff',
-  DarkOrchid = '#8C42D1ff',
-  VioletLighter = '#220939ff',
+  //OrionPurpleHaze
+  MiddleRedPurple = '#210535',
+  VelvetCosmos = '#430d4b',
+  MaximumPurple = '#7b337d',
+  SkyMagneta = '#c874b2',
+  PomodoroEMozzarella = '#f5d5e0',
 }

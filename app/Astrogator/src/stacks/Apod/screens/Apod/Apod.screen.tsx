@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {useQuery} from 'react-query';
-import ApodBackground from '../../../../../assets/images/bg.jpg';
+import ApodBackground from '../../../../../assets/images/bg-image.png';
 import {Arrow} from '../../../../../assets/svgs/Arrow';
 import {axios} from '../../../../axios';
 import {AstrogatorColor} from '../../../../theming/theme';
@@ -78,7 +78,11 @@ const ApodScreen: FC = () => {
               uri: apodData.hdurl,
             }}
             defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
-            linearGradientColors={['#000428', '#004e92']}
+            linearGradientColors={[
+              AstrogatorColor.MiddleRedPurple,
+              AstrogatorColor.VelvetCosmos,
+              AstrogatorColor.MaximumPurple,
+            ]}
           />
           <TouchableOpacity
             style={styles().backButton}
@@ -86,27 +90,31 @@ const ApodScreen: FC = () => {
             <Arrow />
             <Typography
               style={styles().backButtonTitle}
-              color={AstrogatorColor.White}>
+              color={AstrogatorColor.PomodoroEMozzarella}>
               Back
             </Typography>
           </TouchableOpacity>
         </View>
         <View style={styles().contentWrapper}>
           <Typography
-            color={AstrogatorColor.White}
+            color={AstrogatorColor.PomodoroEMozzarella}
             variant={SpaceMono.Bold}
             style={styles().title}>
             {apodData.title}
           </Typography>
           <View style={styles().imageInfoWrapper}>
-            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+            <Typography
+              color={AstrogatorColor.PomodoroEMozzarella}
+              variant={SpaceMono.Bold}>
               Author: {apodData.copyright || '-'}
             </Typography>
-            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+            <Typography
+              color={AstrogatorColor.PomodoroEMozzarella}
+              variant={SpaceMono.Bold}>
               Date: {apodData.date}
             </Typography>
           </View>
-          <Typography color={AstrogatorColor.White}>
+          <Typography color={AstrogatorColor.PomodoroEMozzarella}>
             {apodData.explanation}
           </Typography>
           <Pressable

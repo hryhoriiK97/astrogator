@@ -2,7 +2,7 @@ import {SpaceMono, Typography} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {Image, ImageBackground, Pressable} from 'react-native';
-import ApodTile from '../../../assets/images/apod-tile-2.jpg';
+import ApodTile from '../../../assets/images/apod-tile.jpg';
 import {
   HomeStackNavigationProp,
   HomeStackRoutes,
