@@ -17,7 +17,7 @@ import DatePicker from 'react-native-date-picker';
 import {useQuery} from 'react-query';
 import ApodBackground from '../../../../../assets/images/bg-image.png';
 import {Arrow} from '../../../../../assets/svgs/Arrow';
-import {axios} from '../../../../axios';
+import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/Apod';
 import {ApodStackNavigationProp} from '../../Apod.routes';
@@ -40,7 +40,7 @@ const ApodScreen: FC = () => {
     refetch: apodRefetch,
     isRefetching: isApodRefetching,
   } = useQuery(ApodScreenQueryKey.Apod, () =>
-    axios.get(
+    apodAxiosInstance.get(
       `/planetary/apod?api_key=${NASA_API_KEY}${
         !isToday(selectedDate) && !isFuture(selectedDate)
           ? '&date=' + format(selectedDate, 'yyyy-MM-dd')

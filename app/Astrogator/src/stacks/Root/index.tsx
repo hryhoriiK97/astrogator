@@ -5,6 +5,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {AnimatedTabBar} from '../../components/AnimatedTabBar';
 import HomeStack from '../Home';
+import VideosStack from '../Videos';
 
 const {bp} = getRelativeUnits();
 
@@ -57,7 +58,7 @@ const RootStack = () => {
             />
           ),
         }}
-        component={HomeStack}
+        component={VideosStack}
       />
       <Tab.Screen
         name="Chat"
