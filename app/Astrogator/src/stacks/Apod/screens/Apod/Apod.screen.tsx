@@ -27,6 +27,20 @@ enum ApodScreenQueryKey {
   Apod = 'apod',
 }
 
+function YouTubeGetID(url: string) {
+  let ID = '';
+  url = url
+    .replace(/(>|<)/gi, '')
+    .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+  if (url[2] !== undefined) {
+    ID = url[2].split(/[^0-9a-z_\-]/i);
+    ID = ID[0];
+  } else {
+    ID = url;
+  }
+  return ID;
+}
+
 const ApodScreen: FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -72,29 +86,44 @@ const ApodScreen: FC = () => {
         }
         style={styles().container}
         contentContainerStyle={styles().contentContainerStyle}>
-        <View style={styles().imageWrapper}>
-          <SafeImage
-            source={{
-              uri: apodData.hdurl,
-            }}
-            defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
-            linearGradientColors={[
-              AstrogatorColor.MiddleRedPurple,
-              AstrogatorColor.VelvetCosmos,
-              AstrogatorColor.MaximumPurple,
-            ]}
-          />
+        {apodData.media_type === 'image' ? (
+          <View style={styles().imageWrapper}>
+            <SafeImage
+              source={{
+                uri: apodData.hdurl,
+              }}
+              defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+              linearGradientColors={[
+                AstrogatorColor.MiddleRedPurple,
+                AstrogatorColor.VelvetCosmos,
+                AstrogatorColor.MaximumPurple,
+              ]}
+            />
+            <TouchableOpacity
+              style={styles().backButton}
+              onPress={() => navigation.goBack()}>
+              <Arrow />
+              <Typography
+                style={styles().backButtonTitle}
+                color={AstrogatorColor.PomodoroEMozzarella}>
+                Back
+              </Typography>
+            </TouchableOpacity>
+          </View>
+        ) : (
           <TouchableOpacity
-            style={styles().backButton}
-            onPress={() => navigation.goBack()}>
-            <Arrow />
-            <Typography
-              style={styles().backButtonTitle}
-              color={AstrogatorColor.PomodoroEMozzarella}>
-              Back
-            </Typography>
+            style={{marginTop: 50}}
+            onPress={() => {
+              navigation.navigate('VideoPlayerStack', {
+                screen: 'VideoPlayerScreen',
+                params: {
+                  videoUri: apodData.url,
+                },
+              });
+            }}>
+            <Typography>Video</Typography>
           </TouchableOpacity>
-        </View>
+        )}
         <View style={styles().contentWrapper}>
           <Typography
             color={AstrogatorColor.PomodoroEMozzarella}
