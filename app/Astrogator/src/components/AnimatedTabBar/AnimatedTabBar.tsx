@@ -54,7 +54,7 @@ const AnimatedTabBar = ({
     // 5 pixels come from the little gap between the active background and the circle of the TabBar Components
     return (
       [...layout].find(({index}) => index === activeIndex)!.x -
-      (Platform.OS === MobilePlatform.IOS ? 25 : 27)
+      (Platform.OS === MobilePlatform.IOS ? 25 : 25)
     );
     // Calculate the offset new if the activeIndex changes (e.g. when a new tab is selected)
     // or the layout changes (e.g. when the components haven't finished rendering yet)
