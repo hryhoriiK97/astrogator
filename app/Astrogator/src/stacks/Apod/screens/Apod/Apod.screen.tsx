@@ -5,15 +5,16 @@ import {format, isFuture, isToday} from 'date-fns';
 import React, {FC, useState} from 'react';
 import {
   ActivityIndicator,
+  Dimensions,
   ImageBackground,
   Pressable,
   RefreshControl,
   ScrollView,
-  StatusBar,
   TouchableOpacity,
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
 import ApodBackground from '../../../../../assets/images/bg-image.png';
 import {Arrow} from '../../../../../assets/svgs/Arrow';
@@ -22,6 +23,8 @@ import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/Apod';
 import {ApodStackNavigationProp} from '../../Apod.routes';
 import {styles} from './Apod.styled';
+
+const PlayerHeight = Dimensions.get('window').width * (9 / 16);
 
 enum ApodScreenQueryKey {
   Apod = 'apod',
@@ -74,7 +77,6 @@ const ApodScreen: FC = () => {
       source={ApodBackground}
       blurRadius={5}
       style={{width: '100%', height: '100%'}}>
-      <StatusBar barStyle={'light-content'} />
       <ScrollView
         refreshControl={
           <RefreshControl
@@ -111,18 +113,13 @@ const ApodScreen: FC = () => {
             </TouchableOpacity>
           </View>
         ) : (
-          <TouchableOpacity
-            style={{marginTop: 50}}
-            onPress={() => {
-              navigation.navigate('VideoPlayerStack', {
-                screen: 'VideoPlayerScreen',
-                params: {
-                  videoUri: apodData.url,
-                },
-              });
-            }}>
-            <Typography>Video</Typography>
-          </TouchableOpacity>
+          <>
+            <View style={{height: 50}} />
+            <YoutubePlayer
+              height={PlayerHeight}
+              videoId={YouTubeGetID(apodData.url)}
+            />
+          </>
         )}
         <View style={styles().contentWrapper}>
           <Typography
