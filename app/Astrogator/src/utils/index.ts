@@ -1,0 +1,1 @@
+export {getYouTubeVideoId} from './getYouTubeVideoId';

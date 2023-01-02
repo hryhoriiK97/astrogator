@@ -21,27 +21,14 @@ import {Arrow} from '../../../../../assets/svgs/Arrow';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/Apod';
+import {getYouTubeVideoId} from '../../../../utils';
 import {ApodStackNavigationProp} from '../../Apod.routes';
 import {styles} from './Apod.styled';
 
-const PlayerHeight = Dimensions.get('window').width * (9 / 16);
+const YOUTUBE_PLAYER_HEIGHT = Dimensions.get('window').width * (9 / 16);
 
 enum ApodScreenQueryKey {
   Apod = 'apod',
-}
-
-function YouTubeGetID(url: string) {
-  let ID = '';
-  url = url
-    .replace(/(>|<)/gi, '')
-    .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-  if (url[2] !== undefined) {
-    ID = url[2].split(/[^0-9a-z_\-]/i);
-    ID = ID[0];
-  } else {
-    ID = url;
-  }
-  return ID;
 }
 
 const ApodScreen: FC = () => {
@@ -116,8 +103,8 @@ const ApodScreen: FC = () => {
           <>
             <View style={{height: 50}} />
             <YoutubePlayer
-              height={PlayerHeight}
-              videoId={YouTubeGetID(apodData.url)}
+              height={YOUTUBE_PLAYER_HEIGHT}
+              videoId={getYouTubeVideoId(apodData.url)}
             />
           </>
         )}
