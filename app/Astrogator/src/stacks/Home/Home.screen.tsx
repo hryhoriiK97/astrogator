@@ -1,4 +1,4 @@
-import {HomeTile} from '@astrogator/common';
+import {Divider, DividerVariant, HomeTile} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {Image, ImageBackground, SafeAreaView} from 'react-native';
@@ -20,6 +20,7 @@ const HomeScreen: FC = () => {
           imageSource={Image.resolveAssetSource(ApodTile)}
           onPress={() => navigate(HomeStackRoutes.ApodStack)}
         />
+        <Divider variant={DividerVariant.Divider_15_Vertical} />
         <HomeTile
           title={'Mars Rover Images'}
           imageSource={Image.resolveAssetSource(MarsRoverImage)}
