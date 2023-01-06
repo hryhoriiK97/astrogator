@@ -5,6 +5,7 @@ import {
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
+import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {
   ActivityIndicator,
@@ -17,14 +18,19 @@ import {useQuery} from 'react-query';
 import BgImage from '../../../../../assets/images/bg-image.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
+import {
+  MarsRoversStackNavigationProp,
+  MarsRoversStackRoutes,
+} from '../../MarsRovers.routes';
+import {MarsRover, marsRoverImages} from '../../MarsRovers.utils';
 import {styles} from './MarsRovers.styled';
-import {MarsRover, marsRoverImages} from './MarsRovers.utils';
 
 enum MarsRoverPhotosQueryKey {
   MarsRovers = 'MarsRovers',
 }
 
 const MarsRoversScreen: FC = () => {
+  const {navigate} = useNavigation<MarsRoversStackNavigationProp>();
   const {
     data: marsRovesResponse,
     isLoading: isMarsRoversLoading,
@@ -46,7 +52,12 @@ const MarsRoversScreen: FC = () => {
       <MarsRoverItem
         name={item.name}
         imageSource={marsRoverImages[item.name.toLowerCase() as MarsRover]}
-        onPress={console.log}
+        onPress={() =>
+          navigate(MarsRoversStackRoutes.MarsRoverPhotosScreen, {
+            rover: item,
+          })
+        }
+        //TODO
         onLongPress={console.log}
       />
     );

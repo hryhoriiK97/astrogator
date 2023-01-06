@@ -10,15 +10,14 @@ import {
   Pressable,
   RefreshControl,
   ScrollView,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
 import ApodBackground from '../../../../../assets/images/bg-image.png';
-import {Arrow} from '../../../../../assets/svgs/Arrow';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
+import {BackButton} from '../../../../components/BackButton';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
@@ -88,16 +87,7 @@ const ApodScreen: FC = () => {
                 AstrogatorColor.MaximumPurple,
               ]}
             />
-            <TouchableOpacity
-              style={styles().backButton}
-              onPress={() => navigation.goBack()}>
-              <Arrow />
-              <Typography
-                style={styles().backButtonTitle}
-                color={AstrogatorColor.PomodoroEMozzarella}>
-                Back
-              </Typography>
-            </TouchableOpacity>
+            <BackButton onPress={() => navigation.goBack()} />
           </View>
         ) : (
           <>

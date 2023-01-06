@@ -4,13 +4,20 @@ import {StyleSheet} from 'react-native';
 const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
-  button: {
-    width: 50 * bp,
-    height: 50 * bp,
-    borderRadius: 50 * bp,
-    display: 'flex',
+  backButton: {
+    position: 'absolute',
+    top: 20 * bp,
+    left: 0,
+    paddingHorizontal: 8 * bp,
+    paddingTop: 29 * bp,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
+    flexDirection: 'row',
+    zIndex: 3,
+  },
+  backButtonTitle: {
+    fontSize: 17 * bp,
+    lineHeight: 22 * bp,
+    color: '#ffffff',
   },
 });

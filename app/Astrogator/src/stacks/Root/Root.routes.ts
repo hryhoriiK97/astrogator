@@ -1,7 +1,7 @@
 import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {HomeStackParamList} from '../Home/Home.routes';
-import {MarsRoversStackParamList} from '../MarsRovers/MarsRoverPhotos.routes';
+import {MarsRoversStackParamList} from '../MarsRovers/MarsRovers.routes';
 import {VideosStackParamList} from '../Videos/Videos.routes';
 
 export type RootStackParamList = {

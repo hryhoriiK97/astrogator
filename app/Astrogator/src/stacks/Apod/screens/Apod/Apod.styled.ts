@@ -19,22 +19,6 @@ export const styles = () =>
       width: '100%',
       height: '100%',
     },
-    backButton: {
-      position: 'absolute',
-      top: 20 * bp,
-      left: 0,
-      paddingHorizontal: 8 * bp,
-      paddingTop: 29 * bp,
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-      zIndex: 3,
-    },
-    backButtonTitle: {
-      fontSize: 17 * bp,
-      lineHeight: 22 * bp,
-      color: '#ffffff',
-    },
     imageInfoWrapper: {
       marginBottom: 10 * bp,
     },
