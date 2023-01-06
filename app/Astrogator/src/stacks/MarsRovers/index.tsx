@@ -1,21 +1,21 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
-import {MarsRoverPhotosStackRoutes} from './MarsRoverPhotos.routes';
+import {MarsRoversStackRoutes} from './MarsRoverPhotos.routes';
 import MarsRoversScreen from './screens/MarsRovers/MarsRovers.screen';
 
 const Stack = createNativeStackNavigator();
 
-const MarsRoverPhotosStack: FC = () => {
+const MarsRoversStack: FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={MarsRoverPhotosStackRoutes.MarsRovers}>
+      initialRouteName={MarsRoversStackRoutes.MarsRovers}>
       <Stack.Screen
-        name={MarsRoverPhotosStackRoutes.MarsRovers}
+        name={MarsRoversStackRoutes.MarsRovers}
         component={MarsRoversScreen}
       />
     </Stack.Navigator>
   );
 };
 
-export default MarsRoverPhotosStack;
+export default MarsRoversStack;
