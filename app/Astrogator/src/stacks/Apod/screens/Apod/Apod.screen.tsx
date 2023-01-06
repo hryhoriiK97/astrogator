@@ -20,7 +20,7 @@ import ApodBackground from '../../../../../assets/images/bg-image.png';
 import {Arrow} from '../../../../../assets/svgs/Arrow';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {AstrogatorColor} from '../../../../theming/theme';
-import {ApodResponse} from '../../../../types/Apod';
+import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
 import {ApodStackNavigationProp} from '../../Apod.routes';
 import {styles} from './Apod.styled';
@@ -63,7 +63,7 @@ const ApodScreen: FC = () => {
     <ImageBackground
       source={ApodBackground}
       blurRadius={5}
-      style={{width: '100%', height: '100%'}}>
+      style={styles().imageBackground}>
       <ScrollView
         refreshControl={
           <RefreshControl

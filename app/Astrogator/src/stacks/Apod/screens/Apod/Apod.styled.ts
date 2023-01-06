@@ -15,6 +15,10 @@ export const styles = () =>
     imageWrapper: {
       position: 'relative',
     },
+    imageBackground: {
+      width: '100%',
+      height: '100%',
+    },
     backButton: {
       position: 'absolute',
       top: 20 * bp,

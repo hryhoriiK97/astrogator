@@ -3,7 +3,7 @@ import React, {FC} from 'react';
 import {Image, ImageBackground, SafeAreaView} from 'react-native';
 import BgImage from '../../../../../assets/images/bg-image.png';
 import {AstrogatorColor} from '../../../../theming/theme';
-import {styles} from '../../../Home/Home.styled';
+import {styles} from './VideosList.styled';
 
 const VideosListScreen: FC = () => {
   return (

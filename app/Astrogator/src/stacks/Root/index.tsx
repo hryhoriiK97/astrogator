@@ -5,6 +5,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {AnimatedTabBar} from '../../components/AnimatedTabBar';
 import HomeStack from '../Home';
+import MarsRoverPhotosStack from '../MarsRoverPhotos';
 import VideosStack from '../Videos';
 
 const {bp} = getRelativeUnits();
@@ -58,7 +59,7 @@ const RootStack = () => {
             />
           ),
         }}
-        component={VideosStack}
+        component={MarsRoverPhotosStack}
       />
       <Tab.Screen
         name="Chat"
@@ -73,7 +74,7 @@ const RootStack = () => {
             />
           ),
         }}
-        component={HomeStack}
+        component={VideosStack}
       />
       <Tab.Screen
         name="Settings"
