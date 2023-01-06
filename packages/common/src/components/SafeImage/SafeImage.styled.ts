@@ -22,6 +22,6 @@ export const styles = (indicatorValue?: number) =>
       height: 300 * bp,
     },
     imageInfoWrapper: {
-      marginBottom: 10 * bp,
+      marginBottom: 30 * bp,
     },
   });

@@ -13,6 +13,7 @@ const SafeImage: FC<SafeImageProps> = ({
   imageWrapperStyle,
 }) => {
   const [indicatorLoadingValue, setIndicatorLoadingValue] = useState(0);
+  console.log(source);
   return (
     <View style={[styles().imageWrapper, imageWrapperStyle]}>
       <FastImage

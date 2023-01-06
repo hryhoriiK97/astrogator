@@ -20,6 +20,6 @@ export const coolCarouselMocks: CoolCarouselProps = {
     },
   ],
   defaultSource: Image.resolveAssetSource(
-    require('../../../assets/imgs/space-shuttle.jpeg'),
+    require('../../../assets/imgs/space-shuttle.webp'),
   ),
 };
