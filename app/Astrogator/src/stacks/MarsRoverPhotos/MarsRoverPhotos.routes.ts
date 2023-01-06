@@ -1,7 +1,7 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type MarsRoverPhotosStackParamList = {
-  MarsRoverPhotosScreen: undefined;
+  MarsRovers: undefined;
 };
 
 export type MarsRoverPhotosStackNavigationProp =
@@ -10,5 +10,5 @@ export type MarsRoverPhotosStackNavigationProp =
 export const MarsRoverPhotosStackRoutes: {
   [route in keyof MarsRoverPhotosStackParamList]: route;
 } = {
-  MarsRoverPhotosScreen: 'MarsRoverPhotosScreen',
+  MarsRovers: 'MarsRovers',
 };

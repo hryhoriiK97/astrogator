@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   image: {
     width: '50%',
-    height: 150,
+    height: 120 * bp,
     borderTopRightRadius: 5 * bp,
     borderBottomRightRadius: 5 * bp,
   },

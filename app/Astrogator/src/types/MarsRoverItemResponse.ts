@@ -5,7 +5,7 @@ interface CameraItem {
   full_name: string;
 }
 
-export interface MarsRoverItem {
+export interface MarsRoverItemResponse {
   id: number;
   name: string;
   landing_date: string;
