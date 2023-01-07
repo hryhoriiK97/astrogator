@@ -4,11 +4,13 @@ import React, {FC} from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
 import ApodTile from '../../../assets/images/apod-tile.jpg';
 import MarsRoverImage from '../../../assets/images/mars-rover-bg.webp';
-import {HomeStackNavigationProp, HomeStackRoutes} from './Home.routes';
+import {MarsRoversStackRoutes} from '../MarsRovers/MarsRovers.routes';
+import {RootStackNavigationProp, RootStackRoutes} from '../Root/Root.routes';
+import {HomeStackRoutes} from './Home.routes';
 import {styles} from './Home.styled';
 
 const HomeScreen: FC = () => {
-  const {navigate} = useNavigation<HomeStackNavigationProp>();
+  const {navigate} = useNavigation<RootStackNavigationProp>();
   return (
     <View style={styles.backgroundImage}>
       <SafeAreaView style={styles.container}>
@@ -17,7 +19,11 @@ const HomeScreen: FC = () => {
           onMoreInfoPress={console.log}
           headerTitle={'Astronomy Picture of the Day'}
           imageSource={Image.resolveAssetSource(ApodTile)}
-          onPress={() => navigate(HomeStackRoutes.ApodStack)}
+          onPress={() =>
+            navigate(RootStackRoutes.HomeStack, {
+              screen: HomeStackRoutes.ApodStack,
+            })
+          }
         />
         <Divider variant={DividerVariant.Divider_15_Vertical} />
         <HomeTile
@@ -25,7 +31,11 @@ const HomeScreen: FC = () => {
           onMoreInfoPress={console.log}
           headerTitle={'Mars Rover Images'}
           imageSource={Image.resolveAssetSource(MarsRoverImage)}
-          onPress={() => navigate(HomeStackRoutes.ApodStack)}
+          onPress={() =>
+            navigate(RootStackRoutes.MarsRoversStack, {
+              screen: MarsRoversStackRoutes.MarsRoversScreen,
+            })
+          }
         />
       </SafeAreaView>
     </View>

@@ -7,6 +7,7 @@ import {AnimatedTabBar} from '../../components/AnimatedTabBar';
 import HomeStack from '../Home';
 import MarsRoversStack from '../MarsRovers';
 import VideosStack from '../Videos';
+import {RootStackRoutes} from './Root.routes';
 
 const {bp} = getRelativeUnits();
 
@@ -32,7 +33,7 @@ const RootStack = () => {
       }}
       tabBar={props => <AnimatedTabBar {...props} />}>
       <Tab.Screen
-        name="Home"
+        name={RootStackRoutes.HomeStack}
         options={{
           // @ts-ignore
           tabBarIcon: ({ref}) => (
@@ -47,7 +48,7 @@ const RootStack = () => {
         component={HomeStack}
       />
       <Tab.Screen
-        name="Upload"
+        name={RootStackRoutes.MarsRoversStack}
         options={{
           // @ts-ignore
           tabBarIcon: ({ref}) => (
@@ -62,7 +63,7 @@ const RootStack = () => {
         component={MarsRoversStack}
       />
       <Tab.Screen
-        name="Chat"
+        name={RootStackRoutes.VideosStack}
         options={{
           // @ts-ignore
           tabBarIcon: ({ref}) => (
@@ -77,7 +78,7 @@ const RootStack = () => {
         component={VideosStack}
       />
       <Tab.Screen
-        name="Settings"
+        name={'Settings'}
         options={{
           // @ts-ignore
           tabBarIcon: ({ref}) => (

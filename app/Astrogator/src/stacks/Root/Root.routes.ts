@@ -6,17 +6,17 @@ import {VideosStackParamList} from '../Videos/Videos.routes';
 
 export type RootStackParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
-  MarsRoverPhotosStack: NavigatorScreenParams<MarsRoversStackParamList>;
+  MarsRoversStack: NavigatorScreenParams<MarsRoversStackParamList>;
   VideosStack: NavigatorScreenParams<VideosStackParamList>;
 };
 
 export type RootStackNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
 
-export const EntriesStackRoutes: {
+export const RootStackRoutes: {
   [route in keyof RootStackParamList]: route;
 } = {
   HomeStack: 'HomeStack',
-  MarsRoverPhotosStack: 'MarsRoverPhotosStack',
+  MarsRoversStack: 'MarsRoversStack',
   VideosStack: 'VideosStack',
 };
