@@ -3,14 +3,20 @@ import {getRelativeUnits} from '../../utils/getRelativeUnits';
 
 const {bp} = getRelativeUnits();
 
-export const styles = (indicatorValue?: number) =>
+export const styles = ({
+  indicatorValue,
+  loadingIndicatorHeight = 10,
+}: {
+  indicatorValue?: number;
+  loadingIndicatorHeight?: number;
+}) =>
   StyleSheet.create({
     imageWrapper: {
       width: '100%',
     },
     imageIndicatorWrapper: {
       width: '100%',
-      height: 10 * bp,
+      height: loadingIndicatorHeight * bp,
     },
     indicator: {
       width: `${indicatorValue}%`,

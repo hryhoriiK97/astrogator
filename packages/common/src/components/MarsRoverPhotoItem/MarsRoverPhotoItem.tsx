@@ -19,6 +19,7 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
         source={imageSource}
         defaultSource={defaultSource}
         linearGradientColors={['#EC9F05', '#FF4E00']}
+        indicatorHeight={3}
       />
       <View style={styles.imageInformationWrapper}>
         <Typography variant={SpaceMono.Bold} style={styles.dateText}>

@@ -11,13 +11,13 @@ const SafeImage: FC<SafeImageProps> = ({
   linearGradientColors,
   imageStyle,
   imageWrapperStyle,
+  loadingIndicatorHeight,
 }) => {
   const [indicatorLoadingValue, setIndicatorLoadingValue] = useState(0);
-  console.log(source);
   return (
-    <View style={[styles().imageWrapper, imageWrapperStyle]}>
+    <View style={[styles({}).imageWrapper, imageWrapperStyle]}>
       <FastImage
-        style={[styles().image, imageStyle]}
+        style={[styles({}).image, imageStyle]}
         source={source}
         defaultSource={defaultSource}
         resizeMode={FastImage.resizeMode.cover}
@@ -30,10 +30,14 @@ const SafeImage: FC<SafeImageProps> = ({
           }
         }}
       />
-      <View style={styles().imageIndicatorWrapper}>
+      <View
+        style={
+          styles({loadingIndicatorHeight: loadingIndicatorHeight})
+            .imageIndicatorWrapper
+        }>
         <LinearGradient
           colors={linearGradientColors}
-          style={styles(indicatorLoadingValue).indicator}
+          style={styles({indicatorValue: indicatorLoadingValue}).indicator}
         />
       </View>
     </View>

@@ -7,4 +7,5 @@ export interface SafeImageProps {
   linearGradientColors: string[];
   imageStyle?: FastImageProps['style'];
   imageWrapperStyle?: ViewStyle;
+  loadingIndicatorHeight?: number;
 }
