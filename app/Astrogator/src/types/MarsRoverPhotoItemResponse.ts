@@ -1,4 +1,4 @@
-export interface MarsRoverPhotosResponse {
+export interface MarsRoverPhotoItemResponse {
   id: number;
   sol: number;
   camera: {
