@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {StatusBar} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import RootStack from './src/stacks/Root';
 
@@ -11,9 +12,11 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <StatusBar barStyle="light-content" />
-        <NavigationContainer>
-          <RootStack />
-        </NavigationContainer>
+        <GestureHandlerRootView style={{flex: 1}}>
+          <NavigationContainer>
+            <RootStack />
+          </NavigationContainer>
+        </GestureHandlerRootView>
       </QueryClientProvider>
     </>
   );
