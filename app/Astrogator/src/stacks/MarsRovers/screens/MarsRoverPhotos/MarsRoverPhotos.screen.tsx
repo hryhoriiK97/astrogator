@@ -13,7 +13,7 @@ import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {MarsRoverPhotosHeader} from '../../../../components/MarsRoverPhotosHeader';
 import {MarsRoverPhotoItemResponse} from '../../../../types/MarsRoverPhotoItemResponse';
-import {replaceHttpWithHttps} from '../../../../utils/replaceHttpWithHttps';
+import {replaceHttpWithHttps} from '../../../../utils';
 import {
   MarsRoversStackNavigationProp,
   MarsRoversStackParamList,
@@ -82,6 +82,7 @@ const MarsRoverPhotosScreen: FC = () => {
         ListHeaderComponent={
           <MarsRoverPhotosHeader rover={rover} onBackButtonPress={goBack} />
         }
+        ListFooterComponent={<View style={styles().footer} />}
         data={marsRoverPhotosData}
         renderItem={renderItem}
         ItemSeparatorComponent={renderSeparatorItem}

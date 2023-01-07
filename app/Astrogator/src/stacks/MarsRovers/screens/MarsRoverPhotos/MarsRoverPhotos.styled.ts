@@ -57,4 +57,7 @@ export const styles = (status?: Status) =>
       color: AstrogatorColor.Black,
       marginBottom: 5 * bp,
     },
+    footer: {
+      height: 50 * bp,
+    },
   });
