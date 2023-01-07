@@ -53,6 +53,7 @@ const MarsRoverPhotosScreen: FC = () => {
 
   const marsRoverPhotosData: MarsRoverPhotoItemResponse[] =
     marsRoverPhotosResponse?.data.photos;
+
   const renderItem = ({item}: {item: MarsRoverPhotoItemResponse}) => {
     return (
       /*//TODO: Find better solution*/
