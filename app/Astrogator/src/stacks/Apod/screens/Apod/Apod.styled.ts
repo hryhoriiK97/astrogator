@@ -8,16 +8,13 @@ export const styles = () =>
   StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: AstrogatorColor.Black,
     },
     contentContainerStyle: {
       paddingBottom: 40 * bp,
     },
     imageWrapper: {
       position: 'relative',
-    },
-    imageBackground: {
-      width: '100%',
-      height: '100%',
     },
     imageInfoWrapper: {
       marginBottom: 10 * bp,
@@ -38,9 +35,6 @@ export const styles = () =>
       alignItems: 'center',
       borderRadius: 10 * bp,
       backgroundColor: AstrogatorColor.VelvetCosmos,
-      borderWidth: 2,
-      borderStyle: 'solid',
-      borderColor: AstrogatorColor.PomodoroEMozzarella,
       paddingVertical: 10 * bp,
       paddingHorizontal: 15 * bp,
     },

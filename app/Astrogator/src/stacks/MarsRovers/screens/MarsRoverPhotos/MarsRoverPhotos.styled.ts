@@ -17,7 +17,8 @@ export const styles = (status?: Status) =>
     renderItemWrapper: {
       paddingHorizontal: 16 * bp,
     },
-    backgroundImage: {
+    wrapper: {
+      backgroundColor: AstrogatorColor.Black,
       width: '100%',
       height: '100%',
     },

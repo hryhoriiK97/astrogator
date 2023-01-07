@@ -2,20 +2,14 @@ import {
   Divider,
   DividerVariant,
   MarsRoverItem,
+  SpaceMono,
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  ImageBackground,
-  SafeAreaView,
-} from 'react-native';
+import {ActivityIndicator, FlatList, SafeAreaView} from 'react-native';
 import {useQuery} from 'react-query';
-import BgImage from '../../../../../assets/images/bg-image.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
 import {
@@ -68,21 +62,20 @@ const MarsRoversScreen: FC = () => {
   };
 
   return (
-    <ImageBackground
-      source={Image.resolveAssetSource(BgImage)}
-      style={styles.backgroundImage}>
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          ListHeaderComponent={
-            <Typography style={styles.title}>Mars Rovers</Typography>
-          }
-          data={marsRovesData}
-          renderItem={renderItem}
-          bounces={false}
-          ItemSeparatorComponent={renderItemSeparator}
-        />
-      </SafeAreaView>
-    </ImageBackground>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        contentContainerStyle={{marginHorizontal: 16}}
+        ListHeaderComponent={
+          <Typography variant={SpaceMono.Bold} style={styles.title}>
+            Mars Rovers
+          </Typography>
+        }
+        data={marsRovesData}
+        renderItem={renderItem}
+        bounces={false}
+        ItemSeparatorComponent={renderItemSeparator}
+      />
+    </SafeAreaView>
   );
 };
 

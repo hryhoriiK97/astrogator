@@ -6,7 +6,6 @@ import React, {FC, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
-  ImageBackground,
   Pressable,
   RefreshControl,
   ScrollView,
@@ -15,7 +14,6 @@ import {
 import DatePicker from 'react-native-date-picker';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
-import ApodBackground from '../../../../../assets/images/bg-image.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {BackButton} from '../../../../components/BackButton';
 import {AstrogatorColor} from '../../../../theming/theme';
@@ -59,10 +57,7 @@ const ApodScreen: FC = () => {
   const apodData: ApodResponse = apodResponse?.data;
 
   return (
-    <ImageBackground
-      source={ApodBackground}
-      blurRadius={5}
-      style={styles().imageBackground}>
+    <>
       <ScrollView
         refreshControl={
           <RefreshControl
@@ -100,24 +95,20 @@ const ApodScreen: FC = () => {
         )}
         <View style={styles().contentWrapper}>
           <Typography
-            color={AstrogatorColor.PomodoroEMozzarella}
+            color={AstrogatorColor.White}
             variant={SpaceMono.Bold}
             style={styles().title}>
             {apodData.title}
           </Typography>
           <View style={styles().imageInfoWrapper}>
-            <Typography
-              color={AstrogatorColor.PomodoroEMozzarella}
-              variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
               Author: {apodData.copyright || '-'}
             </Typography>
-            <Typography
-              color={AstrogatorColor.PomodoroEMozzarella}
-              variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
               Date: {apodData.date}
             </Typography>
           </View>
-          <Typography color={AstrogatorColor.PomodoroEMozzarella}>
+          <Typography variant={SpaceMono.Bold} color={AstrogatorColor.White}>
             {apodData.explanation}
           </Typography>
           <Pressable
@@ -148,7 +139,7 @@ const ApodScreen: FC = () => {
           setShowDatePicker(false);
         }}
       />
-    </ImageBackground>
+    </>
   );
 };
 

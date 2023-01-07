@@ -2,16 +2,8 @@ import {Divider, DividerVariant, MarsRoverPhotoItem} from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {FC} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  ImageBackground,
-  StatusBar,
-  View,
-} from 'react-native';
+import {ActivityIndicator, FlatList, StatusBar, View} from 'react-native';
 import {useQuery} from 'react-query';
-import BgImage from '../../../../../assets/images/bg-image.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {MarsRoverPhotosHeader} from '../../../../components/MarsRoverPhotosHeader';
 import {MarsRoverPhotoItemResponse} from '../../../../types/MarsRoverPhotoItemResponse';
@@ -74,9 +66,7 @@ const MarsRoverPhotosScreen: FC = () => {
     return <Divider variant={DividerVariant.Divider_15_Vertical} />;
   };
   return (
-    <ImageBackground
-      source={Image.resolveAssetSource(BgImage)}
-      style={styles().backgroundImage}>
+    <View style={styles().wrapper}>
       <StatusBar barStyle="light-content" />
       <FlatList
         ListHeaderComponent={
@@ -86,7 +76,7 @@ const MarsRoverPhotosScreen: FC = () => {
         renderItem={renderItem}
         ItemSeparatorComponent={renderSeparatorItem}
       />
-    </ImageBackground>
+    </View>
   );
 };
 
