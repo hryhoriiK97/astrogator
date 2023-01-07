@@ -16,8 +16,6 @@ const HomeScreen: FC = () => {
       <SafeAreaView style={styles.container}>
         <HomeTile
           title={'APOD'}
-          onMoreInfoPress={console.log}
-          headerTitle={'Astronomy Picture of the Day'}
           imageSource={Image.resolveAssetSource(ApodTile)}
           onPress={() =>
             navigate(RootStackRoutes.HomeStack, {
@@ -28,8 +26,6 @@ const HomeScreen: FC = () => {
         <Divider variant={DividerVariant.Divider_15_Vertical} />
         <HomeTile
           title={'Mars Images'}
-          onMoreInfoPress={console.log}
-          headerTitle={'Mars Rover Images'}
           imageSource={Image.resolveAssetSource(MarsRoverImage)}
           onPress={() =>
             navigate(RootStackRoutes.MarsRoversStack, {

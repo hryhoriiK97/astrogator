@@ -18,6 +18,7 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
       <SafeImage
         source={imageSource}
         defaultSource={defaultSource}
+        imageStyle={styles.image}
         linearGradientColors={['#EC9F05', '#FF4E00']}
         loadingIndicatorHeight={3}
       />

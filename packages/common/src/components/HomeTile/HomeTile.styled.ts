@@ -5,39 +5,10 @@ const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   container: {
-    width: '100%',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#ffffff',
-    padding: 10 * bp,
-    borderRadius: 5 * bp,
-    marginBottom: 15 * bp,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-  },
-  tileWrapper: {
     position: 'relative',
     width: '100%',
     backgroundColor: '#ffffff',
     borderRadius: 12 * bp,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.48,
-    shadowRadius: 11.95,
-    elevation: 18,
     height: 200 * bp,
   },
   imageBackground: {
@@ -52,16 +23,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     marginBottom: 16 * bp,
-    backgroundColor: '#ffffff',
-    borderRadius: 12 * bp,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.78,
-    shadowRadius: 11.95,
-    elevation: 18,
   },
   image: {
     borderRadius: 12 * bp,
