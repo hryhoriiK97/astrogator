@@ -1,4 +1,4 @@
-import {Typography} from '@astrogator/common';
+import {Divider, DividerVariant, MarsRoverPhotoItem} from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {FC} from 'react';
@@ -8,6 +8,7 @@ import {
   Image,
   ImageBackground,
   StatusBar,
+  View,
 } from 'react-native';
 import {useQuery} from 'react-query';
 import BgImage from '../../../../../assets/images/bg-image.png';
@@ -51,9 +52,25 @@ const MarsRoverPhotosScreen: FC = () => {
 
   const marsRoverPhotosData: MarsRoverPhotoItemResponse[] =
     marsRoverPhotosResponse?.data.photos;
+  const renderItem = ({item}: {item: MarsRoverPhotoItemResponse}) => {
+    return (
+      /*//TODO: Find better solution*/
+      <View style={styles().renderItemWrapper}>
+        <MarsRoverPhotoItem
+          imageSource={{uri: item.img_src}}
+          defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+          cameraFullName={item.camera.full_name}
+          cameraAbbreviation={item.camera.name}
+          earthData={item.earth_date}
+          sol={item.sol}
+        />
+      </View>
+    );
+  };
 
-  console.log(marsRoverPhotosResponse);
-
+  const renderSeparatorItem = () => {
+    return <Divider variant={DividerVariant.Divider_15_Vertical} />;
+  };
   return (
     <ImageBackground
       source={Image.resolveAssetSource(BgImage)}
@@ -64,9 +81,8 @@ const MarsRoverPhotosScreen: FC = () => {
           <MarsRoverPhotosHeader rover={rover} onBackButtonPress={goBack} />
         }
         data={marsRoverPhotosData}
-        renderItem={({item}) => {
-          return <Typography>{item.camera.name}</Typography>;
-        }}
+        renderItem={renderItem}
+        ItemSeparatorComponent={renderSeparatorItem}
       />
     </ImageBackground>
   );
