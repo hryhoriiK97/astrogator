@@ -13,7 +13,7 @@ const BackButton: FC<BackButtonProps> = ({onPress}) => {
       <Typography
         variant={SpaceMono.Bold}
         style={styles.backButtonTitle}
-        color={AstrogatorColor.PomodoroEMozzarella}>
+        color={AstrogatorColor.White}>
         Back
       </Typography>
     </Pressable>

@@ -41,7 +41,7 @@ export const styles = (status?: Status) =>
     roverName: {
       marginBottom: 10 * bp,
       fontSize: 24 * bp,
-      color: AstrogatorColor.MiddleRedPurple,
+      color: AstrogatorColor.Black,
     },
     statusWrapper: {
       flexDirection: 'row',
@@ -54,7 +54,7 @@ export const styles = (status?: Status) =>
       textTransform: 'capitalize',
     },
     roverDetailText: {
-      color: AstrogatorColor.MiddleRedPurple,
+      color: AstrogatorColor.Black,
       marginBottom: 5 * bp,
     },
   });

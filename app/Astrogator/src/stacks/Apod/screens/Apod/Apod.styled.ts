@@ -34,7 +34,7 @@ export const styles = () =>
       marginTop: 15 * bp,
       alignItems: 'center',
       borderRadius: 10 * bp,
-      backgroundColor: AstrogatorColor.VelvetCosmos,
+      backgroundColor: AstrogatorColor.VenetianNights,
       paddingVertical: 10 * bp,
       paddingHorizontal: 15 * bp,
     },

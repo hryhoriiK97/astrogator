@@ -77,9 +77,8 @@ const ApodScreen: FC = () => {
               }}
               defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
               linearGradientColors={[
-                AstrogatorColor.MiddleRedPurple,
-                AstrogatorColor.VelvetCosmos,
-                AstrogatorColor.MaximumPurple,
+                AstrogatorColor.VenetianNights,
+                AstrogatorColor.VenetianNights,
               ]}
             />
             <BackButton onPress={() => navigation.goBack()} />

@@ -1,8 +1,11 @@
 import {getRelativeUnits} from '@astrogator/common';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Lottie from 'lottie-react-native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import {FavouriteIcon} from '../../../assets/svgs/tabBarIcons/FavouriteIcon';
+import {HomeIcon} from '../../../assets/svgs/tabBarIcons/HomeIcon';
+import {MessageIcon} from '../../../assets/svgs/tabBarIcons/MessageIcon';
+import {SettingsIcon} from '../../../assets/svgs/tabBarIcons/SettingsIcon';
 import {AnimatedTabBar} from '../../components/AnimatedTabBar';
 import HomeStack from '../Home';
 import MarsRoversStack from '../MarsRovers';
@@ -35,60 +38,28 @@ const RootStack = () => {
       <Tab.Screen
         name={RootStackRoutes.HomeStack}
         options={{
-          // @ts-ignore
-          tabBarIcon: ({ref}) => (
-            <Lottie
-              ref={ref}
-              loop={false}
-              source={require('../../../assets/lottie/home.icon.json')}
-              style={styles.icon}
-            />
-          ),
+          tabBarIcon: () => <HomeIcon />,
         }}
         component={HomeStack}
       />
       <Tab.Screen
         name={RootStackRoutes.MarsRoversStack}
         options={{
-          // @ts-ignore
-          tabBarIcon: ({ref}) => (
-            <Lottie
-              ref={ref}
-              loop={false}
-              source={require('../../../assets/lottie/upload.icon.json')}
-              style={styles.icon}
-            />
-          ),
+          tabBarIcon: () => <SettingsIcon />,
         }}
         component={MarsRoversStack}
       />
       <Tab.Screen
         name={RootStackRoutes.VideosStack}
         options={{
-          // @ts-ignore
-          tabBarIcon: ({ref}) => (
-            <Lottie
-              ref={ref}
-              loop={false}
-              source={require('../../../assets/lottie/chat.icon.json')}
-              style={styles.icon}
-            />
-          ),
+          tabBarIcon: () => <FavouriteIcon />,
         }}
         component={VideosStack}
       />
       <Tab.Screen
         name={'Settings'}
         options={{
-          // @ts-ignore
-          tabBarIcon: ({ref}) => (
-            <Lottie
-              ref={ref}
-              loop={false}
-              source={require('../../../assets/lottie/settings.icon.json')}
-              style={styles.icon}
-            />
-          ),
+          tabBarIcon: () => <MessageIcon />,
         }}
         component={HomeStack}
       />
