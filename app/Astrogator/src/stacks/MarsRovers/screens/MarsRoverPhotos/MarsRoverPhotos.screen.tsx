@@ -1,8 +1,14 @@
-import {Divider, DividerVariant, MarsRoverPhotoItem} from '@astrogator/common';
+import {
+  Divider,
+  DividerVariant,
+  getRelativeUnits,
+  MarsRoverPhotoItem,
+} from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import React, {FC} from 'react';
-import {ActivityIndicator, FlatList, StatusBar, View} from 'react-native';
+import {FlashList} from '@shopify/flash-list';
+import React, {FC, useRef} from 'react';
+import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {MarsRoverPhotosHeader} from '../../../../components/MarsRoverPhotosHeader';
@@ -18,7 +24,10 @@ enum MarsRoverPhotosQueryKey {
   MarsRoverPhotos = 'MarsRoverPhotos',
 }
 
+const {bp} = getRelativeUnits();
+
 const MarsRoverPhotosScreen: FC = () => {
+  const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
   const {goBack} = useNavigation<MarsRoversStackNavigationProp>();
 
   const route =
@@ -68,13 +77,15 @@ const MarsRoverPhotosScreen: FC = () => {
   return (
     <View style={styles().wrapper}>
       <StatusBar barStyle="light-content" />
-      <FlatList
+      <FlashList
+        ref={flashListRef}
         ListHeaderComponent={
           <MarsRoverPhotosHeader rover={rover} onBackButtonPress={goBack} />
         }
         data={marsRoverPhotosData}
         renderItem={renderItem}
         ItemSeparatorComponent={renderSeparatorItem}
+        estimatedItemSize={370 * bp}
       />
     </View>
   );

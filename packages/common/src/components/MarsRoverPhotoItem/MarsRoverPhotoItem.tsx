@@ -19,7 +19,7 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
         source={imageSource}
         defaultSource={defaultSource}
         imageStyle={styles.image}
-        linearGradientColors={['#EC9F05', '#FF4E00']}
+        linearGradientColors={['#724FFF', '#724FFF']}
         loadingIndicatorHeight={3}
       />
       <View style={styles.imageInformationWrapper}>
@@ -28,6 +28,8 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
         </Typography>
         <Typography
           style={styles.cameraName}
+          numberOfLines={1}
+          ellipsizeMode={'tail'}
           variant={
             SpaceMono.Bold
           }>{`${cameraFullName} (${cameraAbbreviation})`}</Typography>

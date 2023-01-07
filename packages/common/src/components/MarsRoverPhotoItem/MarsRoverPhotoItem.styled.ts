@@ -6,6 +6,7 @@ const {bp} = getRelativeUnits();
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: 370 * bp,
     padding: 10 * bp,
     display: 'flex',
     flexDirection: 'column',
@@ -18,6 +19,7 @@ export const styles = StyleSheet.create({
   },
   imageInformationWrapper: {
     paddingTop: 10 * bp,
+    paddingBottom: 20 * bp,
     borderBottomRightRadius: 7 * bp,
     borderBottomLeftRadius: 7 * bp,
   },
