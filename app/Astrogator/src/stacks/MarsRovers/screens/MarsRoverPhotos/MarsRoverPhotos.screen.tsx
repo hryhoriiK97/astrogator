@@ -15,6 +15,7 @@ import BgImage from '../../../../../assets/images/bg-image.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {MarsRoverPhotosHeader} from '../../../../components/MarsRoverPhotosHeader';
 import {MarsRoverPhotoItemResponse} from '../../../../types/MarsRoverPhotoItemResponse';
+import {replaceHttpWithHttps} from '../../../../utils/replaceHttpWithHttps';
 import {
   MarsRoversStackNavigationProp,
   MarsRoversStackParamList,
@@ -57,7 +58,7 @@ const MarsRoverPhotosScreen: FC = () => {
       /*//TODO: Find better solution*/
       <View style={styles().renderItemWrapper}>
         <MarsRoverPhotoItem
-          imageSource={{uri: item.img_src}}
+          imageSource={{uri: replaceHttpWithHttps(item.img_src)}}
           defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
           cameraFullName={item.camera.full_name}
           cameraAbbreviation={item.camera.name}
