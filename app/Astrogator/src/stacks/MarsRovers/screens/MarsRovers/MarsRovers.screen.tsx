@@ -13,6 +13,7 @@ import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
+import CustomBottomSheetBackdrop from '../../../../components/CustomBottomSheetBackdrop/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {MarsRoverModal} from '../../../../components/MarsRoverModal';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
@@ -43,10 +44,14 @@ const MarsRoversScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['62%'], []);
+  const snapPoints = useMemo(() => ['25', '62%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleCloseModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.dismiss();
   }, []);
 
   if (isMarsRoversLoading || isMarsRoversRefetching) {
@@ -95,6 +100,12 @@ const MarsRoversScreen: FC = () => {
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetModalRef}
+          backdropComponent={props => (
+            <CustomBottomSheetBackdrop
+              {...props}
+              onPress={handleCloseModalPress}
+            />
+          )}
           backgroundComponent={CustomBottomSheetModalBackground}
           snapPoints={snapPoints}
           enableOverDrag={false}

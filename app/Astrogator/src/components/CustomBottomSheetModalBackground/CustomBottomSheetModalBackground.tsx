@@ -12,7 +12,7 @@ const CustomBottomSheetModalBackground: React.FC<
     backgroundColor: interpolateColor(
       animatedIndex.value,
       [0, 1],
-      ['rgba(0,0,0,0.9)', 'rgba(0,0,0,0.9)'],
+      ['rgba(0,0,0,0.7)', 'rgba(0,0,0,0.9)'],
     ),
   }));
   const containerStyle = useMemo(

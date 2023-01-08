@@ -5,6 +5,7 @@ import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
 import ApodTile from '../../../assets/images/apod-tile.jpg';
 import MarsRoverImage from '../../../assets/images/mars-rover-bg.webp';
+import {CustomBottomSheetBackdrop} from '../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../components/CustomBottomSheetModalBackground';
 import {HomeTileModal} from '../../components/HomeTileModal';
 import {
@@ -25,14 +26,14 @@ const HomeScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['32%'], []);
+  const snapPoints = useMemo(() => ['30', '50%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
   const handleCloseModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.close();
+    bottomSheetModalRef.current?.dismiss();
   }, []);
 
   return (
@@ -42,7 +43,6 @@ const HomeScreen: FC = () => {
           title={'APOD'}
           imageSource={Image.resolveAssetSource(ApodTile)}
           onPress={() => {
-            handleCloseModalPress();
             navigate(RootStackRoutes.HomeStack, {
               screen: HomeStackRoutes.ApodStack,
             });
@@ -57,7 +57,6 @@ const HomeScreen: FC = () => {
           title={'Mars Images'}
           imageSource={Image.resolveAssetSource(MarsRoverImage)}
           onPress={() => {
-            handleCloseModalPress();
             navigate(RootStackRoutes.MarsRoversStack, {
               screen: MarsRoversStackRoutes.MarsRoversScreen,
             });
@@ -73,6 +72,12 @@ const HomeScreen: FC = () => {
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetModalRef}
+          backdropComponent={props => (
+            <CustomBottomSheetBackdrop
+              {...props}
+              onPress={handleCloseModalPress}
+            />
+          )}
           backgroundComponent={CustomBottomSheetModalBackground}
           snapPoints={snapPoints}
           enableOverDrag={false}
