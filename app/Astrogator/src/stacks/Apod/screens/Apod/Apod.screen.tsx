@@ -21,6 +21,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {BackButton} from '../../../../components/BackButton';
+import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {HomeTileModal} from '../../../../components/HomeTileModal';
 import {AstrogatorColor} from '../../../../theming/theme';
@@ -47,6 +48,10 @@ const ApodScreen: FC = () => {
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleCloseModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.dismiss();
   }, []);
 
   const {
@@ -100,7 +105,7 @@ const ApodScreen: FC = () => {
           </View>
         ) : (
           <>
-            <View style={{height: 50}} />
+            <View style={styles().youtubePlayerWhiteSpace} />
             <YoutubePlayer
               height={YOUTUBE_PLAYER_HEIGHT}
               videoId={getYouTubeVideoId(apodData.url)}
@@ -167,6 +172,12 @@ const ApodScreen: FC = () => {
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetModalRef}
+          backdropComponent={props => (
+            <CustomBottomSheetBackdrop
+              {...props}
+              onPress={handleCloseModalPress}
+            />
+          )}
           backgroundComponent={CustomBottomSheetModalBackground}
           snapPoints={snapPoints}
           enableOverDrag={false}

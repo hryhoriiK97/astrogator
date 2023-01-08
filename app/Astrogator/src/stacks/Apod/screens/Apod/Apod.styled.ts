@@ -19,6 +19,9 @@ export const styles = () =>
     imageInfoWrapper: {
       marginBottom: 10 * bp,
     },
+    youtubePlayerWhiteSpace: {
+      height: 50 * bp,
+    },
     contentWrapper: {
       paddingVertical: 10 * bp,
       paddingHorizontal: 16 * bp,
