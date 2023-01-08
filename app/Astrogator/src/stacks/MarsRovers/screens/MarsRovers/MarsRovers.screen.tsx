@@ -12,7 +12,8 @@ import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {ActivityIndicator, FlatList, SafeAreaView} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
-import MarsRoverModal from '../../../../components/MarsRoverModal/MarsRoverModal';
+import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import {MarsRoverModal} from '../../../../components/MarsRoverModal';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
 import {
   MarsRoversStackNavigationProp,
@@ -93,6 +94,7 @@ const MarsRoversScreen: FC = () => {
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetModalRef}
+          backgroundComponent={CustomBottomSheetModalBackground}
           snapPoints={snapPoints}
           enableOverDrag={false}
           enableDismissOnClose={true}>

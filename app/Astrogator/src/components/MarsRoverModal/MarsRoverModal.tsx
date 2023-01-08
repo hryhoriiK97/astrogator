@@ -17,7 +17,7 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({rover}) => {
       variant={SpaceMono.Bold}
       color={AstrogatorColor.VenetianNights}
       style={styles.roverInfoText}>
-      {`${item.full_name} - ${item.name}`}
+      {`${item.full_name} (${item.name})`}
     </Typography>
   );
   return (
@@ -25,7 +25,7 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({rover}) => {
       <Typography
         variant={SpaceMono.Bold}
         style={styles.title}
-        color={AstrogatorColor.VenetianNights}>
+        color={AstrogatorColor.White}>
         {rover.name}
       </Typography>
       <View style={styles.rowWrapper}>
@@ -74,7 +74,7 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({rover}) => {
         <Typography
           variant={SpaceMono.Bold}
           style={styles.title}
-          color={AstrogatorColor.VenetianNights}>
+          color={AstrogatorColor.White}>
           {'Rover Cameras'}
         </Typography>
         <View style={{height: 500}}>
