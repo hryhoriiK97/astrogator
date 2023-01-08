@@ -10,9 +10,21 @@ export const styles = StyleSheet.create({
     paddingTop: 24 * bp,
     backgroundColor: AstrogatorColor.Black,
   },
+  contentContainerStyle: {
+    marginHorizontal: 16 * bp,
+  },
   title: {
     fontSize: 34 * bp,
     color: AstrogatorColor.White,
     marginBottom: 16 * bp,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'red',
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
