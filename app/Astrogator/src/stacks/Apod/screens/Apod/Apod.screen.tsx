@@ -5,9 +5,10 @@ import {
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
+import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import {format, isFuture, isToday} from 'date-fns';
-import React, {FC, useState} from 'react';
+import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {
   Dimensions,
   Pressable,
@@ -20,6 +21,8 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {BackButton} from '../../../../components/BackButton';
+import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import {HomeTileModal} from '../../../../components/HomeTileModal';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
@@ -37,6 +40,14 @@ const ApodScreen: FC = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const navigation = useNavigation<ApodStackNavigationProp>();
+
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['25%', '50%', '75%', '95%'], []);
+
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
 
   const {
     data: apodResponse,
@@ -111,8 +122,19 @@ const ApodScreen: FC = () => {
               Date: {apodData.date}
             </Typography>
           </View>
-          <Typography variant={SpaceMono.Bold} color={AstrogatorColor.White}>
-            {apodData.explanation}
+          <Typography
+            variant={SpaceMono.Bold}
+            color={AstrogatorColor.White}
+            style={styles().explanation}
+            ellipsizeMode={'clip'}>
+            {apodData.explanation.split(' ').slice(0, 60).join(' ')}{' '}
+            <Typography
+              onPress={handlePresentModalPress}
+              style={styles().readMoreButton}
+              variant={SpaceMono.Bold}
+              color={AstrogatorColor.VenetianNights}>
+              read more...
+            </Typography>
           </Typography>
           <Pressable
             onPress={() => setShowDatePicker(true)}
@@ -142,6 +164,19 @@ const ApodScreen: FC = () => {
           setShowDatePicker(false);
         }}
       />
+      <BottomSheetModalProvider>
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          backgroundComponent={CustomBottomSheetModalBackground}
+          snapPoints={snapPoints}
+          enableOverDrag={false}
+          enableDismissOnClose={true}>
+          <HomeTileModal
+            title={apodData.title}
+            description={apodData.explanation}
+          />
+        </BottomSheetModal>
+      </BottomSheetModalProvider>
     </>
   );
 };

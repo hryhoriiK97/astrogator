@@ -29,6 +29,14 @@ export const styles = () =>
       textShadowRadius: 4,
       marginBottom: 5 * bp,
     },
+    explanation: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    readMoreButton: {
+      alignSelf: 'center',
+      paddingLeft: 5 * bp,
+    },
     pickButton: {
       width: '100%',
       marginTop: 15 * bp,
