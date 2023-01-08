@@ -18,6 +18,5 @@ export const styles = StyleSheet.create({
   backButtonTitle: {
     fontSize: 17 * bp,
     lineHeight: 22 * bp,
-    color: '#ffffff',
   },
 });

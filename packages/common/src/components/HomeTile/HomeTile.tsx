@@ -5,10 +5,18 @@ import {SpaceMono, Typography} from '../Typography';
 import {HomeTileProps} from './HomeTile.props';
 import {styles} from './HomeTile.styled';
 
-const HomeTile: FC<HomeTileProps> = ({title, imageSource, onPress}) => {
+const HomeTile: FC<HomeTileProps> = ({
+  title,
+  imageSource,
+  onPress,
+  onLongPress,
+}) => {
   return (
     <View style={styles.container}>
-      <Pressable onPress={onPress} style={styles.container}>
+      <Pressable
+        onPress={onPress}
+        onLongPress={onLongPress}
+        style={styles.container}>
         <ImageBackground
           style={styles.imageBackground}
           imageStyle={styles.image}

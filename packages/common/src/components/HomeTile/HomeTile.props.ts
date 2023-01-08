@@ -4,4 +4,5 @@ export interface HomeTileProps {
   title: string;
   imageSource: ImageProps['source'];
   onPress: () => void;
+  onLongPress: () => void;
 }

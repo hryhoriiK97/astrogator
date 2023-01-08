@@ -9,11 +9,11 @@ import {styles} from './BackButton.styled';
 const BackButton: FC<BackButtonProps> = ({onPress}) => {
   return (
     <Pressable style={styles.backButton} onPress={onPress}>
-      <Arrow />
+      <Arrow fillColor={AstrogatorColor.VenetianNights} />
       <Typography
         variant={SpaceMono.Bold}
         style={styles.backButtonTitle}
-        color={AstrogatorColor.White}>
+        color={AstrogatorColor.VenetianNights}>
         Back
       </Typography>
     </Pressable>
