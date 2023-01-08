@@ -1,6 +1,7 @@
 import {
   Divider,
   DividerVariant,
+  LoadingScreen,
   MarsRoverItem,
   SpaceMono,
   Typography,
@@ -9,7 +10,7 @@ import {NASA_API_KEY} from '@env';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {ActivityIndicator, FlatList, SafeAreaView} from 'react-native';
+import {FlatList, SafeAreaView} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
@@ -49,7 +50,7 @@ const MarsRoversScreen: FC = () => {
   }, []);
 
   if (isMarsRoversLoading || isMarsRoversRefetching) {
-    return <ActivityIndicator />;
+    return <LoadingScreen />;
   }
 
   const marsRovesData: MarsRoverItemResponse[] = marsRovesResponse?.data.rovers;

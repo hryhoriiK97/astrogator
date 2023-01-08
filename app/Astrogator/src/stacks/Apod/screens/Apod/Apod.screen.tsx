@@ -1,10 +1,14 @@
-import {SafeImage, SpaceMono, Typography} from '@astrogator/common';
+import {
+  LoadingScreen,
+  SafeImage,
+  SpaceMono,
+  Typography,
+} from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {useNavigation} from '@react-navigation/native';
 import {format, isFuture, isToday} from 'date-fns';
 import React, {FC, useState} from 'react';
 import {
-  ActivityIndicator,
   Dimensions,
   Pressable,
   RefreshControl,
@@ -51,7 +55,7 @@ const ApodScreen: FC = () => {
   );
 
   if (isApodLoading || isApodRefetching) {
-    return <ActivityIndicator />;
+    return <LoadingScreen />;
   }
 
   const apodData: ApodResponse = apodResponse?.data;

@@ -2,13 +2,14 @@ import {
   Divider,
   DividerVariant,
   getRelativeUnits,
+  LoadingScreen,
   MarsRoverPhotoItem,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useRef} from 'react';
-import {ActivityIndicator, StatusBar, View} from 'react-native';
+import {StatusBar, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {MarsRoverPhotosHeader} from '../../../../components/MarsRoverPhotosHeader';
@@ -49,7 +50,7 @@ const MarsRoverPhotosScreen: FC = () => {
   );
 
   if (isMarsRoverPhotosLoading || isMarsRoverPhotosRefetching) {
-    <ActivityIndicator />;
+    return <LoadingScreen />;
   }
 
   const marsRoverPhotosData: MarsRoverPhotoItemResponse[] =
