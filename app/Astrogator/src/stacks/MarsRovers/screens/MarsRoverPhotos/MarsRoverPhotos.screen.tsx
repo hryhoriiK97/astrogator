@@ -15,6 +15,7 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {StatusBar, View} from 'react-native';
+import {Picker} from 'react-native-wheel-pick';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
@@ -40,17 +41,20 @@ const MarsRoverPhotosScreen: FC = () => {
   const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
   const {goBack} = useNavigation<MarsRoversStackNavigationProp>();
 
-  const [isError, setIsError] = useState<boolean>(false);
-
   const route =
     useRoute<RouteProp<MarsRoversStackParamList, 'MarsRoverPhotosScreen'>>();
   const {rover} = route.params;
 
+  const pickerData = ['All', ...rover.cameras.map(camera => camera.name)];
+
+  const [isError, setIsError] = useState<boolean>(false);
+
   const [currentMarsSol, setCurrentMarsSol] = useState<number>(rover.max_sol);
+  const [selectedCamera, setSelectedCamera] = useState<string | null>(null);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
+  const bottomSheetSnapPoints = useMemo(() => ['25%', '60%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -129,7 +133,7 @@ const MarsRoverPhotosScreen: FC = () => {
             />
           )}
           backgroundComponent={CustomBottomSheetModalBackground}
-          snapPoints={snapPoints}
+          snapPoints={bottomSheetSnapPoints}
           enableOverDrag={false}
           enableDismissOnClose={true}>
           <View style={styles.modalContainer}>
@@ -137,7 +141,7 @@ const MarsRoverPhotosScreen: FC = () => {
               style={styles.pickerTitle}
               variant={SpaceMono.Bold}
               color={AstrogatorColor.White}>
-              Type Mars Sol
+              Provide Mars Sol and Camera Type
             </Typography>
             <SafeTextInput
               inputTypeCheckVariant={SafeInputTypeCheck.Number}
@@ -147,6 +151,14 @@ const MarsRoverPhotosScreen: FC = () => {
               errorTexts={inputErrorTexts}
               maxValue={rover.max_sol}
               minValue={1}
+            />
+            <Picker
+              style={styles.picker}
+              pickerData={pickerData}
+              selectedValue={pickerData[0]}
+              onValueChange={value =>
+                setSelectedCamera(value !== 'All' ? value : null)
+              }
             />
           </View>
         </BottomSheetModal>

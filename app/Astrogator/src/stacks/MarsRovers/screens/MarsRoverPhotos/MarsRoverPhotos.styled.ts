@@ -28,7 +28,15 @@ export const styles = StyleSheet.create({
     padding: 10 * bp,
   },
   pickerTitle: {
+    maxWidth: 250 * bp,
     fontSize: 20 * bp,
+    textAlign: 'center',
     marginBottom: 10 * bp,
+  },
+  picker: {
+    width: 250 * bp,
+    height: 150 * bp,
+    marginTop: 20 * bp,
+    borderRadius: 20 * bp,
   },
 });
