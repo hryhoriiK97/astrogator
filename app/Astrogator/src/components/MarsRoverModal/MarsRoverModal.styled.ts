@@ -24,4 +24,7 @@ export const styles = StyleSheet.create({
     fontSize: 13 * bp,
     marginBottom: 5 * bp,
   },
+  flashListHeight: {
+    height: 200 * bp,
+  },
 });

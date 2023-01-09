@@ -77,7 +77,7 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({rover}) => {
           color={AstrogatorColor.White}>
           {'Rover Cameras'}
         </Typography>
-        <View style={{height: 500}}>
+        <View style={styles.flashListHeight}>
           <FlashList
             bounces={false}
             data={rover.cameras}
