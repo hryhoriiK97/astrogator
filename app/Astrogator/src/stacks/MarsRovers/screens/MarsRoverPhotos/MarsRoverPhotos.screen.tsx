@@ -4,6 +4,8 @@ import {
   getRelativeUnits,
   LoadingScreen,
   MarsRoverPhotoItem,
+  SafeInputTypeCheck,
+  SafeTextInput,
   SpaceMono,
   Typography,
 } from '@astrogator/common';
@@ -12,7 +14,7 @@ import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {Pressable, StatusBar, TextInput, View} from 'react-native';
+import {Pressable, StatusBar, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
@@ -26,6 +28,7 @@ import {
   MarsRoversStackParamList,
 } from '../../MarsRovers.routes';
 import {styles} from './MarsRoverPhotos.styled';
+import {inputErrorTexts} from './MarsRoverPhotos.utils';
 
 enum MarsRoverPhotosQueryKey {
   MarsRoverPhotos = 'MarsRoverPhotos',
@@ -36,6 +39,8 @@ const {bp} = getRelativeUnits();
 const MarsRoverPhotosScreen: FC = () => {
   const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
   const {goBack} = useNavigation<MarsRoversStackNavigationProp>();
+
+  const [isError, setIsError] = useState<boolean>(false);
 
   const route =
     useRoute<RouteProp<MarsRoversStackParamList, 'MarsRoverPhotosScreen'>>();
@@ -74,8 +79,6 @@ const MarsRoverPhotosScreen: FC = () => {
   const marsRoverPhotosData: MarsRoverPhotoItemResponse[] =
     marsRoverPhotosResponse?.data.photos;
 
-  console.log(Array.from(Array(rover.max_sol).keys()));
-
   const renderItem = ({item}: {item: MarsRoverPhotoItemResponse}) => {
     return (
       /*//TODO: Find better solution*/
@@ -95,6 +98,7 @@ const MarsRoverPhotosScreen: FC = () => {
   const renderSeparatorItem = () => {
     return <Divider variant={DividerVariant.Divider_15_Vertical} />;
   };
+
   return (
     <>
       <View style={styles().wrapper}>
@@ -136,9 +140,14 @@ const MarsRoverPhotosScreen: FC = () => {
               color={AstrogatorColor.White}>
               Type Mars Sol
             </Typography>
-            <TextInput
-              onChangeText={e => setCurrentMarsSol(Number(e))}
-              style={styles().solInput}
+            <SafeTextInput
+              inputTypeCheckVariant={SafeInputTypeCheck.Number}
+              setTextValue={value => setCurrentMarsSol(Number(value))}
+              isError={isError}
+              setIsError={setIsError}
+              errorTexts={inputErrorTexts}
+              maxValue={rover.max_sol}
+              minValue={1}
             />
           </View>
         </BottomSheetModal>

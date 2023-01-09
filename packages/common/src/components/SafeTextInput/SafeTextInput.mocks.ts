@@ -1,18 +1,18 @@
 import {
-  InputErrorTexts,
-  InputTypeCheck,
-  InputTypeError,
+  SafeInputErrorTexts,
+  SafeInputTypeCheck,
+  SafeInputTypeError,
   SafeTextInputProps,
 } from './SafeTextInput.props';
 
-const errorTexts: InputErrorTexts = {
-  [InputTypeError.Number]: 'Please, type only numbers',
-  [InputTypeError.String]: 'Please, type only strings',
-  [InputTypeError.MaxValue]: 'Your number greater than maximum sol ',
+const errorTexts: SafeInputErrorTexts = {
+  [SafeInputTypeError.Number]: 'Please, type only numbers',
+  [SafeInputTypeError.String]: 'Please, type only strings',
+  [SafeInputTypeError.MaxValue]: 'Your number greater than maximum sol ',
 };
 
 export const safeTextInputPropsMock: SafeTextInputProps = {
-  inputTypeCheckVariant: InputTypeCheck.Number,
+  inputTypeCheckVariant: SafeInputTypeCheck.Number,
   maxValue: 3702,
   errorTexts: errorTexts,
   isError: false,

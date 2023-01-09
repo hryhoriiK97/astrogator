@@ -1,7 +1,7 @@
 import {
-  InputErrorTexts,
-  InputTypeCheck,
-  InputTypeError,
+  SafeInputErrorTexts,
+  SafeInputTypeCheck,
+  SafeInputTypeError,
 } from './SafeTextInput.props';
 
 const LETTER_REGEX = /[A-Za-z]/;
@@ -9,11 +9,12 @@ const NUMBERS_REGEX = /^[0-9]+$/;
 
 interface HandleOnChangeText {
   text: string;
-  inputTypeCheckVariant: InputTypeCheck;
+  inputTypeCheckVariant: SafeInputTypeCheck;
   setIsError: (value: boolean) => void;
   setErrorText: (value: string) => void;
-  errorTexts: InputErrorTexts;
+  errorTexts: SafeInputErrorTexts;
   maxValue?: number;
+  minValue?: number;
 }
 
 export const handleOnChangeText = ({
@@ -23,26 +24,34 @@ export const handleOnChangeText = ({
   setErrorText,
   errorTexts,
   maxValue,
+  minValue,
 }: HandleOnChangeText) => {
+  if (text === '') {
+    setIsError(false);
+    return;
+  }
   if (
-    (inputTypeCheckVariant === InputTypeCheck.Number &&
+    (inputTypeCheckVariant === SafeInputTypeCheck.Number &&
       text.match(LETTER_REGEX)) ||
-    (maxValue && Number(text) > maxValue)
+    (maxValue && Number(text) > maxValue) ||
+    (minValue && Number(text) < minValue)
   ) {
     setIsError(true);
     setErrorText(
       errorTexts[
         Number(text) > maxValue!
-          ? InputTypeError.MaxValue
-          : InputTypeError.Number
+          ? SafeInputTypeError.MaxValue
+          : text !== '' && Number(text) < minValue!
+          ? SafeInputTypeError.MinValue
+          : SafeInputTypeError.Number
       ],
     );
   } else if (
-    inputTypeCheckVariant === InputTypeCheck.String &&
+    inputTypeCheckVariant === SafeInputTypeCheck.String &&
     text.match(NUMBERS_REGEX)
   ) {
     setIsError(true);
-    setErrorText(errorTexts[InputTypeError.String]);
+    setErrorText(errorTexts[SafeInputTypeError.String]);
   } else {
     setIsError(false);
   }

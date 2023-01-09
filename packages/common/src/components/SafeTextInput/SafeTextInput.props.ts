@@ -1,27 +1,30 @@
 import {StyleProp, TextStyle, ViewStyle} from 'react-native';
 
-export enum InputTypeError {
+export enum SafeInputTypeError {
   Number = 'number',
   String = 'string',
   MaxValue = 'maxValue',
+  MinValue = 'minValue',
 }
 
-export type InputErrorTexts = {
-  [key in InputTypeError]: string;
+export type SafeInputErrorTexts = {
+  [key in SafeInputTypeError]: string;
 };
 
-export enum InputTypeCheck {
+export enum SafeInputTypeCheck {
   String = 'String',
   Number = 'Number',
   AllCharacters = 'AllCharacters',
 }
 
 export type SafeTextInputProps = {
-  inputTypeCheckVariant: InputTypeCheck;
+  inputTypeCheckVariant: SafeInputTypeCheck;
+  setTextValue: (value: string) => void;
   isError: boolean;
   setIsError: (value: boolean) => void;
-  errorTexts: InputErrorTexts;
+  errorTexts: SafeInputErrorTexts;
   maxValue?: number;
+  minValue?: number;
   inputWrapperStyles?: StyleProp<ViewStyle>;
   inputStyles?: StyleProp<TextStyle>;
 };

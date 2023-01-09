@@ -1,4 +1,4 @@
-import {getRelativeUnits, SpaceMono} from '@astrogator/common';
+import {getRelativeUnits} from '@astrogator/common';
 import {StyleSheet} from 'react-native';
 import {AstrogatorColor} from '../../../../theming/theme';
 
@@ -66,19 +66,6 @@ export const styles = (status?: Status) =>
     },
     pickerTitle: {
       fontSize: 20 * bp,
-      marginBottom: 20 * bp,
-    },
-    solInput: {
-      width: 100 * bp,
-      height: 50 * bp,
-      padding: 5 * bp,
-      fontSize: 17 * bp,
-      fontFamily: SpaceMono.Bold,
-      textAlign: 'center',
-      borderRadius: 10 * bp,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: AstrogatorColor.White,
+      marginBottom: 10 * bp,
     },
   });

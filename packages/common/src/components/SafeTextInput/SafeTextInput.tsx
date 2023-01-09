@@ -7,9 +7,11 @@ import {handleOnChangeText} from './SafeTextInput.utils';
 
 const SafeTextInput: FC<SafeTextInputProps> = ({
   inputTypeCheckVariant,
-  maxValue,
+  setTextValue,
   isError,
   setIsError,
+  maxValue,
+  minValue,
   errorTexts,
   inputWrapperStyles,
   inputStyles,
@@ -32,7 +34,9 @@ const SafeTextInput: FC<SafeTextInputProps> = ({
             setErrorText,
             errorTexts,
             maxValue,
+            minValue,
           });
+          setTextValue(text);
         }}
       />
     </View>

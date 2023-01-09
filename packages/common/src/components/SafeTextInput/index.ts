@@ -1,3 +1,3 @@
 export {default as SafeTextInput} from './SafeTextInput';
-export {InputTypeCheck, InputTypeError} from './SafeTextInput.props';
-export type {InputErrorTexts} from './SafeTextInput.props';
+export {SafeInputTypeCheck, SafeInputTypeError} from './SafeTextInput.props';
+export type {SafeInputErrorTexts} from './SafeTextInput.props';
