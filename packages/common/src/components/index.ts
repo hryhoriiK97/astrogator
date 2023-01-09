@@ -5,4 +5,5 @@ export * from './LoadingScreen';
 export * from './MarsRoverItem';
 export * from './MarsRoverPhotoItem';
 export * from './SafeImage';
+export * from './SafeTextInput';
 export * from './Typography';

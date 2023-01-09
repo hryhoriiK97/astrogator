@@ -13,7 +13,7 @@ import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
-import CustomBottomSheetBackdrop from '../../../../components/CustomBottomSheetBackdrop/CustomBottomSheetBackdrop';
+import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {MarsRoverModal} from '../../../../components/MarsRoverModal';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
@@ -44,7 +44,7 @@ const MarsRoversScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['25', '62%'], []);
+  const snapPoints = useMemo(() => ['25', '60%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
