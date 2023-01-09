@@ -1,21 +1,20 @@
 import {SpaceMono, Typography} from '@astrogator/common';
 import React, {FC} from 'react';
-import {View} from 'react-native';
+import {Pressable, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {
   MarsRover,
   marsRoverImages,
 } from '../../stacks/MarsRovers/MarsRovers.utils';
-import {
-  Status,
-  styles,
-} from '../../stacks/MarsRovers/screens/MarsRoverPhotos/MarsRoverPhotos.styled';
+import {AstrogatorColor} from '../../theming/theme';
 import {BackButton} from '../BackButton';
 import {MarsRoverPhotosHeaderProps} from './MarsRoverPhotosHeader.props';
+import {Status, styles} from './MarsRoverPhotosHeader.styled';
 
 const MarsRoverPhotosHeader: FC<MarsRoverPhotosHeaderProps> = ({
   rover,
   onBackButtonPress,
+  onFilterButtonPress,
 }) => {
   return (
     <View style={styles().container}>
@@ -27,9 +26,18 @@ const MarsRoverPhotosHeader: FC<MarsRoverPhotosHeaderProps> = ({
         />
       </View>
       <View style={styles().roverInformationWrapper}>
-        <Typography variant={SpaceMono.Bold} style={styles().roverName}>
-          {rover.name}
-        </Typography>
+        <View style={styles().roverNameWrapper}>
+          <Typography variant={SpaceMono.Bold} style={styles().roverName}>
+            {rover.name}
+          </Typography>
+          <Pressable
+            style={styles().filterButton}
+            onPress={onFilterButtonPress}>
+            <Typography variant={SpaceMono.Bold} color={AstrogatorColor.White}>
+              Filter
+            </Typography>
+          </Pressable>
+        </View>
         <View>
           <View style={styles().statusWrapper}>
             <Typography

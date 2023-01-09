@@ -26,18 +26,35 @@ export const styles = (status?: Status) =>
       height: 300 * bp,
     },
     roverInformationWrapper: {
+      position: 'relative',
       width: '90%',
       alignSelf: 'center',
       borderRadius: 5 * bp,
       marginTop: 30 * bp,
-      backgroundColor: AstrogatorColor.White,
       padding: 20 * bp,
       marginVertical: 20 * bp,
+    },
+    roverNameWrapper: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     roverName: {
       marginBottom: 10 * bp,
       fontSize: 24 * bp,
-      color: AstrogatorColor.Black,
+      color: AstrogatorColor.White,
+    },
+    filterButton: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      width: 70 * bp,
+      height: 70 * bp,
+      borderBottomLeftRadius: 70 * bp,
+      alignItems: 'center',
+      padding: 5 * bp,
+      borderRadius: 5 * bp,
+      backgroundColor: AstrogatorColor.VenetianNights,
     },
     statusWrapper: {
       flexDirection: 'row',
@@ -50,7 +67,7 @@ export const styles = (status?: Status) =>
       textTransform: 'capitalize',
     },
     roverDetailText: {
-      color: AstrogatorColor.Black,
+      color: AstrogatorColor.White,
       marginBottom: 5 * bp,
     },
   });

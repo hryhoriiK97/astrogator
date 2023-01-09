@@ -14,7 +14,7 @@ import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {Pressable, StatusBar, View} from 'react-native';
+import {StatusBar, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
@@ -82,7 +82,7 @@ const MarsRoverPhotosScreen: FC = () => {
   const renderItem = ({item}: {item: MarsRoverPhotoItemResponse}) => {
     return (
       /*//TODO: Find better solution*/
-      <View style={styles().renderItemWrapper}>
+      <View style={styles.renderItemWrapper}>
         <MarsRoverPhotoItem
           imageSource={{uri: replaceHttpWithHttps(item.img_src)}}
           defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
@@ -101,19 +101,18 @@ const MarsRoverPhotosScreen: FC = () => {
 
   return (
     <>
-      <View style={styles().wrapper}>
+      <View style={styles.wrapper}>
         <StatusBar barStyle="light-content" />
         <FlashList
           ref={flashListRef}
           ListHeaderComponent={
-            <>
-              <MarsRoverPhotosHeader rover={rover} onBackButtonPress={goBack} />
-              <Pressable onPress={handlePresentModalPress}>
-                <Typography color={AstrogatorColor.White}>Open</Typography>
-              </Pressable>
-            </>
+            <MarsRoverPhotosHeader
+              rover={rover}
+              onBackButtonPress={goBack}
+              onFilterButtonPress={handlePresentModalPress}
+            />
           }
-          ListFooterComponent={<View style={styles().footer} />}
+          ListFooterComponent={<View style={styles.footer} />}
           data={marsRoverPhotosData}
           renderItem={renderItem}
           ItemSeparatorComponent={renderSeparatorItem}
@@ -133,9 +132,9 @@ const MarsRoverPhotosScreen: FC = () => {
           snapPoints={snapPoints}
           enableOverDrag={false}
           enableDismissOnClose={true}>
-          <View style={styles().modalContainer}>
+          <View style={styles.modalContainer}>
             <Typography
-              style={styles().pickerTitle}
+              style={styles.pickerTitle}
               variant={SpaceMono.Bold}
               color={AstrogatorColor.White}>
               Type Mars Sol
