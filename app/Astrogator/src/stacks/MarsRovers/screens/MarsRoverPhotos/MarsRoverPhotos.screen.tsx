@@ -14,7 +14,7 @@ import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {StatusBar, View} from 'react-native';
+import {Pressable, StatusBar, View} from 'react-native';
 import {Picker} from 'react-native-wheel-pick';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
@@ -54,7 +54,7 @@ const MarsRoverPhotosScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const bottomSheetSnapPoints = useMemo(() => ['25%', '60%'], []);
+  const bottomSheetSnapPoints = useMemo(() => ['25%', '65%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -72,7 +72,7 @@ const MarsRoverPhotosScreen: FC = () => {
     isRefetching: isMarsRoverPhotosRefetching,
   } = useQuery(MarsRoverPhotosQueryKey.MarsRoverPhotos, () =>
     apodAxiosInstance.get(
-      `/mars-photos/api/v1/rovers/${rover.name.toLowerCase()}/photos?sol=${currentMarsSol}&api_key=${NASA_API_KEY}`,
+      `/mars-photos/api/v1/rovers/${rover.name.toLowerCase()}/photos?sol=${currentMarsSol}&camera=${selectedCamera}&api_key=${NASA_API_KEY}`,
     ),
   );
 
@@ -150,16 +150,25 @@ const MarsRoverPhotosScreen: FC = () => {
               setIsError={setIsError}
               errorTexts={inputErrorTexts}
               maxValue={rover.max_sol}
-              minValue={1}
+              minValue={0}
             />
             <Picker
               style={styles.picker}
               pickerData={pickerData}
               selectedValue={pickerData[0]}
-              onValueChange={value =>
+              onValueChange={(value): void =>
                 setSelectedCamera(value !== 'All' ? value : null)
               }
             />
+            <Pressable
+              style={styles.getButton}
+              onPress={(): void => {
+                marsRoverPhotosRefetch({
+                  queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
+                });
+              }}>
+              <Typography style={styles.getButtonTitle}>Get Photos</Typography>
+            </Pressable>
           </View>
         </BottomSheetModal>
       </BottomSheetModalProvider>

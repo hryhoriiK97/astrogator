@@ -5,7 +5,7 @@ import {styles} from './Typography.styled';
 
 const Typography: React.FC<TypographyProps> = ({
   children,
-  variant = SpaceMono.Regular,
+  variant = SpaceMono.Bold,
   style: customStyles,
   ...textProps
 }) => {

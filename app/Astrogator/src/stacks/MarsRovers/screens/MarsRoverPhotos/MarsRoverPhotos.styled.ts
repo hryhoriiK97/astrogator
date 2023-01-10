@@ -39,4 +39,18 @@ export const styles = StyleSheet.create({
     marginTop: 20 * bp,
     borderRadius: 20 * bp,
   },
+  getButton: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 250 * bp,
+    height: 40 * bp,
+    borderRadius: 5 * bp,
+    marginTop: 30 * bp,
+    backgroundColor: AstrogatorColor.VenetianNights,
+  },
+  getButtonTitle: {
+    fontSize: 16 * bp,
+    color: AstrogatorColor.White,
+  },
 });
