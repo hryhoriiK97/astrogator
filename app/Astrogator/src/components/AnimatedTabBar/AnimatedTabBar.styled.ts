@@ -10,9 +10,6 @@ export const styles = StyleSheet.create({
     backgroundColor: '#000000',
     height: Platform.OS === MobilePlatform.Android ? 65 * bp : 80 * bp,
   },
-  activeBackground: {
-    position: 'absolute',
-  },
   tabBarContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',

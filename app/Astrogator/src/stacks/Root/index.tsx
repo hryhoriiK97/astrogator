@@ -34,7 +34,9 @@ const RootStack = () => {
           borderTopColor: 'transparent',
         },
       }}
-      tabBar={props => <AnimatedTabBar {...props} />}>
+      tabBar={props => {
+        return <AnimatedTabBar {...props} />;
+      }}>
       <Tab.Screen
         name={RootStackRoutes.HomeStack}
         options={{
