@@ -7,4 +7,5 @@ export interface MarsRoverPhotoItemProps {
   cameraAbbreviation: string;
   earthData: string;
   sol: number;
+  onPress: () => void;
 }

@@ -12,9 +12,10 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
   cameraAbbreviation,
   earthData,
   sol,
+  onPress,
 }) => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <SafeImage
         source={imageSource}
         defaultSource={defaultSource}

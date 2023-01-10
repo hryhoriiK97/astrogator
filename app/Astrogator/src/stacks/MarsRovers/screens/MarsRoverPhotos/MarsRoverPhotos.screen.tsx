@@ -39,7 +39,7 @@ const {bp} = getRelativeUnits();
 
 const MarsRoverPhotosScreen: FC = () => {
   const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
-  const {goBack} = useNavigation<MarsRoversStackNavigationProp>();
+  const {navigate, goBack} = useNavigation<MarsRoversStackNavigationProp>();
 
   const route =
     useRoute<RouteProp<MarsRoversStackParamList, 'MarsRoverPhotosScreen'>>();
@@ -96,6 +96,14 @@ const MarsRoverPhotosScreen: FC = () => {
           cameraAbbreviation={item.camera.name}
           earthData={item.earth_date}
           sol={item.sol}
+          onPress={() =>
+            navigate('PhotoStack', {
+              screen: 'PhotoScreen',
+              params: {
+                photoUri: item.img_src,
+              },
+            })
+          }
         />
       </View>
     );

@@ -1,5 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
+import PhotoStack from '../Photo';
 import {MarsRoversStackRoutes} from './MarsRovers.routes';
 import MarsRoverPhotosScreen from './screens/MarsRoverPhotos/MarsRoverPhotos.screen';
 import MarsRoversScreen from './screens/MarsRovers/MarsRovers.screen';
@@ -18,6 +19,11 @@ const MarsRoversStack: FC = () => {
       <Stack.Screen
         name={MarsRoversStackRoutes.MarsRoverPhotosScreen}
         component={MarsRoverPhotosScreen}
+      />
+      <Stack.Screen
+        name={MarsRoversStackRoutes.PhotoStack}
+        options={{animation: 'slide_from_bottom'}}
+        component={PhotoStack}
       />
     </Stack.Navigator>
   );
