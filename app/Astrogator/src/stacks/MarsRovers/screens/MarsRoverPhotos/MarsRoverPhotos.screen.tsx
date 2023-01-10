@@ -72,7 +72,9 @@ const MarsRoverPhotosScreen: FC = () => {
     isRefetching: isMarsRoverPhotosRefetching,
   } = useQuery(MarsRoverPhotosQueryKey.MarsRoverPhotos, () =>
     apodAxiosInstance.get(
-      `/mars-photos/api/v1/rovers/${rover.name.toLowerCase()}/photos?sol=${currentMarsSol}&camera=${selectedCamera}&api_key=${NASA_API_KEY}`,
+      `/mars-photos/api/v1/rovers/${rover.name.toLowerCase()}/photos?sol=${currentMarsSol}${
+        selectedCamera ? `&camera=${selectedCamera}` : ''
+      }&api_key=${NASA_API_KEY}`,
     ),
   );
 
@@ -112,9 +114,20 @@ const MarsRoverPhotosScreen: FC = () => {
           ListHeaderComponent={
             <MarsRoverPhotosHeader
               rover={rover}
+              currentMarsSol={currentMarsSol}
+              selectedCamera={selectedCamera}
               onBackButtonPress={goBack}
               onFilterButtonPress={handlePresentModalPress}
             />
+          }
+          ListEmptyComponent={
+            marsRoverPhotosData.length === 0 ? (
+              <View>
+                <Typography color={AstrogatorColor.White}>
+                  No photo for current sol
+                </Typography>
+              </View>
+            ) : null
           }
           ListFooterComponent={<View style={styles.footer} />}
           data={marsRoverPhotosData}

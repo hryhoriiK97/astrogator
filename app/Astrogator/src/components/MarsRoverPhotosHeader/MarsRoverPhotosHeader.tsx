@@ -13,6 +13,8 @@ import {Status, styles} from './MarsRoverPhotosHeader.styled';
 
 const MarsRoverPhotosHeader: FC<MarsRoverPhotosHeaderProps> = ({
   rover,
+  currentMarsSol,
+  selectedCamera,
   onBackButtonPress,
   onFilterButtonPress,
 }) => {
@@ -58,10 +60,13 @@ const MarsRoverPhotosHeader: FC<MarsRoverPhotosHeaderProps> = ({
             Landing Date: {rover.landing_date}
           </Typography>
           <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
-            Last Martian Sol: {rover.max_sol}
+            Last Active Date: {rover.max_date}
           </Typography>
           <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
-            Last Active Date: {rover.max_date}
+            {`Martian Sol: ${currentMarsSol}`}
+          </Typography>
+          <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
+            {`Selected Camera: ${selectedCamera || '-'}`}
           </Typography>
         </View>
       </View>
