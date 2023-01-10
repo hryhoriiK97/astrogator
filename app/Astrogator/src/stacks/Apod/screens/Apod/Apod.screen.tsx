@@ -91,16 +91,26 @@ const ApodScreen: FC = () => {
         contentContainerStyle={styles().contentContainerStyle}>
         {apodData.media_type === 'image' ? (
           <View style={styles().imageWrapper}>
-            <SafeImage
-              source={{
-                uri: apodData.hdurl,
-              }}
-              defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
-              linearGradientColors={[
-                AstrogatorColor.VenetianNights,
-                AstrogatorColor.VenetianNights,
-              ]}
-            />
+            <Pressable
+              onPress={() =>
+                navigation.navigate('PhotoStack', {
+                  screen: 'PhotoScreen',
+                  params: {
+                    photoUri: apodData.hdurl,
+                  },
+                })
+              }>
+              <SafeImage
+                source={{
+                  uri: apodData.hdurl,
+                }}
+                defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+                linearGradientColors={[
+                  AstrogatorColor.VenetianNights,
+                  AstrogatorColor.VenetianNights,
+                ]}
+              />
+            </Pressable>
             <BackButton onPress={() => navigation.goBack()} />
           </View>
         ) : (

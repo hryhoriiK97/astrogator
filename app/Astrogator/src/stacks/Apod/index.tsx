@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
+import PhotoStack from '../Photo';
 import VideoPlayerStack from '../VideoPlayer';
 import {ApodStackRoutes} from './Apod.routes';
 import ApodScreen from './screens/Apod/Apod.screen';
-import FullSizeImageScreen from './screens/FullSizeImage/FullSizeImage.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,9 +18,9 @@ const ApodStack: FC = () => {
         component={VideoPlayerStack}
       />
       <Stack.Screen
-        name={ApodStackRoutes.FullSizeImageScreen}
-        options={{headerShown: false}}
-        component={FullSizeImageScreen}
+        name={ApodStackRoutes.PhotoStack}
+        options={{animation: 'slide_from_bottom'}}
+        component={PhotoStack}
       />
     </Stack.Navigator>
   );

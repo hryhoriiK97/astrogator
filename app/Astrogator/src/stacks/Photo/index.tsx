@@ -12,7 +12,6 @@ const PhotoStack: FC = () => {
       initialRouteName={PhotoStackRoutes.PhotoScreen}>
       <Stack.Screen
         name={PhotoStackRoutes.PhotoScreen}
-        options={{animation: 'slide_from_bottom'}}
         component={PhotoScreen}
       />
     </Stack.Navigator>
