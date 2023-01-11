@@ -24,6 +24,7 @@ import {BackButton} from '../../../../components/BackButton';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {HomeTileModal} from '../../../../components/HomeTileModal';
+import {commonStyles} from '../../../../theming/commonStyles';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
@@ -204,7 +205,7 @@ const ApodScreen: FC = () => {
       />
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        handleIndicatorStyle={{backgroundColor: 'white'}}
+        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
         backdropComponent={props => (
           <CustomBottomSheetBackdrop
             {...props}

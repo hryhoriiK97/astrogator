@@ -16,6 +16,7 @@ import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {MarsRoverModal} from '../../../../components/MarsRoverModal';
+import {commonStyles} from '../../../../theming/commonStyles';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
 import {
   MarsRoversStackNavigationProp,
@@ -99,6 +100,7 @@ const MarsRoversScreen: FC = () => {
       />
       <BottomSheetModal
         ref={bottomSheetModalRef}
+        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
         backdropComponent={props => (
           <CustomBottomSheetBackdrop
             {...props}

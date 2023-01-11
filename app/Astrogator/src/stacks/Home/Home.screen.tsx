@@ -13,6 +13,7 @@ import {
   HomeTilesTexts,
   TileDescription,
 } from '../../constants/HomeTilesTexts/HomeTilesTexts';
+import {commonStyles} from '../../theming/commonStyles';
 import {MarsRoversStackRoutes} from '../MarsRovers/MarsRovers.routes';
 import {RootStackNavigationProp, RootStackRoutes} from '../Root/Root.routes';
 import {HomeStackRoutes} from './Home.routes';
@@ -78,6 +79,7 @@ const HomeScreen: FC = () => {
           />
         )}
         backgroundComponent={CustomBottomSheetModalBackground}
+        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
         snapPoints={snapPoints}
         enableOverDrag={false}
         enableDismissOnClose={true}>
