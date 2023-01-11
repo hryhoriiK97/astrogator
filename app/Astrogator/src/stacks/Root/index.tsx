@@ -9,7 +9,7 @@ import {SettingsIcon} from '../../../assets/svgs/tabBarIcons/SettingsIcon';
 import {AstrogatorColor} from '../../theming/theme';
 import HomeStack from '../Home';
 import MarsRoversStack from '../MarsRovers';
-import VideosStack from '../Videos';
+import NasaAssetsStack from '../NasaAssets';
 import {RootStackRoutes} from './Root.routes';
 
 const {bp} = getRelativeUnits();
@@ -66,7 +66,7 @@ const RootStack = () => {
         component={MarsRoversStack}
       />
       <Tab.Screen
-        name={RootStackRoutes.VideosStack}
+        name={RootStackRoutes.NasaAssetsStack}
         options={{
           tabBarIcon: props => (
             <FavouriteIcon
@@ -78,7 +78,7 @@ const RootStack = () => {
             />
           ),
         }}
-        component={VideosStack}
+        component={NasaAssetsStack}
       />
       <Tab.Screen
         name={'Settings'}

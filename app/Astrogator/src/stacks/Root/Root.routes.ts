@@ -2,12 +2,12 @@ import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {HomeStackParamList} from '../Home/Home.routes';
 import {MarsRoversStackParamList} from '../MarsRovers/MarsRovers.routes';
-import {VideosStackParamList} from '../Videos/Videos.routes';
+import {NasaAssetsStackParamList} from '../NasaAssets/NasaAssets.routes';
 
 export type RootStackParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
   MarsRoversStack: NavigatorScreenParams<MarsRoversStackParamList>;
-  VideosStack: NavigatorScreenParams<VideosStackParamList>;
+  NasaAssetsStack: NavigatorScreenParams<NasaAssetsStackParamList>;
 };
 
 export type RootStackNavigationProp =
@@ -18,5 +18,5 @@ export const RootStackRoutes: {
 } = {
   HomeStack: 'HomeStack',
   MarsRoversStack: 'MarsRoversStack',
-  VideosStack: 'VideosStack',
+  NasaAssetsStack: 'NasaAssetsStack',
 };
