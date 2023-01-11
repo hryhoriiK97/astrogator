@@ -1,4 +1,4 @@
-export interface NasaImageItem {
+export interface NasaImageItemResponse {
   href: string;
   data: Array<{
     center: string;
