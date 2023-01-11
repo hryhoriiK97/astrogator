@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
@@ -97,22 +97,20 @@ const MarsRoversScreen: FC = () => {
         bounces={false}
         ItemSeparatorComponent={renderItemSeparator}
       />
-      <BottomSheetModalProvider>
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          backdropComponent={props => (
-            <CustomBottomSheetBackdrop
-              {...props}
-              onPress={handleCloseModalPress}
-            />
-          )}
-          backgroundComponent={CustomBottomSheetModalBackground}
-          snapPoints={snapPoints}
-          enableOverDrag={false}
-          enableDismissOnClose={true}>
-          <MarsRoverModal rover={selectedRover!} />
-        </BottomSheetModal>
-      </BottomSheetModalProvider>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        backdropComponent={props => (
+          <CustomBottomSheetBackdrop
+            {...props}
+            onPress={handleCloseModalPress}
+          />
+        )}
+        backgroundComponent={CustomBottomSheetModalBackground}
+        snapPoints={snapPoints}
+        enableOverDrag={false}
+        enableDismissOnClose={true}>
+        <MarsRoverModal rover={selectedRover!} />
+      </BottomSheetModal>
     </SafeAreaView>
   );
 };
