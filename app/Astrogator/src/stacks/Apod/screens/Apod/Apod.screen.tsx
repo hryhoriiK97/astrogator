@@ -5,7 +5,7 @@ import {
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import {format, isFuture, isToday} from 'date-fns';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
@@ -24,6 +24,7 @@ import {BackButton} from '../../../../components/BackButton';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {HomeTileModal} from '../../../../components/HomeTileModal';
+import {commonStyles} from '../../../../theming/commonStyles';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
@@ -70,7 +71,7 @@ const ApodScreen: FC = () => {
       }`,
     ),
   );
-//TODO: hide tab bar
+  //TODO: hide tab bar
   // useEffect(() => {
   //   homeNavigation
   //     .getParent()
@@ -202,25 +203,24 @@ const ApodScreen: FC = () => {
           setShowDatePicker(false);
         }}
       />
-      <BottomSheetModalProvider>
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          backdropComponent={props => (
-            <CustomBottomSheetBackdrop
-              {...props}
-              onPress={handleCloseModalPress}
-            />
-          )}
-          backgroundComponent={CustomBottomSheetModalBackground}
-          snapPoints={snapPoints}
-          enableOverDrag={false}
-          enableDismissOnClose={true}>
-          <HomeTileModal
-            title={apodData.title}
-            description={apodData.explanation}
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
+        backdropComponent={props => (
+          <CustomBottomSheetBackdrop
+            {...props}
+            onPress={handleCloseModalPress}
           />
-        </BottomSheetModal>
-      </BottomSheetModalProvider>
+        )}
+        backgroundComponent={CustomBottomSheetModalBackground}
+        snapPoints={snapPoints}
+        enableOverDrag={false}
+        enableDismissOnClose={true}>
+        <HomeTileModal
+          title={apodData.title}
+          description={apodData.explanation}
+        />
+      </BottomSheetModal>
     </>
   );
 };

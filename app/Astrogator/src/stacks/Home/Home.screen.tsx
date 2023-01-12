@@ -1,5 +1,5 @@
 import {Divider, DividerVariant, HomeTile} from '@astrogator/common';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
@@ -13,6 +13,7 @@ import {
   HomeTilesTexts,
   TileDescription,
 } from '../../constants/HomeTilesTexts/HomeTilesTexts';
+import {commonStyles} from '../../theming/commonStyles';
 import {MarsRoversStackRoutes} from '../MarsRovers/MarsRovers.routes';
 import {RootStackNavigationProp, RootStackRoutes} from '../Root/Root.routes';
 import {HomeStackRoutes} from './Home.routes';
@@ -26,7 +27,7 @@ const HomeScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['30', '50%'], []);
+  const snapPoints = useMemo(() => ['20', '50%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -69,22 +70,21 @@ const HomeScreen: FC = () => {
           }}
         />
       </SafeAreaView>
-      <BottomSheetModalProvider>
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          backdropComponent={props => (
-            <CustomBottomSheetBackdrop
-              {...props}
-              onPress={handleCloseModalPress}
-            />
-          )}
-          backgroundComponent={CustomBottomSheetModalBackground}
-          snapPoints={snapPoints}
-          enableOverDrag={false}
-          enableDismissOnClose={true}>
-          <HomeTileModal {...selectedTileDescription!} />
-        </BottomSheetModal>
-      </BottomSheetModalProvider>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        backdropComponent={props => (
+          <CustomBottomSheetBackdrop
+            {...props}
+            onPress={handleCloseModalPress}
+          />
+        )}
+        backgroundComponent={CustomBottomSheetModalBackground}
+        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
+        snapPoints={snapPoints}
+        enableOverDrag={false}
+        enableDismissOnClose={true}>
+        <HomeTileModal {...selectedTileDescription!} />
+      </BottomSheetModal>
     </View>
   );
 };

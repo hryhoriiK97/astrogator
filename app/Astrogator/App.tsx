@@ -1,3 +1,4 @@
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {StatusBar} from 'react-native';
@@ -13,9 +14,11 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <StatusBar barStyle="light-content" />
         <GestureHandlerRootView style={{flex: 1}}>
-          <NavigationContainer>
-            <RootStack />
-          </NavigationContainer>
+          <BottomSheetModalProvider>
+            <NavigationContainer>
+              <RootStack />
+            </NavigationContainer>
+          </BottomSheetModalProvider>
         </GestureHandlerRootView>
       </QueryClientProvider>
     </>

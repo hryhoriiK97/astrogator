@@ -6,10 +6,10 @@ import {FavouriteIcon} from '../../../assets/svgs/tabBarIcons/FavouriteIcon';
 import {HomeIcon} from '../../../assets/svgs/tabBarIcons/HomeIcon';
 import {MessageIcon} from '../../../assets/svgs/tabBarIcons/MessageIcon';
 import {SettingsIcon} from '../../../assets/svgs/tabBarIcons/SettingsIcon';
-import {AnimatedTabBar} from '../../components/AnimatedTabBar';
+import {AstrogatorColor} from '../../theming/theme';
 import HomeStack from '../Home';
 import MarsRoversStack from '../MarsRovers';
-import VideosStack from '../Videos';
+import NasaAssetsStack from '../NasaAssets';
 import {RootStackRoutes} from './Root.routes';
 
 const {bp} = getRelativeUnits();
@@ -27,41 +27,71 @@ const RootStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarShowLabel: false,
         headerShown: false,
         tabBarActiveTintColor: '#F60081',
         tabBarStyle: {
-          backgroundColor: '#b3b3b3',
+          backgroundColor: AstrogatorColor.Black,
           borderTopColor: 'transparent',
         },
-      }}
-      tabBar={props => {
-        return <AnimatedTabBar {...props} />;
       }}>
       <Tab.Screen
         name={RootStackRoutes.HomeStack}
         options={{
-          tabBarIcon: () => <HomeIcon />,
+          tabBarIcon: props => (
+            <HomeIcon
+              fillColor={
+                props.focused
+                  ? AstrogatorColor.VenetianNights
+                  : AstrogatorColor.White
+              }
+            />
+          ),
         }}
         component={HomeStack}
       />
       <Tab.Screen
         name={RootStackRoutes.MarsRoversStack}
         options={{
-          tabBarIcon: () => <SettingsIcon />,
+          tabBarIcon: props => (
+            <SettingsIcon
+              fillColor={
+                props.focused
+                  ? AstrogatorColor.VenetianNights
+                  : AstrogatorColor.White
+              }
+            />
+          ),
         }}
         component={MarsRoversStack}
       />
       <Tab.Screen
-        name={RootStackRoutes.VideosStack}
+        name={RootStackRoutes.NasaAssetsStack}
         options={{
-          tabBarIcon: () => <FavouriteIcon />,
+          tabBarIcon: props => (
+            <FavouriteIcon
+              fillColor={
+                props.focused
+                  ? AstrogatorColor.VenetianNights
+                  : AstrogatorColor.White
+              }
+            />
+          ),
         }}
-        component={VideosStack}
+        component={NasaAssetsStack}
       />
       <Tab.Screen
         name={'Settings'}
         options={{
-          tabBarIcon: () => <MessageIcon />,
+          tabBarIcon: props => (
+            <MessageIcon
+              fillColor={
+                props.focused
+                  ? AstrogatorColor.VenetianNights
+                  : AstrogatorColor.White
+              }
+            />
+          ),
         }}
         component={HomeStack}
       />
