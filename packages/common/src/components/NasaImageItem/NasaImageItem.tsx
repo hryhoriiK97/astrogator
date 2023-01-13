@@ -30,7 +30,7 @@ const NasaImageItem: FC<NasaImageItemProps> = ({
           </Typography>
           <Typography style={styles.subheaderTitle}>Date: {date}</Typography>
         </View>
-        <Typography>{description}</Typography>
+        <Typography style={styles.description}>{description}</Typography>
       </View>
     </Pressable>
   );
