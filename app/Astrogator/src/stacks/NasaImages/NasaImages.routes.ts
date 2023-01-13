@@ -3,7 +3,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {FullImageStackParamList} from '../FullImage/FullImage.routes';
 
 export type NasaImagesStackParamList = {
-  NasaImages: undefined;
+  NasaImagesScreen: undefined;
   FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
@@ -13,6 +13,6 @@ export type NasaImagesStackNavigationProp =
 export const NasaImagesStackRoutes: {
   [route in keyof NasaImagesStackParamList]: route;
 } = {
-  NasaImages: 'NasaImages',
+  NasaImagesScreen: 'NasaImagesScreen',
   FullImageStack: 'FullImageStack',
 };

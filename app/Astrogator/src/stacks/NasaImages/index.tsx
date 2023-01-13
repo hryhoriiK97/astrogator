@@ -10,9 +10,9 @@ const NasaImagesStack: FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={NasaImagesStackRoutes.NasaImages}>
+      initialRouteName={NasaImagesStackRoutes.NasaImagesScreen}>
       <Stack.Screen
-        name={NasaImagesStackRoutes.NasaImages}
+        name={NasaImagesStackRoutes.NasaImagesScreen}
         component={NasaImagesScreen}
       />
       <Stack.Screen
