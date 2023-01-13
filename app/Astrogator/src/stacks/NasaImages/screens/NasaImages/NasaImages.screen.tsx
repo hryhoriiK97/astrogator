@@ -18,8 +18,8 @@ import {styles} from './NasaImages.styled';
 
 const {bp} = getRelativeUnits();
 
-enum ImagesScreenQueryKey {
-  ImagesScreen = 'ImagesScreen',
+enum NasaImagesScreenQueryKey {
+  NasaImages = 'NasaImages',
 }
 
 const NasaImagesScreen: FC = () => {
@@ -30,7 +30,7 @@ const NasaImagesScreen: FC = () => {
     isError: isImagesRoversError,
     refetch: imagesRefetch,
     isRefetching: isImagesRefetching,
-  } = useQuery(ImagesScreenQueryKey.ImagesScreen, () =>
+  } = useQuery(NasaImagesScreenQueryKey.NasaImages, () =>
     nasaAssetsAxiosInstance.get(`/search?media_type=image`),
   );
 
