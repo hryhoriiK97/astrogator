@@ -7,4 +7,5 @@ export interface NasaImageItemProps {
   description: string;
   date: string;
   author: string;
+  onPress: () => void;
 }

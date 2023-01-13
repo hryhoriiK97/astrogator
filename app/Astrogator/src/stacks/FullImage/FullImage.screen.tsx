@@ -2,11 +2,11 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {PhotoStackParamList} from './Photo.routes';
-import {styles} from './Photo.styled';
+import {FullImageStackParamList} from './FullImage.routes';
+import {styles} from './FullImage.styled';
 
-const PhotoScreen: FC = () => {
-  const route = useRoute<RouteProp<PhotoStackParamList, 'PhotoScreen'>>();
+const FullImageScreen: FC = () => {
+  const route = useRoute<RouteProp<FullImageStackParamList, 'PhotoScreen'>>();
   const {photoUri} = route.params;
   return (
     <View style={styles.container}>
@@ -19,4 +19,4 @@ const PhotoScreen: FC = () => {
   );
 };
 
-export default PhotoScreen;
+export default FullImageScreen;

@@ -47,6 +47,7 @@ const ImagesScreen: FC = () => {
         description={item.data[0].description}
         date={format(new Date(item.data[0].date_created), 'dd/MM/yyyy')}
         author={item.data[0].secondary_creator}
+        onPress={() => console.log}
       />
     );
   };
