@@ -12,7 +12,7 @@ import {View} from 'react-native';
 import {useQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {NasaImageItemResponse} from '../../../../types/NasaImageItemResponse';
-import {styles} from './Images.styled';
+import {styles} from './NasaImages.styled';
 
 const {bp} = getRelativeUnits();
 
@@ -20,7 +20,7 @@ enum ImagesScreenQueryKey {
   ImagesScreen = 'ImagesScreen',
 }
 
-const ImagesScreen: FC = () => {
+const NasaImagesScreen: FC = () => {
   const {
     data: imagesResponse,
     isLoading: isImagesLoading,
@@ -69,4 +69,4 @@ const ImagesScreen: FC = () => {
   );
 };
 
-export default ImagesScreen;
+export default NasaImagesScreen;
