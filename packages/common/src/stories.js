@@ -5,6 +5,7 @@ import './components/LoadingScreen/LoadingScreen.stories';
 import './components/MarsRoverItem/MarsRoverItem.stories';
 import './components/MarsRoverPhotoItem/MarsRoverPhotoItem.stories';
 import './components/NasaImageItem/NasaImageItem.stories';
+import './components/NasaVideoItem/NasaVideoItem.stories';
 import './components/SafeImage/SafeImage.stories';
 import './components/SafeTextInput/SafeTextInput.stories';
 import './components/Typography/Typography.stories';
