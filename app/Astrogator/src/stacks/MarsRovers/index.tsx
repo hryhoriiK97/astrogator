@@ -21,7 +21,7 @@ const MarsRoversStack: FC = () => {
         component={MarsRoverPhotosScreen}
       />
       <Stack.Screen
-        name={MarsRoversStackRoutes.PhotoStack}
+        name={MarsRoversStackRoutes.FullImageStack}
         options={{animation: 'slide_from_bottom'}}
         component={FullImageStack}
       />

@@ -97,8 +97,8 @@ const MarsRoverPhotosScreen: FC = () => {
           earthData={item.earth_date}
           sol={item.sol}
           onPress={() =>
-            navigate('PhotoStack', {
-              screen: 'PhotoScreen',
+            navigate('FullImageStack', {
+              screen: 'FullImageScreen',
               params: {
                 photoUri: item.img_src,
               },

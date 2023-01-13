@@ -12,9 +12,10 @@ const NasaImageItem: FC<NasaImageItemProps> = ({
   description,
   date,
   author,
+  onPress,
 }) => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <SafeImage
         source={imageSource}
         defaultSource={defaultSource}

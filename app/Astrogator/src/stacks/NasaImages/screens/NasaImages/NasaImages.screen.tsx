@@ -5,6 +5,7 @@ import {
   LoadingScreen,
   NasaImageItem,
 } from '@astrogator/common';
+import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import {format} from 'date-fns';
 import React, {FC} from 'react';
@@ -12,6 +13,7 @@ import {View} from 'react-native';
 import {useQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {NasaImageItemResponse} from '../../../../types/NasaImageItemResponse';
+import {NasaImagesStackNavigationProp} from '../../NasaImages.routes';
 import {styles} from './NasaImages.styled';
 
 const {bp} = getRelativeUnits();
@@ -21,6 +23,7 @@ enum ImagesScreenQueryKey {
 }
 
 const NasaImagesScreen: FC = () => {
+  const {navigate} = useNavigation<NasaImagesStackNavigationProp>();
   const {
     data: imagesResponse,
     isLoading: isImagesLoading,
@@ -47,7 +50,14 @@ const NasaImagesScreen: FC = () => {
         description={item.data[0].description}
         date={format(new Date(item.data[0].date_created), 'dd/MM/yyyy')}
         author={item.data[0].secondary_creator}
-        onPress={() => console.log}
+        onPress={() =>
+          navigate('FullImageStack', {
+            screen: 'FullImageScreen',
+            params: {
+              photoUri: item.links[0].href,
+            },
+          })
+        }
       />
     );
   };

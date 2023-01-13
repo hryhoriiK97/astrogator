@@ -6,7 +6,7 @@ import {FullImageStackParamList} from '../FullImage/FullImage.routes';
 export type MarsRoversStackParamList = {
   MarsRoversScreen: undefined;
   MarsRoverPhotosScreen: {rover: MarsRoverItemResponse};
-  PhotoStack: NavigatorScreenParams<FullImageStackParamList>;
+  FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
 export type MarsRoversStackNavigationProp =
@@ -17,5 +17,5 @@ export const MarsRoversStackRoutes: {
 } = {
   MarsRoversScreen: 'MarsRoversScreen',
   MarsRoverPhotosScreen: 'MarsRoverPhotosScreen',
-  PhotoStack: 'PhotoStack',
+  FullImageStack: 'FullImageStack',
 };

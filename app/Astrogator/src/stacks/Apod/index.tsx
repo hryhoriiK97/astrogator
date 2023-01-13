@@ -18,7 +18,7 @@ const ApodStack: FC = () => {
         component={VideoPlayerStack}
       />
       <Stack.Screen
-        name={ApodStackRoutes.PhotoStack}
+        name={ApodStackRoutes.FullImageStack}
         options={{animation: 'slide_from_bottom'}}
         component={FullImageStack}
       />

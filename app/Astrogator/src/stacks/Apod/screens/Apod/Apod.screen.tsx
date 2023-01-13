@@ -117,8 +117,8 @@ const ApodScreen: FC = () => {
           <View style={styles().imageWrapper}>
             <Pressable
               onPress={() =>
-                navigation.navigate('PhotoStack', {
-                  screen: 'PhotoScreen',
+                navigation.navigate('FullImageStack', {
+                  screen: 'FullImageScreen',
                   params: {
                     photoUri: apodData.hdurl,
                   },

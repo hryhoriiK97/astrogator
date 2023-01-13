@@ -1,7 +1,7 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type FullImageStackParamList = {
-  PhotoScreen: {photoUri: string};
+  FullImageScreen: {photoUri: string};
 };
 
 export type FullImageStackNavigationProp =
@@ -10,5 +10,5 @@ export type FullImageStackNavigationProp =
 export const FullImageStackRoutes: {
   [route in keyof FullImageStackParamList]: route;
 } = {
-  PhotoScreen: 'PhotoScreen',
+  FullImageScreen: 'FullImageScreen',
 };

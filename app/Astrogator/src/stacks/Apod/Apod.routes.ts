@@ -6,7 +6,7 @@ import {VideoPlayerStackParamList} from '../VideoPlayer/VideoPlayer.routes';
 export type ApodStackParamList = {
   ApodScreen: undefined;
   VideoPlayerStack: NavigatorScreenParams<VideoPlayerStackParamList>;
-  PhotoStack: NavigatorScreenParams<FullImageStackParamList>;
+  FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
 export type ApodStackNavigationProp =
@@ -17,5 +17,5 @@ export const ApodStackRoutes: {
 } = {
   ApodScreen: 'ApodScreen',
   VideoPlayerStack: 'VideoPlayerStack',
-  PhotoStack: 'PhotoStack',
+  FullImageStack: 'FullImageStack',
 };

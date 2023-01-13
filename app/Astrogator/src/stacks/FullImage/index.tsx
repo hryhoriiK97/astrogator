@@ -9,9 +9,9 @@ const FullImageStack: FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={FullImageStackRoutes.PhotoScreen}>
+      initialRouteName={FullImageStackRoutes.FullImageScreen}>
       <Stack.Screen
-        name={FullImageStackRoutes.PhotoScreen}
+        name={FullImageStackRoutes.FullImageScreen}
         component={FullImageScreen}
       />
     </Stack.Navigator>
