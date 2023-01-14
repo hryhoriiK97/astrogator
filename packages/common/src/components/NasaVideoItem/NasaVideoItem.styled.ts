@@ -7,8 +7,9 @@ export const styles = StyleSheet.create({
   container: {
     borderTopLeftRadius: 10 * bp,
     borderTopRightRadius: 10 * bp,
-    width: 190 * bp,
+    width: '95%',
     height: 140 * bp,
+    margin: 5 * bp,
     backgroundColor: '#ffffff',
   },
   image: {
