@@ -27,7 +27,7 @@ const HomeScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['20', '50%'], []);
+  const snapPoints = useMemo(() => ['35%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();

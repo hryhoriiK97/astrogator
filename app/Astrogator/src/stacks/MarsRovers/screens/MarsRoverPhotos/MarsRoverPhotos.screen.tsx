@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
@@ -54,7 +54,7 @@ const MarsRoverPhotosScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const bottomSheetSnapPoints = useMemo(() => ['25%', '65%'], []);
+  const bottomSheetSnapPoints = useMemo(() => ['65%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -144,55 +144,53 @@ const MarsRoverPhotosScreen: FC = () => {
           estimatedItemSize={370 * bp}
         />
       </View>
-      <BottomSheetModalProvider>
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          backdropComponent={props => (
-            <CustomBottomSheetBackdrop
-              {...props}
-              onPress={handleCloseModalPress}
-            />
-          )}
-          backgroundComponent={CustomBottomSheetModalBackground}
-          snapPoints={bottomSheetSnapPoints}
-          enableOverDrag={false}
-          enableDismissOnClose={true}>
-          <View style={styles.modalContainer}>
-            <Typography
-              style={styles.pickerTitle}
-              variant={SpaceMono.Bold}
-              color={AstrogatorColor.White}>
-              Provide Mars Sol and Camera Type
-            </Typography>
-            <SafeTextInput
-              inputTypeCheckVariant={SafeInputTypeCheck.Number}
-              setTextValue={value => setCurrentMarsSol(Number(value))}
-              isError={isError}
-              setIsError={setIsError}
-              errorTexts={inputErrorTexts}
-              maxValue={rover.max_sol}
-              minValue={0}
-            />
-            <Picker
-              style={styles.picker}
-              pickerData={pickerData}
-              selectedValue={pickerData[0]}
-              onValueChange={(value): void =>
-                setSelectedCamera(value !== 'All' ? value : null)
-              }
-            />
-            <Pressable
-              style={styles.getButton}
-              onPress={(): void => {
-                marsRoverPhotosRefetch({
-                  queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
-                });
-              }}>
-              <Typography style={styles.getButtonTitle}>Get Photos</Typography>
-            </Pressable>
-          </View>
-        </BottomSheetModal>
-      </BottomSheetModalProvider>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        backdropComponent={props => (
+          <CustomBottomSheetBackdrop
+            {...props}
+            onPress={handleCloseModalPress}
+          />
+        )}
+        backgroundComponent={CustomBottomSheetModalBackground}
+        snapPoints={bottomSheetSnapPoints}
+        enableOverDrag={false}
+        enableDismissOnClose={true}>
+        <View style={styles.modalContainer}>
+          <Typography
+            style={styles.pickerTitle}
+            variant={SpaceMono.Bold}
+            color={AstrogatorColor.White}>
+            Provide Mars Sol and Camera Type
+          </Typography>
+          <SafeTextInput
+            inputTypeCheckVariant={SafeInputTypeCheck.Number}
+            setTextValue={value => setCurrentMarsSol(Number(value))}
+            isError={isError}
+            setIsError={setIsError}
+            errorTexts={inputErrorTexts}
+            maxValue={rover.max_sol}
+            minValue={0}
+          />
+          <Picker
+            style={styles.picker}
+            pickerData={pickerData}
+            selectedValue={pickerData[0]}
+            onValueChange={(value): void =>
+              setSelectedCamera(value !== 'All' ? value : null)
+            }
+          />
+          <Pressable
+            style={styles.getButton}
+            onPress={(): void => {
+              marsRoverPhotosRefetch({
+                queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
+              });
+            }}>
+            <Typography style={styles.getButtonTitle}>Get Photos</Typography>
+          </Pressable>
+        </View>
+      </BottomSheetModal>
     </>
   );
 };

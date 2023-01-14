@@ -71,28 +71,6 @@ const ApodScreen: FC = () => {
       }`,
     ),
   );
-  //TODO: hide tab bar
-  // useEffect(() => {
-  //   homeNavigation
-  //     .getParent()
-  //     ?.getParent()
-  //     ?.setOptions({
-  //       tabBarStyle: {
-  //         display: 'none',
-  //       },
-  //       tabBarVisible: false,
-  //     });
-  //   return () =>
-  //     navigation
-  //       .getParent()
-  //       ?.getParent()
-  //       ?.setOptions({
-  //         tabBarStyle: {
-  //           display: 'flex',
-  //         },
-  //         tabBarVisible: true,
-  //       });
-  // }, [navigation]);
 
   if (isApodLoading || isApodRefetching) {
     return <LoadingScreen />;

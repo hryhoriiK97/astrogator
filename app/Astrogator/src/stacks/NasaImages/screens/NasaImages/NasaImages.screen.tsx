@@ -1,9 +1,13 @@
-import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
+import {LoadingScreen, NasaAssetItem, Typography} from '@astrogator/common';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {FlashList} from '@shopify/flash-list';
-import React, {FC} from 'react';
+import React, {FC, useCallback, useMemo, useRef} from 'react';
 import {View} from 'react-native';
 import {useQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
+import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
+import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import {commonStyles} from '../../../../theming/commonStyles';
 import {NasaImageItemResponse} from '../../../../types/NasaImageItemResponse';
 import {styles} from './NasaImages.styled';
 
@@ -22,6 +26,18 @@ const NasaImagesScreen: FC = () => {
     nasaAssetsAxiosInstance.get(`/search?media_type=image`),
   );
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['50%'], []);
+
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleCloseModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.dismiss();
+  }, []);
+
   if (isImagesLoading || isImagesRefetching) {
     return <LoadingScreen />;
   }
@@ -37,7 +53,9 @@ const NasaImagesScreen: FC = () => {
         defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
         title={item.data[0].title}
         onPress={console.log}
-        onLongPress={console.log}
+        onLongPress={() => {
+          handlePresentModalPress();
+        }}
       />
     );
   };
@@ -51,6 +69,21 @@ const NasaImagesScreen: FC = () => {
         renderItem={renderItem}
         numColumns={2}
       />
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
+        backdropComponent={props => (
+          <CustomBottomSheetBackdrop
+            {...props}
+            onPress={handleCloseModalPress}
+          />
+        )}
+        backgroundComponent={CustomBottomSheetModalBackground}
+        snapPoints={snapPoints}
+        enableOverDrag={false}
+        enableDismissOnClose={true}>
+        <Typography>Modal</Typography>
+      </BottomSheetModal>
     </View>
   );
 };
