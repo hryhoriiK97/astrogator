@@ -1,29 +1,17 @@
-import {
-  Divider,
-  DividerVariant,
-  getRelativeUnits,
-  LoadingScreen,
-  NasaImageItem,
-} from '@astrogator/common';
-import {useNavigation} from '@react-navigation/native';
+import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
 import {FlashList} from '@shopify/flash-list';
-import {format} from 'date-fns';
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import {useQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {NasaImageItemResponse} from '../../../../types/NasaImageItemResponse';
-import {NasaImagesStackNavigationProp} from '../../NasaImages.routes';
 import {styles} from './NasaImages.styled';
-
-const {bp} = getRelativeUnits();
 
 enum NasaImagesScreenQueryKey {
   NasaImages = 'NasaImages',
 }
 
 const NasaImagesScreen: FC = () => {
-  const {navigate} = useNavigation<NasaImagesStackNavigationProp>();
   const {
     data: imagesResponse,
     isLoading: isImagesLoading,
@@ -42,38 +30,26 @@ const NasaImagesScreen: FC = () => {
     imagesResponse?.data.collection.items;
 
   const renderItem = ({item}: {item: NasaImageItemResponse}) => {
+    const [imagePreview] = item.links;
     return (
-      <NasaImageItem
-        imageSource={{uri: item.links[0].href}}
+      <NasaAssetItem
+        imageSource={{uri: imagePreview.href}}
         defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
         title={item.data[0].title}
-        description={item.data[0].description}
-        date={format(new Date(item.data[0].date_created), 'dd/MM/yyyy')}
-        author={item.data[0].secondary_creator}
-        onPress={() =>
-          navigate('FullImageStack', {
-            screen: 'FullImageScreen',
-            params: {
-              photoUri: item.links[0].href,
-            },
-          })
-        }
+        onPress={console.log}
+        onLongPress={console.log}
       />
     );
   };
-
-  const renderSeparator = () => (
-    <Divider variant={DividerVariant.Divider_15_Vertical} />
-  );
 
   return (
     <View style={styles.container}>
       <FlashList
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaImagesData}
+        estimatedItemSize={175.5}
         renderItem={renderItem}
-        estimatedItemSize={460 * bp}
-        ItemSeparatorComponent={renderSeparator}
+        numColumns={2}
       />
     </View>
   );
