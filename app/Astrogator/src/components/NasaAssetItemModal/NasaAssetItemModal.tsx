@@ -21,12 +21,16 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
       </View>
     );
   };
+
+  const renderSeparator = () => (
+    <Divider variant={DividerVariant.Divider_5_Horizontal} />
+  );
   return (
     <View style={styles.container}>
       <Typography style={styles.title}>{title}</Typography>
       <View style={styles.imageInfoWrapper}>
         <Typography numberOfLines={1} style={styles.imageInfoText}>
-          {secondary_creator}
+          {secondary_creator ?? '-'}
         </Typography>
         <Typography style={styles.imageInfoText}>
           {format(new Date(date_created), 'dd/MM/yyyy')}
@@ -41,9 +45,7 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
             horizontal={true}
             bounces={false}
             estimatedItemSize={36}
-            ItemSeparatorComponent={() => (
-              <Divider variant={DividerVariant.Divider_5_Horizontal} />
-            )}
+            ItemSeparatorComponent={renderSeparator}
           />
         </View>
       )}

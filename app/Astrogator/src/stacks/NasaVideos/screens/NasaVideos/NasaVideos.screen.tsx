@@ -1,15 +1,19 @@
-import {LoadingScreen, NasaAssetItem, Typography} from '@astrogator/common';
+import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
-import React, {FC, useCallback, useMemo, useRef} from 'react';
+import React, {FC, useCallback, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {useQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import {NasaAssetItemModal} from '../../../../components/NasaAssetItemModal';
 import {commonStyles} from '../../../../theming/commonStyles';
-import {NasaAssetItemResponse} from '../../../../types/NasaAssetItemResponse';
+import {
+  NasaAssetItemData,
+  NasaAssetItemResponse,
+} from '../../../../types/NasaAssetItemResponse';
 import {NasaAssetsStackNavigationProp} from '../../../NasaAssets/NasaAssets.routes';
 import {styles} from './NasaVideos.styled';
 
@@ -29,9 +33,10 @@ const NasaVideosScreen: FC = () => {
     nasaAssetsAxiosInstance.get(`/search?media_type=video`),
   );
 
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const [selectedNasaVideoData, setSelectedNasaVideoData] =
+    useState<NasaAssetItemData | null>(null);
 
-  const snapPoints = useMemo(() => ['25%', '50%', '75%', '95%'], []);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -61,6 +66,7 @@ const NasaVideosScreen: FC = () => {
           });
         }}
         onLongPress={() => {
+          setSelectedNasaVideoData(item.data[0]);
           handlePresentModalPress();
         }}
       />
@@ -87,10 +93,15 @@ const NasaVideosScreen: FC = () => {
           />
         )}
         backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={snapPoints}
+        snapPoints={[
+          selectedNasaVideoData &&
+          selectedNasaVideoData.description.length > 150
+            ? '50%'
+            : '40%',
+        ]}
         enableOverDrag={false}
         enableDismissOnClose={true}>
-        <Typography>Modal</Typography>
+        <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />
       </BottomSheetModal>
     </View>
   );

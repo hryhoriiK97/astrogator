@@ -6,7 +6,7 @@ export interface NasaAssetItemData {
   keywords: Array<string>;
   media_type: string;
   description_508: string;
-  secondary_creator: string;
+  secondary_creator: string | null;
   description: string;
 }
 
