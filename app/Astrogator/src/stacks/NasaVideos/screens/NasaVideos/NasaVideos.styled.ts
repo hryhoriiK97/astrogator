@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     backgroundColor: AstrogatorColor.Black,
-    paddingVertical: 30 * bp,
+    paddingVertical: 15 * bp,
+    paddingHorizontal: 5 * bp,
   },
 });

@@ -3,8 +3,9 @@ import {StyleSheet} from 'react-native';
 
 const {bp} = getRelativeUnits();
 
-export const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
+    position: 'relative',
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#000000',
@@ -40,9 +41,27 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#FFFFFF',
   },
+  goBackButtonWrapper: {
+    zIndex: 100,
+    top: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    width: '100%',
+    left: 0,
+  },
+  goBackButton: {
+    zIndex: 100,
+    top: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    height: 50 * bp,
+  },
   goBackText: {
-    fontSize: 14 * bp,
+    fontSize: 17 * bp,
     color: '#FFFFFF',
-    marginHorizontal: 12 * bp,
+    marginLeft: 10 * bp,
   },
 });

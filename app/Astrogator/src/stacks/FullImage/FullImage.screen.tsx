@@ -6,7 +6,8 @@ import {FullImageStackParamList} from './FullImage.routes';
 import {styles} from './FullImage.styled';
 
 const FullImageScreen: FC = () => {
-  const route = useRoute<RouteProp<FullImageStackParamList, 'PhotoScreen'>>();
+  const route =
+    useRoute<RouteProp<FullImageStackParamList, 'FullImageScreen'>>();
   const {photoUri} = route.params;
   return (
     <View style={styles.container}>

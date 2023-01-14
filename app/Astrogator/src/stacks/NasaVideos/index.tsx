@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
-import VideoPlayerStack from '../VideoPlayer';
 import {NasaVideosStackRoutes} from './NasaVideos.routes';
 import NasaVideosScreen from './screens/NasaVideos/NasaVideos.screen';
+import SelectedVideoScreen from './screens/SelectedVideo/SelectedVideo.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,8 +16,11 @@ const NasaVideosStack: FC = () => {
         component={NasaVideosScreen}
       />
       <Stack.Screen
-        name={NasaVideosStackRoutes.VideoPlayerStack}
-        component={VideoPlayerStack}
+        name={NasaVideosStackRoutes.SelectedVideo}
+        options={{
+          headerShown: false,
+        }}
+        component={SelectedVideoScreen}
       />
     </Stack.Navigator>
   );

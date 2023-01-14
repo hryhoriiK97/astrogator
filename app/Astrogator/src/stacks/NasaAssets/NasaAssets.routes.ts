@@ -7,6 +7,7 @@ import {NasaVideosStackParamList} from '../NasaVideos/NasaVideos.routes';
 export type NasaAssetsStackParamList = {
   NasaImagesStack: NavigatorScreenParams<NasaImagesStackParamList>;
   NasaVideosStack: NavigatorScreenParams<NasaVideosStackParamList>;
+  SelectedVideo: {videoCollectionUri: string};
   FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
@@ -18,5 +19,6 @@ export const NasaAssetsStackRoutes: {
 } = {
   NasaImagesStack: 'NasaImagesStack',
   NasaVideosStack: 'NasaVideosStack',
+  SelectedVideo: 'SelectedVideo',
   FullImageStack: 'FullImageStack',
 };
