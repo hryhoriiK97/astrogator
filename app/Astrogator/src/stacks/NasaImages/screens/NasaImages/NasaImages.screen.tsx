@@ -1,14 +1,18 @@
-import {LoadingScreen, NasaAssetItem, Typography} from '@astrogator/common';
+import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {FlashList} from '@shopify/flash-list';
-import React, {FC, useCallback, useMemo, useRef} from 'react';
+import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {useQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import NasaAssetItemModal from '../../../../components/NasaAssetItemModal/NasaAssetItemModal';
 import {commonStyles} from '../../../../theming/commonStyles';
-import {NasaImageItemResponse} from '../../../../types/NasaImageItemResponse';
+import {
+  NasaAssetItemData,
+  NasaAssetItemResponse,
+} from '../../../../types/NasaAssetItemResponse';
 import {styles} from './NasaImages.styled';
 
 enum NasaImagesScreenQueryKey {
@@ -26,6 +30,8 @@ const NasaImagesScreen: FC = () => {
     nasaAssetsAxiosInstance.get(`/search?media_type=image`),
   );
 
+  const [selectedNasaImageData, setSelectedNasaImageData] =
+    useState<NasaAssetItemData | null>(null);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const snapPoints = useMemo(() => ['50%'], []);
@@ -42,10 +48,10 @@ const NasaImagesScreen: FC = () => {
     return <LoadingScreen />;
   }
 
-  const nasaImagesData: NasaImageItemResponse[] =
+  const nasaImagesData: NasaAssetItemResponse[] =
     imagesResponse?.data.collection.items;
 
-  const renderItem = ({item}: {item: NasaImageItemResponse}) => {
+  const renderItem = ({item}: {item: NasaAssetItemResponse}) => {
     const [imagePreview] = item.links;
     return (
       <NasaAssetItem
@@ -54,6 +60,7 @@ const NasaImagesScreen: FC = () => {
         title={item.data[0].title}
         onPress={console.log}
         onLongPress={() => {
+          setSelectedNasaImageData(item.data[0]);
           handlePresentModalPress();
         }}
       />
@@ -82,7 +89,7 @@ const NasaImagesScreen: FC = () => {
         snapPoints={snapPoints}
         enableOverDrag={false}
         enableDismissOnClose={true}>
-        <Typography>Modal</Typography>
+        <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
       </BottomSheetModal>
     </View>
   );

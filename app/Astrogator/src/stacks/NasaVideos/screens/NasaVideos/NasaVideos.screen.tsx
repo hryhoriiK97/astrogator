@@ -9,7 +9,7 @@ import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {commonStyles} from '../../../../theming/commonStyles';
-import {NasaImageItemResponse} from '../../../../types/NasaImageItemResponse';
+import {NasaAssetItemResponse} from '../../../../types/NasaAssetItemResponse';
 import {NasaAssetsStackNavigationProp} from '../../../NasaAssets/NasaAssets.routes';
 import {styles} from './NasaVideos.styled';
 
@@ -45,10 +45,10 @@ const NasaVideosScreen: FC = () => {
     return <LoadingScreen />;
   }
 
-  const nasaVideosData: NasaImageItemResponse[] =
+  const nasaVideosData: NasaAssetItemResponse[] =
     nasaVideosResponse?.data.collection.items;
 
-  const renderItem = ({item}: {item: NasaImageItemResponse}) => {
+  const renderItem = ({item}: {item: NasaAssetItemResponse}) => {
     const [imagePreview] = item.links;
     return (
       <NasaAssetItem
