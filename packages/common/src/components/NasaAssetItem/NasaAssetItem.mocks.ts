@@ -1,6 +1,6 @@
-import {NasaVideoItemProps} from './NasaVideoItem.props';
+import {NasaAssetItemProps} from './NasaAssetItem.props';
 
-export const nasaVideoItemPropsMock: NasaVideoItemProps = {
+export const nasaAssetItemPropsMock: NasaAssetItemProps = {
   imageSource: {
     uri: 'https://images-assets.nasa.gov/video/SpaceX_CRS-23_Crew_Message/SpaceX_CRS-23_Crew_Message~thumb.jpg',
   },

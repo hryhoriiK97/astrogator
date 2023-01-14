@@ -1,10 +1,9 @@
-import {LoadingScreen} from '@astrogator/common';
+import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import {useQuery} from 'react-query';
-import NasaVideoItem from '../../../../../../../packages/common/src/components/NasaVideoItem/NasaVideoItem';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {NasaImageItemResponse} from '../../../../types/NasaImageItemResponse';
 import {NasaAssetsStackNavigationProp} from '../../../NasaAssets/NasaAssets.routes';
@@ -36,7 +35,7 @@ const NasaVideosScreen: FC = () => {
   const renderItem = ({item}: {item: NasaImageItemResponse}) => {
     const [imagePreview] = item.links;
     return (
-      <NasaVideoItem
+      <NasaAssetItem
         imageSource={{uri: imagePreview.href}}
         defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
         title={item.data[0].title}

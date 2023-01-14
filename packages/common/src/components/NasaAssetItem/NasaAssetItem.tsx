@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import {Pressable} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Typography} from '../Typography';
-import {NasaVideoItemProps} from './NasaVideoItem.props';
-import {styles} from './NasaVideoItem.styled';
+import {NasaAssetItemProps} from './NasaAssetItem.props';
+import {styles} from './NasaAssetItem.styled';
 
-const NasaVideoItem: FC<NasaVideoItemProps> = ({
+const NasaAssetItem: FC<NasaAssetItemProps> = ({
   imageSource,
   defaultSource,
   title,
@@ -29,4 +29,4 @@ const NasaVideoItem: FC<NasaVideoItemProps> = ({
   );
 };
 
-export default NasaVideoItem;
+export default NasaAssetItem;
