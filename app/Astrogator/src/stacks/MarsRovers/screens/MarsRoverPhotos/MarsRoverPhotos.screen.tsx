@@ -21,6 +21,7 @@ import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {MarsRoverPhotosHeader} from '../../../../components/MarsRoverPhotosHeader';
+import {commonStyles} from '../../../../theming/commonStyles';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {MarsRoverPhotoItemResponse} from '../../../../types/MarsRoverPhotoItemResponse';
 import {replaceHttpWithHttps} from '../../../../utils';
@@ -152,6 +153,7 @@ const MarsRoverPhotosScreen: FC = () => {
             onPress={handleCloseModalPress}
           />
         )}
+        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
         backgroundComponent={CustomBottomSheetModalBackground}
         snapPoints={bottomSheetSnapPoints}
         enableOverDrag={false}
