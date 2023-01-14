@@ -1,6 +1,6 @@
-import {Divider, DividerVariant, LoadingScreen} from '@astrogator/common';
+import {LoadingScreen} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
-import {MasonryFlashList} from '@shopify/flash-list';
+import {FlashList} from '@shopify/flash-list';
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import {useQuery} from 'react-query';
@@ -50,19 +50,14 @@ const NasaVideosScreen: FC = () => {
     );
   };
 
-  const renderSeparator = () => {
-    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
-  };
-
   return (
     <View style={styles.container}>
-      <MasonryFlashList
+      <FlashList
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaVideosData}
-        estimatedItemSize={140}
+        estimatedItemSize={175.5}
         renderItem={renderItem}
         numColumns={2}
-        ItemSeparatorComponent={renderSeparator}
       />
     </View>
   );

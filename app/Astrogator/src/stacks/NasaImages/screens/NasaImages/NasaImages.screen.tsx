@@ -72,7 +72,7 @@ const NasaImagesScreen: FC = () => {
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaImagesData}
         renderItem={renderItem}
-        estimatedItemSize={510 * bp}
+        estimatedItemSize={460 * bp}
         ItemSeparatorComponent={renderSeparator}
       />
     </View>
