@@ -1,4 +1,4 @@
-import {Typography} from '@astrogator/common';
+import {Divider, DividerVariant, Typography} from '@astrogator/common';
 import {FlashList} from '@shopify/flash-list';
 import {format} from 'date-fns';
 import React, {FC} from 'react';
@@ -15,7 +15,9 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
   const renderItem = ({item}: {item: string}) => {
     return (
       <View style={styles.keywordItem}>
-        <Typography style={styles.keywordItemText}>{item}</Typography>
+        <Typography numberOfLines={1} style={styles.keywordItemText}>
+          {item}
+        </Typography>
       </View>
     );
   };
@@ -23,7 +25,7 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
     <View style={styles.container}>
       <Typography style={styles.title}>{title}</Typography>
       <View style={styles.imageInfoWrapper}>
-        <Typography style={styles.imageInfoText}>
+        <Typography numberOfLines={1} style={styles.imageInfoText}>
           {secondary_creator}
         </Typography>
         <Typography style={styles.imageInfoText}>
@@ -31,16 +33,20 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
         </Typography>
       </View>
       <Typography style={styles.description}>{description}</Typography>
-      <View style={styles.keywordsWrapper}>
-        <FlashList
-          data={keywords}
-          renderItem={renderItem}
-          horizontal={true}
-          bounces={false}
-          estimatedItemSize={36}
-          ItemSeparatorComponent={() => <View style={{marginHorizontal: 5}} />}
-        />
-      </View>
+      {!!keywords?.length && (
+        <View style={styles.keywordsWrapper}>
+          <FlashList
+            data={keywords}
+            renderItem={renderItem}
+            horizontal={true}
+            bounces={false}
+            estimatedItemSize={36}
+            ItemSeparatorComponent={() => (
+              <Divider variant={DividerVariant.Divider_5_Horizontal} />
+            )}
+          />
+        </View>
+      )}
     </View>
   );
 };

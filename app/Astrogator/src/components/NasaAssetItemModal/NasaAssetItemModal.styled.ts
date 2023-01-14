@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     marginVertical: 10 * bp,
   },
   imageInfoText: {
+    maxWidth: 200 * bp,
     fontSize: 10 * bp,
     color: AstrogatorColor.White,
   },
@@ -30,7 +31,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     marginTop: 20 * bp,
     flexDirection: 'row',
-    alignItems: 'center',
     flexWrap: 'wrap',
   },
   keywordItem: {

@@ -1,7 +1,7 @@
 import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {FlashList} from '@shopify/flash-list';
-import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
+import React, {FC, useCallback, useRef, useState} from 'react';
 import {View} from 'react-native';
 import {useQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
@@ -33,8 +33,6 @@ const NasaImagesScreen: FC = () => {
   const [selectedNasaImageData, setSelectedNasaImageData] =
     useState<NasaAssetItemData | null>(null);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const snapPoints = useMemo(() => ['50%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -86,7 +84,12 @@ const NasaImagesScreen: FC = () => {
           />
         )}
         backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={snapPoints}
+        snapPoints={[
+          selectedNasaImageData &&
+          selectedNasaImageData.description.length > 150
+            ? '50%'
+            : '40%',
+        ]}
         enableOverDrag={false}
         enableDismissOnClose={true}>
         <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
