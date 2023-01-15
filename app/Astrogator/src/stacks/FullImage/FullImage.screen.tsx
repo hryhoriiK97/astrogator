@@ -14,7 +14,7 @@ const FullImageScreen: FC = () => {
       <FastImage
         style={styles.image}
         source={{uri: photoUri}}
-        resizeMode={FastImage.resizeMode.cover}
+        resizeMode={FastImage.resizeMode.contain}
       />
     </View>
   );

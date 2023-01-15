@@ -1,5 +1,6 @@
 import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useRef, useState} from 'react';
 import {View} from 'react-native';
@@ -13,6 +14,7 @@ import {
   NasaAssetItemData,
   NasaAssetItemResponse,
 } from '../../../../types/NasaAssetItemResponse';
+import {NasaImagesStackNavigationProp} from '../../NasaImages.routes';
 import {styles} from './NasaImages.styled';
 
 enum NasaImagesScreenQueryKey {
@@ -20,6 +22,7 @@ enum NasaImagesScreenQueryKey {
 }
 
 const NasaImagesScreen: FC = () => {
+  const navigation = useNavigation<NasaImagesStackNavigationProp>();
   const {
     data: imagesResponse,
     isLoading: isImagesLoading,
@@ -56,7 +59,14 @@ const NasaImagesScreen: FC = () => {
         imageSource={{uri: imagePreview.href}}
         defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
         title={item.data[0].title}
-        onPress={console.log}
+        onPress={() => {
+          navigation.navigate('FullImageStack', {
+            screen: 'FullImageScreen',
+            params: {
+              photoUri: imagePreview.href,
+            },
+          });
+        }}
         onLongPress={() => {
           setSelectedNasaImageData(item.data[0]);
           handlePresentModalPress();

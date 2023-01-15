@@ -101,7 +101,7 @@ const MarsRoverPhotosScreen: FC = () => {
             navigate('FullImageStack', {
               screen: 'FullImageScreen',
               params: {
-                photoUri: item.img_src,
+                photoUri: replaceHttpWithHttps(item.img_src),
               },
             })
           }
