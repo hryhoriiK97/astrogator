@@ -58,7 +58,7 @@ const NasaVideosScreen: FC = () => {
     return (
       <NasaAssetItem
         imageSource={{uri: imagePreview.href}}
-        defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+        defaultSource={require('../../../../../assets/images/apod-tile.webp')}
         title={item.data[0].title}
         onPress={() => {
           navigation.navigate('SelectedVideo', {

@@ -106,7 +106,7 @@ const ApodScreen: FC = () => {
                 source={{
                   uri: apodData.hdurl,
                 }}
-                defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+                defaultSource={require('../../../../../assets/images/apod-tile.webp')}
                 linearGradientColors={[
                   AstrogatorColor.VenetianNights,
                   AstrogatorColor.VenetianNights,

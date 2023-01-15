@@ -3,7 +3,7 @@ import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
-import ApodTile from '../../../assets/images/apod-tile.jpg';
+import ApodTile from '../../../assets/images/apod-tile.webp';
 import MarsRoverImage from '../../../assets/images/mars-rover-bg.webp';
 import {CustomBottomSheetBackdrop} from '../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../components/CustomBottomSheetModalBackground';

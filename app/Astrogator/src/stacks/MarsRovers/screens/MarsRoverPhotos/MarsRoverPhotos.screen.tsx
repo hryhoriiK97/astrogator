@@ -89,7 +89,7 @@ const MarsRoverPhotosScreen: FC = () => {
       <View style={styles.renderItemWrapper}>
         <MarsRoverPhotoItem
           imageSource={{uri: replaceHttpWithHttps(item.img_src)}}
-          defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+          defaultSource={require('../../../../../assets/images/apod-tile.webp')}
           cameraFullName={item.camera.full_name}
           cameraAbbreviation={item.camera.name}
           earthData={item.earth_date}
