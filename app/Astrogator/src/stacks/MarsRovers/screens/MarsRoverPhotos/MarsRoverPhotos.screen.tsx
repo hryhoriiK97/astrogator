@@ -1,7 +1,6 @@
 import {
   Divider,
   DividerVariant,
-  getRelativeUnits,
   LoadingScreen,
   MarsRoverPhotoItem,
   SafeInputTypeCheck,
@@ -35,8 +34,6 @@ import {inputErrorTexts} from './MarsRoverPhotos.utils';
 enum MarsRoverPhotosQueryKey {
   MarsRoverPhotos = 'MarsRoverPhotos',
 }
-
-const {bp} = getRelativeUnits();
 
 const MarsRoverPhotosScreen: FC = () => {
   const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
@@ -139,10 +136,11 @@ const MarsRoverPhotosScreen: FC = () => {
             ) : null
           }
           ListFooterComponent={<View style={styles.footer} />}
+          showsVerticalScrollIndicator={false}
           data={marsRoverPhotosData}
           renderItem={renderItem}
           ItemSeparatorComponent={renderSeparatorItem}
-          estimatedItemSize={370 * bp}
+          estimatedItemSize={355.5}
         />
       </View>
       <BottomSheetModal

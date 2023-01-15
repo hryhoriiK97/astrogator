@@ -12,24 +12,22 @@ const HomeTile: FC<HomeTileProps> = ({
   onLongPress,
 }) => {
   return (
-    <View style={styles.container}>
-      <Pressable
-        onPress={onPress}
-        onLongPress={onLongPress}
-        style={styles.container}>
-        <ImageBackground
-          style={styles.imageBackground}
-          imageStyle={styles.image}
-          source={imageSource}>
-          <Typography variant={SpaceMono.Bold} style={styles.title}>
-            {title}
-          </Typography>
-          <View style={styles.iconWrapper}>
-            <ChevronIcon />
-          </View>
-        </ImageBackground>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={() => onPress()}
+      onLongPress={() => onLongPress()}
+      style={styles.container}>
+      <ImageBackground
+        style={styles.imageBackground}
+        imageStyle={styles.image}
+        source={imageSource}>
+        <Typography variant={SpaceMono.Bold} style={styles.title}>
+          {title}
+        </Typography>
+        <View style={styles.iconWrapper}>
+          <ChevronIcon />
+        </View>
+      </ImageBackground>
+    </Pressable>
   );
 };
 

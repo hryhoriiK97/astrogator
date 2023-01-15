@@ -78,7 +78,8 @@ const NasaVideosScreen: FC = () => {
       <FlashList
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaVideosData}
-        estimatedItemSize={175.5}
+        showsVerticalScrollIndicator={false}
+        estimatedItemSize={145}
         renderItem={renderItem}
         numColumns={2}
       />

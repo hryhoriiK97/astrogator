@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     backgroundColor: AstrogatorColor.Black,
   },
   contentContainerStyle: {
-    height: 300 * bp,
     marginHorizontal: 16 * bp,
   },
   title: {
