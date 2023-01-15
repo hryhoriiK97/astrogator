@@ -94,12 +94,7 @@ const NasaVideosScreen: FC = () => {
           />
         )}
         backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={[
-          selectedNasaVideoData &&
-          selectedNasaVideoData.description.length > 150
-            ? '50%'
-            : '40%',
-        ]}
+        snapPoints={['50%']}
         enableOverDrag={false}
         enableDismissOnClose={true}>
         <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />
