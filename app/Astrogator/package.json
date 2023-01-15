@@ -29,6 +29,7 @@
     "react-native-dotenv": "^3.4.6",
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.8.0",
+    "react-native-haptic-feedback": "^1.14.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-pager-view": "^6.1.2",
     "react-native-reanimated": "^2.13.0",

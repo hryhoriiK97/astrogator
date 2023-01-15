@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
 import {Pressable} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import {reactNativeHapticFeedbackOptions} from '../../config/reactNativeHapticFeedbackOptions';
 import {SpaceMono, Typography} from '../Typography';
 import {MarsRoverItemProps} from './MarsRoverItem.props';
 import {styles} from './MarsRoverItem.styled';
@@ -15,7 +17,13 @@ const MarsRoverItem: FC<MarsRoverItemProps> = ({
     <Pressable
       style={styles.container}
       onPress={onPress}
-      onLongPress={onLongPress}>
+      onLongPress={() => {
+        ReactNativeHapticFeedback.trigger(
+          'impactHeavy',
+          reactNativeHapticFeedbackOptions,
+        );
+        onLongPress();
+      }}>
       <Typography variant={SpaceMono.Bold} style={styles.title}>
         {name}
       </Typography>

@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
 import {ImageBackground, Pressable, View} from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {ChevronIcon} from '../../../assets/svgs/ChevronIcon';
+import {reactNativeHapticFeedbackOptions} from '../../config/reactNativeHapticFeedbackOptions';
 import {SpaceMono, Typography} from '../Typography';
 import {HomeTileProps} from './HomeTile.props';
 import {styles} from './HomeTile.styled';
@@ -14,7 +16,13 @@ const HomeTile: FC<HomeTileProps> = ({
   return (
     <Pressable
       onPress={() => onPress()}
-      onLongPress={() => onLongPress()}
+      onLongPress={() => {
+        ReactNativeHapticFeedback.trigger(
+          'impactHeavy',
+          reactNativeHapticFeedbackOptions,
+        );
+        onLongPress();
+      }}
       style={styles.container}>
       <ImageBackground
         style={styles.imageBackground}
