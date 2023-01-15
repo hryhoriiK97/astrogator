@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     marginTop: 5 * bp,
     fontSize: 17 * bp,
     fontFamily: SpaceMono.Bold,
+    color: '#000000',
     textAlign: 'center',
     borderRadius: 10 * bp,
     display: 'flex',

@@ -181,7 +181,8 @@ const MarsRoverPhotosScreen: FC = () => {
             }
           />
           <Pressable
-            style={styles.getButton}
+            style={[styles.getButton, isError && styles.disabledGetButton]}
+            disabled={isError}
             onPress={(): void => {
               marsRoverPhotosRefetch({
                 queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
