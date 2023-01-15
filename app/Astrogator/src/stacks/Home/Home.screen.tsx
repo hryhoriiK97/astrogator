@@ -5,9 +5,11 @@ import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
 import ApodTile from '../../../assets/images/apod-tile.webp';
 import MarsRoverImage from '../../../assets/images/mars-rover-bg.webp';
+import NasaTileImage from '../../../assets/images/nasa-tile.webp';
 import {CustomBottomSheetBackdrop} from '../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../components/CustomBottomSheetModalBackground';
 import {HomeTileModal} from '../../components/HomeTileModal';
+import NasaTile from '../../components/NasaTile/NasaTIle';
 import {
   HomeTileName,
   HomeTilesTexts,
@@ -15,6 +17,8 @@ import {
 } from '../../constants/HomeTilesTexts/HomeTilesTexts';
 import {commonStyles} from '../../theming/commonStyles';
 import {MarsRoversStackRoutes} from '../MarsRovers/MarsRovers.routes';
+import {NasaAssetsStackRoutes} from '../NasaAssets/NasaAssets.routes';
+import {NasaImagesStackRoutes} from '../NasaImages/NasaImages.routes';
 import {RootStackNavigationProp, RootStackRoutes} from '../Root/Root.routes';
 import {HomeStackRoutes} from './Home.routes';
 import {styles} from './Home.styled';
@@ -60,6 +64,24 @@ const HomeScreen: FC = () => {
           onPress={() => {
             navigate(RootStackRoutes.MarsRoversStack, {
               screen: MarsRoversStackRoutes.MarsRoversScreen,
+            });
+          }}
+          onLongPress={() => {
+            setSelectedTileDescription(
+              HomeTilesTexts[HomeTileName.MarsRoverPhotos],
+            );
+            handlePresentModalPress();
+          }}
+        />
+        <Divider variant={DividerVariant.Divider_15_Vertical} />
+        <NasaTile
+          imageSource={Image.resolveAssetSource(NasaTileImage)}
+          onPress={() => {
+            navigate(RootStackRoutes.NasaAssetsStack, {
+              screen: NasaAssetsStackRoutes.NasaImagesStack,
+              params: {
+                screen: NasaImagesStackRoutes.NasaImagesScreen,
+              },
             });
           }}
           onLongPress={() => {
