@@ -5,27 +5,21 @@ const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   container: {
-    position: 'relative',
     width: '100%',
-    backgroundColor: '#ffffff',
-    borderRadius: 12 * bp,
+    backgroundColor: '#000000',
+    borderRadius: 14 * bp,
     height: 200 * bp,
+    overflow: 'hidden',
   },
   imageBackground: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    top: 0,
-    left: 0,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     flex: 1,
-    marginBottom: 16 * bp,
   },
   image: {
-    borderRadius: 12 * bp,
+    flex: 1,
   },
   title: {
     color: '#ffffff',

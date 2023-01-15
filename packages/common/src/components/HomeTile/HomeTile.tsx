@@ -18,6 +18,7 @@ const HomeTile: FC<HomeTileProps> = ({
       style={styles.container}>
       <ImageBackground
         style={styles.imageBackground}
+        resizeMode={'cover'}
         imageStyle={styles.image}
         source={imageSource}>
         <Typography variant={SpaceMono.Bold} style={styles.title}>
