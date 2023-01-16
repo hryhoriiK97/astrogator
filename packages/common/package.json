@@ -22,6 +22,7 @@
     "react-native-svg": "*"
   },
   "dependencies": {
+    "@react-native-community/blur": "^4.3.0",
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-fast-image": "^8.6.3",
