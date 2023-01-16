@@ -1,3 +1,4 @@
+export * from './ApodWidget';
 export * from './CoolCarousel';
 export * from './Divider';
 export * from './HomeTile';
