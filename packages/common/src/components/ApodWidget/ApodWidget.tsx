@@ -1,4 +1,3 @@
-import {BlurView} from '@react-native-community/blur';
 import React, {FC} from 'react';
 import {Pressable, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -18,21 +17,24 @@ const ApodWidget: FC<ApodWidgetProps> = ({
 }) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
-      <FastImage source={imageSource} style={styles.imageBackground} />
-      <View style={styles.contentWrapper}>
-        <BlurView
-          style={styles.blurView}
-          blurType="light"
-          blurAmount={3}
-          downsampleFactor={100}
+      <View style={styles.imageWrapper}>
+        <FastImage
+          source={imageSource}
+          style={styles.image}
+          defaultSource={defaultSource}
+          resizeMode={'cover'}
         />
+      </View>
+      <View style={styles.contentWrapper}>
         <Typography style={styles.title}>{title}</Typography>
         <View style={styles.apodInfoWrapper}>
           <Typography style={styles.apodInfoText}>{author}</Typography>
           <Divider variant={DividerVariant.Divider_5_Horizontal} />
           <Typography style={styles.apodInfoText}>{date}</Typography>
         </View>
-        <Typography style={styles.description}>{description}</Typography>
+        <Typography style={styles.description} numberOfLines={2}>
+          {description}
+        </Typography>
         <Pressable style={styles.viewMoreButton}>
           <Typography style={styles.viewMoreTitle}>View More</Typography>
         </Pressable>

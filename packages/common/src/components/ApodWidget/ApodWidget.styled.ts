@@ -6,25 +6,26 @@ const {bp} = getRelativeUnits();
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    minHeight: 300 * bp,
-    borderRadius: 30 * bp,
+    flexDirection: 'row',
+    minHeight: 150 * bp,
+    borderRadius: 25 * bp,
     justifyContent: 'center',
     overflow: 'hidden',
+    padding: 2 * bp,
   },
-  imageBackground: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
+  imageWrapper: {
+    width: 140 * bp,
+    minHeight: 150 * bp,
+  },
+  image: {
     flex: 1,
-    width: '100%',
-    height: '100%',
     backgroundColor: 'red',
     justifyContent: 'flex-end',
   },
   contentWrapper: {
-    maxWidth: 250,
+    backgroundColor: '#ffffff',
+    maxWidth: 250 * bp,
     padding: 15 * bp,
-    marginLeft: 40 * bp,
   },
   apodInfoWrapper: {
     flexDirection: 'row',
@@ -34,26 +35,20 @@ export const styles = StyleSheet.create({
   apodInfoText: {
     fontSize: 12 * bp,
   },
-  blurView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    borderWidth: 0,
-    borderRadius: 10 * bp,
-  },
   title: {
     fontSize: 16 * bp,
   },
   description: {
     fontSize: 12 * bp,
-    marginVertical: 4 * bp,
+    marginTop: 3 * bp,
+    marginBottom: 6 * bp,
   },
   viewMoreButton: {
     padding: 6 * bp,
     borderRadius: 4 * bp,
     backgroundColor: '#724FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
     alignSelf: 'flex-start',
   },
   viewMoreTitle: {
