@@ -84,96 +84,89 @@ const ApodScreen: FC = () => {
   const apodData: ApodResponse = apodResponse?.data;
 
   return (
-    <>
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            refreshing={isApodRefetching}
-            onRefresh={() => {
-              apodRefetch({queryKey: ApodScreenQueryKey.Apod});
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={isApodRefetching}
+          onRefresh={() => {
+            apodRefetch({queryKey: ApodScreenQueryKey.Apod});
+          }}
+        />
+      }
+      style={styles().container}
+      contentContainerStyle={styles().contentContainerStyle}>
+      {apodData.media_type === 'image' ? (
+        <View style={styles().imageWrapper}>
+          <SafeImage
+            source={{
+              uri: apodData.hdurl,
             }}
+            defaultSource={require('../../../../../assets/images/apod-tile.webp')}
+            loadingIndicatorHeight={3}
+            linearGradientColors={[
+              AstrogatorColor.VenetianNights,
+              AstrogatorColor.VenetianNights,
+            ]}
           />
-        }
-        style={styles().container}
-        contentContainerStyle={styles().contentContainerStyle}>
-        {apodData.media_type === 'image' ? (
-          <View style={styles().imageWrapper}>
-            <SafeImage
-              source={{
-                uri: apodData.hdurl,
-              }}
-              defaultSource={require('../../../../../assets/images/apod-tile.webp')}
-              loadingIndicatorHeight={3}
-              linearGradientColors={[
-                AstrogatorColor.VenetianNights,
-                AstrogatorColor.VenetianNights,
-              ]}
-            />
-            <BackButton onPress={() => navigation.goBack()} />
-          </View>
-        ) : (
-          <>
-            <View style={styles().youtubePlayerWhiteSpace} />
-            <YoutubePlayer
-              height={YOUTUBE_PLAYER_HEIGHT}
-              videoId={getYouTubeVideoId(apodData.url)}
-            />
-          </>
-        )}
-        <View style={styles().contentWrapper}>
-          <Typography
-            color={AstrogatorColor.White}
-            variant={SpaceMono.Bold}
-            style={styles().title}>
-            {apodData.title}
-          </Typography>
-          <View style={styles().subheader}>
-            <View style={styles().imageInfoWrapper}>
-              <Typography
-                color={AstrogatorColor.White}
-                variant={SpaceMono.Bold}>
-                Author: {apodData.copyright || '-'}
-              </Typography>
-              <Typography
-                color={AstrogatorColor.White}
-                variant={SpaceMono.Bold}>
-                Date: {apodData.date}
-              </Typography>
-            </View>
-            <View style={styles().subheaderControlsWrapper}>
-              <Pressable
-                onPress={() =>
-                  navigation.navigate('FullImageStack', {
-                    screen: 'FullImageScreen',
-                    params: {
-                      photoUri: apodData.hdurl,
-                    },
-                  })
-                }>
-                <Magnifier />
-              </Pressable>
-              <Pressable onPress={() => setShowDatePicker(true)}>
-                <Settings />
-              </Pressable>
-            </View>
-          </View>
-          <Typography
-            variant={SpaceMono.Bold}
-            color={AstrogatorColor.White}
-            style={styles().explanation}
-            ellipsizeMode={'clip'}>
-            {apodData.explanation.split(' ').slice(0, 85).join(' ')}{' '}
-            <Typography
-              onPress={handlePresentModalPress}
-              style={styles().readMoreButton}
-              variant={SpaceMono.Bold}
-              color={AstrogatorColor.VenetianNights}>
-              read more...
-            </Typography>
-          </Typography>
+          <BackButton onPress={() => navigation.goBack()} />
         </View>
-      </ScrollView>
-
+      ) : (
+        <>
+          <View style={styles().youtubePlayerWhiteSpace} />
+          <YoutubePlayer
+            height={YOUTUBE_PLAYER_HEIGHT}
+            videoId={getYouTubeVideoId(apodData.url)}
+          />
+        </>
+      )}
+      <View style={styles().contentWrapper}>
+        <Typography
+          color={AstrogatorColor.White}
+          variant={SpaceMono.Bold}
+          style={styles().title}>
+          {apodData.title}
+        </Typography>
+        <View style={styles().subheader}>
+          <View style={styles().imageInfoWrapper}>
+            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+              Author: {apodData.copyright || '-'}
+            </Typography>
+            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+              Date: {apodData.date}
+            </Typography>
+          </View>
+          <View style={styles().subheaderControlsWrapper}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate('FullImageStack', {
+                  screen: 'FullImageScreen',
+                  params: {
+                    photoUri: apodData.hdurl,
+                  },
+                })
+              }>
+              <Magnifier />
+            </Pressable>
+            <Pressable onPress={() => setShowDatePicker(true)}>
+              <Settings />
+            </Pressable>
+          </View>
+        </View>
+        <Typography
+          variant={SpaceMono.Bold}
+          color={AstrogatorColor.White}
+          style={styles().explanation}
+          ellipsizeMode={'clip'}>
+          {apodData.explanation.split(' ').slice(0, 100).join(' ')}{' '}
+          <Typography
+            onPress={handlePresentModalPress}
+            style={styles().readMoreButton}
+            variant={SpaceMono.Bold}
+            color={AstrogatorColor.VenetianNights}>
+            read more...
+          </Typography>
+        </Typography>
+      </View>
       {/*@ts-ignore*/}
       <DatePicker
         modal
@@ -210,7 +203,7 @@ const ApodScreen: FC = () => {
           description={apodData.explanation}
         />
       </BottomSheetModal>
-    </>
+    </ScrollView>
   );
 };
 
