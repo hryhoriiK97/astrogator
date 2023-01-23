@@ -19,9 +19,9 @@ import {MarsRoverModal} from '../../../../components/MarsRoverModal';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
 import {
-  MarsRoversStackNavigationProp,
-  MarsRoversStackRoutes,
-} from '../../MarsRovers.routes';
+  RootStackNavigationProp,
+  RootStackRoutes,
+} from '../../../Root/Root.routes';
 import {MarsRover, marsRoverImages} from '../../MarsRovers.utils';
 import {styles} from './MarsRovers.styled';
 
@@ -30,7 +30,7 @@ enum MarsRoverPhotosQueryKey {
 }
 
 const MarsRoversScreen: FC = () => {
-  const {navigate} = useNavigation<MarsRoversStackNavigationProp>();
+  const {navigate} = useNavigation<RootStackNavigationProp>();
   const {
     data: marsRovesResponse,
     isLoading: isMarsRoversLoading,
@@ -68,8 +68,11 @@ const MarsRoversScreen: FC = () => {
         imageSource={marsRoverImages[item.name.toLowerCase() as MarsRover]}
         onPress={() => {
           bottomSheetModalRef.current?.close();
-          navigate(MarsRoversStackRoutes.MarsRoverPhotosScreen, {
-            rover: item,
+          navigate(RootStackRoutes.MarsRoversPhotosStack, {
+            screen: 'MarsRoverPhotosScreen',
+            params: {
+              rover: item,
+            },
           });
         }}
         onLongPress={() => {

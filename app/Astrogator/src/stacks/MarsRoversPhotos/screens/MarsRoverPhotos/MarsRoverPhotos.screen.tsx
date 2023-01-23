@@ -25,9 +25,9 @@ import {AstrogatorColor} from '../../../../theming/theme';
 import {MarsRoverPhotoItemResponse} from '../../../../types/MarsRoverPhotoItemResponse';
 import {replaceHttpWithHttps} from '../../../../utils';
 import {
-  MarsRoversStackNavigationProp,
-  MarsRoversStackParamList,
-} from '../../MarsRovers.routes';
+  MarsRoversPhotosStackNavigationProp,
+  MarsRoversPhotosStackParamList,
+} from '../../MarsRoversPhotos.routes';
 import {styles} from './MarsRoverPhotos.styled';
 import {inputErrorTexts} from './MarsRoverPhotos.utils';
 
@@ -37,10 +37,13 @@ enum MarsRoverPhotosQueryKey {
 
 const MarsRoverPhotosScreen: FC = () => {
   const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
-  const {navigate, goBack} = useNavigation<MarsRoversStackNavigationProp>();
+  const {navigate, goBack} =
+    useNavigation<MarsRoversPhotosStackNavigationProp>();
 
   const route =
-    useRoute<RouteProp<MarsRoversStackParamList, 'MarsRoverPhotosScreen'>>();
+    useRoute<
+      RouteProp<MarsRoversPhotosStackParamList, 'MarsRoverPhotosScreen'>
+    >();
   const {rover} = route.params;
 
   const pickerData = ['All', ...rover.cameras.map(camera => camera.name)];
