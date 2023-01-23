@@ -16,8 +16,20 @@ export const styles = () =>
     imageWrapper: {
       position: 'relative',
     },
+    subheader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingRight: 10 * bp,
+    },
     imageInfoWrapper: {
       marginBottom: 10 * bp,
+    },
+    subheaderControlsWrapper: {
+      minWidth: 65 * bp,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     youtubePlayerWhiteSpace: {
       height: 50 * bp,
