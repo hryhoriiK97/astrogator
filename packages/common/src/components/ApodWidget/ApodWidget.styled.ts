@@ -5,26 +5,24 @@ const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     width: '100%',
     flexDirection: 'row',
+    backgroundColor: '#ffffff',
     minHeight: 150 * bp,
-    borderRadius: 25 * bp,
-    justifyContent: 'center',
+    borderRadius: 35 * bp,
     overflow: 'hidden',
-    padding: 2 * bp,
   },
   imageWrapper: {
-    width: 140 * bp,
-    minHeight: 150 * bp,
-  },
-  image: {
-    flex: 1,
-    backgroundColor: 'red',
-    justifyContent: 'flex-end',
+    width: 120 * bp,
+    height: '100%',
+    borderTopRightRadius: 100 * bp,
+    borderBottomRightRadius: 100 * bp,
+    backgroundColor: '#ffffff',
   },
   contentWrapper: {
     backgroundColor: '#ffffff',
-    maxWidth: 250 * bp,
+    maxWidth: 150 * bp,
     padding: 15 * bp,
   },
   apodInfoWrapper: {

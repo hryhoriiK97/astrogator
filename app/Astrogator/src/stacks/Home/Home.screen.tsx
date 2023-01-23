@@ -1,112 +1,59 @@
-import {Divider, DividerVariant, HomeTile} from '@astrogator/common';
-import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {ApodWidget, LoadingScreen} from '@astrogator/common';
+import {NASA_API_KEY} from '@env';
 import {useNavigation} from '@react-navigation/native';
-import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {Image, SafeAreaView, View} from 'react-native';
-import ApodTile from '../../../assets/images/apod-tile.webp';
-import MarsRoverImage from '../../../assets/images/mars-rover-bg.webp';
-import NasaTileImage from '../../../assets/images/nasa-tile.webp';
-import {CustomBottomSheetBackdrop} from '../../components/CustomBottomSheetBackdrop';
-import {CustomBottomSheetModalBackground} from '../../components/CustomBottomSheetModalBackground';
-import {HomeTileModal} from '../../components/HomeTileModal';
-import NasaTile from '../../components/NasaTile/NasaTIle';
-import {
-  HomeTileName,
-  HomeTilesTexts,
-  TileDescription,
-} from '../../constants/HomeTilesTexts/HomeTilesTexts';
-import {commonStyles} from '../../theming/commonStyles';
-import {MarsRoversStackRoutes} from '../MarsRovers/MarsRovers.routes';
-import {NasaAssetsStackRoutes} from '../NasaAssets/NasaAssets.routes';
-import {NasaImagesStackRoutes} from '../NasaImages/NasaImages.routes';
-import {RootStackNavigationProp, RootStackRoutes} from '../Root/Root.routes';
-import {HomeStackRoutes} from './Home.routes';
+import React, {FC} from 'react';
+import {SafeAreaView, View} from 'react-native';
+import {useQuery} from 'react-query';
+import {apodAxiosInstance} from '../../api/apodAxiosInstance';
+import {ApodResponse} from '../../types/ApodResponse';
+import {RootStackNavigationProp} from '../Root/Root.routes';
 import {styles} from './Home.styled';
+
+enum HomeScreenQueryKey {
+  Apod = 'Apod',
+}
 
 const HomeScreen: FC = () => {
   const {navigate} = useNavigation<RootStackNavigationProp>();
 
-  const [selectedTileDescription, setSelectedTileDescription] =
-    useState<TileDescription | null>(null);
+  const {
+    data: apodResponse,
+    isLoading: isApodLoading,
+    isError: isApodError,
+    refetch: apodRefetch,
+    isRefetching: isApodRefetching,
+  } = useQuery(HomeScreenQueryKey.Apod, () =>
+    apodAxiosInstance.get(`/planetary/apod?api_key=${NASA_API_KEY}`),
+  );
 
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  if (isApodLoading || isApodRefetching) {
+    return <LoadingScreen />;
+  }
 
-  const snapPoints = useMemo(() => ['35%'], []);
-
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const handleCloseModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.dismiss();
-  }, []);
+  const apodData: ApodResponse = apodResponse?.data;
 
   return (
     <View style={styles.backgroundImage}>
       <SafeAreaView style={styles.container}>
-        <HomeTile
-          title={'APOD'}
-          imageSource={Image.resolveAssetSource(ApodTile)}
-          onPress={() => {
-            navigate(RootStackRoutes.HomeStack, {
-              screen: HomeStackRoutes.ApodStack,
-            });
-          }}
-          onLongPress={() => {
-            setSelectedTileDescription(HomeTilesTexts[HomeTileName.Apod]);
-            handlePresentModalPress();
-          }}
-        />
-        <Divider variant={DividerVariant.Divider_15_Vertical} />
-        <HomeTile
-          title={'Mars Images'}
-          imageSource={Image.resolveAssetSource(MarsRoverImage)}
-          onPress={() => {
-            navigate(RootStackRoutes.MarsRoversStack, {
-              screen: MarsRoversStackRoutes.MarsRoversScreen,
-            });
-          }}
-          onLongPress={() => {
-            setSelectedTileDescription(
-              HomeTilesTexts[HomeTileName.MarsRoverPhotos],
-            );
-            handlePresentModalPress();
-          }}
-        />
-        <Divider variant={DividerVariant.Divider_15_Vertical} />
-        <NasaTile
-          imageSource={Image.resolveAssetSource(NasaTileImage)}
-          onPress={() => {
-            navigate(RootStackRoutes.NasaAssetsStack, {
-              screen: NasaAssetsStackRoutes.NasaImagesStack,
+        <ApodWidget
+          imageSource={{uri: apodData.hdurl}}
+          title={apodData.title}
+          date={apodData.date}
+          author={apodData.copyright}
+          description={apodData.explanation}
+          onPress={() =>
+            navigate('HomeStack', {
+              screen: 'ApodStack',
               params: {
-                screen: NasaImagesStackRoutes.NasaImagesScreen,
+                screen: 'ApodScreen',
+                params: {
+                  todayApodData: apodData,
+                },
               },
-            });
-          }}
-          onLongPress={() => {
-            setSelectedTileDescription(
-              HomeTilesTexts[HomeTileName.MarsRoverPhotos],
-            );
-            handlePresentModalPress();
-          }}
+            })
+          }
         />
       </SafeAreaView>
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        backdropComponent={props => (
-          <CustomBottomSheetBackdrop
-            {...props}
-            onPress={handleCloseModalPress}
-          />
-        )}
-        backgroundComponent={CustomBottomSheetModalBackground}
-        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
-        snapPoints={snapPoints}
-        enableOverDrag={false}
-        enableDismissOnClose={true}>
-        <HomeTileModal {...selectedTileDescription!} />
-      </BottomSheetModal>
     </View>
   );
 };

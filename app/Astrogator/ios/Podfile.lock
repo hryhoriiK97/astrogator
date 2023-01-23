@@ -93,8 +93,6 @@ PODS:
   - PromisesObjC (2.1.1)
   - PromisesSwift (2.1.1):
     - PromisesObjC (= 2.1.1)
-  - PurchasesHybridCommon (4.8.0):
-    - RevenueCat (= 4.16.0)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -390,7 +388,6 @@ PODS:
     - React-jsi (= 0.70.6)
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
-  - RevenueCat (4.16.0)
   - RNCPicker (2.4.8):
     - React-Core
   - RNDateTimePicker (6.7.1):
@@ -402,9 +399,6 @@ PODS:
   - RNFlashList (1.4.0):
     - React-Core
   - RNGestureHandler (2.8.0):
-    - React-Core
-  - RNPurchases (5.6.0):
-    - PurchasesHybridCommon (= 4.8.0)
     - React-Core
   - RNReactNativeHapticFeedback (1.14.0):
     - React-Core
@@ -520,7 +514,6 @@ DEPENDENCIES:
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNPurchases (from `../node_modules/react-native-purchases`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -546,8 +539,6 @@ SPEC REPOS:
     - OpenSSL-Universal
     - PromisesObjC
     - PromisesSwift
-    - PurchasesHybridCommon
-    - RevenueCat
     - SDWebImage
     - SDWebImageWebPCoder
     - SocketRocket
@@ -642,8 +633,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@shopify/flash-list"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNPurchases:
-    :path: "../node_modules/react-native-purchases"
   RNReactNativeHapticFeedback:
     :path: "../node_modules/react-native-haptic-feedback"
   RNReanimated:
@@ -680,7 +669,6 @@ SPEC CHECKSUMS:
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   PromisesSwift: 99fddfe4a0ec88a56486644c0da106694c92a604
-  PurchasesHybridCommon: bd1e1d3476afd3f95332b0ae160e4ce1bd1efd99
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a
   RCTTypeSafety: 27c2ac1b00609a432ced1ae701247593f07f901e
@@ -713,13 +701,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: c75ceef7aa60a33b2d5731ebe5800ddde40cefc4
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
-  RevenueCat: c12e14f5e3dc5732db6d5095ac4ce6ff08d7eeb0
   RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
   RNDateTimePicker: 0530a73a6f3a1a85814cbde0802736993b9e675e
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFlashList: 399bf6a0db68f594ad2c86aaff3ea39564f39f8a
   RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
-  RNPurchases: bf74bd8e79ed681a84f05d2c7324964d0859b913
   RNReactNativeHapticFeedback: 1e3efeca9628ff9876ee7cdd9edec1b336913f8c
   RNReanimated: ce445c233a6ff5600223484a88ad5704945d972a
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9

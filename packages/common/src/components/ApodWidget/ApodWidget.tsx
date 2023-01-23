@@ -17,14 +17,12 @@ const ApodWidget: FC<ApodWidgetProps> = ({
 }) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
-      <View style={styles.imageWrapper}>
-        <FastImage
-          source={imageSource}
-          style={styles.image}
-          defaultSource={defaultSource}
-          resizeMode={'cover'}
-        />
-      </View>
+      <FastImage
+        source={imageSource}
+        style={styles.imageWrapper}
+        defaultSource={defaultSource}
+        resizeMode={'cover'}
+      />
       <View style={styles.contentWrapper}>
         <Typography style={styles.title}>{title}</Typography>
         <View style={styles.apodInfoWrapper}>
@@ -35,7 +33,7 @@ const ApodWidget: FC<ApodWidgetProps> = ({
         <Typography style={styles.description} numberOfLines={2}>
           {description}
         </Typography>
-        <Pressable style={styles.viewMoreButton}>
+        <Pressable style={styles.viewMoreButton} onPress={onPress}>
           <Typography style={styles.viewMoreTitle}>View More</Typography>
         </Pressable>
       </View>
