@@ -10,7 +10,7 @@ import {AstrogatorColor} from '../../theming/theme';
 import HomeStack from '../Home';
 import MarsRoversStack from '../MarsRovers';
 import NasaAssetsStack from '../NasaAssets';
-import {RootStackRoutes} from './Root.routes';
+import {BottomTabStackRoutes} from './BottomTab.routes';
 
 const {bp} = getRelativeUnits();
 
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 
 const Tab = createBottomTabNavigator();
 
-const RootStack = () => {
+const BottomTabStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -36,7 +36,7 @@ const RootStack = () => {
         },
       }}>
       <Tab.Screen
-        name={RootStackRoutes.HomeStack}
+        name={BottomTabStackRoutes.HomeStack}
         options={{
           tabBarIcon: props => (
             <HomeIcon
@@ -51,7 +51,7 @@ const RootStack = () => {
         component={HomeStack}
       />
       <Tab.Screen
-        name={RootStackRoutes.MarsRoversStack}
+        name={BottomTabStackRoutes.MarsRoversStack}
         options={{
           tabBarIcon: props => (
             <SettingsIcon
@@ -66,7 +66,7 @@ const RootStack = () => {
         component={MarsRoversStack}
       />
       <Tab.Screen
-        name={RootStackRoutes.NasaAssetsStack}
+        name={BottomTabStackRoutes.NasaAssetsStack}
         options={{
           tabBarIcon: props => (
             <FavouriteIcon
@@ -99,4 +99,4 @@ const RootStack = () => {
   );
 };
 
-export default RootStack;
+export default BottomTabStack;

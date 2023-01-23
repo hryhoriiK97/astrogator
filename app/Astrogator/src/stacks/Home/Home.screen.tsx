@@ -6,7 +6,7 @@ import {SafeAreaView, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../api/apodAxiosInstance';
 import {ApodResponse} from '../../types/ApodResponse';
-import {RootStackNavigationProp} from '../Root/Root.routes';
+import {BottomTabStackNavigationProp} from '../BottomTab/BottomTab.routes';
 import {styles} from './Home.styled';
 
 enum HomeScreenQueryKey {
@@ -14,7 +14,7 @@ enum HomeScreenQueryKey {
 }
 
 const HomeScreen: FC = () => {
-  const {navigate} = useNavigation<RootStackNavigationProp>();
+  const {navigate} = useNavigation<BottomTabStackNavigationProp>();
 
   const {
     data: apodResponse,

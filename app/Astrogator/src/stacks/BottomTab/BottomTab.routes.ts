@@ -4,17 +4,17 @@ import {HomeStackParamList} from '../Home/Home.routes';
 import {MarsRoversStackParamList} from '../MarsRovers/MarsRovers.routes';
 import {NasaAssetsStackParamList} from '../NasaAssets/NasaAssets.routes';
 
-export type RootStackParamList = {
+export type BottomTabParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
   MarsRoversStack: NavigatorScreenParams<MarsRoversStackParamList>;
   NasaAssetsStack: NavigatorScreenParams<NasaAssetsStackParamList>;
 };
 
-export type RootStackNavigationProp =
-  NativeStackNavigationProp<RootStackParamList>;
+export type BottomTabStackNavigationProp =
+  NativeStackNavigationProp<BottomTabParamList>;
 
-export const RootStackRoutes: {
-  [route in keyof RootStackParamList]: route;
+export const BottomTabStackRoutes: {
+  [route in keyof BottomTabParamList]: route;
 } = {
   HomeStack: 'HomeStack',
   MarsRoversStack: 'MarsRoversStack',

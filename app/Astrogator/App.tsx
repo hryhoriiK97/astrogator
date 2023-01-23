@@ -4,7 +4,7 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import RootStack from './src/stacks/Root';
+import BottomTabStack from './src/stacks/BottomTab';
 
 const queryClient = new QueryClient();
 
@@ -16,7 +16,7 @@ const App = () => {
         <GestureHandlerRootView style={{flex: 1}}>
           <BottomSheetModalProvider>
             <NavigationContainer>
-              <RootStack />
+              <BottomTabStack />
             </NavigationContainer>
           </BottomSheetModalProvider>
         </GestureHandlerRootView>
