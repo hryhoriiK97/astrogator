@@ -1,12 +1,12 @@
 import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MarsRoverItemResponse} from '../../types/MarsRoverItemResponse';
-import {PhotoStackParamList} from '../Photo/Photo.routes';
+import {FullImageStackParamList} from '../FullImage/FullImage.routes';
 
 export type MarsRoversStackParamList = {
   MarsRoversScreen: undefined;
   MarsRoverPhotosScreen: {rover: MarsRoverItemResponse};
-  PhotoStack: NavigatorScreenParams<PhotoStackParamList>;
+  FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
 export type MarsRoversStackNavigationProp =
@@ -17,5 +17,5 @@ export const MarsRoversStackRoutes: {
 } = {
   MarsRoversScreen: 'MarsRoversScreen',
   MarsRoverPhotosScreen: 'MarsRoverPhotosScreen',
-  PhotoStack: 'PhotoStack',
+  FullImageStack: 'FullImageStack',
 };

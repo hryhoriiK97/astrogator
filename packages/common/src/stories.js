@@ -1,9 +1,11 @@
+import './components/ApodWidget/ApodWidget.stories';
 import './components/CoolCarousel/CoolCarousel.stories';
 import './components/Divider/Divider.stories';
 import './components/HomeTile/HomeTile.stories';
 import './components/LoadingScreen/LoadingScreen.stories';
 import './components/MarsRoverItem/MarsRoverItem.stories';
 import './components/MarsRoverPhotoItem/MarsRoverPhotoItem.stories';
+import './components/NasaAssetItem/NasaAssetItem.stories';
 import './components/NasaImageItem/NasaImageItem.stories';
 import './components/SafeImage/SafeImage.stories';
 import './components/SafeTextInput/SafeTextInput.stories';

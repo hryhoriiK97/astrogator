@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
 import {ImageBackground, Pressable, View} from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {ChevronIcon} from '../../../assets/svgs/ChevronIcon';
+import {reactNativeHapticFeedbackOptions} from '../../config/reactNativeHapticFeedbackOptions';
 import {SpaceMono, Typography} from '../Typography';
 import {HomeTileProps} from './HomeTile.props';
 import {styles} from './HomeTile.styled';
@@ -12,24 +14,29 @@ const HomeTile: FC<HomeTileProps> = ({
   onLongPress,
 }) => {
   return (
-    <View style={styles.container}>
-      <Pressable
-        onPress={onPress}
-        onLongPress={onLongPress}
-        style={styles.container}>
-        <ImageBackground
-          style={styles.imageBackground}
-          imageStyle={styles.image}
-          source={imageSource}>
-          <Typography variant={SpaceMono.Bold} style={styles.title}>
-            {title}
-          </Typography>
-          <View style={styles.iconWrapper}>
-            <ChevronIcon />
-          </View>
-        </ImageBackground>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={() => onPress()}
+      onLongPress={() => {
+        ReactNativeHapticFeedback.trigger(
+          'impactHeavy',
+          reactNativeHapticFeedbackOptions,
+        );
+        onLongPress();
+      }}
+      style={styles.container}>
+      <ImageBackground
+        style={styles.imageBackground}
+        resizeMode={'cover'}
+        imageStyle={styles.image}
+        source={imageSource}>
+        <Typography variant={SpaceMono.Bold} style={styles.title}>
+          {title}
+        </Typography>
+        <View style={styles.iconWrapper}>
+          <ChevronIcon />
+        </View>
+      </ImageBackground>
+    </Pressable>
   );
 };
 

@@ -3,9 +3,9 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import React, {FC} from 'react';
 import {SafeAreaView} from 'react-native';
 import {AstrogatorColor} from '../../theming/theme';
+import NasaImagesStack from '../NasaImages';
+import NasaVideosStack from '../NasaVideos';
 import {NasaAssetsStackRoutes} from './NasaAssets.routes';
-import ImagesScreen from './screens/Images/Images.screen';
-import VideosScreen from './screens/Videos/Videos.screen';
 
 const Stack = createMaterialTopTabNavigator();
 
@@ -13,15 +13,16 @@ const NasaAssetsStack: FC = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: AstrogatorColor.Black}}>
       <Stack.Navigator
-        initialRouteName={NasaAssetsStackRoutes.ImagesScreen}
+        initialRouteName={NasaAssetsStackRoutes.NasaImagesStack}
         screenOptions={props => {
           return {
-            title: props.route.name === 'ImagesScreen' ? 'Images' : 'Videos',
+            title: props.route.name === 'NasaImagesStack' ? 'Images' : 'Videos',
             tabBarStyle: {
               backgroundColor: AstrogatorColor.Black,
             },
             tabBarIndicatorStyle: {
               backgroundColor: AstrogatorColor.VenetianNights,
+              height: 5,
             },
             tabBarLabelStyle: {
               color: AstrogatorColor.White,
@@ -30,12 +31,12 @@ const NasaAssetsStack: FC = () => {
           };
         }}>
         <Stack.Screen
-          name={NasaAssetsStackRoutes.ImagesScreen}
-          component={ImagesScreen}
+          name={NasaAssetsStackRoutes.NasaImagesStack}
+          component={NasaImagesStack}
         />
         <Stack.Screen
-          name={NasaAssetsStackRoutes.VideosScreen}
-          component={VideosScreen}
+          name={NasaAssetsStackRoutes.NasaVideosStack}
+          component={NasaVideosStack}
         />
       </Stack.Navigator>
     </SafeAreaView>

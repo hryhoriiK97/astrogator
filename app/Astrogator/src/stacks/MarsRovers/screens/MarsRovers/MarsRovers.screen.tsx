@@ -45,7 +45,7 @@ const MarsRoversScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['25', '50%', '70%'], []);
+  const snapPoints = useMemo(() => ['60%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();

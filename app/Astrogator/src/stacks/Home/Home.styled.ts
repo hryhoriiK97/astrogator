@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   },
   backgroundImage: {
     backgroundColor: AstrogatorColor.Black,
-    paddingHorizontal: 16 * bp,
+    paddingHorizontal: 10 * bp,
     width: '100%',
     height: '100%',
   },

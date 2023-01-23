@@ -5,7 +5,7 @@ const {bp} = getRelativeUnits();
 
 export const styles = ({
   indicatorValue,
-  loadingIndicatorHeight = 10,
+  loadingIndicatorHeight,
 }: {
   indicatorValue?: number;
   loadingIndicatorHeight?: number;
@@ -16,7 +16,7 @@ export const styles = ({
     },
     imageIndicatorWrapper: {
       width: '100%',
-      height: loadingIndicatorHeight * bp,
+      height: loadingIndicatorHeight! * bp,
     },
     indicator: {
       width: `${indicatorValue}%`,

@@ -1,8 +1,14 @@
+import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {FullImageStackParamList} from '../FullImage/FullImage.routes';
+import {NasaImagesStackParamList} from '../NasaImages/NasaImages.routes';
+import {NasaVideosStackParamList} from '../NasaVideos/NasaVideos.routes';
 
 export type NasaAssetsStackParamList = {
-  ImagesScreen: undefined;
-  VideosScreen: undefined;
+  NasaImagesStack: NavigatorScreenParams<NasaImagesStackParamList>;
+  NasaVideosStack: NavigatorScreenParams<NasaVideosStackParamList>;
+  SelectedVideo: {videoCollectionUri: string};
+  FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
 export type NasaAssetsStackNavigationProp =
@@ -11,6 +17,8 @@ export type NasaAssetsStackNavigationProp =
 export const NasaAssetsStackRoutes: {
   [route in keyof NasaAssetsStackParamList]: route;
 } = {
-  ImagesScreen: 'ImagesScreen',
-  VideosScreen: 'VideosScreen',
+  NasaImagesStack: 'NasaImagesStack',
+  NasaVideosStack: 'NasaVideosStack',
+  SelectedVideo: 'SelectedVideo',
+  FullImageStack: 'FullImageStack',
 };

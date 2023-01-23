@@ -1,8 +1,10 @@
+import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {ApodStackParamList} from '../Apod/Apod.routes';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  ApodStack: undefined;
+  ApodStack: NavigatorScreenParams<ApodStackParamList>;
 };
 
 export type HomeStackNavigationProp =

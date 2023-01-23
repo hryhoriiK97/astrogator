@@ -49,6 +49,9 @@ export const styles = StyleSheet.create({
     marginTop: 30 * bp,
     backgroundColor: AstrogatorColor.VenetianNights,
   },
+  disabledGetButton: {
+    backgroundColor: AstrogatorColor.Gray,
+  },
   getButtonTitle: {
     fontSize: 16 * bp,
     color: AstrogatorColor.White,

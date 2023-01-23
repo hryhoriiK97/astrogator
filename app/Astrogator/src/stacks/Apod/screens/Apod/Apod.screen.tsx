@@ -6,7 +6,7 @@ import {
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {format, isFuture, isToday} from 'date-fns';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {
@@ -28,7 +28,7 @@ import {commonStyles} from '../../../../theming/commonStyles';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
-import {ApodStackNavigationProp} from '../../Apod.routes';
+import {ApodStackNavigationProp, ApodStackParamList} from '../../Apod.routes';
 import {styles} from './Apod.styled';
 
 const YOUTUBE_PLAYER_HEIGHT = Dimensions.get('window').width * (9 / 16);
@@ -42,7 +42,10 @@ const ApodScreen: FC = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const navigation = useNavigation<ApodStackNavigationProp>();
-  // const homeNavigation = useNavigation<HomeStackNavigationProp>();
+
+  const route = useRoute<RouteProp<ApodStackParamList, 'ApodScreen'>>();
+
+  const {todayApodData} = route.params;
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -71,28 +74,6 @@ const ApodScreen: FC = () => {
       }`,
     ),
   );
-  //TODO: hide tab bar
-  // useEffect(() => {
-  //   homeNavigation
-  //     .getParent()
-  //     ?.getParent()
-  //     ?.setOptions({
-  //       tabBarStyle: {
-  //         display: 'none',
-  //       },
-  //       tabBarVisible: false,
-  //     });
-  //   return () =>
-  //     navigation
-  //       .getParent()
-  //       ?.getParent()
-  //       ?.setOptions({
-  //         tabBarStyle: {
-  //           display: 'flex',
-  //         },
-  //         tabBarVisible: true,
-  //       });
-  // }, [navigation]);
 
   if (isApodLoading || isApodRefetching) {
     return <LoadingScreen />;
@@ -117,8 +98,8 @@ const ApodScreen: FC = () => {
           <View style={styles().imageWrapper}>
             <Pressable
               onPress={() =>
-                navigation.navigate('PhotoStack', {
-                  screen: 'PhotoScreen',
+                navigation.navigate('FullImageStack', {
+                  screen: 'FullImageScreen',
                   params: {
                     photoUri: apodData.hdurl,
                   },
@@ -128,7 +109,7 @@ const ApodScreen: FC = () => {
                 source={{
                   uri: apodData.hdurl,
                 }}
-                defaultSource={require('../../../../../assets/images/apod-tile.jpg')}
+                defaultSource={require('../../../../../assets/images/apod-tile.webp')}
                 linearGradientColors={[
                   AstrogatorColor.VenetianNights,
                   AstrogatorColor.VenetianNights,

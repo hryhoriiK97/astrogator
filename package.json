@@ -64,6 +64,8 @@
       "**/react-native-youtube-iframe/**",
       "**/react-native-media-console",
       "**/react-native-media-console/**",
+      "**/react-native-haptic-feedback",
+      "**/react-native-haptic-feedback/**",
       "**/react-native-screens",
       "**/react-native-screens/**",
       "**/react-native-safe-area-context",
