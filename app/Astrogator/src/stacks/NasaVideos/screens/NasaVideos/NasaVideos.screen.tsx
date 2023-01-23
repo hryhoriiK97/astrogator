@@ -14,7 +14,11 @@ import {
   NasaAssetItemData,
   NasaAssetItemResponse,
 } from '../../../../types/NasaAssetItemResponse';
-import {NasaAssetsStackNavigationProp} from '../../../NasaAssets/NasaAssets.routes';
+import {
+  RootStackNavigationProp,
+  RootStackRoutes,
+} from '../../../Root/Root.routes';
+import {SelectedVideoStackRoutes} from '../../../SelectedVideo/SelectedVideo.routes';
 import {styles} from './NasaVideos.styled';
 
 enum NasaVideosScreenQueryKey {
@@ -22,7 +26,7 @@ enum NasaVideosScreenQueryKey {
 }
 
 const NasaVideosScreen: FC = () => {
-  const navigation = useNavigation<NasaAssetsStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const {
     data: nasaVideosResponse,
     isLoading: isNasaVideosLoading,
@@ -61,8 +65,11 @@ const NasaVideosScreen: FC = () => {
         defaultSource={require('../../../../../assets/images/apod-tile.webp')}
         title={item.data[0].title}
         onPress={() => {
-          navigation.navigate('SelectedVideo', {
-            videoCollectionUri: item.href,
+          navigation.navigate(RootStackRoutes.SelectedVideoStack, {
+            screen: SelectedVideoStackRoutes.SelectedVideoScreen,
+            params: {
+              videoCollectionUri: item.href,
+            },
           });
         }}
         onLongPress={() => {

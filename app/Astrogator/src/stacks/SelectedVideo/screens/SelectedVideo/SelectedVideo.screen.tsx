@@ -5,18 +5,18 @@ import React, {FC} from 'react';
 import {useQuery} from 'react-query';
 import {LiveVideoPlayer} from '../../../../components/VideoPlayer';
 import {
-  NasaVideosStackNavigationProp,
-  NasaVideosStackParamList,
-} from '../../NasaVideos.routes';
+  SelectedVideoStackNavigationProp,
+  SelectedVideoStackParamList,
+} from '../../SelectedVideo.routes';
 
 enum SelectedVideoScreenQueryKey {
   SelectedVideo = 'SelectedVideo',
 }
 
 const SelectedVideoScreen: FC = () => {
-  const navigation = useNavigation<NasaVideosStackNavigationProp>();
+  const navigation = useNavigation<SelectedVideoStackNavigationProp>();
   const route =
-    useRoute<RouteProp<NasaVideosStackParamList, 'SelectedVideo'>>();
+    useRoute<RouteProp<SelectedVideoStackParamList, 'SelectedVideoScreen'>>();
   const {videoCollectionUri} = route.params;
 
   const {

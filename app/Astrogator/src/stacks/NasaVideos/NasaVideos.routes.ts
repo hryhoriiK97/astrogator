@@ -1,8 +1,7 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type NasaVideosStackParamList = {
-  NasaIVideosScreen: undefined;
-  SelectedVideo: {videoCollectionUri: string};
+  NasaVideosScreen: undefined;
 };
 
 export type NasaVideosStackNavigationProp =
@@ -11,6 +10,5 @@ export type NasaVideosStackNavigationProp =
 export const NasaVideosStackRoutes: {
   [route in keyof NasaVideosStackParamList]: route;
 } = {
-  NasaIVideosScreen: 'NasaIVideosScreen',
-  SelectedVideo: 'SelectedVideo',
+  NasaVideosScreen: 'NasaVideosScreen',
 };

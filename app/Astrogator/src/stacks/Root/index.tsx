@@ -3,6 +3,7 @@ import React, {FC} from 'react';
 import ApodStack from '../Apod';
 import BottomTabStack from '../BottomTab';
 import MarsRoversPhotosStack from '../MarsRoversPhotos';
+import SelectedVideoStack from '../SelectedVideo';
 import {RootStackRoutes} from './Root.routes';
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,11 @@ const RootStack: FC = () => {
         name={RootStackRoutes.MarsRoversPhotosStack}
         options={{animation: 'slide_from_right'}}
         component={MarsRoversPhotosStack}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.SelectedVideoStack}
+        options={{animation: 'slide_from_right'}}
+        component={SelectedVideoStack}
       />
     </Stack.Navigator>
   );
