@@ -7,10 +7,10 @@ import {HomeIcon} from '../../../assets/svgs/tabBarIcons/HomeIcon';
 import {MessageIcon} from '../../../assets/svgs/tabBarIcons/MessageIcon';
 import {SettingsIcon} from '../../../assets/svgs/tabBarIcons/SettingsIcon';
 import {AstrogatorColor} from '../../theming/theme';
-import HomeStack from '../Home';
-import MarsRoversStack from '../MarsRovers';
 import NasaAssetsStack from '../NasaAssets';
 import {BottomTabStackRoutes} from './BottomTab.routes';
+import HomeScreen from './screens/Home/Home.screen';
+import MarsRoversScreen from './screens/MarsRovers/MarsRovers.screen';
 
 const {bp} = getRelativeUnits();
 
@@ -36,7 +36,7 @@ const BottomTabStack = () => {
         },
       }}>
       <Tab.Screen
-        name={BottomTabStackRoutes.HomeStack}
+        name={BottomTabStackRoutes.HomeScreen}
         options={{
           tabBarIcon: props => (
             <HomeIcon
@@ -48,10 +48,10 @@ const BottomTabStack = () => {
             />
           ),
         }}
-        component={HomeStack}
+        component={HomeScreen}
       />
       <Tab.Screen
-        name={BottomTabStackRoutes.MarsRoversStack}
+        name={BottomTabStackRoutes.MarsRoversScreen}
         options={{
           tabBarIcon: props => (
             <SettingsIcon
@@ -63,7 +63,7 @@ const BottomTabStack = () => {
             />
           ),
         }}
-        component={MarsRoversStack}
+        component={MarsRoversScreen}
       />
       <Tab.Screen
         name={BottomTabStackRoutes.NasaAssetsStack}
@@ -93,7 +93,7 @@ const BottomTabStack = () => {
             />
           ),
         }}
-        component={HomeStack}
+        component={HomeScreen}
       />
     </Tab.Navigator>
   );

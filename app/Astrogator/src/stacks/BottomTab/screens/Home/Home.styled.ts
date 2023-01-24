@@ -1,6 +1,6 @@
 import {getRelativeUnits} from '@astrogator/common';
 import {StyleSheet} from 'react-native';
-import {AstrogatorColor} from '../../theming/theme';
+import {AstrogatorColor} from '../../../../theming/theme';
 
 const {bp} = getRelativeUnits();
 

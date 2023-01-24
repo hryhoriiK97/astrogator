@@ -22,8 +22,8 @@ import {
   RootStackNavigationProp,
   RootStackRoutes,
 } from '../../../Root/Root.routes';
-import {MarsRover, marsRoverImages} from '../../MarsRovers.utils';
 import {styles} from './MarsRovers.styled';
+import {MarsRover, marsRoverImages} from './MarsRovers.utils';
 
 enum MarsRoverPhotosQueryKey {
   MarsRovers = 'MarsRovers',
