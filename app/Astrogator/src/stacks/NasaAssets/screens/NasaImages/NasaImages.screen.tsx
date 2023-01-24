@@ -14,7 +14,7 @@ import {
   NasaAssetItemData,
   NasaAssetItemResponse,
 } from '../../../../types/NasaAssetItemResponse';
-import {NasaImagesStackNavigationProp} from '../../NasaImages.routes';
+import {RootStackNavigationProp} from '../../../Root/Root.routes';
 import {styles} from './NasaImages.styled';
 
 enum NasaImagesScreenQueryKey {
@@ -22,7 +22,7 @@ enum NasaImagesScreenQueryKey {
 }
 
 const NasaImagesScreen: FC = () => {
-  const navigation = useNavigation<NasaImagesStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const {
     data: imagesResponse,
     isLoading: isImagesLoading,

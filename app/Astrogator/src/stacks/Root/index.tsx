@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
 import ApodStack from '../Apod';
 import BottomTabStack from '../BottomTab';
+import FullImageStack from '../FullImage';
 import MarsRoversPhotosStack from '../MarsRoversPhotos';
 import SelectedVideoStack from '../SelectedVideo';
 import {RootStackRoutes} from './Root.routes';
@@ -31,6 +32,11 @@ const RootStack: FC = () => {
         name={RootStackRoutes.SelectedVideoStack}
         options={{animation: 'slide_from_right'}}
         component={SelectedVideoStack}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.FullImageStack}
+        options={{animation: 'slide_from_right'}}
+        component={FullImageStack}
       />
     </Stack.Navigator>
   );

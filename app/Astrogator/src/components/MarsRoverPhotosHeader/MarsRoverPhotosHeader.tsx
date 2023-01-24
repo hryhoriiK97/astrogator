@@ -5,7 +5,7 @@ import FastImage from 'react-native-fast-image';
 import {
   MarsRover,
   marsRoverImages,
-} from '../../stacks/MarsRovers/MarsRovers.utils';
+} from '../../stacks/BottomTab/screens/MarsRovers/MarsRovers.utils';
 import {AstrogatorColor} from '../../theming/theme';
 import {BackButton} from '../BackButton';
 import {MarsRoverPhotosHeaderProps} from './MarsRoverPhotosHeader.props';
