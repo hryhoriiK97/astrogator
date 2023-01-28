@@ -5,6 +5,7 @@ const {bp} = getRelativeUnits();
 
 export enum DividerVariant {
   Divider_5_Vertical = 'Divider_5_Vertical',
+  Divider_3_Horizontal = 'Divider_3_Horizontal',
   Divider_5_Horizontal = 'Divider_5_Horizontal',
   Divider_10_Vertical = 'Divider_10_Vertical',
   Divider_15_Vertical = 'Divider_15_Vertical',
@@ -24,6 +25,9 @@ export type DividerStyle = {
 export const dividerStyle: DividerStyle = {
   [DividerVariant.Divider_5_Vertical]: {
     marginVertical: 5 * bp,
+  },
+  [DividerVariant.Divider_3_Horizontal]: {
+    marginHorizontal: 3 * bp,
   },
   [DividerVariant.Divider_5_Horizontal]: {
     marginHorizontal: 5 * bp,

@@ -19,18 +19,17 @@ import {
 import DatePicker from 'react-native-date-picker';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
-import {Magnifier} from '../../../../../assets/svgs/Magnifier';
 import {Settings} from '../../../../../assets/svgs/Settings';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {BackButton} from '../../../../components/BackButton';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {HomeTileModal} from '../../../../components/HomeTileModal';
+import {ImageActionsTab} from '../../../../components/ImageActionsTab';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
-import {shareOnInstagramStories} from '../../../../utils/sharing/shareOnInstagramStories';
 import {ApodStackNavigationProp, ApodStackParamList} from '../../Apod.routes';
 import {styles} from './Apod.styled';
 
@@ -110,6 +109,16 @@ const ApodScreen: FC = () => {
             ]}
           />
           <BackButton onPress={() => navigation.goBack()} />
+          <ImageActionsTab
+            onMagnifierButtonPress={() =>
+              navigation.navigate('FullImageStack', {
+                screen: 'FullImageScreen',
+                params: {
+                  photoUri: apodData.hdurl,
+                },
+              })
+            }
+          />
         </View>
       ) : (
         <>
@@ -137,20 +146,6 @@ const ApodScreen: FC = () => {
             </Typography>
           </View>
           <View style={styles().subheaderControlsWrapper}>
-            <Pressable onPress={shareOnInstagramStories}>
-              <Typography>Make capture</Typography>
-            </Pressable>
-            <Pressable
-              onPress={() =>
-                navigation.navigate('FullImageStack', {
-                  screen: 'FullImageScreen',
-                  params: {
-                    photoUri: apodData.hdurl,
-                  },
-                })
-              }>
-              <Magnifier />
-            </Pressable>
             <Pressable onPress={() => setShowDatePicker(true)}>
               <Settings />
             </Pressable>
