@@ -30,6 +30,7 @@ import {commonStyles} from '../../../../theming/commonStyles';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
+import {shareOnInstagramStories} from '../../../../utils/sharing/shareOnInstagramStories';
 import {ApodStackNavigationProp, ApodStackParamList} from '../../Apod.routes';
 import {styles} from './Apod.styled';
 
@@ -136,6 +137,9 @@ const ApodScreen: FC = () => {
             </Typography>
           </View>
           <View style={styles().subheaderControlsWrapper}>
+            <Pressable onPress={shareOnInstagramStories}>
+              <Typography>Make capture</Typography>
+            </Pressable>
             <Pressable
               onPress={() =>
                 navigation.navigate('FullImageStack', {
