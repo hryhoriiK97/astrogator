@@ -6,6 +6,7 @@ export type BottomTabParamList = {
   HomeScreen: undefined;
   MarsRoversScreen: undefined;
   NasaAssetsStack: NavigatorScreenParams<NasaAssetsStackParamList>;
+  AboutAppScreen: undefined;
 };
 
 export type BottomTabStackNavigationProp =
@@ -17,4 +18,5 @@ export const BottomTabStackRoutes: {
   HomeScreen: 'HomeScreen',
   MarsRoversScreen: 'MarsRoversScreen',
   NasaAssetsStack: 'NasaAssetsStack',
+  AboutAppScreen: 'AboutAppScreen',
 };

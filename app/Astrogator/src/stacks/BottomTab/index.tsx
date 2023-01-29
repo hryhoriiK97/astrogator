@@ -9,6 +9,7 @@ import {SettingsIcon} from '../../../assets/svgs/tabBarIcons/SettingsIcon';
 import {AstrogatorColor} from '../../theming/theme';
 import NasaAssetsStack from '../NasaAssets';
 import {BottomTabStackRoutes} from './BottomTab.routes';
+import AboutAppScreen from './screens/AboutApp/AboutApp.screen';
 import HomeScreen from './screens/Home/Home.screen';
 import MarsRoversScreen from './screens/MarsRovers/MarsRovers.screen';
 
@@ -93,7 +94,7 @@ const BottomTabStack = () => {
             />
           ),
         }}
-        component={HomeScreen}
+        component={AboutAppScreen}
       />
     </Tab.Navigator>
   );

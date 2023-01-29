@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
-import {Pressable, View} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import {Divider, DividerVariant} from '../Divider';
+import {ImageBackground, Pressable, View} from 'react-native';
+import {Chevron} from '../../../assets/svgs/Chevron';
 import {Typography} from '../Typography';
 import {ApodWidgetProps} from './ApodWidget.props';
 import {styles} from './ApodWidget.styled';
@@ -11,33 +10,30 @@ const ApodWidget: FC<ApodWidgetProps> = ({
   title,
   date,
   author,
-  description,
   onPress,
   defaultSource,
 }) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
-      <FastImage
-        source={imageSource}
-        style={styles.imageWrapper}
-        defaultSource={defaultSource}
-        resizeMode={'cover'}
-      />
-      <View style={styles.contentWrapper}>
-        <Typography style={styles.title}>{title}</Typography>
-        <View style={styles.apodInfoWrapper}>
-          <Typography style={styles.apodInfoText}>{author}</Typography>
-          <Divider variant={DividerVariant.Divider_5_Horizontal} />
-          <Typography style={styles.apodInfoText}>{date}</Typography>
+    <ImageBackground
+      source={imageSource}
+      defaultSource={defaultSource}
+      style={styles.imageBackground}
+      imageStyle={styles.image}>
+      <Pressable style={styles.innerWrapper} onPress={onPress}>
+        <View style={styles.titleWrapper}>
+          <Typography style={styles.title}>{title}</Typography>
         </View>
-        <Typography style={styles.description} numberOfLines={2}>
-          {description}
-        </Typography>
-        <Pressable style={styles.viewMoreButton} onPress={onPress}>
-          <Typography style={styles.viewMoreTitle}>View More</Typography>
-        </Pressable>
-      </View>
-    </Pressable>
+        <View style={styles.apodInfoWrapper}>
+          <View style={styles.dateAuthorInfo}>
+            <Typography style={styles.infoTitle}>Author: {author}</Typography>
+            <Typography style={styles.infoTitle}>Date: {date}</Typography>
+          </View>
+          <Pressable style={styles.moreInfoButton}>
+            <Chevron />
+          </Pressable>
+        </View>
+      </Pressable>
+    </ImageBackground>
   );
 };
 
