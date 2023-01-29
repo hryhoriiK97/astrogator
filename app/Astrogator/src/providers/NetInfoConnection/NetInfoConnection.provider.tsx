@@ -19,8 +19,7 @@ const NetInfoConnectionProvider: FC<NetInfoConnectionProviderProps> = ({
   children,
 }) => {
   const [isNetInfoFetching, setIsNetInfoFetching] = useState<boolean>(false);
-  const [isNetInfoConnection, setIsNetInfoConnection] =
-    useState<boolean>(false);
+  const [isNetInfoConnection, setIsNetInfoConnection] = useState<boolean>(true);
 
   const getNetInfo = async () => {
     setIsNetInfoFetching(true);
@@ -33,7 +32,9 @@ const NetInfoConnectionProvider: FC<NetInfoConnectionProviderProps> = ({
   };
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
-      setIsNetInfoConnection(state.isConnected ?? false);
+      setIsNetInfoConnection(
+        (state.isConnected || state.isInternetReachable) ?? false,
+      );
     });
     return () => {
       unsubscribe();
