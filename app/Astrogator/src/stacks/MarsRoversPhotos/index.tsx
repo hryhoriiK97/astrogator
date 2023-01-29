@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
-import FullImageStack from '../FullImage';
+import MarsFullImageStack from '../MarsFullImage';
 import {MarsRoversPhotosStackRoutes} from './MarsRoversPhotos.routes';
 import MarsRoverPhotosScreen from './screens/MarsRoverPhotos/MarsRoverPhotos.screen';
 
@@ -16,9 +16,9 @@ const MarsRoversPhotosStack: FC = () => {
         component={MarsRoverPhotosScreen}
       />
       <Stack.Screen
-        name={MarsRoversPhotosStackRoutes.FullImageStack}
+        name={MarsRoversPhotosStackRoutes.MarsFullImageStack}
         options={{animation: 'slide_from_bottom'}}
-        component={FullImageStack}
+        component={MarsFullImageStack}
       />
     </Stack.Navigator>
   );

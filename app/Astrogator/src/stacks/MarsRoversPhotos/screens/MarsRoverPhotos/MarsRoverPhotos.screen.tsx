@@ -88,7 +88,6 @@ const MarsRoverPhotosScreen: FC = () => {
 
   const renderItem = ({item}: {item: MarsRoverPhotoItemResponse}) => {
     return (
-      /*//TODO: Find better solution*/
       <View style={styles.renderItemWrapper}>
         <MarsRoverPhotoItem
           imageSource={{uri: replaceHttpWithHttps(item.img_src)}}
@@ -98,10 +97,15 @@ const MarsRoverPhotosScreen: FC = () => {
           earthData={item.earth_date}
           sol={item.sol}
           onPress={() =>
-            navigate('FullImageStack', {
-              screen: 'FullImageScreen',
+            navigate('MarsFullImageStack', {
+              screen: 'MarsFullImageScreen',
               params: {
                 photoUri: replaceHttpWithHttps(item.img_src),
+                roverName: item.rover.name,
+                cameraName: item.camera.full_name,
+                cameraAbbreviation: item.camera.name,
+                earthDate: item.earth_date,
+                marsSol: item.sol,
               },
             })
           }
