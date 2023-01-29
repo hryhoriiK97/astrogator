@@ -115,6 +115,7 @@ const ApodScreen: FC = () => {
                 screen: 'FullImageScreen',
                 params: {
                   photoUri: apodData.hdurl,
+                  title: apodData.title,
                 },
               })
             }

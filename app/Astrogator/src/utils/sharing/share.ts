@@ -6,7 +6,7 @@ export const share = () => {
     format: 'jpg',
     quality: 1,
   }).then(
-    async uri => {
+    uri => {
       Share.open({
         filename: uri,
         url: uri,
