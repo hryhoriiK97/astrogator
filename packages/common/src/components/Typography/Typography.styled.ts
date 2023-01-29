@@ -1,7 +1,7 @@
 import {StyleSheet, TextStyle} from 'react-native';
-import {SpaceMono} from './Typography.props';
+import {Raleway} from './Typography.props';
 
-export const styles = (variant: SpaceMono, color: TextStyle['color']) =>
+export const styles = (variant: Raleway, color: TextStyle['color']) =>
   StyleSheet.create({
     text: {
       fontFamily: variant,

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Pressable, View} from 'react-native';
 import {SafeImage} from '../SafeImage';
-import {SpaceMono, Typography} from '../Typography';
+import {Raleway, Typography} from '../Typography';
 import {MarsRoverPhotoItemProps} from './MarsRoverPhotoItem.props';
 import {styles} from './MarsRoverPhotoItem.styled';
 
@@ -24,7 +24,7 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
         loadingIndicatorHeight={3}
       />
       <View style={styles.imageInformationWrapper}>
-        <Typography variant={SpaceMono.Bold} style={styles.dateText}>
+        <Typography variant={Raleway.Bold} style={styles.dateText}>
           {`Earth Date: ${earthData} / Martian Sol: ${sol}`}
         </Typography>
         <Typography
@@ -32,7 +32,7 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
           numberOfLines={1}
           ellipsizeMode={'tail'}
           variant={
-            SpaceMono.Bold
+            Raleway.Bold
           }>{`${cameraFullName} (${cameraAbbreviation})`}</Typography>
       </View>
     </Pressable>

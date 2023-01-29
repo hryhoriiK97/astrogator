@@ -1,7 +1,7 @@
 import {
   LoadingScreen,
+  Raleway,
   SafeImage,
-  SpaceMono,
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
@@ -133,16 +133,16 @@ const ApodScreen: FC = () => {
       <View style={styles().contentWrapper}>
         <Typography
           color={AstrogatorColor.White}
-          variant={SpaceMono.Bold}
+          variant={Raleway.Bold}
           style={styles().title}>
           {apodData.title}
         </Typography>
         <View style={styles().subheader}>
           <View style={styles().imageInfoWrapper}>
-            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={Raleway.Bold}>
               Author: {apodData.copyright || '-'}
             </Typography>
-            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={Raleway.Bold}>
               Date: {apodData.date}
             </Typography>
           </View>
@@ -153,7 +153,7 @@ const ApodScreen: FC = () => {
           </View>
         </View>
         <Typography
-          variant={SpaceMono.Bold}
+          variant={Raleway.Bold}
           color={AstrogatorColor.White}
           style={styles().explanation}
           ellipsizeMode={'clip'}>
@@ -161,7 +161,7 @@ const ApodScreen: FC = () => {
           <Typography
             onPress={handlePresentModalPress}
             style={styles().readMoreButton}
-            variant={SpaceMono.Bold}
+            variant={Raleway.Bold}
             color={AstrogatorColor.VenetianNights}>
             read more...
           </Typography>

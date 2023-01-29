@@ -3,7 +3,7 @@ import {Pressable} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {reactNativeHapticFeedbackOptions} from '../../config/reactNativeHapticFeedbackOptions';
-import {SpaceMono, Typography} from '../Typography';
+import {Raleway, Typography} from '../Typography';
 import {MarsRoverItemProps} from './MarsRoverItem.props';
 import {styles} from './MarsRoverItem.styled';
 
@@ -24,7 +24,7 @@ const MarsRoverItem: FC<MarsRoverItemProps> = ({
         );
         onLongPress();
       }}>
-      <Typography variant={SpaceMono.Bold} style={styles.title}>
+      <Typography variant={Raleway.Bold} style={styles.title}>
         {name}
       </Typography>
       <FastImage

@@ -1,4 +1,4 @@
-import {SpaceMono, Typography} from '@astrogator/common';
+import {Raleway, Typography} from '@astrogator/common';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {FC, useState} from 'react';
 import {Pressable, View} from 'react-native';
@@ -41,7 +41,7 @@ const MarsFullImageScreen: FC = () => {
           <Typography style={styles.title}>
             {roverName} {cameraName} ({cameraAbbreviation})
           </Typography>
-          <Typography variant={SpaceMono.Bold} style={styles.dateTitle}>
+          <Typography variant={Raleway.Bold} style={styles.dateTitle}>
             {`Earth Date: ${earthDate}  Mars Sol: ${marsSol}`}
           </Typography>
         </View>

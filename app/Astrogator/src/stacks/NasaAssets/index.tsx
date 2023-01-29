@@ -1,4 +1,4 @@
-import {SpaceMono} from '@astrogator/common';
+import {Raleway} from '@astrogator/common';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React, {FC} from 'react';
 import {SafeAreaView} from 'react-native';
@@ -26,7 +26,7 @@ const NasaAssetsStack: FC = () => {
             },
             tabBarLabelStyle: {
               color: AstrogatorColor.White,
-              fontFamily: SpaceMono.Bold,
+              fontFamily: Raleway.Bold,
             },
           };
         }}>

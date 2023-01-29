@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getRelativeUnits} from '../../utils/getRelativeUnits';
-import {SpaceMono} from '../Typography';
+import {Raleway} from '../Typography';
 
 const {bp} = getRelativeUnits();
 
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     padding: 5 * bp,
     marginTop: 5 * bp,
     fontSize: 17 * bp,
-    fontFamily: SpaceMono.Bold,
+    fontFamily: Raleway.Bold,
     color: '#000000',
     textAlign: 'center',
     borderRadius: 10 * bp,

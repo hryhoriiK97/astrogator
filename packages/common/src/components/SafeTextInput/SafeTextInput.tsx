@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {TextInput, View} from 'react-native';
-import {SpaceMono, Typography} from '../Typography';
+import {Raleway, Typography} from '../Typography';
 import {SafeTextInputProps} from './SafeTextInput.props';
 import {styles} from './SafeTextInput.styled';
 import {handleOnChangeText} from './SafeTextInput.utils';
@@ -21,7 +21,7 @@ const SafeTextInput: FC<SafeTextInputProps> = ({
   const [errorText, setErrorText] = useState<string | null>(null);
   return (
     <View style={[styles.container, inputWrapperStyles]}>
-      <Typography variant={SpaceMono.Bold} style={styles.errorText}>
+      <Typography variant={Raleway.Bold} style={styles.errorText}>
         {isError ? errorText : ''}
       </Typography>
       <TextInput

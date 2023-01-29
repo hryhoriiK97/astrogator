@@ -1,4 +1,4 @@
-import {SpaceMono, Typography} from '@astrogator/common';
+import {Raleway, Typography} from '@astrogator/common';
 import React, {FC} from 'react';
 import {Pressable} from 'react-native';
 import {Arrow} from '../../../assets/svgs/Arrow';
@@ -11,7 +11,7 @@ const BackButton: FC<BackButtonProps> = ({onPress}) => {
     <Pressable style={styles.backButton} onPress={onPress}>
       <Arrow fillColor={AstrogatorColor.White} />
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         style={styles.backButtonTitle}
         color={AstrogatorColor.White}>
         Back

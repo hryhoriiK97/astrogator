@@ -3,9 +3,9 @@ import {
   DividerVariant,
   LoadingScreen,
   MarsRoverPhotoItem,
+  Raleway,
   SafeInputTypeCheck,
   SafeTextInput,
-  SpaceMono,
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
@@ -166,7 +166,7 @@ const MarsRoverPhotosScreen: FC = () => {
         <View style={styles.modalContainer}>
           <Typography
             style={styles.pickerTitle}
-            variant={SpaceMono.Bold}
+            variant={Raleway.Bold}
             color={AstrogatorColor.White}>
             Provide Mars Sol and Camera Type
           </Typography>

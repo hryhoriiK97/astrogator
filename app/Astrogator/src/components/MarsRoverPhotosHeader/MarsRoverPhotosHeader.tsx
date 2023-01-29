@@ -1,4 +1,4 @@
-import {SpaceMono, Typography} from '@astrogator/common';
+import {Raleway, Typography} from '@astrogator/common';
 import React, {FC} from 'react';
 import {Pressable, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -29,43 +29,41 @@ const MarsRoverPhotosHeader: FC<MarsRoverPhotosHeaderProps> = ({
       </View>
       <View style={styles().roverInformationWrapper}>
         <View style={styles().roverNameWrapper}>
-          <Typography variant={SpaceMono.Bold} style={styles().roverName}>
+          <Typography variant={Raleway.Bold} style={styles().roverName}>
             {rover.name}
           </Typography>
           <Pressable
             style={styles().filterButton}
             onPress={onFilterButtonPress}>
-            <Typography variant={SpaceMono.Bold} color={AstrogatorColor.White}>
+            <Typography variant={Raleway.Bold} color={AstrogatorColor.White}>
               Filter
             </Typography>
           </Pressable>
         </View>
         <View>
           <View style={styles().statusWrapper}>
-            <Typography
-              variant={SpaceMono.Bold}
-              style={styles().roverDetailText}>
+            <Typography variant={Raleway.Bold} style={styles().roverDetailText}>
               Status:
             </Typography>
             <Typography
-              variant={SpaceMono.Bold}
+              variant={Raleway.Bold}
               style={styles(rover.status as Status).status}>
               {rover.status}
             </Typography>
           </View>
-          <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
+          <Typography variant={Raleway.Bold} style={styles().roverDetailText}>
             Launch Date: {rover.launch_date}
           </Typography>
-          <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
+          <Typography variant={Raleway.Bold} style={styles().roverDetailText}>
             Landing Date: {rover.landing_date}
           </Typography>
-          <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
+          <Typography variant={Raleway.Bold} style={styles().roverDetailText}>
             Last Active Date: {rover.max_date}
           </Typography>
-          <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
+          <Typography variant={Raleway.Bold} style={styles().roverDetailText}>
             {`Martian Sol: ${currentMarsSol}`}
           </Typography>
-          <Typography variant={SpaceMono.Bold} style={styles().roverDetailText}>
+          <Typography variant={Raleway.Bold} style={styles().roverDetailText}>
             {`Selected Camera: ${selectedCamera || '-'}`}
           </Typography>
         </View>

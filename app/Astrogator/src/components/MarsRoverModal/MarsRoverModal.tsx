@@ -1,4 +1,4 @@
-import {SpaceMono, Typography} from '@astrogator/common';
+import {Raleway, Typography} from '@astrogator/common';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC} from 'react';
 import {View} from 'react-native';
@@ -14,7 +14,7 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({rover}) => {
     item: MarsRoverItemResponse['cameras'][number];
   }) => (
     <Typography
-      variant={SpaceMono.Bold}
+      variant={Raleway.Bold}
       color={AstrogatorColor.VenetianNights}
       style={styles.roverInfoText}>
       {`${item.full_name} (${item.name})`}
@@ -23,20 +23,20 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({rover}) => {
   return (
     <View style={styles.container}>
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         style={styles.title}
         color={AstrogatorColor.White}>
         {rover.name}
       </Typography>
       <View style={styles.rowWrapper}>
         <Typography
-          variant={SpaceMono.Bold}
+          variant={Raleway.Bold}
           color={AstrogatorColor.VenetianNights}
           style={styles.roverInfoText}>
           Status:
         </Typography>
         <Typography
-          variant={SpaceMono.Bold}
+          variant={Raleway.Bold}
           color={
             rover.status === 'active'
               ? AstrogatorColor.Green
@@ -47,32 +47,32 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({rover}) => {
         </Typography>
       </View>
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         color={AstrogatorColor.VenetianNights}
         style={styles.roverInfoText}>
         Launch Date: {rover.launch_date}
       </Typography>
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         color={AstrogatorColor.VenetianNights}
         style={styles.roverInfoText}>
         Landing Date: {rover.landing_date}
       </Typography>
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         color={AstrogatorColor.VenetianNights}
         style={styles.roverInfoText}>
         Total amount of photos: {rover.total_photos}
       </Typography>
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         color={AstrogatorColor.VenetianNights}
         style={styles.roverInfoText}>
         {`Last earth date / mars sol: ${rover.max_date} / ${rover.max_sol}`}
       </Typography>
       <View>
         <Typography
-          variant={SpaceMono.Bold}
+          variant={Raleway.Bold}
           style={styles.title}
           color={AstrogatorColor.White}>
           {'Rover Cameras'}

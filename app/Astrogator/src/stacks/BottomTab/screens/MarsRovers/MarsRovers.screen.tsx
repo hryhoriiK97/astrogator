@@ -3,7 +3,7 @@ import {
   DividerVariant,
   LoadingScreen,
   MarsRoverItem,
-  SpaceMono,
+  Raleway,
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
@@ -92,7 +92,7 @@ const MarsRoversScreen: FC = () => {
       <FlatList
         contentContainerStyle={styles.contentContainerStyle}
         ListHeaderComponent={
-          <Typography variant={SpaceMono.Bold} style={styles.title}>
+          <Typography variant={Raleway.Bold} style={styles.title}>
             Mars Rovers
           </Typography>
         }
