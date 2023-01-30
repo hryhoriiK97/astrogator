@@ -1,11 +1,10 @@
-import {FastImageProps} from 'react-native-fast-image';
+import {ImageBackgroundProps} from 'react-native';
 
 export interface ApodWidgetProps {
-  imageSource: FastImageProps['source'];
+  imageSource: ImageBackgroundProps['source'];
   title: string;
   date: string;
   author: string;
-  description: string;
   onPress: () => void;
-  defaultSource?: FastImageProps['defaultSource'];
+  defaultSource?: ImageBackgroundProps['defaultSource'];
 }

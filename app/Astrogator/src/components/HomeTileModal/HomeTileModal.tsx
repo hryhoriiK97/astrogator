@@ -1,4 +1,4 @@
-import {SpaceMono, Typography} from '@astrogator/common';
+import {Raleway, Typography} from '@astrogator/common';
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import {AstrogatorColor} from '../../theming/theme';
@@ -9,13 +9,13 @@ const HomeTileModal: FC<HomeTileModalProps> = ({title, description}) => {
   return (
     <View style={styles.container}>
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         color={AstrogatorColor.White}
         style={styles.title}>
         {title}
       </Typography>
       <Typography
-        variant={SpaceMono.Bold}
+        variant={Raleway.Bold}
         color={AstrogatorColor.White}
         style={styles.description}>
         {description}

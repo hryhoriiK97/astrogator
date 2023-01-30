@@ -1,7 +1,7 @@
 import {
   LoadingScreen,
+  Raleway,
   SafeImage,
-  SpaceMono,
   Typography,
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
@@ -19,11 +19,13 @@ import {
 import DatePicker from 'react-native-date-picker';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
+import {Settings} from '../../../../../assets/svgs/Settings';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {BackButton} from '../../../../components/BackButton';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {HomeTileModal} from '../../../../components/HomeTileModal';
+import {ImageActionsTab} from '../../../../components/ImageActionsTab';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {AstrogatorColor} from '../../../../theming/theme';
 import {ApodResponse} from '../../../../types/ApodResponse';
@@ -49,7 +51,7 @@ const ApodScreen: FC = () => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['25%', '50%', '75%', '95%'], []);
+  const snapPoints = useMemo(() => ['85%', '95%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -82,90 +84,89 @@ const ApodScreen: FC = () => {
   const apodData: ApodResponse = apodResponse?.data;
 
   return (
-    <>
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            refreshing={isApodRefetching}
-            onRefresh={() => {
-              apodRefetch({queryKey: ApodScreenQueryKey.Apod});
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={isApodRefetching}
+          onRefresh={() => {
+            apodRefetch({queryKey: ApodScreenQueryKey.Apod});
+          }}
+        />
+      }
+      style={styles().container}
+      contentContainerStyle={styles().contentContainerStyle}>
+      {apodData.media_type === 'image' ? (
+        <View style={styles().imageWrapper}>
+          <SafeImage
+            source={{
+              uri: apodData.hdurl,
             }}
+            defaultSource={require('../../../../../assets/images/apod-tile.webp')}
+            loadingIndicatorHeight={3}
+            linearGradientColors={[
+              AstrogatorColor.VenetianNights,
+              AstrogatorColor.VenetianNights,
+            ]}
           />
-        }
-        style={styles().container}
-        contentContainerStyle={styles().contentContainerStyle}>
-        {apodData.media_type === 'image' ? (
-          <View style={styles().imageWrapper}>
-            <Pressable
-              onPress={() =>
-                navigation.navigate('FullImageStack', {
-                  screen: 'FullImageScreen',
-                  params: {
-                    photoUri: apodData.hdurl,
-                  },
-                })
-              }>
-              <SafeImage
-                source={{
-                  uri: apodData.hdurl,
-                }}
-                defaultSource={require('../../../../../assets/images/apod-tile.webp')}
-                linearGradientColors={[
-                  AstrogatorColor.VenetianNights,
-                  AstrogatorColor.VenetianNights,
-                ]}
-              />
-            </Pressable>
-            <BackButton onPress={() => navigation.goBack()} />
-          </View>
-        ) : (
-          <>
-            <View style={styles().youtubePlayerWhiteSpace} />
-            <YoutubePlayer
-              height={YOUTUBE_PLAYER_HEIGHT}
-              videoId={getYouTubeVideoId(apodData.url)}
-            />
-          </>
-        )}
-        <View style={styles().contentWrapper}>
-          <Typography
-            color={AstrogatorColor.White}
-            variant={SpaceMono.Bold}
-            style={styles().title}>
-            {apodData.title}
-          </Typography>
+          <BackButton onPress={() => navigation.goBack()} />
+          <ImageActionsTab
+            onMagnifierButtonPress={() =>
+              navigation.navigate('FullImageStack', {
+                screen: 'FullImageScreen',
+                params: {
+                  photoUri: apodData.hdurl,
+                  title: apodData.title,
+                },
+              })
+            }
+          />
+        </View>
+      ) : (
+        <>
+          <View style={styles().youtubePlayerWhiteSpace} />
+          <YoutubePlayer
+            height={YOUTUBE_PLAYER_HEIGHT}
+            videoId={getYouTubeVideoId(apodData.url)}
+          />
+        </>
+      )}
+      <View style={styles().contentWrapper}>
+        <Typography
+          color={AstrogatorColor.White}
+          variant={Raleway.Bold}
+          style={styles().title}>
+          {apodData.title}
+        </Typography>
+        <View style={styles().subheader}>
           <View style={styles().imageInfoWrapper}>
-            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={Raleway.Bold}>
               Author: {apodData.copyright || '-'}
             </Typography>
-            <Typography color={AstrogatorColor.White} variant={SpaceMono.Bold}>
+            <Typography color={AstrogatorColor.White} variant={Raleway.Bold}>
               Date: {apodData.date}
             </Typography>
           </View>
-          <Typography
-            variant={SpaceMono.Bold}
-            color={AstrogatorColor.White}
-            style={styles().explanation}
-            ellipsizeMode={'clip'}>
-            {apodData.explanation.split(' ').slice(0, 60).join(' ')}{' '}
-            <Typography
-              onPress={handlePresentModalPress}
-              style={styles().readMoreButton}
-              variant={SpaceMono.Bold}
-              color={AstrogatorColor.VenetianNights}>
-              read more...
-            </Typography>
-          </Typography>
-          <Pressable
-            onPress={() => setShowDatePicker(true)}
-            style={styles().pickButton}>
-            <Typography variant={SpaceMono.Bold} style={styles().pickTitle}>
-              Pick APOD Date
-            </Typography>
-          </Pressable>
+          <View style={styles().subheaderControlsWrapper}>
+            <Pressable onPress={() => setShowDatePicker(true)}>
+              <Settings />
+            </Pressable>
+          </View>
         </View>
-      </ScrollView>
-
+        <Typography
+          variant={Raleway.Bold}
+          color={AstrogatorColor.White}
+          style={styles().explanation}
+          ellipsizeMode={'clip'}>
+          {apodData.explanation.split(' ').slice(0, 100).join(' ')}{' '}
+          <Typography
+            onPress={handlePresentModalPress}
+            style={styles().readMoreButton}
+            variant={Raleway.Bold}
+            color={AstrogatorColor.VenetianNights}>
+            read more...
+          </Typography>
+        </Typography>
+      </View>
       {/*@ts-ignore*/}
       <DatePicker
         modal
@@ -202,7 +203,7 @@ const ApodScreen: FC = () => {
           description={apodData.explanation}
         />
       </BottomSheetModal>
-    </>
+    </ScrollView>
   );
 };
 

@@ -1,2 +1,2 @@
 export {default as Typography} from './Typography';
-export {SpaceMono} from './Typography.props';
+export {Raleway} from './Typography.props';

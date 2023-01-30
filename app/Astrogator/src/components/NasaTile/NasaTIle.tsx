@@ -1,4 +1,4 @@
-import {SpaceMono, Typography} from '@astrogator/common';
+import {Raleway, Typography} from '@astrogator/common';
 import React, {FC} from 'react';
 import {ImageBackground, Pressable, View} from 'react-native';
 import {Arrow} from '../../../assets/svgs/Arrow';
@@ -24,7 +24,7 @@ const NasaTile: FC<NasaTileProps> = ({
         source={imageSource}>
         {title && (
           <>
-            <Typography variant={SpaceMono.Bold} style={styles.title}>
+            <Typography variant={Raleway.Bold} style={styles.title}>
               {title}
             </Typography>
             <View style={styles.iconWrapper}>

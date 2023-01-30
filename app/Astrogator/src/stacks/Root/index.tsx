@@ -1,101 +1,44 @@
-import {getRelativeUnits} from '@astrogator/common';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {FavouriteIcon} from '../../../assets/svgs/tabBarIcons/FavouriteIcon';
-import {HomeIcon} from '../../../assets/svgs/tabBarIcons/HomeIcon';
-import {MessageIcon} from '../../../assets/svgs/tabBarIcons/MessageIcon';
-import {SettingsIcon} from '../../../assets/svgs/tabBarIcons/SettingsIcon';
-import {AstrogatorColor} from '../../theming/theme';
-import HomeStack from '../Home';
-import MarsRoversStack from '../MarsRovers';
-import NasaAssetsStack from '../NasaAssets';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {FC} from 'react';
+import ApodStack from '../Apod';
+import BottomTabStack from '../BottomTab';
+import FullImageStack from '../FullImage';
+import MarsRoversPhotosStack from '../MarsRoversPhotos';
+import SelectedVideoStack from '../SelectedVideo';
 import {RootStackRoutes} from './Root.routes';
 
-const {bp} = getRelativeUnits();
+const Stack = createNativeStackNavigator();
 
-export const styles = StyleSheet.create({
-  icon: {
-    height: 36 * bp,
-    width: 36 * bp,
-  },
-});
-
-const Tab = createBottomTabNavigator();
-
-const RootStack = () => {
+const RootStack: FC = () => {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarShowLabel: false,
-        headerShown: false,
-        tabBarActiveTintColor: '#F60081',
-        tabBarStyle: {
-          backgroundColor: AstrogatorColor.Black,
-          borderTopColor: 'transparent',
-        },
-      }}>
-      <Tab.Screen
-        name={RootStackRoutes.HomeStack}
-        options={{
-          tabBarIcon: props => (
-            <HomeIcon
-              fillColor={
-                props.focused
-                  ? AstrogatorColor.VenetianNights
-                  : AstrogatorColor.White
-              }
-            />
-          ),
-        }}
-        component={HomeStack}
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName={RootStackRoutes.BottomTabStack}>
+      <Stack.Screen
+        name={RootStackRoutes.BottomTabStack}
+        component={BottomTabStack}
       />
-      <Tab.Screen
-        name={RootStackRoutes.MarsRoversStack}
-        options={{
-          tabBarIcon: props => (
-            <SettingsIcon
-              fillColor={
-                props.focused
-                  ? AstrogatorColor.VenetianNights
-                  : AstrogatorColor.White
-              }
-            />
-          ),
-        }}
-        component={MarsRoversStack}
+      <Stack.Screen
+        name={RootStackRoutes.ApodStack}
+        options={{animation: 'slide_from_right'}}
+        component={ApodStack}
       />
-      <Tab.Screen
-        name={RootStackRoutes.NasaAssetsStack}
-        options={{
-          tabBarIcon: props => (
-            <FavouriteIcon
-              fillColor={
-                props.focused
-                  ? AstrogatorColor.VenetianNights
-                  : AstrogatorColor.White
-              }
-            />
-          ),
-        }}
-        component={NasaAssetsStack}
+      <Stack.Screen
+        name={RootStackRoutes.MarsRoversPhotosStack}
+        options={{animation: 'slide_from_right'}}
+        component={MarsRoversPhotosStack}
       />
-      <Tab.Screen
-        name={'Settings'}
-        options={{
-          tabBarIcon: props => (
-            <MessageIcon
-              fillColor={
-                props.focused
-                  ? AstrogatorColor.VenetianNights
-                  : AstrogatorColor.White
-              }
-            />
-          ),
-        }}
-        component={HomeStack}
+      <Stack.Screen
+        name={RootStackRoutes.SelectedVideoStack}
+        options={{animation: 'slide_from_right'}}
+        component={SelectedVideoStack}
       />
-    </Tab.Navigator>
+      <Stack.Screen
+        name={RootStackRoutes.FullImageStack}
+        options={{animation: 'slide_from_right'}}
+        component={FullImageStack}
+      />
+    </Stack.Navigator>
   );
 };
 

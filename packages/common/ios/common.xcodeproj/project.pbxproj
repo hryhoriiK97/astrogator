@@ -12,10 +12,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		4B7E458A24574F4F82949C08 /* SpaceMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94376B36460D4FE78C318314 /* SpaceMono-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-common-commonTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-common-commonTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		9B1F1C68DFDD4A16820F5313 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 387216FEB490438CA04B7588 /* SpaceMono-Regular.ttf */; };
+		48DABCCE985D4ED88D1F0FE9 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2168EF1B00A8466B9A5C4D93 /* Raleway-Bold.ttf */; };
+		E4356AF3EB4440C485B84CA6 /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC4BB4A4ABAF42F785641BE0 /* Raleway-Light.ttf */; };
+		B203B3E6CEDC4C22880ACEC9 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD4E1C761D354981B3B3EDBA /* Raleway-Medium.ttf */; };
+		7A4E4848929D4FAAB7FBB71F /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1EA6C3EC4264026A387A081 /* Raleway-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,15 +41,17 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = common/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = common/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-common-commonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-common-commonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		387216FEB490438CA04B7588 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SpaceMono-Regular.ttf"; path = "../assets/fonts/SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-common.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common.debug.xcconfig"; path = "Target Support Files/Pods-common/Pods-common.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common.release.xcconfig"; path = "Target Support Files/Pods-common/Pods-common.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-common-commonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common-commonTests.debug.xcconfig"; path = "Target Support Files/Pods-common-commonTests/Pods-common-commonTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-common.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-common.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = common/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-common-commonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common-commonTests.release.xcconfig"; path = "Target Support Files/Pods-common-commonTests/Pods-common-commonTests.release.xcconfig"; sourceTree = "<group>"; };
-		94376B36460D4FE78C318314 /* SpaceMono-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SpaceMono-Bold.ttf"; path = "../assets/fonts/SpaceMono-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		2168EF1B00A8466B9A5C4D93 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; name = "Raleway-Bold.ttf"; path = "../assets/fonts/Raleway-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DC4BB4A4ABAF42F785641BE0 /* Raleway-Light.ttf */ = {isa = PBXFileReference; name = "Raleway-Light.ttf"; path = "../assets/fonts/Raleway-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BD4E1C761D354981B3B3EDBA /* Raleway-Medium.ttf */ = {isa = PBXFileReference; name = "Raleway-Medium.ttf"; path = "../assets/fonts/Raleway-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E1EA6C3EC4264026A387A081 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; name = "Raleway-Regular.ttf"; path = "../assets/fonts/Raleway-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +149,10 @@
 		A70EE7735CA14D75B9249DAC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				94376B36460D4FE78C318314 /* SpaceMono-Bold.ttf */,
-				387216FEB490438CA04B7588 /* SpaceMono-Regular.ttf */,
+				2168EF1B00A8466B9A5C4D93 /* Raleway-Bold.ttf */,
+				DC4BB4A4ABAF42F785641BE0 /* Raleway-Light.ttf */,
+				BD4E1C761D354981B3B3EDBA /* Raleway-Medium.ttf */,
+				E1EA6C3EC4264026A387A081 /* Raleway-Regular.ttf */,
 			);
 			name = Resources;
 			path = "";
@@ -259,8 +265,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				4B7E458A24574F4F82949C08 /* SpaceMono-Bold.ttf in Resources */,
-				9B1F1C68DFDD4A16820F5313 /* SpaceMono-Regular.ttf in Resources */,
+				48DABCCE985D4ED88D1F0FE9 /* Raleway-Bold.ttf in Resources */,
+				E4356AF3EB4440C485B84CA6 /* Raleway-Light.ttf in Resources */,
+				B203B3E6CEDC4C22880ACEC9 /* Raleway-Medium.ttf in Resources */,
+				7A4E4848929D4FAAB7FBB71F /* Raleway-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
