@@ -1,6 +1,7 @@
 import {AstrogatorColor} from 'Astrogator/src/theming/theme';
 import {StyleSheet} from 'react-native';
 import {getRelativeUnits} from '../../utils/getRelativeUnits';
+import {Raleway} from '../Typography';
 
 const {bp} = getRelativeUnits();
 
@@ -48,6 +49,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(11, 11, 11, 0.66)',
   },
   infoTitle: {
+    fontFamily: Raleway.Regular,
     fontSize: 12 * bp,
     color: '#ffffff',
   },
