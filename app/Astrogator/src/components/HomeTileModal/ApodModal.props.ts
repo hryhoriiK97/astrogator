@@ -1,4 +1,4 @@
-export interface HomeTileModalProps {
+export interface ApodModalProps {
   title: string;
   description: string;
 }

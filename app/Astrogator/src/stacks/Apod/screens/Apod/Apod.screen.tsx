@@ -2,6 +2,7 @@ import {
   Divider,
   DividerVariant,
   LoadingScreen,
+  MobilePlatform,
   SafeImage,
   Typography,
 } from '@astrogator/common';
@@ -12,6 +13,7 @@ import {format, isFuture, isToday} from 'date-fns';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
 import {
   Dimensions,
+  Platform,
   RefreshControl,
   ScrollView,
   StatusBar,
@@ -24,7 +26,7 @@ import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {BackButton} from '../../../../components/BackButton';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
-import {HomeTileModal} from '../../../../components/HomeTileModal';
+import {ApodModal} from '../../../../components/HomeTileModal';
 import {ImageActionsTab} from '../../../../components/ImageActionsTab';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {ApodResponse} from '../../../../types/ApodResponse';
@@ -142,7 +144,10 @@ const ApodScreen: FC = () => {
           />
         </View>
         <Typography style={styles.explanation} ellipsizeMode={'clip'}>
-          {apodData.explanation.split(' ').slice(0, 70).join(' ')}{' '}
+          {apodData.explanation
+            .split(' ')
+            .slice(0, Platform.OS === MobilePlatform.Android ? 70 : 90)
+            .join(' ')}{' '}
           <Typography
             onPress={handlePresentModalPress}
             style={styles.readMoreButton}>
@@ -180,7 +185,7 @@ const ApodScreen: FC = () => {
           snapPoints={snapPoints}
           enableOverDrag={false}
           enableDismissOnClose={true}>
-          <HomeTileModal
+          <ApodModal
             title={apodData.title}
             description={apodData.explanation}
           />

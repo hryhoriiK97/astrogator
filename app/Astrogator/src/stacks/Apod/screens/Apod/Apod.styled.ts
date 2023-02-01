@@ -57,8 +57,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     fontFamily: Raleway.Medium,
     color: AstrogatorColor.White,
+    fontSize: 14 * bp,
     lineHeight: 21 * bp,
-    marginTop: Platform.OS === MobilePlatform.IOS ? 40 * bp : 20 * bp,
+    marginTop: Platform.OS === MobilePlatform.IOS ? 30 * bp : 20 * bp,
   },
   readMoreButton: {
     alignSelf: 'center',

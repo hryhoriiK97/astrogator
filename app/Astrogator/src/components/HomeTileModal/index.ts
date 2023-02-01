@@ -1,1 +1,1 @@
-export {default as HomeTileModal} from './HomeTileModal';
+export {default as ApodModal} from './ApodModal';
