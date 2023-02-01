@@ -8,6 +8,7 @@ import {
 import {NASA_API_KEY} from '@env';
 import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
+import {format, subDays} from 'date-fns';
 import React, {FC} from 'react';
 import {ImageBackground, StatusBar, View} from 'react-native';
 import {useQuery} from 'react-query';
@@ -36,7 +37,10 @@ const HomeScreen: FC = () => {
     isRefetching: isApodRefetching,
   } = useQuery(HomeScreenQueryKey.Apod, () =>
     apodAxiosInstance.get(
-      `/planetary/apod?start_date=2023-01-25&api_key=${NASA_API_KEY}`,
+      `/planetary/apod?start_date=${format(
+        subDays(new Date(), 5),
+        'yyyy-MM-dd',
+      )}&api_key=${NASA_API_KEY}`,
     ),
   );
 

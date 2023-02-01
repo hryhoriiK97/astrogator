@@ -1,21 +1,15 @@
-import {Raleway, Typography} from '@astrogator/common';
+import {Typography} from '@astrogator/common';
+import {Chevron} from '@astrogator/common/assets/svgs/Chevron';
 import React, {FC} from 'react';
 import {Pressable} from 'react-native';
-import {Arrow} from '../../../assets/svgs/Arrow';
-import {AstrogatorColor} from '../../theming/theme';
 import {BackButtonProps} from './BackButton.props';
 import {styles} from './BackButton.styled';
 
 const BackButton: FC<BackButtonProps> = ({onPress}) => {
   return (
     <Pressable style={styles.backButton} onPress={onPress}>
-      <Arrow fillColor={AstrogatorColor.White} />
-      <Typography
-        variant={Raleway.Bold}
-        style={styles.backButtonTitle}
-        color={AstrogatorColor.White}>
-        Back
-      </Typography>
+      <Chevron rotate={180} />
+      <Typography style={styles.backButtonTitle}>Return</Typography>
     </Pressable>
   );
 };
