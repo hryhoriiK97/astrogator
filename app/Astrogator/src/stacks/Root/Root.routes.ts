@@ -7,6 +7,7 @@ import {MarsRoversPhotosStackParamList} from '../MarsRoversPhotos/MarsRoversPhot
 import {SelectedVideoStackParamList} from '../SelectedVideo/SelectedVideo.routes';
 
 export type RootParamList = {
+  WelcomeScreen: undefined;
   BottomTabStack: NavigatorScreenParams<BottomTabParamList>;
   ApodStack: NavigatorScreenParams<ApodStackParamList>;
   MarsRoversPhotosStack: NavigatorScreenParams<MarsRoversPhotosStackParamList>;
@@ -19,6 +20,7 @@ export type RootStackNavigationProp = NativeStackNavigationProp<RootParamList>;
 export const RootStackRoutes: {
   [route in keyof RootParamList]: route;
 } = {
+  WelcomeScreen: 'WelcomeScreen',
   BottomTabStack: 'BottomTabStack',
   ApodStack: 'ApodStack',
   MarsRoversPhotosStack: 'MarsRoversPhotosStack',

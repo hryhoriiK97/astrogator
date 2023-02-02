@@ -1,10 +1,14 @@
 import React, {FC} from 'react';
-import {View} from 'react-native';
+import {View, ViewProps} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 
-export const Astronaut: FC = () => {
+interface AstronautProps {
+  style?: ViewProps['style'];
+}
+
+export const Astronaut: FC<AstronautProps> = ({style}) => {
   return (
-    <View style={{zIndex: 100, width: 200, height: 200}}>
+    <View style={style}>
       <SvgXml xml={xml} width={'100%'} height={'100%'} />
     </View>
   );

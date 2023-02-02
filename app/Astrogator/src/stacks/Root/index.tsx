@@ -6,6 +6,7 @@ import FullImageStack from '../FullImage';
 import MarsRoversPhotosStack from '../MarsRoversPhotos';
 import SelectedVideoStack from '../SelectedVideo';
 import {RootStackRoutes} from './Root.routes';
+import WelcomeScreen from './screens/Welcome/Welcome.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,11 @@ const RootStack: FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={RootStackRoutes.BottomTabStack}>
+      initialRouteName={RootStackRoutes.WelcomeScreen}>
+      <Stack.Screen
+        name={RootStackRoutes.WelcomeScreen}
+        component={WelcomeScreen}
+      />
       <Stack.Screen
         name={RootStackRoutes.BottomTabStack}
         component={BottomTabStack}
