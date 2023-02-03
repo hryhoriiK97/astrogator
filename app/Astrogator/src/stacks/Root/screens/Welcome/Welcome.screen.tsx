@@ -1,5 +1,5 @@
 import {Typography} from '@astrogator/common';
-import {VibrancyView} from '@react-native-community/blur';
+import {BlurView} from '@react-native-community/blur';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {ImageBackground, Pressable, StatusBar, View} from 'react-native';
@@ -12,9 +12,14 @@ import {styles} from './Welcome.styled';
 
 const WelcomeScreen: FC = () => {
   const {navigate} = useNavigation<RootStackNavigationProp>();
+
   return (
     <>
-      <StatusBar hidden translucent={true} showHideTransition={'fade'} />
+      <StatusBar
+        translucent={true}
+        showHideTransition={'fade'}
+        backgroundColor={'rgba(0,0,0, 0.01)'}
+      />
       <ImageBackground
         source={Background}
         resizeMode={'cover'}
@@ -45,7 +50,7 @@ const WelcomeScreen: FC = () => {
                   screen: 'HomeScreen',
                 })
               }>
-              <VibrancyView
+              <BlurView
                 blurType={'dark'}
                 blurAmount={3}
                 style={styles.blurViewStyle}

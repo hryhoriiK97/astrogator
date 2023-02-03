@@ -59,6 +59,8 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: '32%',
     left: 0,
+    width: 234 * bp,
+    height: 284 * bp,
   },
   smallPlanet: {
     position: 'absolute',
@@ -84,7 +86,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 52 * bp,
     borderRadius: 12 * bp,
-    paddingVertical: 18 * bp,
+    paddingVertical: 14 * bp,
     display: 'flex',
     alignItems: 'center',
     borderWidth: 1,

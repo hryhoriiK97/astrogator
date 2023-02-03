@@ -21,6 +21,7 @@ const RootStack: FC = () => {
       />
       <Stack.Screen
         name={RootStackRoutes.BottomTabStack}
+        options={{animation: 'fade'}}
         component={BottomTabStack}
       />
       <Stack.Screen
