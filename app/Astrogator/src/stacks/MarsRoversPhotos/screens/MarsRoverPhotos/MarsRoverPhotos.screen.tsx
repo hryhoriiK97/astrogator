@@ -13,10 +13,11 @@ import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {Pressable, StatusBar, View} from 'react-native';
+import {Pressable, View} from 'react-native';
 import {Picker} from 'react-native-wheel-pick';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
+import {BackButton} from '../../../../components/BackButton';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {MarsRoverPhotosHeader} from '../../../../components/MarsRoverPhotosHeader';
@@ -121,15 +122,17 @@ const MarsRoverPhotosScreen: FC = () => {
   return (
     <>
       <View style={styles.wrapper}>
-        <StatusBar barStyle="light-content" />
+        <View style={{height: 80, justifyContent: 'center'}}>
+          <BackButton onPress={goBack} />
+        </View>
         <FlashList
           ref={flashListRef}
+          contentContainerStyle={styles.flashList}
           ListHeaderComponent={
             <MarsRoverPhotosHeader
               rover={rover}
               currentMarsSol={currentMarsSol}
               selectedCamera={selectedCamera}
-              onBackButtonPress={goBack}
               onFilterButtonPress={handlePresentModalPress}
             />
           }

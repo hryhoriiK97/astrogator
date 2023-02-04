@@ -7,7 +7,6 @@ import {
   marsRoverImages,
 } from '../../stacks/BottomTab/screens/MarsRovers/MarsRovers.utils';
 import {AstrogatorColor} from '../../theming/theme';
-import {BackButton} from '../BackButton';
 import {MarsRoverPhotosHeaderProps} from './MarsRoverPhotosHeader.props';
 import {Status, styles} from './MarsRoverPhotosHeader.styled';
 
@@ -15,13 +14,11 @@ const MarsRoverPhotosHeader: FC<MarsRoverPhotosHeaderProps> = ({
   rover,
   currentMarsSol,
   selectedCamera,
-  onBackButtonPress,
   onFilterButtonPress,
 }) => {
   return (
     <View style={styles().container}>
       <View style={styles().imageWrapper}>
-        <BackButton onPress={() => onBackButtonPress()} />
         <FastImage
           source={marsRoverImages[rover.name.toLowerCase() as MarsRover]}
           style={styles().roverImage}

@@ -6,12 +6,15 @@ const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: AstrogatorColor.Black,
+    position: 'relative',
+    backgroundColor: AstrogatorColor.VenetianNights,
     width: '100%',
     height: '100%',
+    paddingTop: 20 * bp,
+    marginBottom: 20,
   },
   renderItemWrapper: {
-    paddingHorizontal: 16 * bp,
+    paddingHorizontal: 16,
   },
   imageWrapper: {
     position: 'relative',
@@ -19,6 +22,9 @@ export const styles = StyleSheet.create({
   roverImage: {
     width: '100%',
     height: 300 * bp,
+  },
+  flashList: {
+    backgroundColor: AstrogatorColor.Black,
   },
   footer: {
     height: 50 * bp,

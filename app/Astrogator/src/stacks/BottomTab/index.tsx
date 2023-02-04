@@ -1,4 +1,5 @@
 import {getRelativeUnits} from '@astrogator/common';
+import {BlurView} from '@react-native-community/blur';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {StyleSheet} from 'react-native';
@@ -20,6 +21,19 @@ export const styles = StyleSheet.create({
     height: 36 * bp,
     width: 36 * bp,
   },
+  blurView: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  tabBarStyle: {
+    position: 'absolute',
+    height: 70 * bp,
+    borderTopColor: 'transparent',
+    overflow: 'hidden',
+  },
 });
 
 const Tab = createBottomTabNavigator();
@@ -31,10 +45,10 @@ const BottomTabStack = () => {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarActiveTintColor: '#F60081',
-        tabBarStyle: {
-          backgroundColor: AstrogatorColor.Black,
-          borderTopColor: 'transparent',
-        },
+        tabBarBackground: () => (
+          <BlurView blurType={'dark'} blurAmount={10} style={styles.blurView} />
+        ),
+        tabBarStyle: styles.tabBarStyle,
       }}>
       <Tab.Screen
         name={BottomTabStackRoutes.HomeScreen}
