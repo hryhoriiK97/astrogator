@@ -19,6 +19,7 @@ import {
   RootStackRoutes,
 } from '../../../Root/Root.routes';
 import {SelectedVideoStackRoutes} from '../../../SelectedVideo/SelectedVideo.routes';
+import {getBottomModalSnapPoint} from '../../NasaAssets.utils';
 import {styles} from './NasaVideos.styled';
 
 enum NasaVideosScreenQueryKey {
@@ -100,7 +101,9 @@ const NasaVideosScreen: FC = () => {
           />
         )}
         backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={['50%']}
+        snapPoints={[
+          getBottomModalSnapPoint(selectedNasaVideoData?.description.length),
+        ]}
         enableOverDrag={false}
         enableDismissOnClose={true}>
         <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />

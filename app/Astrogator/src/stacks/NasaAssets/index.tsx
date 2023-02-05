@@ -1,7 +1,7 @@
-import {Raleway} from '@astrogator/common';
+import {MobilePlatform, Raleway} from '@astrogator/common';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React, {FC} from 'react';
-import {SafeAreaView} from 'react-native';
+import {Platform, SafeAreaView} from 'react-native';
 import {AstrogatorColor} from '../../theming/theme';
 import {NasaAssetsStackRoutes} from './NasaAssets.routes';
 import NasaImagesScreen from './screens/NasaImages/NasaImages.screen';
@@ -22,7 +22,7 @@ const NasaAssetsStack: FC = () => {
                 : 'Videos',
             tabBarStyle: {
               backgroundColor: AstrogatorColor.Black,
-              paddingTop: 30,
+              paddingTop: Platform.OS === MobilePlatform.Android ? 30 : 0,
             },
             tabBarIndicatorStyle: {
               backgroundColor: AstrogatorColor.VenetianNights,

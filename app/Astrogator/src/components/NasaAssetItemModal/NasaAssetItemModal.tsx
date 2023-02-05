@@ -15,9 +15,7 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
   const renderItem = ({item}: {item: string}) => {
     return (
       <View style={styles.keywordItem}>
-        <Typography numberOfLines={1} style={styles.keywordItemText}>
-          {item}
-        </Typography>
+        <Typography style={styles.keywordItemText}>{item}</Typography>
       </View>
     );
   };
@@ -43,7 +41,7 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
             data={keywords}
             renderItem={renderItem}
             horizontal={true}
-            bounces={false}
+            showsHorizontalScrollIndicator={false}
             estimatedItemSize={36}
             ItemSeparatorComponent={renderSeparator}
           />

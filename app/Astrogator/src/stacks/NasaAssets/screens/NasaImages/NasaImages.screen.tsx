@@ -15,6 +15,7 @@ import {
   NasaAssetItemResponse,
 } from '../../../../types/NasaAssetItemResponse';
 import {RootStackNavigationProp} from '../../../Root/Root.routes';
+import {getBottomModalSnapPoint} from '../../NasaAssets.utils';
 import {styles} from './NasaImages.styled';
 
 enum NasaImagesScreenQueryKey {
@@ -95,7 +96,9 @@ const NasaImagesScreen: FC = () => {
           />
         )}
         backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={['50%']}
+        snapPoints={[
+          getBottomModalSnapPoint(selectedNasaImageData?.description.length),
+        ]}
         enableOverDrag={false}
         enableDismissOnClose={true}>
         <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
