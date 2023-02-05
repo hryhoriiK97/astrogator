@@ -12,27 +12,33 @@ const {bp} = getRelativeUnits();
 export const styles = (status?: Status) =>
   StyleSheet.create({
     container: {
+      position: 'relative',
       flex: 1,
+    },
+    blurView: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
     backgroundImage: {
       width: '100%',
       height: '100%',
     },
-    imageWrapper: {
-      position: 'relative',
-    },
     roverImage: {
       width: '100%',
-      height: 300 * bp,
+      height: 200 * bp,
+      borderRadius: 16 * bp,
+      marginBottom: 20 * bp,
     },
     roverInformationWrapper: {
       position: 'relative',
-      width: '90%',
+      paddingHorizontal: 16 * bp,
+      paddingVertical: 30 * bp,
+      width: '100%',
       alignSelf: 'center',
       borderRadius: 5 * bp,
-      marginTop: 30 * bp,
-      padding: 20 * bp,
-      marginVertical: 20 * bp,
     },
     roverNameWrapper: {
       flexDirection: 'row',
@@ -45,16 +51,9 @@ export const styles = (status?: Status) =>
       color: AstrogatorColor.White,
     },
     filterButton: {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      width: 70 * bp,
-      height: 70 * bp,
-      borderBottomLeftRadius: 70 * bp,
       alignItems: 'center',
       padding: 5 * bp,
       borderRadius: 5 * bp,
-      backgroundColor: AstrogatorColor.VenetianNights,
     },
     statusWrapper: {
       flexDirection: 'row',

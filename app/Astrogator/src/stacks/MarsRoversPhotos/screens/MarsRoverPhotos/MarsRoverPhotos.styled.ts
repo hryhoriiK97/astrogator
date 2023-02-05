@@ -14,18 +14,28 @@ export const styles = (headerHeight?: number) =>
       marginTop: headerHeight,
       marginBottom: 20,
     },
+    blurView: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    },
+    backdropWrapper: {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.25)',
+    },
     renderItemWrapper: {
       paddingHorizontal: 16,
     },
     imageWrapper: {
       position: 'relative',
-    },
-    roverImage: {
-      width: '100%',
-      height: 300 * bp,
-    },
-    flashList: {
-      backgroundColor: AstrogatorColor.Black,
     },
     footer: {
       height: 50 * bp,

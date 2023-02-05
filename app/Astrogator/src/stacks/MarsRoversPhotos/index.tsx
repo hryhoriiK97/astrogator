@@ -38,29 +38,30 @@ const Stack = createNativeStackNavigator();
 const MarsRoversPhotosStack: FC = () => {
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        headerBackground: () => {
-          const {goBack} = useNavigation();
-          return (
-            <ImageBackground
-              source={Background}
-              style={styles.backgroundImage}
-              imageStyle={styles.image}>
-              <BackButton onPress={goBack} />
-              <View style={styles.backdropWrapper} />
-            </ImageBackground>
-          );
-        },
-      }}
+      screenOptions={{headerShown: false}}
       initialRouteName={MarsRoversPhotosStackRoutes.MarsRoverPhotosScreen}>
       <Stack.Screen
         name={MarsRoversPhotosStackRoutes.MarsRoverPhotosScreen}
+        options={{
+          headerShown: false,
+          headerBackground: () => {
+            const {goBack} = useNavigation();
+            return (
+              <ImageBackground
+                source={Background}
+                style={styles.backgroundImage}
+                imageStyle={styles.image}>
+                <BackButton onPress={goBack} />
+                <View style={styles.backdropWrapper} />
+              </ImageBackground>
+            );
+          },
+        }}
         component={MarsRoverPhotosScreen}
       />
       <Stack.Screen
         name={MarsRoversPhotosStackRoutes.MarsFullImageStack}
-        options={{animation: 'fade'}}
+        options={{animation: 'fade', headerShown: false}}
         component={MarsFullImageStack}
       />
     </Stack.Navigator>

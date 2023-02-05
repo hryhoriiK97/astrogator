@@ -10,13 +10,15 @@ import {
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {BlurView} from '@react-native-community/blur';
 import {useHeaderHeight} from '@react-navigation/elements';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {Pressable, View} from 'react-native';
+import {ImageBackground, Pressable, View} from 'react-native';
 import {Picker} from 'react-native-wheel-pick';
 import {useQuery} from 'react-query';
+import Background from '../../../../../assets/images/Group.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
@@ -122,10 +124,11 @@ const MarsRoverPhotosScreen: FC = () => {
 
   return (
     <>
-      <View style={styles(headerHeight).wrapper}>
+      <ImageBackground source={Background} style={styles(headerHeight).wrapper}>
+        <View style={styles().backdropWrapper} />
+        <BlurView blurType={'dark'} blurAmount={2} style={styles().blurView} />
         <FlashList
           ref={flashListRef}
-          contentContainerStyle={styles().flashList}
           ListHeaderComponent={
             <MarsRoverPhotosHeader
               rover={rover}
@@ -150,7 +153,7 @@ const MarsRoverPhotosScreen: FC = () => {
           ItemSeparatorComponent={renderSeparatorItem}
           estimatedItemSize={355.5}
         />
-      </View>
+      </ImageBackground>
       <BottomSheetModal
         ref={bottomSheetModalRef}
         backdropComponent={props => (
