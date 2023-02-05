@@ -3,7 +3,6 @@ import {FastImageProps} from 'react-native-fast-image';
 export interface NasaAssetItemProps {
   imageSource: FastImageProps['source'];
   defaultSource: FastImageProps['defaultSource'];
-  title: string;
+  onMoreInfoPress: () => void;
   onPress: () => void;
-  onLongPress: () => void;
 }

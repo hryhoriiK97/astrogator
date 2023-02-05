@@ -58,16 +58,16 @@ const NasaImagesScreen: FC = () => {
       <NasaAssetItem
         imageSource={{uri: imagePreview.href}}
         defaultSource={require('../../../../../assets/images/apod-tile.webp')}
-        title={item.data[0].title}
         onPress={() => {
           navigation.navigate('FullImageStack', {
             screen: 'FullImageScreen',
             params: {
               photoUri: imagePreview.href,
+              title: item.data[0].title,
             },
           });
         }}
-        onLongPress={() => {
+        onMoreInfoPress={() => {
           setSelectedNasaImageData(item.data[0]);
           handlePresentModalPress();
         }}

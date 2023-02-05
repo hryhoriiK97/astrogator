@@ -63,7 +63,10 @@ const NasaVideosScreen: FC = () => {
       <NasaAssetItem
         imageSource={{uri: imagePreview.href}}
         defaultSource={require('../../../../../assets/images/apod-tile.webp')}
-        title={item.data[0].title}
+        onMoreInfoPress={() => {
+          setSelectedNasaVideoData(item.data[0]);
+          handlePresentModalPress();
+        }}
         onPress={() => {
           navigation.navigate(RootStackRoutes.SelectedVideoStack, {
             screen: SelectedVideoStackRoutes.SelectedVideoScreen,
@@ -71,10 +74,6 @@ const NasaVideosScreen: FC = () => {
               videoCollectionUri: item.href,
             },
           });
-        }}
-        onLongPress={() => {
-          setSelectedNasaVideoData(item.data[0]);
-          handlePresentModalPress();
         }}
       />
     );
