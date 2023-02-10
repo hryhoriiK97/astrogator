@@ -16,6 +16,7 @@ import Background from '../../../../../assets/images/Group.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import {EmptySpace} from '../../../../components/EmptySpace';
 import {MarsRoverModal} from '../../../../components/MarsRoverModal';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
@@ -101,6 +102,7 @@ const MarsRoversScreen: FC = () => {
         <View style={styles.innerWrapper}>
           <FlatList
             contentContainerStyle={styles.contentContainerStyle}
+            ListFooterComponent={<EmptySpace height={170} />}
             ListHeaderComponent={
               <View style={styles.header}>
                 <Typography variant={Raleway.Bold} style={styles.title}>

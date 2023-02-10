@@ -1,4 +1,4 @@
-import {getRelativeUnits} from '@astrogator/common';
+import {getRelativeUnits, Raleway} from '@astrogator/common';
 import {StyleSheet} from 'react-native';
 import {AstrogatorColor} from '../../theming/theme';
 
@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     fontSize: 14 * bp,
     lineHeight: 21 * bp,
     color: AstrogatorColor.White,
+    fontFamily: Raleway.Regular,
   },
   keywordsWrapper: {
     width: '100%',

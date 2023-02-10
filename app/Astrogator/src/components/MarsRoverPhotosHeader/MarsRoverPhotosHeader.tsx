@@ -1,5 +1,4 @@
 import {Raleway, Typography} from '@astrogator/common';
-import {BlurView} from '@react-native-community/blur';
 import React, {FC} from 'react';
 import {Pressable, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -19,7 +18,7 @@ const MarsRoverPhotosHeader: FC<MarsRoverPhotosHeaderProps> = ({
 }) => {
   return (
     <View style={styles().container}>
-      <BlurView blurType={'dark'} blurAmount={40} style={styles().blurView} />
+      {/*<BlurView blurType={'dark'} blurAmount={40} style={styles().blurView} />*/}
       <View style={styles().roverInformationWrapper}>
         <FastImage
           source={marsRoverImages[rover.name.toLowerCase() as MarsRover]}
