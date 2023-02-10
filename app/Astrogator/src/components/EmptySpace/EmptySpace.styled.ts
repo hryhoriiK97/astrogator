@@ -7,5 +7,7 @@ export const styles = ({height = 100}: {height?: number}) =>
   StyleSheet.create({
     container: {
       height: height * bp,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   });

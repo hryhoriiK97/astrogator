@@ -4,10 +4,11 @@ import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useRef, useState} from 'react';
 import {View} from 'react-native';
-import {useQuery} from 'react-query';
+import {useInfiniteQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import {EmptySpace} from '../../../../components/EmptySpace';
 import {NasaAssetItemModal} from '../../../../components/NasaAssetItemModal';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {
@@ -31,12 +32,36 @@ const NasaVideosScreen: FC = () => {
   const {
     data: nasaVideosResponse,
     isLoading: isNasaVideosLoading,
-    isError: isNasaVideosRoversError,
+    fetchNextPage: fetchNasaVideosNextPage,
+    hasNextPage: hasNasaVideosNextPage,
+    isFetchedAfterMount: isNasaVideosFetchedAfterMount,
+    isFetchingNextPage: isNasaVideosFetchingNextPage,
+    isError: isNasaVideosError,
     refetch: nasaVideosRefetch,
     isRefetching: isNasaVideosRefetching,
-  } = useQuery(NasaVideosScreenQueryKey.NasaVideos, () =>
-    nasaAssetsAxiosInstance.get(`/search?media_type=video`),
+  } = useInfiniteQuery(
+    NasaVideosScreenQueryKey.NasaVideos,
+    async ({pageParam = 1}) => {
+      const data = await nasaAssetsAxiosInstance.get(
+        `/search?media_type=video&page=${pageParam}`,
+      );
+      return {
+        data: data,
+        nextPage: pageParam + 1,
+      };
+    },
+    {
+      getNextPageParam: lastPage => {
+        return lastPage.nextPage;
+      },
+    },
   );
+
+  const loadNextPageData = () => {
+    if (hasNasaVideosNextPage) {
+      fetchNasaVideosNextPage();
+    }
+  };
 
   const [selectedNasaVideoData, setSelectedNasaVideoData] =
     useState<NasaAssetItemData | null>(null);
@@ -51,12 +76,13 @@ const NasaVideosScreen: FC = () => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
 
-  if (isNasaVideosLoading || isNasaVideosRefetching) {
+  if (isNasaVideosFetchedAfterMount && isNasaVideosLoading) {
     return <LoadingScreen />;
   }
-
-  const nasaVideosData: NasaAssetItemResponse[] =
-    nasaVideosResponse?.data.collection.items;
+  const nasaVideosData: NasaAssetItemResponse[] = nasaVideosResponse?.pages
+    .length
+    ? nasaVideosResponse.pages.flatMap(page => page.data.data.collection.items)
+    : [];
 
   const renderItem = ({item}: {item: NasaAssetItemResponse}) => {
     const [imagePreview] = item.links;
@@ -89,6 +115,14 @@ const NasaVideosScreen: FC = () => {
         estimatedItemSize={145}
         renderItem={renderItem}
         numColumns={2}
+        ListFooterComponent={
+          <EmptySpace
+            height={90}
+            isLoaderShown={isNasaVideosFetchingNextPage}
+          />
+        }
+        onEndReached={loadNextPageData}
+        onEndReachedThreshold={0.2}
       />
 
       <BottomSheetModal

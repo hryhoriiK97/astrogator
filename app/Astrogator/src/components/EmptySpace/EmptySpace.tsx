@@ -1,10 +1,20 @@
 import React, {FC} from 'react';
-import {View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
+import {AstrogatorColor} from '../../theming/theme';
 import {EmptySpaceProps} from './EmptySpace.props';
 import {styles} from './EmptySpace.styled';
 
-const EmptySpace: FC<EmptySpaceProps> = ({height}) => {
-  return <View style={styles({height}).container} />;
+const EmptySpace: FC<EmptySpaceProps> = ({height, isLoaderShown}) => {
+  return (
+    <View style={styles({height}).container}>
+      {isLoaderShown && (
+        <ActivityIndicator
+          size={'large'}
+          color={AstrogatorColor.VenetianNights}
+        />
+      )}
+    </View>
+  );
 };
 
 export default EmptySpace;
