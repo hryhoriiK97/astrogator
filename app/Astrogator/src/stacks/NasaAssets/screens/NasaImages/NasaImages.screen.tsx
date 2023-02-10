@@ -14,8 +14,8 @@ import {
   NasaAssetItemData,
   NasaAssetItemResponse,
 } from '../../../../types/NasaAssetItemResponse';
+import {getBottomModalSnapPoint} from '../../../../utils/getBottomModalSnapPoint';
 import {RootStackNavigationProp} from '../../../Root/Root.routes';
-import {getBottomModalSnapPoint} from '../../NasaAssets.utils';
 import {styles} from './NasaImages.styled';
 
 enum NasaImagesScreenQueryKey {

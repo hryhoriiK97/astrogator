@@ -6,9 +6,11 @@ export const getBottomModalSnapPoint = (
     return '35%';
   } else if (descriptionLength <= 450) {
     return '45%';
-  } else if (descriptionLength <= 700) {
-    return '65%';
+  } else if (descriptionLength <= 820) {
+    return '60%';
+  } else if (descriptionLength <= 1020) {
+    return '70%';
   } else {
-    return '90%';
+    return '80%';
   }
 };

@@ -10,7 +10,7 @@ import {NASA_API_KEY} from '@env';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {format, isFuture, isToday} from 'date-fns';
-import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
+import React, {FC, useCallback, useRef, useState} from 'react';
 import {
   Dimensions,
   Platform,
@@ -31,6 +31,7 @@ import {ImageActionsTab} from '../../../../components/ImageActionsTab';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {ApodResponse} from '../../../../types/ApodResponse';
 import {getYouTubeVideoId} from '../../../../utils';
+import {getBottomModalSnapPoint} from '../../../../utils/getBottomModalSnapPoint';
 import {ApodStackNavigationProp, ApodStackParamList} from '../../Apod.routes';
 import {styles} from './Apod.styled';
 
@@ -41,18 +42,16 @@ enum ApodScreenQueryKey {
 }
 
 const ApodScreen: FC = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
-
   const navigation = useNavigation<ApodStackNavigationProp>();
 
   const route = useRoute<RouteProp<ApodStackParamList, 'ApodScreen'>>();
 
-  const {todayApodData} = route.params;
+  const {apodDate} = route.params;
+
+  const [selectedDate, setSelectedDate] = useState(new Date(apodDate));
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const snapPoints = useMemo(() => ['85%', '95%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -77,12 +76,13 @@ const ApodScreen: FC = () => {
       }`,
     ),
   );
-
   if (isApodLoading || isApodRefetching) {
     return <LoadingScreen />;
   }
 
-  const apodData: ApodResponse = todayApodData || apodResponse?.data;
+  const apodData: ApodResponse = apodResponse?.data;
+
+  const apodExplanationArray = apodData.explanation.split(' ');
 
   return (
     <>
@@ -144,15 +144,19 @@ const ApodScreen: FC = () => {
           />
         </View>
         <Typography style={styles.explanation} ellipsizeMode={'clip'}>
-          {apodData.explanation
-            .split(' ')
+          {apodExplanationArray
             .slice(0, Platform.OS === MobilePlatform.Android ? 70 : 90)
             .join(' ')}{' '}
-          <Typography
-            onPress={handlePresentModalPress}
-            style={styles.readMoreButton}>
-            read more...
-          </Typography>
+          {((Platform.OS === MobilePlatform.IOS &&
+            apodExplanationArray.length >= 90) ||
+            (Platform.OS === MobilePlatform.Android &&
+              apodExplanationArray.length >= 70)) && (
+            <Typography
+              onPress={handlePresentModalPress}
+              style={styles.readMoreButton}>
+              read more...
+            </Typography>
+          )}
         </Typography>
         {/*@ts-ignore*/}
         <DatePicker
@@ -182,7 +186,7 @@ const ApodScreen: FC = () => {
             />
           )}
           backgroundComponent={CustomBottomSheetModalBackground}
-          snapPoints={snapPoints}
+          snapPoints={[getBottomModalSnapPoint(apodData.explanation.length)]}
           enableOverDrag={false}
           enableDismissOnClose={true}>
           <ApodModal

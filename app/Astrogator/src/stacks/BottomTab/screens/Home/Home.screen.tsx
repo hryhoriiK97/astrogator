@@ -61,7 +61,7 @@ const HomeScreen: FC = () => {
           navigation.navigate('ApodStack', {
             screen: 'ApodScreen',
             params: {
-              todayApodData: item,
+              apodDate: item.date,
             },
           })
         }

@@ -14,12 +14,12 @@ import {
   NasaAssetItemData,
   NasaAssetItemResponse,
 } from '../../../../types/NasaAssetItemResponse';
+import {getBottomModalSnapPoint} from '../../../../utils/getBottomModalSnapPoint';
 import {
   RootStackNavigationProp,
   RootStackRoutes,
 } from '../../../Root/Root.routes';
 import {SelectedVideoStackRoutes} from '../../../SelectedVideo/SelectedVideo.routes';
-import {getBottomModalSnapPoint} from '../../NasaAssets.utils';
 import {styles} from './NasaVideos.styled';
 
 enum NasaVideosScreenQueryKey {
