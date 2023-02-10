@@ -52,7 +52,9 @@ const NasaVideosScreen: FC = () => {
     },
     {
       getNextPageParam: lastPage => {
-        return lastPage.nextPage;
+        if (!!lastPage.data.data.collection.links[0].prompt) {
+          return lastPage.nextPage;
+        }
       },
     },
   );
