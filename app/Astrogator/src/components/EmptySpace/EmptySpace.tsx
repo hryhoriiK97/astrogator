@@ -9,7 +9,7 @@ const EmptySpace: FC<EmptySpaceProps> = ({height, isLoaderShown}) => {
     <View style={styles({height}).container}>
       {isLoaderShown && (
         <ActivityIndicator
-          size={'large'}
+          size={'small'}
           color={AstrogatorColor.VenetianNights}
         />
       )}
