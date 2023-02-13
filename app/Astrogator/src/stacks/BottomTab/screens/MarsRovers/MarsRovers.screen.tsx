@@ -2,7 +2,7 @@ import {
   Divider,
   DividerVariant,
   LoadingScreen,
-  MarsRoverItem,
+  MarsRoverWidget,
   Raleway,
   Typography,
 } from '@astrogator/common';
@@ -65,7 +65,7 @@ const MarsRoversScreen: FC = () => {
 
   const renderItem = ({item}: {item: MarsRoverItemResponse}) => {
     return (
-      <MarsRoverItem
+      <MarsRoverWidget
         name={item.name}
         imageSource={marsRoverImages[item.name.toLowerCase() as MarsRover]}
         onPress={() => {

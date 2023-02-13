@@ -1,6 +1,6 @@
-import {MarsRoverItemProps} from './MarsRoverItem.props';
+import {MarsRoverWidgetProps} from './MarsRoverWidget.props';
 
-export const marsRoverItemPropsMock: MarsRoverItemProps = {
+export const marsRoverWidgetPropsMock: MarsRoverWidgetProps = {
   name: 'Spirit',
   imageSource: require('../../../assets/imgs/mars-rover.webp'),
   onPress: () => console.log('onPress is pressed'),
