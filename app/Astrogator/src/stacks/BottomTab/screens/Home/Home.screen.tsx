@@ -92,7 +92,18 @@ const HomeScreen: FC = () => {
           <FlashList
             data={apodData.reverse()}
             renderItem={renderItem}
-            ListHeaderComponent={<HomeHeader />}
+            ListHeaderComponent={
+              <HomeHeader
+                onDatePicking={selectedDate => {
+                  navigation.navigate('ApodStack', {
+                    screen: 'ApodScreen',
+                    params: {
+                      apodDate: format(selectedDate, 'yyyy-MM-dd'),
+                    },
+                  });
+                }}
+              />
+            }
             ListFooterComponent={<EmptySpace />}
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={renderItemSeparator}

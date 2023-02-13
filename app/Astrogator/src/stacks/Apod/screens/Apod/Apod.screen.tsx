@@ -10,7 +10,7 @@ import {NASA_API_KEY} from '@env';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {format, isFuture, isToday} from 'date-fns';
-import React, {FC, useCallback, useRef, useState} from 'react';
+import React, {FC, useCallback, useRef} from 'react';
 import {
   Dimensions,
   Platform,
@@ -19,7 +19,6 @@ import {
   StatusBar,
   View,
 } from 'react-native';
-import DatePicker from 'react-native-date-picker';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {useQuery} from 'react-query';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
@@ -48,8 +47,7 @@ const ApodScreen: FC = () => {
 
   const {apodDate} = route.params;
 
-  const [selectedDate, setSelectedDate] = useState(new Date(apodDate));
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const selectedApodDate = new Date(apodDate);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -70,8 +68,8 @@ const ApodScreen: FC = () => {
   } = useQuery(ApodScreenQueryKey.Apod, () =>
     apodAxiosInstance.get(
       `/planetary/apod?api_key=${NASA_API_KEY}${
-        !isToday(selectedDate) && !isFuture(selectedDate)
-          ? '&date=' + format(selectedDate, 'yyyy-MM-dd')
+        !isToday(selectedApodDate) && !isFuture(selectedApodDate)
+          ? '&date=' + format(selectedApodDate, 'yyyy-MM-dd')
           : ''
       }`,
     ),
@@ -131,7 +129,6 @@ const ApodScreen: FC = () => {
             </Typography>
           </View>
           <ImageActionsTab
-            onDatePickerButtonPress={() => setShowDatePicker(true)}
             onMagnifierButtonPress={() =>
               navigation.navigate('FullImageStack', {
                 screen: 'FullImageScreen',
@@ -158,24 +155,6 @@ const ApodScreen: FC = () => {
             </Typography>
           )}
         </Typography>
-        {/*@ts-ignore*/}
-        <DatePicker
-          modal
-          mode={'date'}
-          androidVariant={'iosClone'}
-          minimumDate={new Date('1995-06-16')}
-          open={showDatePicker}
-          date={selectedDate}
-          maximumDate={new Date()}
-          onConfirm={async (date: Date) => {
-            setShowDatePicker(false);
-            await setSelectedDate(date);
-            await apodRefetch({queryKey: ApodScreenQueryKey.Apod});
-          }}
-          onCancel={() => {
-            setShowDatePicker(false);
-          }}
-        />
         <BottomSheetModal
           ref={bottomSheetModalRef}
           handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
