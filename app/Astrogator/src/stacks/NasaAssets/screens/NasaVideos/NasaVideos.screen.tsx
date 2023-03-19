@@ -1,26 +1,22 @@
-import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
-import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {
+  ApodWidget,
+  Divider,
+  DividerVariant,
+  LoadingScreen,
+} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
-import React, {FC, useCallback, useRef, useState} from 'react';
+import React, {FC} from 'react';
 import {View} from 'react-native';
 import {useInfiniteQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
-import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
-import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
 import {EmptySpace} from '../../../../components/EmptySpace';
-import {NasaAssetItemModal} from '../../../../components/NasaAssetItemModal';
-import {commonStyles} from '../../../../theming/commonStyles';
-import {
-  NasaAssetItemData,
-  NasaAssetItemResponse,
-} from '../../../../types/NasaAssetItemResponse';
-import {getBottomModalSnapPoint} from '../../../../utils/getBottomModalSnapPoint';
+import {NasaAssetItemResponse} from '../../../../types/NasaAssetItemResponse';
+import {NasaAssetDetailsStackRoutes} from '../../../NasaAssetDetails/NasaAssetDetails.routes';
 import {
   RootStackNavigationProp,
   RootStackRoutes,
 } from '../../../Root/Root.routes';
-import {SelectedVideoStackRoutes} from '../../../SelectedVideo/SelectedVideo.routes';
 import {styles} from './NasaVideos.styled';
 
 enum NasaVideosScreenQueryKey {
@@ -65,19 +61,6 @@ const NasaVideosScreen: FC = () => {
     }
   };
 
-  const [selectedNasaVideoData, setSelectedNasaVideoData] =
-    useState<NasaAssetItemData | null>(null);
-
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const handleCloseModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.dismiss();
-  }, []);
-
   if (isNasaVideosFetchedAfterMount && isNasaVideosLoading) {
     return <LoadingScreen />;
   }
@@ -89,23 +72,26 @@ const NasaVideosScreen: FC = () => {
   const renderItem = ({item}: {item: NasaAssetItemResponse}) => {
     const [imagePreview] = item.links;
     return (
-      <NasaAssetItem
+      <ApodWidget
+        title={item.data[0].title}
+        date={item.data[0].date_created}
+        author={item.data[0].secondary_creator || '-'}
         imageSource={{uri: imagePreview.href}}
         defaultSource={require('../../../../../assets/images/apod-tile.webp')}
-        onMoreInfoPress={() => {
-          setSelectedNasaVideoData(item.data[0]);
-          handlePresentModalPress();
-        }}
         onPress={() => {
-          navigation.navigate(RootStackRoutes.SelectedVideoStack, {
-            screen: SelectedVideoStackRoutes.SelectedVideoScreen,
+          navigation.navigate(RootStackRoutes.NasaAssetDetailsStack, {
+            screen: NasaAssetDetailsStackRoutes.NasaAssetDetailsScreen,
             params: {
-              videoCollectionUri: item.href,
+              nasaAssetItem: item,
             },
           });
         }}
       />
     );
+  };
+
+  const renderItemSeparator = () => {
+    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
   };
 
   return (
@@ -116,7 +102,7 @@ const NasaVideosScreen: FC = () => {
         showsVerticalScrollIndicator={false}
         estimatedItemSize={145}
         renderItem={renderItem}
-        numColumns={2}
+        ItemSeparatorComponent={renderItemSeparator}
         ListFooterComponent={
           <EmptySpace
             height={90}
@@ -126,24 +112,6 @@ const NasaVideosScreen: FC = () => {
         onEndReached={loadNextPageData}
         onEndReachedThreshold={0.2}
       />
-
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
-        backdropComponent={props => (
-          <CustomBottomSheetBackdrop
-            {...props}
-            onPress={handleCloseModalPress}
-          />
-        )}
-        backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={[
-          getBottomModalSnapPoint(selectedNasaVideoData?.description.length),
-        ]}
-        enableOverDrag={false}
-        enableDismissOnClose={true}>
-        <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />
-      </BottomSheetModal>
     </View>
   );
 };

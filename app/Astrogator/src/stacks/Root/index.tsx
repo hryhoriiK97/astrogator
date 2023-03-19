@@ -4,6 +4,7 @@ import ApodStack from '../Apod';
 import BottomTabStack from '../BottomTab';
 import FullImageStack from '../FullImage';
 import MarsRoversPhotosStack from '../MarsRoversPhotos';
+import NasaAssetDetailsStack from '../NasaAssetDetails';
 import SelectedVideoStack from '../SelectedVideo';
 import {RootStackRoutes} from './Root.routes';
 import WelcomeScreen from './screens/Welcome/Welcome.screen';
@@ -33,6 +34,11 @@ const RootStack: FC = () => {
         name={RootStackRoutes.MarsRoversPhotosStack}
         options={{animation: 'slide_from_right'}}
         component={MarsRoversPhotosStack}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.NasaAssetDetailsStack}
+        options={{animation: 'slide_from_right'}}
+        component={NasaAssetDetailsStack}
       />
       <Stack.Screen
         name={RootStackRoutes.SelectedVideoStack}

@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AstrogatorColor.Black,
+    paddingHorizontal: 16 * bp,
   },
   contentContainerStyle: {
     backgroundColor: AstrogatorColor.Black,
