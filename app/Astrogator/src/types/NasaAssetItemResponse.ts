@@ -16,6 +16,6 @@ export interface NasaAssetItemResponse {
   links: Array<{
     href: string;
     rel: string;
-    render: string;
+    prompt: string;
   }>;
 }

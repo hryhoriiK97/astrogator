@@ -3,31 +3,24 @@ import {getRelativeUnits} from '../../utils/getRelativeUnits';
 
 const {bp} = getRelativeUnits();
 
-export const styles = ({
-  indicatorValue,
-  loadingIndicatorHeight,
-}: {
-  indicatorValue?: number;
-  loadingIndicatorHeight?: number;
-}) =>
-  StyleSheet.create({
-    imageWrapper: {
-      width: '100%',
-    },
-    imageIndicatorWrapper: {
-      width: '100%',
-      height: loadingIndicatorHeight! * bp,
-    },
-    indicator: {
-      width: `${indicatorValue}%`,
-      height: `100%`,
-      backgroundColor: 'red',
-    },
-    image: {
-      width: '100%',
-      height: 300 * bp,
-    },
-    imageInfoWrapper: {
-      marginBottom: 30 * bp,
-    },
-  });
+export const styles = StyleSheet.create({
+  imageWrapper: {
+    position: 'relative',
+    width: '100%',
+  },
+  image: {
+    position: 'relative',
+    width: '100%',
+    overflow: 'hidden',
+    height: 300 * bp,
+  },
+  loaderWrapper: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    top: 0,
+    left: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

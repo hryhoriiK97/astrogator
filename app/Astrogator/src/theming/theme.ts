@@ -5,4 +5,5 @@ export enum AstrogatorColor {
   VenetianNights = '#724FFF',
   Green = '#66FF00',
   Red = '#D10000',
+  Silver = '#CACACA',
 }

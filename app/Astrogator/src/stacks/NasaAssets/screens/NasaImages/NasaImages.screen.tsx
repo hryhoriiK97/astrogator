@@ -1,19 +1,17 @@
-import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
-import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {
+  ApodWidget,
+  Divider,
+  DividerVariant,
+  LoadingScreen,
+} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
-import React, {FC, useCallback, useRef, useState} from 'react';
+import React, {FC} from 'react';
 import {View} from 'react-native';
-import {useQuery} from 'react-query';
+import {useInfiniteQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
-import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
-import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
-import NasaAssetItemModal from '../../../../components/NasaAssetItemModal/NasaAssetItemModal';
-import {commonStyles} from '../../../../theming/commonStyles';
-import {
-  NasaAssetItemData,
-  NasaAssetItemResponse,
-} from '../../../../types/NasaAssetItemResponse';
+import {EmptySpace} from '../../../../components/EmptySpace';
+import {NasaAssetItemResponse} from '../../../../types/NasaAssetItemResponse';
 import {RootStackNavigationProp} from '../../../Root/Root.routes';
 import {styles} from './NasaImages.styled';
 
@@ -24,55 +22,73 @@ enum NasaImagesScreenQueryKey {
 const NasaImagesScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const {
-    data: imagesResponse,
-    isLoading: isImagesLoading,
+    data: nasaImagesResponse,
+    isLoading: isNasaImagesLoading,
+    fetchNextPage: fetchNasaImagesNextPage,
+    hasNextPage: hasNasaImagesNextPage,
+    isFetchedAfterMount: isNasaImagesFetchedAfterMount,
+    isFetchingNextPage: isNasaImagesFetchingNextPage,
     isError: isImagesRoversError,
     refetch: imagesRefetch,
-    isRefetching: isImagesRefetching,
-  } = useQuery(NasaImagesScreenQueryKey.NasaImages, () =>
-    nasaAssetsAxiosInstance.get(`/search?media_type=image`),
+    isRefetching: isNasaImagesRefetching,
+  } = useInfiniteQuery(
+    NasaImagesScreenQueryKey.NasaImages,
+    async ({pageParam = 1}) => {
+      const data = await nasaAssetsAxiosInstance.get(
+        `/search?media_type=image&page=${pageParam}`,
+      );
+      return {
+        data: data,
+        nextPage: pageParam + 1,
+      };
+    },
+    {
+      getNextPageParam: lastPage => {
+        if (!!lastPage.data.data.collection.links[0].prompt) {
+          return lastPage.nextPage;
+        }
+      },
+    },
   );
 
-  const [selectedNasaImageData, setSelectedNasaImageData] =
-    useState<NasaAssetItemData | null>(null);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const loadNextPageData = () => {
+    if (hasNasaImagesNextPage) {
+      fetchNasaImagesNextPage();
+    }
+  };
 
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const handleCloseModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.dismiss();
-  }, []);
-
-  if (isImagesLoading || isImagesRefetching) {
+  if (isNasaImagesFetchedAfterMount && isNasaImagesLoading) {
     return <LoadingScreen />;
   }
 
-  const nasaImagesData: NasaAssetItemResponse[] =
-    imagesResponse?.data.collection.items;
+  const nasaImagesData: NasaAssetItemResponse[] = nasaImagesResponse?.pages
+    .length
+    ? nasaImagesResponse.pages.flatMap(page => page.data.data.collection.items)
+    : [];
 
   const renderItem = ({item}: {item: NasaAssetItemResponse}) => {
     const [imagePreview] = item.links;
     return (
-      <NasaAssetItem
+      <ApodWidget
         imageSource={{uri: imagePreview.href}}
-        defaultSource={require('../../../../../assets/images/apod-tile.webp')}
         title={item.data[0].title}
+        date={item.data[0].date_created}
+        author={item.data[0].secondary_creator!}
+        defaultSource={require('../../../../../assets/images/apod-tile.webp')}
         onPress={() => {
-          navigation.navigate('FullImageStack', {
-            screen: 'FullImageScreen',
+          navigation.navigate('NasaAssetDetailsStack', {
+            screen: 'NasaAssetDetailsScreen',
             params: {
-              photoUri: imagePreview.href,
+              nasaAssetItem: item,
             },
           });
         }}
-        onLongPress={() => {
-          setSelectedNasaImageData(item.data[0]);
-          handlePresentModalPress();
-        }}
       />
     );
+  };
+
+  const renderItemSeparator = () => {
+    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
   };
 
   return (
@@ -83,23 +99,16 @@ const NasaImagesScreen: FC = () => {
         showsVerticalScrollIndicator={false}
         estimatedItemSize={145}
         renderItem={renderItem}
-        numColumns={2}
-      />
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
-        backdropComponent={props => (
-          <CustomBottomSheetBackdrop
-            {...props}
-            onPress={handleCloseModalPress}
+        ItemSeparatorComponent={renderItemSeparator}
+        ListFooterComponent={
+          <EmptySpace
+            height={90}
+            isLoaderShown={isNasaImagesFetchingNextPage}
           />
-        )}
-        backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={['50%']}
-        enableOverDrag={false}
-        enableDismissOnClose={true}>
-        <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
-      </BottomSheetModal>
+        }
+        onEndReached={loadNextPageData}
+        onEndReachedThreshold={0.2}
+      />
     </View>
   );
 };

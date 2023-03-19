@@ -2,7 +2,7 @@ import {
   Divider,
   DividerVariant,
   LoadingScreen,
-  MarsRoverItem,
+  MarsRoverWidget,
   Raleway,
   Typography,
 } from '@astrogator/common';
@@ -10,11 +10,13 @@ import {NASA_API_KEY} from '@env';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
+import {FlatList, ImageBackground, View} from 'react-native';
 import {useQuery} from 'react-query';
+import Background from '../../../../../assets/images/Group.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
+import {EmptySpace} from '../../../../components/EmptySpace';
 import {MarsRoverModal} from '../../../../components/MarsRoverModal';
 import {commonStyles} from '../../../../theming/commonStyles';
 import {MarsRoverItemResponse} from '../../../../types/MarsRoverItemResponse';
@@ -63,7 +65,7 @@ const MarsRoversScreen: FC = () => {
 
   const renderItem = ({item}: {item: MarsRoverItemResponse}) => {
     return (
-      <MarsRoverItem
+      <MarsRoverWidget
         name={item.name}
         imageSource={marsRoverImages[item.name.toLowerCase() as MarsRover]}
         onPress={() => {
@@ -88,19 +90,37 @@ const MarsRoversScreen: FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.contentContainerStyle}
-        ListHeaderComponent={
-          <Typography variant={Raleway.Bold} style={styles.title}>
-            Mars Rovers
-          </Typography>
-        }
-        data={marsRovesData}
-        renderItem={renderItem}
-        bounces={false}
-        ItemSeparatorComponent={renderItemSeparator}
-      />
+    <>
+      <ImageBackground
+        source={Background}
+        resizeMode={'cover'}
+        progressiveRenderingEnabled={true}
+        resizeMethod={'resize'}
+        style={styles.backgroundImage}
+        imageStyle={{width: '100%', height: '100%'}}>
+        <View style={styles.backdropWrapper} />
+        <View style={styles.innerWrapper}>
+          <FlatList
+            contentContainerStyle={styles.contentContainerStyle}
+            ListFooterComponent={<EmptySpace height={170} />}
+            ListHeaderComponent={
+              <View style={styles.header}>
+                <Typography variant={Raleway.Bold} style={styles.title}>
+                  Mars Rovers
+                </Typography>
+                <Divider variant={DividerVariant.Divider_8_Vertical} />
+                <Typography style={styles.subtitle}>
+                  Explore space managing updates directly from NASA
+                </Typography>
+              </View>
+            }
+            data={marsRovesData}
+            renderItem={renderItem}
+            bounces={false}
+            ItemSeparatorComponent={renderItemSeparator}
+          />
+        </View>
+      </ImageBackground>
       <BottomSheetModal
         ref={bottomSheetModalRef}
         handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
@@ -116,7 +136,7 @@ const MarsRoversScreen: FC = () => {
         enableDismissOnClose={true}>
         <MarsRoverModal rover={selectedRover!} />
       </BottomSheetModal>
-    </SafeAreaView>
+    </>
   );
 };
 

@@ -1,23 +1,21 @@
 import React, {FC, useState} from 'react';
-import {View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import LinearGradient from 'react-native-linear-gradient';
 import {SafeImageProps} from './SafeImage.props';
 import {styles} from './SafeImage.styled';
 
 const SafeImage: FC<SafeImageProps> = ({
   source,
   defaultSource,
-  linearGradientColors,
   imageStyle,
   imageWrapperStyle,
-  loadingIndicatorHeight = 10,
+  children,
 }) => {
   const [indicatorLoadingValue, setIndicatorLoadingValue] = useState(0);
   return (
-    <View style={[styles({}).imageWrapper, imageWrapperStyle]}>
+    <View style={[styles.imageWrapper, imageWrapperStyle]}>
       <FastImage
-        style={[styles({}).image, imageStyle]}
+        style={[styles.image, imageStyle]}
         source={source}
         defaultSource={defaultSource}
         resizeMode={FastImage.resizeMode.cover}
@@ -30,20 +28,12 @@ const SafeImage: FC<SafeImageProps> = ({
           }
         }}
       />
-      {loadingIndicatorHeight &&
-        loadingIndicatorHeight > 0 &&
-        linearGradientColors && (
-          <View
-            style={
-              styles({loadingIndicatorHeight: loadingIndicatorHeight!})
-                .imageIndicatorWrapper
-            }>
-            <LinearGradient
-              colors={linearGradientColors}
-              style={styles({indicatorValue: indicatorLoadingValue}).indicator}
-            />
-          </View>
-        )}
+      {indicatorLoadingValue < 100 && (
+        <View style={styles.loaderWrapper}>
+          <ActivityIndicator />
+        </View>
+      )}
+      {children}
     </View>
   );
 };

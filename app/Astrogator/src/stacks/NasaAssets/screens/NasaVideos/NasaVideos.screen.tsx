@@ -1,24 +1,22 @@
-import {LoadingScreen, NasaAssetItem} from '@astrogator/common';
-import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {
+  ApodWidget,
+  Divider,
+  DividerVariant,
+  LoadingScreen,
+} from '@astrogator/common';
 import {useNavigation} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
-import React, {FC, useCallback, useRef, useState} from 'react';
+import React, {FC} from 'react';
 import {View} from 'react-native';
-import {useQuery} from 'react-query';
+import {useInfiniteQuery} from 'react-query';
 import {nasaAssetsAxiosInstance} from '../../../../api/nasaAssetsAxiosInstance';
-import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
-import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
-import {NasaAssetItemModal} from '../../../../components/NasaAssetItemModal';
-import {commonStyles} from '../../../../theming/commonStyles';
-import {
-  NasaAssetItemData,
-  NasaAssetItemResponse,
-} from '../../../../types/NasaAssetItemResponse';
+import {EmptySpace} from '../../../../components/EmptySpace';
+import {NasaAssetItemResponse} from '../../../../types/NasaAssetItemResponse';
+import {NasaAssetDetailsStackRoutes} from '../../../NasaAssetDetails/NasaAssetDetails.routes';
 import {
   RootStackNavigationProp,
   RootStackRoutes,
 } from '../../../Root/Root.routes';
-import {SelectedVideoStackRoutes} from '../../../SelectedVideo/SelectedVideo.routes';
 import {styles} from './NasaVideos.styled';
 
 enum NasaVideosScreenQueryKey {
@@ -30,54 +28,70 @@ const NasaVideosScreen: FC = () => {
   const {
     data: nasaVideosResponse,
     isLoading: isNasaVideosLoading,
-    isError: isNasaVideosRoversError,
+    fetchNextPage: fetchNasaVideosNextPage,
+    hasNextPage: hasNasaVideosNextPage,
+    isFetchedAfterMount: isNasaVideosFetchedAfterMount,
+    isFetchingNextPage: isNasaVideosFetchingNextPage,
+    isError: isNasaVideosError,
     refetch: nasaVideosRefetch,
     isRefetching: isNasaVideosRefetching,
-  } = useQuery(NasaVideosScreenQueryKey.NasaVideos, () =>
-    nasaAssetsAxiosInstance.get(`/search?media_type=video`),
+  } = useInfiniteQuery(
+    NasaVideosScreenQueryKey.NasaVideos,
+    async ({pageParam = 1}) => {
+      const data = await nasaAssetsAxiosInstance.get(
+        `/search?media_type=video&page=${pageParam}`,
+      );
+      return {
+        data: data,
+        nextPage: pageParam + 1,
+      };
+    },
+    {
+      getNextPageParam: lastPage => {
+        if (!!lastPage.data.data.collection.links[0].prompt) {
+          return lastPage.nextPage;
+        }
+      },
+    },
   );
 
-  const [selectedNasaVideoData, setSelectedNasaVideoData] =
-    useState<NasaAssetItemData | null>(null);
+  const loadNextPageData = () => {
+    if (hasNasaVideosNextPage) {
+      fetchNasaVideosNextPage();
+    }
+  };
 
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const handleCloseModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.dismiss();
-  }, []);
-
-  if (isNasaVideosLoading || isNasaVideosRefetching) {
+  if (isNasaVideosFetchedAfterMount && isNasaVideosLoading) {
     return <LoadingScreen />;
   }
-
-  const nasaVideosData: NasaAssetItemResponse[] =
-    nasaVideosResponse?.data.collection.items;
+  const nasaVideosData: NasaAssetItemResponse[] = nasaVideosResponse?.pages
+    .length
+    ? nasaVideosResponse.pages.flatMap(page => page.data.data.collection.items)
+    : [];
 
   const renderItem = ({item}: {item: NasaAssetItemResponse}) => {
     const [imagePreview] = item.links;
     return (
-      <NasaAssetItem
+      <ApodWidget
+        title={item.data[0].title}
+        date={item.data[0].date_created}
+        author={item.data[0].secondary_creator || '-'}
         imageSource={{uri: imagePreview.href}}
         defaultSource={require('../../../../../assets/images/apod-tile.webp')}
-        title={item.data[0].title}
         onPress={() => {
-          navigation.navigate(RootStackRoutes.SelectedVideoStack, {
-            screen: SelectedVideoStackRoutes.SelectedVideoScreen,
+          navigation.navigate(RootStackRoutes.NasaAssetDetailsStack, {
+            screen: NasaAssetDetailsStackRoutes.NasaAssetDetailsScreen,
             params: {
-              videoCollectionUri: item.href,
+              nasaAssetItem: item,
             },
           });
         }}
-        onLongPress={() => {
-          setSelectedNasaVideoData(item.data[0]);
-          handlePresentModalPress();
-        }}
       />
     );
+  };
+
+  const renderItemSeparator = () => {
+    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
   };
 
   return (
@@ -88,24 +102,16 @@ const NasaVideosScreen: FC = () => {
         showsVerticalScrollIndicator={false}
         estimatedItemSize={145}
         renderItem={renderItem}
-        numColumns={2}
-      />
-
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
-        backdropComponent={props => (
-          <CustomBottomSheetBackdrop
-            {...props}
-            onPress={handleCloseModalPress}
+        ItemSeparatorComponent={renderItemSeparator}
+        ListFooterComponent={
+          <EmptySpace
+            height={90}
+            isLoaderShown={isNasaVideosFetchingNextPage}
           />
-        )}
-        backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={['50%']}
-        enableOverDrag={false}
-        enableDismissOnClose={true}>
-        <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />
-      </BottomSheetModal>
+        }
+        onEndReached={loadNextPageData}
+        onEndReachedThreshold={0.2}
+      />
     </View>
   );
 };

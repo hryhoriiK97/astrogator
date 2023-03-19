@@ -10,12 +10,15 @@ import {
 } from '@astrogator/common';
 import {NASA_API_KEY} from '@env';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {BlurView} from '@react-native-community/blur';
+import {useHeaderHeight} from '@react-navigation/elements';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlashList} from '@shopify/flash-list';
 import React, {FC, useCallback, useMemo, useRef, useState} from 'react';
-import {Pressable, StatusBar, View} from 'react-native';
+import {ImageBackground, Pressable, View} from 'react-native';
 import {Picker} from 'react-native-wheel-pick';
 import {useQuery} from 'react-query';
+import Background from '../../../../../assets/images/Group.png';
 import {apodAxiosInstance} from '../../../../api/apodAxiosInstance';
 import {CustomBottomSheetBackdrop} from '../../../../components/CustomBottomSheetBackdrop';
 import {CustomBottomSheetModalBackground} from '../../../../components/CustomBottomSheetModalBackground';
@@ -37,8 +40,7 @@ enum MarsRoverPhotosQueryKey {
 
 const MarsRoverPhotosScreen: FC = () => {
   const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
-  const {navigate, goBack} =
-    useNavigation<MarsRoversPhotosStackNavigationProp>();
+  const {navigate} = useNavigation<MarsRoversPhotosStackNavigationProp>();
 
   const route =
     useRoute<
@@ -47,6 +49,8 @@ const MarsRoverPhotosScreen: FC = () => {
   const {rover} = route.params;
 
   const pickerData = ['All', ...rover.cameras.map(camera => camera.name)];
+
+  const headerHeight = useHeaderHeight();
 
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -88,7 +92,7 @@ const MarsRoverPhotosScreen: FC = () => {
 
   const renderItem = ({item}: {item: MarsRoverPhotoItemResponse}) => {
     return (
-      <View style={styles.renderItemWrapper}>
+      <View style={styles().renderItemWrapper}>
         <MarsRoverPhotoItem
           imageSource={{uri: replaceHttpWithHttps(item.img_src)}}
           defaultSource={require('../../../../../assets/images/apod-tile.webp')}
@@ -120,8 +124,9 @@ const MarsRoverPhotosScreen: FC = () => {
 
   return (
     <>
-      <View style={styles.wrapper}>
-        <StatusBar barStyle="light-content" />
+      <ImageBackground source={Background} style={styles(headerHeight).wrapper}>
+        <View style={styles().backdropWrapper} />
+        <BlurView blurType={'dark'} blurAmount={2} style={styles().blurView} />
         <FlashList
           ref={flashListRef}
           ListHeaderComponent={
@@ -129,7 +134,6 @@ const MarsRoverPhotosScreen: FC = () => {
               rover={rover}
               currentMarsSol={currentMarsSol}
               selectedCamera={selectedCamera}
-              onBackButtonPress={goBack}
               onFilterButtonPress={handlePresentModalPress}
             />
           }
@@ -142,14 +146,14 @@ const MarsRoverPhotosScreen: FC = () => {
               </View>
             ) : null
           }
-          ListFooterComponent={<View style={styles.footer} />}
+          ListFooterComponent={<View style={styles().footer} />}
           showsVerticalScrollIndicator={false}
           data={marsRoverPhotosData}
           renderItem={renderItem}
           ItemSeparatorComponent={renderSeparatorItem}
           estimatedItemSize={355.5}
         />
-      </View>
+      </ImageBackground>
       <BottomSheetModal
         ref={bottomSheetModalRef}
         backdropComponent={props => (
@@ -163,9 +167,9 @@ const MarsRoverPhotosScreen: FC = () => {
         snapPoints={bottomSheetSnapPoints}
         enableOverDrag={false}
         enableDismissOnClose={true}>
-        <View style={styles.modalContainer}>
+        <View style={styles().modalContainer}>
           <Typography
-            style={styles.pickerTitle}
+            style={styles().pickerTitle}
             variant={Raleway.Bold}
             color={AstrogatorColor.White}>
             Provide Mars Sol and Camera Type
@@ -180,7 +184,7 @@ const MarsRoverPhotosScreen: FC = () => {
             minValue={0}
           />
           <Picker
-            style={styles.picker}
+            style={styles().picker}
             pickerData={pickerData}
             selectedValue={pickerData[0]}
             onValueChange={(value): void =>
@@ -188,14 +192,14 @@ const MarsRoverPhotosScreen: FC = () => {
             }
           />
           <Pressable
-            style={[styles.getButton, isError && styles.disabledGetButton]}
+            style={[styles().getButton, isError && styles().disabledGetButton]}
             disabled={isError}
             onPress={(): void => {
               marsRoverPhotosRefetch({
                 queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
               });
             }}>
-            <Typography style={styles.getButtonTitle}>Get Photos</Typography>
+            <Typography style={styles().getButtonTitle}>Get Photos</Typography>
           </Pressable>
         </View>
       </BottomSheetModal>

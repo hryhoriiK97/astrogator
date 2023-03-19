@@ -1,7 +1,7 @@
-import {Raleway} from '@astrogator/common';
+import {MobilePlatform, Raleway} from '@astrogator/common';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React, {FC} from 'react';
-import {SafeAreaView} from 'react-native';
+import {Platform, SafeAreaView} from 'react-native';
 import {AstrogatorColor} from '../../theming/theme';
 import {NasaAssetsStackRoutes} from './NasaAssets.routes';
 import NasaImagesScreen from './screens/NasaImages/NasaImages.screen';
@@ -16,9 +16,13 @@ const NasaAssetsStack: FC = () => {
         initialRouteName={NasaAssetsStackRoutes.NasaImagesScreen}
         screenOptions={props => {
           return {
-            title: props.route.name === 'NasaImagesStack' ? 'Images' : 'Videos',
+            title:
+              props.route.name === NasaAssetsStackRoutes.NasaImagesScreen
+                ? 'Images'
+                : 'Videos',
             tabBarStyle: {
               backgroundColor: AstrogatorColor.Black,
+              paddingTop: Platform.OS === MobilePlatform.Android ? 30 : 0,
             },
             tabBarIndicatorStyle: {
               backgroundColor: AstrogatorColor.VenetianNights,
@@ -35,7 +39,7 @@ const NasaAssetsStack: FC = () => {
           component={NasaImagesScreen}
         />
         <Stack.Screen
-          name={NasaAssetsStackRoutes.NasaImagesVideos}
+          name={NasaAssetsStackRoutes.NasaVideosScreen}
           component={NasaVideosScreen}
         />
       </Stack.Navigator>

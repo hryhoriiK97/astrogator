@@ -2,10 +2,10 @@ import {Raleway, Typography} from '@astrogator/common';
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import {AstrogatorColor} from '../../theming/theme';
-import {HomeTileModalProps} from './HomeTileModal.props';
-import {styles} from './HomeTileModal.styled';
+import {ApodModalProps} from './ApodModal.props';
+import {styles} from './ApodModal.styled';
 
-const HomeTileModal: FC<HomeTileModalProps> = ({title, description}) => {
+const ApodModal: FC<ApodModalProps> = ({title, description}) => {
   return (
     <View style={styles.container}>
       <Typography
@@ -14,14 +14,9 @@ const HomeTileModal: FC<HomeTileModalProps> = ({title, description}) => {
         style={styles.title}>
         {title}
       </Typography>
-      <Typography
-        variant={Raleway.Bold}
-        color={AstrogatorColor.White}
-        style={styles.description}>
-        {description}
-      </Typography>
+      <Typography style={styles.description}>{description}</Typography>
     </View>
   );
 };
 
-export default HomeTileModal;
+export default ApodModal;

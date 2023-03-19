@@ -7,8 +7,6 @@ const {bp} = getRelativeUnits();
 export const styles = StyleSheet.create({
   screenView: {
     backgroundColor: AstrogatorColor.Black,
-    borderWidth: 2,
-    borderColor: 'red',
   },
   contentContainerStyle: {
     flex: 1,

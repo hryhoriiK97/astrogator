@@ -1,4 +1,4 @@
-import {FastImageProps} from 'react-native-fast-image';
+import {ImageBackgroundProps} from 'react-native';
 
 export enum MarsRover {
   Curiosity = 'curiosity',
@@ -8,7 +8,7 @@ export enum MarsRover {
 }
 
 type MarsRoverImages = {
-  [key in MarsRover]: FastImageProps['source'];
+  [key in MarsRover]: ImageBackgroundProps['source'];
 };
 
 export const marsRoverImages: MarsRoverImages = {

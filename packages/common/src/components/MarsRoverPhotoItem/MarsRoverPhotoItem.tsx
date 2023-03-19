@@ -19,22 +19,20 @@ const MarsRoverPhotoItem: FC<MarsRoverPhotoItemProps> = ({
       <SafeImage
         source={imageSource}
         defaultSource={defaultSource}
-        imageStyle={styles.image}
-        linearGradientColors={['#724FFF', '#724FFF']}
-        loadingIndicatorHeight={3}
-      />
-      <View style={styles.imageInformationWrapper}>
-        <Typography variant={Raleway.Bold} style={styles.dateText}>
-          {`Earth Date: ${earthData} / Martian Sol: ${sol}`}
-        </Typography>
-        <Typography
-          style={styles.cameraName}
-          numberOfLines={1}
-          ellipsizeMode={'tail'}
-          variant={
-            Raleway.Bold
-          }>{`${cameraFullName} (${cameraAbbreviation})`}</Typography>
-      </View>
+        imageStyle={styles.image}>
+        <View style={styles.imageInformationWrapper}>
+          <Typography variant={Raleway.Bold} style={styles.dateText}>
+            {`Earth Date: ${earthData} / Martian Sol: ${sol}`}
+          </Typography>
+          <Typography
+            style={styles.cameraName}
+            numberOfLines={1}
+            ellipsizeMode={'tail'}
+            variant={
+              Raleway.Bold
+            }>{`${cameraFullName} (${cameraAbbreviation})`}</Typography>
+        </View>
+      </SafeImage>
     </Pressable>
   );
 };

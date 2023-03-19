@@ -1,23 +1,24 @@
 import {getRelativeUnits} from '@astrogator/common';
 import {StyleSheet} from 'react-native';
-import {AstrogatorColor} from '../../theming/theme';
 
 const {bp} = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   actionButtonsWrapper: {
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: 15 * bp,
-    right: 15 * bp,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 4 * bp,
+    paddingHorizontal: 8 * bp,
+    width: 100 * bp,
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.11)',
+    borderStyle: 'solid',
+    borderRadius: 8 * bp,
   },
   showMoreButton: {
-    backgroundColor: AstrogatorColor.Black,
-    width: 40 * bp,
-    height: 40 * bp,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20 * bp,
   },
 });
