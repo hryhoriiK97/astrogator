@@ -1,11 +1,24 @@
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
+
+const { width } = Dimensions.get("screen");
 
 const { bp } = getRelativeUnits();
 
 export const styles = (headerHeight?: number) =>
   StyleSheet.create({
+    header: {
+      position: "absolute",
+      top: 50 * bp,
+      width: width * 0.5,
+      borderRadius: 30 * bp,
+      left: 40 * bp,
+      rigth: 40 * bp,
+      height: 60 * bp,
+      backgroundColor: "red",
+      zIndex: 10000,
+    },
     wrapper: {
       position: "relative",
       backgroundColor: AstrogatorColor.Black,

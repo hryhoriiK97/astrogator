@@ -1,10 +1,14 @@
-import {NavigatorScreenParams} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {MarsRoverItemResponse} from '../../types/MarsRoverItemResponse';
-import {MarsFullImageStackParamList} from '../MarsFullImage/MarsFullImage.routes';
+import { NavigatorScreenParams } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MarsRoverItemResponse } from "../../types/MarsRoverItemResponse";
+import { MarsFullImageStackParamList } from "../MarsFullImage/MarsFullImage.routes";
 
 export type MarsRoversPhotosStackParamList = {
-  MarsRoverPhotosScreen: {rover: MarsRoverItemResponse};
+  MarsRoverPhotosScreen: {
+    rover: MarsRoverItemResponse;
+    marsSol?: string | null;
+    camera: string | null;
+  };
   MarsFullImageStack: NavigatorScreenParams<MarsFullImageStackParamList>;
 };
 
@@ -14,6 +18,6 @@ export type MarsRoversPhotosStackNavigationProp =
 export const MarsRoversPhotosStackRoutes: {
   [route in keyof MarsRoversPhotosStackParamList]: route;
 } = {
-  MarsRoverPhotosScreen: 'MarsRoverPhotosScreen',
-  MarsFullImageStack: 'MarsFullImageStack',
+  MarsRoverPhotosScreen: "MarsRoverPhotosScreen",
+  MarsFullImageStack: "MarsFullImageStack",
 };

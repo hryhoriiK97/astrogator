@@ -37,7 +37,7 @@ const HomeScreen: FC = () => {
   } = useQuery(HomeScreenQueryKey.Apod, () =>
     apodAxiosInstance.get(
       `/planetary/apod?start_date=${format(
-        subDays(new Date(), 50),
+        subDays(new Date(), 20),
         "yyyy-MM-dd"
       )}&api_key=${NASA_API_KEY}`
     )

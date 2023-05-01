@@ -1,22 +1,9 @@
-import {
-  Divider,
-  DividerVariant,
-  LoadingScreen,
-  MarsPhotoItem,
-  Raleway,
-  Typography,
-} from "../../../../components";
+import { LoadingScreen, Raleway, Typography } from "../../../../components";
 import { NASA_API_KEY } from "@env";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import React, { FC, useCallback, useMemo, useRef, useState } from "react";
-import {
-  Dimensions,
-  Animated,
-  SafeAreaView,
-  ImageBackground,
-  View,
-} from "react-native";
+import { SafeAreaView, ImageBackground, View } from "react-native";
 import { useQuery } from "react-query";
 import Background from "../../../../../assets/images/Group.png";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
@@ -25,14 +12,9 @@ import { CustomBottomSheetModalBackground } from "../../../../components/CustomB
 import { MarsRoverModal } from "../../../../components/MarsRoverModal";
 import { commonStyles } from "../../../../theming/commonStyles";
 import { MarsRoverItemResponse } from "../../../../types/MarsRoverItemResponse";
-import {
-  RootStackNavigationProp,
-  RootStackRoutes,
-} from "../../../Root/Root.routes";
+import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./MarsRovers.styled";
-import { MarsRover, marsRoverImages } from "./MarsRovers.utils";
 import { MarsRovers } from "../../../../components/MarsRovers";
-const { width } = Dimensions.get("screen");
 
 enum MarsRoverPhotosQueryKey {
   MarsRovers = "MarsRovers",
@@ -40,8 +22,8 @@ enum MarsRoverPhotosQueryKey {
 
 const MarsRoversScreen: FC = () => {
   const { navigate } = useNavigation<RootStackNavigationProp>();
-
-  const scrollX = useRef(new Animated.Value(0)).current;
+  const [selectedCamera, setSelectedCamera] = useState<string | null>(null);
+  const [selectedMarsSol, setSelectedMarsSol] = useState<string | null>();
 
   const {
     data: marsRovesResponse,
@@ -54,8 +36,6 @@ const MarsRoversScreen: FC = () => {
   );
   const [selectedRover, setSelectedRover] =
     useState<MarsRoverItemResponse | null>(null);
-
-    const [pickersData, setPickersData] = useState<string[]>([]);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -90,28 +70,46 @@ const MarsRoversScreen: FC = () => {
         <Typography variant={Raleway.Bold} style={styles.title}>
           Mars Rovers
         </Typography>
-        <MarsRovers marsRoversData={marsRoversData} onRoverItemPress={(rover) => {
+        <MarsRovers
+          marsRoversData={marsRoversData}
+          onRoverItemPress={(rover) => {
             handlePresentModalPress();
             setSelectedRover(rover);
-            setPickersData(["All", ...rover.cameras.map((camera) => camera.name)])
-
-        }} />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
-          backdropComponent={(props) => (
-            <CustomBottomSheetBackdrop
-              {...props}
-              onPress={handleCloseModalPress}
+          }}
+        />
+        {selectedRover && (
+          <BottomSheetModal
+            ref={bottomSheetModalRef}
+            handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
+            backdropComponent={(props) => (
+              <CustomBottomSheetBackdrop
+                {...props}
+                onPress={handleCloseModalPress}
+              />
+            )}
+            backgroundComponent={CustomBottomSheetModalBackground}
+            snapPoints={snapPoints}
+            enableOverDrag={false}
+            enableDismissOnClose={true}
+          >
+            <MarsRoverModal
+              rover={selectedRover}
+              onCameraSelection={setSelectedCamera}
+              onMarsSolSelection={setSelectedMarsSol}
+              onExploreButtonPress={() => {
+                bottomSheetModalRef.current?.dismiss();
+                navigate("MarsRoversPhotosStack", {
+                  screen: "MarsRoverPhotosScreen",
+                  params: {
+                    rover: selectedRover,
+                    marsSol: selectedMarsSol,
+                    camera: selectedCamera,
+                  },
+                });
+              }}
             />
-          )}
-          backgroundComponent={CustomBottomSheetModalBackground}
-          snapPoints={snapPoints}
-          enableOverDrag={false}
-          enableDismissOnClose={true}
-        >
-          <MarsRoverModal rover={selectedRover!} />
-        </BottomSheetModal>
+          </BottomSheetModal>
+        )}
       </SafeAreaView>
     </ImageBackground>
   );
