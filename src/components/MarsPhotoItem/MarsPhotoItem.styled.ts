@@ -46,6 +46,11 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 5 * bp,
     borderBottomRightRadius: 5 * bp,
   },
+  avatarWrapper: {
+    position: "absolute",
+    bottom: 150 * bp,
+    right: 60 * bp,
+  },
   avatar: {
     width: 60 * bp,
     height: 60 * bp,
@@ -53,8 +58,5 @@ export const styles = StyleSheet.create({
     resizeMode: "cover",
     borderWidth: 6 * bp,
     borderColor: "white",
-    position: "absolute",
-    bottom: 150 * bp,
-    right: 60 * bp,
   },
 });

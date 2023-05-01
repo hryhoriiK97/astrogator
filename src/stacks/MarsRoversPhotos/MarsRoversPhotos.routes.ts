@@ -4,11 +4,7 @@ import { MarsRoverItemResponse } from "../../types/MarsRoverItemResponse";
 import { MarsFullImageStackParamList } from "../MarsFullImage/MarsFullImage.routes";
 
 export type MarsRoversPhotosStackParamList = {
-  MarsRoverPhotosScreen: {
-    rover: MarsRoverItemResponse;
-    marsSol?: string | null;
-    camera: string | null;
-  };
+  MarsRoverPhotosScreen: undefined;
   MarsFullImageStack: NavigatorScreenParams<MarsFullImageStackParamList>;
 };
 

@@ -1,6 +1,6 @@
-import { MarsRoverItemResponse } from "../../types/MarsRoverItemResponse";
+import { MarsRoverItemResponse } from "../../../../types/MarsRoverItemResponse";
 
-export interface MarsRoverModalProps {
+export interface MarsRoverModalContentProps {
   rover: MarsRoverItemResponse;
   onCameraSelection: (camera: string) => void;
   onMarsSolSelection: (marsSol: string) => void;

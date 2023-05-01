@@ -14,7 +14,6 @@ import RootStack from "./src/stacks/Root";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { Logs } from "expo";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "react-native";
 
 Logs.enableExpoCliLogging();

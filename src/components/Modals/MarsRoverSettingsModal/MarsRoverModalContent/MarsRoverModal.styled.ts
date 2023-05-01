@@ -1,7 +1,7 @@
-import { AstrogatorColor } from "../../theming/theme";
-import { getRelativeUnits } from "../../utils/getRelativeUnits";
+import { AstrogatorColor } from "../../../../theming/theme";
+import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
-import { Raleway } from "../Typography";
+import { Raleway } from "../../../Typography";
 
 const { bp } = getRelativeUnits();
 

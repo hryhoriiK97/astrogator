@@ -1,15 +1,15 @@
-import { Raleway, Typography } from "../../components/Typography";
-import React, { FC, useState } from "react";
+import { Raleway, Typography } from "../../../Typography";
+import React, { FC } from "react";
 import { Pressable, View } from "react-native";
-import { AstrogatorColor } from "../../theming/theme";
-import { MarsRoverModalProps } from "./MarsRoverModal.props";
+import { AstrogatorColor } from "../../../../theming/theme";
+import { MarsRoverModalContentProps } from "./MarsRoverModalContent.props";
 import { styles } from "./MarsRoverModal.styled";
-import { Divider, DividerVariant } from "../Divider";
-import { DropdownSelector } from "../DropdownSelector";
-import { SafeInputTypeCheck, SafeTextInput } from "../SafeTextInput";
-import { inputErrorTexts } from "../../stacks/MarsRoversPhotos/screens/MarsRoverPhotos/MarsRoverPhotos.utils";
+import { Divider, DividerVariant } from "../../../Divider";
+import { DropdownSelector } from "../../../DropdownSelector";
+import { SafeInputTypeCheck, SafeTextInput } from "../../../SafeTextInput";
+import { inputErrorTexts } from "../../../../stacks/MarsRoversPhotos/screens/MarsRoverPhotos/MarsRoverPhotos.utils";
 
-const MarsRoverModal: FC<MarsRoverModalProps> = ({
+const MarsRoverModalContent: FC<MarsRoverModalContentProps> = ({
   rover,
   onCameraSelection,
   onMarsSolSelection,
@@ -80,7 +80,7 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({
         inputTypeCheckVariant={SafeInputTypeCheck.Number}
         setTextValue={onMarsSolSelection}
         errorTexts={inputErrorTexts}
-        placeholder={"Please, type mars sol"}
+        placeholder={"Type mars sol"}
       />
       <Divider variant={DividerVariant.Divider_10_Vertical} />
       <DropdownSelector
@@ -96,4 +96,4 @@ const MarsRoverModal: FC<MarsRoverModalProps> = ({
   );
 };
 
-export default MarsRoverModal;
+export default MarsRoverModalContent;
