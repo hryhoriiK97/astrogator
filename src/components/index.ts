@@ -1,5 +1,5 @@
 export * from "./ApodWidget";
-export * from "./Divider";
+export * from "./Spacer";
 export * from "./HomeTile";
 export * from "./LoadingScreen";
 export * from "./MarsPhotoItem";

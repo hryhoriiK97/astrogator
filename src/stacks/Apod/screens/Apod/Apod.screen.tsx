@@ -1,6 +1,6 @@
 import {
-  Divider,
-  DividerVariant,
+  Spacer,
+  SpacerVariant,
   LoadingScreen,
   SafeImage,
   Typography,
@@ -128,7 +128,7 @@ const ApodScreen: FC = () => {
             <Typography style={styles.subheaderText}>
               Author: {apodData.copyright || "-"}
             </Typography>
-            <Divider variant={DividerVariant.Divider_2_Vertical} />
+            <Spacer variant={SpacerVariant.Spacer_2_Vertical} />
             <Typography style={styles.subheaderText}>
               Date: {apodData.date}
             </Typography>

@@ -1,7 +1,7 @@
 import {
   ApodWidget,
-  Divider,
-  DividerVariant,
+  Spacer,
+  SpacerVariant,
   LoadingScreen,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -112,7 +112,7 @@ const NasaImagesScreen: FC = () => {
   };
 
   const renderItemSeparator = () => {
-    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
+    return <Spacer variant={SpacerVariant.Spacer_10_Vertical} />;
   };
 
   return (

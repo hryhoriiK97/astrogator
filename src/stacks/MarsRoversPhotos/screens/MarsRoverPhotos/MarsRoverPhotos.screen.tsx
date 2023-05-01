@@ -1,6 +1,6 @@
 import {
-  Divider,
-  DividerVariant,
+  Spacer,
+  SpacerVariant,
   LoadingScreen,
   MarsPhotoItem,
 } from "../../../../components";
@@ -122,7 +122,7 @@ const MarsRoverPhotosScreen: FC = () => {
   };
 
   const renderItemSeparator = () => {
-    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
+    return <Spacer variant={SpacerVariant.Spacer_10_Vertical} />;
   };
   return (
     <>

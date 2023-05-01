@@ -4,7 +4,7 @@ import { Pressable, View } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { MarsRoverModalContentProps } from "./MarsRoverModalContent.props";
 import { styles } from "./MarsRoverModal.styled";
-import { Divider, DividerVariant } from "../../../Divider";
+import { Spacer, SpacerVariant } from "../../../Spacer";
 import { DropdownSelector } from "../../../DropdownSelector";
 import { SafeInputTypeCheck, SafeTextInput } from "../../../SafeTextInput";
 import { inputErrorTexts } from "../../../../stacks/MarsRoversPhotos/screens/MarsRoverPhotos/MarsRoverPhotos.utils";
@@ -82,13 +82,13 @@ const MarsRoverModalContent: FC<MarsRoverModalContentProps> = ({
         errorTexts={inputErrorTexts}
         placeholder={"Type mars sol"}
       />
-      <Divider variant={DividerVariant.Divider_10_Vertical} />
+      <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
       <DropdownSelector
         data={cameras}
         placeholderText={"Select rover camera"}
         onItemSelection={onCameraSelection}
       />
-      <Divider variant={DividerVariant.Divider_10_Vertical} />
+      <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
       <Pressable onPress={onExploreButtonPress} style={styles.exploreButton}>
         <Typography style={styles.exploreTitle}>Explore</Typography>
       </Pressable>

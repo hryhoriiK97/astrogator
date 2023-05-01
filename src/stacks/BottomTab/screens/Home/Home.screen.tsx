@@ -1,7 +1,7 @@
 import {
   ApodWidget,
-  Divider,
-  DividerVariant,
+  Spacer,
+  SpacerVariant,
   LoadingScreen,
 } from "../../../../components";
 import { useQuery } from "react-query";
@@ -69,7 +69,7 @@ const HomeScreen: FC = () => {
   };
 
   const renderItemSeparator = () => {
-    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
+    return <Spacer variant={SpacerVariant.Spacer_10_Vertical} />;
   };
 
   return (
