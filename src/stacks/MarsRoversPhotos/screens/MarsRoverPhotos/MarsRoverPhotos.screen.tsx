@@ -1,31 +1,31 @@
-import {
-  Spacer,
-  SpacerVariant,
-  LoadingScreen,
-  MarsPhotoItem,
-} from "../../../../components";
 import { NASA_API_KEY } from "@env";
+import React, { FC, useCallback, useRef } from "react";
+import { Animated, Dimensions, StatusBar, View } from "react-native";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-
 import { useNavigation } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
-import React, { FC, useCallback, useRef } from "react";
-import { Dimensions, View } from "react-native";
 import { useQuery } from "react-query";
+
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
 import {
   MarsRoversPhotosStackNavigationProp,
   MarsRoversPhotosStackRoutes,
 } from "../../MarsRoversPhotos.routes";
-import { styles } from "./MarsRoverPhotos.styled";
-import { Animated } from "react-native";
 import {
   MarsRover,
   marsRoverImages,
 } from "../../../BottomTab/screens/MarsRovers/MarsRovers.utils";
+import {
+  Spacer,
+  SpacerVariant,
+  LoadingScreen,
+  MarsPhotoItem,
+  MarsPhotoNavigationTopBar,
+  MarsRoverSettingsModal,
+} from "../../../../components";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
-import { MarsRoverSettingsModal } from "../../../../components/Modals";
+import { styles } from "./MarsRoverPhotos.styled";
 
 const { width } = Dimensions.get("screen");
 
@@ -34,7 +34,8 @@ enum MarsRoverPhotosQueryKey {
 }
 
 const MarsRoverPhotosScreen: FC = () => {
-  const { navigate } = useNavigation<MarsRoversPhotosStackNavigationProp>();
+  const { navigate, goBack } =
+    useNavigation<MarsRoversPhotosStackNavigationProp>();
 
   const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -48,8 +49,6 @@ const MarsRoverPhotosScreen: FC = () => {
   );
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  console.log(selectedCamera, selectedMarsSol, "SELECTEDITEMS");
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -124,30 +123,39 @@ const MarsRoverPhotosScreen: FC = () => {
   const renderItemSeparator = () => {
     return <Spacer variant={SpacerVariant.Spacer_10_Vertical} />;
   };
+
   return (
     <>
-      <View style={styles().header}></View>
-      <Animated.FlatList
-        contentContainerStyle={{ backgroundColor: "white" }}
-        data={marsRoverPhotosData}
-        renderItem={renderItem}
-        pagingEnabled={true}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: true }
-        )}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={renderItemSeparator}
-      />
-      <MarsRoverSettingsModal
-        bottomSheetModalRef={bottomSheetModalRef}
-        onExploreButtonPress={(): void => {
-          marsRoverPhotosRefetch({
-            queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
-          });
-        }}
-      />
+      <StatusBar barStyle={"dark-content"} />
+      <View style={styles.screen}>
+        <MarsPhotoNavigationTopBar
+          onBackButtonPress={goBack}
+          //TODO
+          onListButtonPRess={() => {}}
+        />
+
+        <Animated.FlatList
+          contentContainerStyle={styles.contentContainerStyle}
+          data={marsRoverPhotosData}
+          renderItem={renderItem}
+          pagingEnabled={true}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            { useNativeDriver: true }
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={renderItemSeparator}
+        />
+        <MarsRoverSettingsModal
+          bottomSheetModalRef={bottomSheetModalRef}
+          onExploreButtonPress={(): void => {
+            marsRoverPhotosRefetch({
+              queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
+            });
+          }}
+        />
+      </View>
     </>
   );
 };
