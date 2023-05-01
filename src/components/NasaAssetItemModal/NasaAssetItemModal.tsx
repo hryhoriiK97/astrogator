@@ -1,4 +1,4 @@
-import { Spacer, DividerVariant, Typography } from "../../components";
+import { Spacer, SpacerVariant, Typography } from "../../components";
 import { FlashList } from "@shopify/flash-list";
 import { format } from "date-fns";
 import React, { FC } from "react";
@@ -23,7 +23,7 @@ const NasaAssetItemModal: FC<NasaAssetItemModalProps> = ({
   };
 
   const renderSeparator = () => (
-    <Spacer variant={DividerVariant.Divider_5_Horizontal} />
+    <Spacer variant={SpacerVariant.Spacer_5_Horizontal} />
   );
   return (
     <View style={styles.container}>
