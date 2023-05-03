@@ -1,9 +1,8 @@
 import { NASA_API_KEY } from "@env";
-import React, { FC, useCallback, useRef } from "react";
-import { Animated, Dimensions, StatusBar, View } from "react-native";
+import React, { FC, useCallback, useEffect, useRef } from "react";
+import { Animated, Dimensions, StatusBar, View, FlatList } from "react-native";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
-import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "react-query";
 
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
@@ -37,16 +36,17 @@ const MarsRoverPhotosScreen: FC = () => {
   const { navigate, goBack } =
     useNavigation<MarsRoversPhotosStackNavigationProp>();
 
-  const flashListRef = useRef<FlashList<MarsRoverPhotoItemResponse>>(null);
+  const flatListRef = useRef<FlatList<MarsRoverPhotoItemResponse>>(null);
+
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  const [selectedRover, selectedCamera, selectedMarsSol] = useMarsRoversStore(
-    (state) => [
+  const [selectedRover, selectedCamera, selectedMarsSol, selectedPhotoIndex] =
+    useMarsRoversStore((state) => [
       state.selectedRover,
       state.selectedCamera,
       state.selectedMarsSol,
-    ]
-  );
+      state.selectedPhotoIndex,
+    ]);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -69,6 +69,24 @@ const MarsRoverPhotosScreen: FC = () => {
       }&api_key=${NASA_API_KEY}`
     )
   );
+
+  const getItemLayout = (
+    _: MarsRoverPhotoItemResponse[] | null | undefined,
+    index: number
+  ) => ({
+    length: width,
+    offset: width * index,
+    index,
+  });
+
+  useEffect(() => {
+    if (flatListRef && flatListRef.current && !!selectedPhotoIndex) {
+      flatListRef.current?.scrollToIndex({
+        index: selectedPhotoIndex,
+        animated: false,
+      });
+    }
+  }, [flatListRef, flatListRef.current, selectedPhotoIndex]);
 
   if (isMarsRoverPhotosLoading || isMarsRoverPhotosRefetching) {
     return <LoadingScreen />;
@@ -96,6 +114,8 @@ const MarsRoverPhotosScreen: FC = () => {
     return (
       <MarsPhotoItem
         name={item.rover.name}
+        cameraFullName={item.camera.full_name}
+        cameraAbbreviation={item.camera.name}
         imageSource={{ uri: item.img_src }}
         roverImageSource={
           marsRoverImages[selectedRover?.name.toLowerCase() as MarsRover]
@@ -130,13 +150,18 @@ const MarsRoverPhotosScreen: FC = () => {
       <View style={styles.screen}>
         <MarsPhotoNavigationTopBar
           onBackButtonPress={goBack}
-          //TODO
-          onListButtonPRess={() => {}}
+          onListButtonPRess={() => {
+            navigate("MarsRoverPhotosFullList", {
+              marsPhotos: marsRoverPhotosData,
+            });
+          }}
         />
 
         <Animated.FlatList
+          ref={flatListRef}
           contentContainerStyle={styles.contentContainerStyle}
           data={marsRoverPhotosData}
+          getItemLayout={getItemLayout}
           renderItem={renderItem}
           pagingEnabled={true}
           onScroll={Animated.event(

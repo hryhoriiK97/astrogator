@@ -3,11 +3,11 @@ import React, { FC } from "react";
 import { Pressable, View } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { MarsRoverModalContentProps } from "./MarsRoverModalContent.props";
-import { styles } from "./MarsRoverModal.styled";
 import { Spacer, SpacerVariant } from "../../../Spacer";
 import { DropdownSelector } from "../../../DropdownSelector";
 import { SafeInputTypeCheck, SafeTextInput } from "../../../SafeTextInput";
-import { inputErrorTexts } from "../../../../stacks/MarsRoversPhotos/screens/MarsRoverPhotos/MarsRoverPhotos.utils";
+import { inputErrorTexts } from "./MarsRoverModalContent.utils";
+import { styles } from "./MarsRoverModalContent.styled";
 
 const MarsRoverModalContent: FC<MarsRoverModalContentProps> = ({
   rover,

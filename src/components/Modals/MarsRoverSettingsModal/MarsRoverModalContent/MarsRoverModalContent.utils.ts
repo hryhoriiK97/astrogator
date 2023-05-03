@@ -1,7 +1,7 @@
 import {
   SafeInputErrorTexts,
   SafeInputTypeError,
-} from "../../../../components";
+} from "../../../SafeTextInput";
 
 export const inputErrorTexts: SafeInputErrorTexts = {
   [SafeInputTypeError.Number]: "Please, type only numbers",

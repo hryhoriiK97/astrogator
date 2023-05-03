@@ -1,12 +1,13 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
+import { AstrogatorColor } from "../../theming/theme";
 
 const { bp } = getRelativeUnits();
 
 const { width } = Dimensions.get("screen");
 
-const ITEM_WIDTH = width * 0.76;
-const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
+export const ITEM_WIDTH = width * 0.76;
+export const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,6 +15,24 @@ export const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+  },
+  roverNameWrapper: {
+    paddingVertical: 15 * bp,
+    paddingHorizontal: 10 * bp,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30 * bp,
+    backgroundColor: AstrogatorColor.White,
+    shadowColor: AstrogatorColor.Black,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+
+    elevation: 16,
   },
   outerWrapper: {
     borderRadius: 18,
@@ -48,7 +67,7 @@ export const styles = StyleSheet.create({
   },
   avatarWrapper: {
     position: "absolute",
-    bottom: 150 * bp,
+    bottom: 100 * bp,
     right: 60 * bp,
   },
   avatar: {
