@@ -9,7 +9,6 @@ import React, { FC } from "react";
 import { NASA_API_KEY } from "@env";
 import { useNavigation } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
-import * as Crypto from "expo-crypto";
 import { format, subDays, isToday } from "date-fns";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 import { ImageBackground, View } from "react-native";
@@ -98,9 +97,7 @@ const HomeScreen: FC = () => {
         <FlashList
           data={apods.reverse()}
           renderItem={renderItem}
-          /*Build a new build */
-          // keyExtractor={() => Crypto.randomUUID()}
-          keyExtractor={({ title }) => title}
+          keyExtractor={(item) => item.date}
           ListFooterComponent={<EmptySpace />}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={renderItemSeparator}

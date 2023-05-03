@@ -6,6 +6,11 @@ import { styles } from "./MarsPhotoItem.styled";
 import { Typography } from "../Typography";
 import { Spacer, SpacerVariant } from "../Spacer";
 
+const blurhash =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
+const AnimatedImage = Animated.createAnimatedComponent(Image);
+
 const MarsRoverItem: FC<MarsPhotoItemProps> = ({
   name,
   cameraFullName,
@@ -25,8 +30,9 @@ const MarsRoverItem: FC<MarsPhotoItemProps> = ({
       <Spacer variant={SpacerVariant.Spacer_20_Vertical} />
       <View style={styles.outerWrapper}>
         <View style={styles.innerWrapper}>
-          <Animated.Image
-            source={imageSource!}
+          <AnimatedImage
+            source={imageSource}
+            placeholder={blurhash}
             style={[
               styles.image,
               {
