@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ImageBackground, Pressable, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { Chevron } from "../../../assets/svgs/Chevron";
 import { Image } from "expo-image";
 import { Typography } from "../Typography";
