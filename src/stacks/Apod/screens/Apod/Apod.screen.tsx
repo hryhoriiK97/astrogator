@@ -125,7 +125,11 @@ const ApodScreen: FC = () => {
         <Typography style={styles.title}>{apodData.title}</Typography>
         <View style={styles.subheader}>
           <View style={styles.imageInfoWrapper}>
-            <Typography style={styles.subheaderText}>
+            <Typography
+              style={[styles.subheaderText, styles.authorText]}
+              numberOfLines={2}
+              ellipsizeMode={"tail"}
+            >
               Author: {apodData.copyright || "-"}
             </Typography>
             <Spacer variant={SpacerVariant.Spacer_2_Vertical} />

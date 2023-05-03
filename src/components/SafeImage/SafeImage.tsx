@@ -1,51 +1,28 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { View } from "react-native";
 import { Image, ImageStyle } from "expo-image";
-import { LinearGradient } from "expo-linear-gradient";
+
 import { SafeImageProps } from "./SafeImage.props";
 import { styles } from "./SafeImage.styled";
 
+const blurhash =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
 const SafeImage: FC<SafeImageProps> = ({
   source,
-  linearGradientColors,
   imageStyle,
   imageWrapperStyle,
-  loadingIndicatorHeight = 10,
 }) => {
-  const [indicatorLoadingValue, setIndicatorLoadingValue] = useState(0);
   return (
-    <View style={[styles({}).imageWrapper, imageWrapperStyle]}>
+    <View style={[styles.imageWrapper, imageWrapperStyle]}>
       <Image
-        style={[styles({}).image, imageStyle as ImageStyle]}
+        style={[styles.image, imageStyle as ImageStyle]}
         source={source}
-        placeholderContentFit="cover"
-        placeholder={require("../../../assets/splash.png")}
+        placeholderContentFit={"cover"}
+        placeholder={blurhash}
         contentFit={"cover"}
-        onLoad={() => setIndicatorLoadingValue(100)}
-        onProgress={(e) => {
-          const loadedValue = (e.loaded / e.total) * 100;
-          if (loadedValue > 0) {
-            setIndicatorLoadingValue(loadedValue);
-          }
-        }}
+        cachePolicy={"memory"}
       />
-      {loadingIndicatorHeight &&
-        loadingIndicatorHeight > 0 &&
-        linearGradientColors && (
-          <View
-            style={
-              styles({ loadingIndicatorHeight: loadingIndicatorHeight! })
-                .imageIndicatorWrapper
-            }
-          >
-            <LinearGradient
-              colors={linearGradientColors}
-              style={
-                styles({ indicatorValue: indicatorLoadingValue }).indicator
-              }
-            />
-          </View>
-        )}
     </View>
   );
 };

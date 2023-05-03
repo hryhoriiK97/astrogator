@@ -48,6 +48,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   dateAuthorInfo: {
+    maxWidth: 250 * bp,
     padding: 6 * bp,
     backgroundColor: "rgba(11, 11, 11, 0.66)",
   },

@@ -20,6 +20,7 @@ const ApodWidget: FC<ApodWidgetProps> = ({
         style={styles.image}
         source={imageSource}
         placeholder={require("../../../assets/splash.png")}
+        cachePolicy={"memory"}
       />
       <Pressable
         style={styles.innerWrapper}
@@ -35,7 +36,11 @@ const ApodWidget: FC<ApodWidgetProps> = ({
         </View>
         <View style={styles.apodInfoWrapper}>
           <View style={styles.dateAuthorInfo}>
-            <Typography style={styles.infoTitle}>
+            <Typography
+              style={styles.infoTitle}
+              numberOfLines={2}
+              ellipsizeMode={"tail"}
+            >
               Author: {author ? author : " -"}
             </Typography>
             <Typography style={styles.infoTitle}>Date: {date}</Typography>

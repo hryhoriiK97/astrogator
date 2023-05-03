@@ -37,6 +37,9 @@ export const styles = StyleSheet.create({
     fontFamily: Raleway.Light,
     lineHeight: 16 * bp,
   },
+  authorText: {
+    maxWidth: 250 * bp,
+  },
   imageInfoWrapper: {
     marginBottom: 10 * bp,
   },
