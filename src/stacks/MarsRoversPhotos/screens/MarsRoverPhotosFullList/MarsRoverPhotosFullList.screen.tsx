@@ -1,12 +1,21 @@
-import React, { FC } from "react";
-import { Pressable, SafeAreaView, View } from "react-native";
+import React, { FC, useRef } from "react";
+import {
+  Animated,
+  Pressable,
+  SafeAreaView,
+  View,
+  FlatList,
+} from "react-native";
 import { Image } from "expo-image";
-import { FlashList } from "@shopify/flash-list";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { MarsRoversPhotosStackParamList } from "../../MarsRoversPhotos.routes";
 import { styles } from "./MarsRoverPhotosFullList.styled";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
+import {
+  ScrollToTopButton,
+  useScrollToTopButton,
+} from "../../../../components";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -19,9 +28,21 @@ const MarsRoverPhotosFullListScreen: FC = () => {
     >();
   const { marsPhotos } = route.params;
 
+  console.log(marsPhotos.length);
+
+  const flatListRef = useRef<FlatList<MarsRoverPhotoItemResponse>>(null);
+
+  const { scrollY, buttonOpacity } = useScrollToTopButton();
+
   const [setSelectedPhotoIndex] = useMarsRoversStore((state) => [
     state.setSelectedPhotoIndex,
   ]);
+
+  const scrollToTop = (): void => {
+    if (flatListRef && flatListRef.current) {
+      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+    }
+  };
 
   const renderItem = ({
     item,
@@ -49,12 +70,21 @@ const MarsRoverPhotosFullListScreen: FC = () => {
   return (
     <View style={styles.screen}>
       <SafeAreaView style={styles.safeAreaContainer}>
-        <FlashList
+        <Animated.FlatList
+          ref={flatListRef}
           data={marsPhotos}
           numColumns={3}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={renderItem}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
+        />
+        <ScrollToTopButton
+          onPress={scrollToTop}
+          buttonOpacity={buttonOpacity}
         />
       </SafeAreaView>
     </View>

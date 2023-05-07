@@ -27,7 +27,7 @@ export const MarsRovers: FC<MarsRoversProps> = ({
         return (
           <MarsRoverCard
             card={roverItem}
-            key={index * 10}
+            key={index}
             onPress={() => {
               onRoverItemPress(rover);
             }}
