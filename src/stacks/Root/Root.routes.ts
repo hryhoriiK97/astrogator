@@ -6,7 +6,7 @@ import { FullImageStackParamList } from "../FullImage/FullImage.routes";
 import { MarsRoversPhotosStackParamList } from "../MarsRoversPhotos/MarsRoversPhotos.routes";
 import { NasaAssetsStackParamList } from "../NasaAssets/NasaAssets.routes";
 import { SelectedVideoStackParamList } from "../SelectedVideo/SelectedVideo.routes";
-import { AssetStackParamList } from "../Asset/Asset.routes";
+import { NasaAssetTransformed } from "../../types/NasaAssetTransformed";
 
 export type RootParamList = {
   WelcomeScreen: undefined;
@@ -14,7 +14,10 @@ export type RootParamList = {
   ApodStack: NavigatorScreenParams<ApodStackParamList>;
   MarsRoversPhotosStack: NavigatorScreenParams<MarsRoversPhotosStackParamList>;
   NasaAssetsStack: NavigatorScreenParams<NasaAssetsStackParamList>;
-  AssetStack: NavigatorScreenParams<AssetStackParamList>;
+  NasaImageScreen: {
+    id: string;
+    item: NasaAssetTransformed;
+  };
   SelectedVideoStack: NavigatorScreenParams<SelectedVideoStackParamList>;
   FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
@@ -29,7 +32,7 @@ export const RootStackRoutes: {
   ApodStack: "ApodStack",
   MarsRoversPhotosStack: "MarsRoversPhotosStack",
   NasaAssetsStack: "NasaAssetsStack",
-  AssetStack: "AssetStack",
+  NasaImageScreen: "NasaImageScreen",
   SelectedVideoStack: "SelectedVideoStack",
   FullImageStack: "FullImageStack",
 };

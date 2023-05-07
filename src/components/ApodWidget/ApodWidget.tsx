@@ -5,8 +5,10 @@ import { Image } from "expo-image";
 import { Typography } from "../Typography";
 import { ApodWidgetProps } from "./ApodWidget.props";
 import { styles } from "./ApodWidget.styled";
+import { SharedElement } from "react-navigation-shared-element";
 
 const ApodWidget: FC<ApodWidgetProps> = ({
+  id,
   imageSource,
   title,
   date,
@@ -14,14 +16,17 @@ const ApodWidget: FC<ApodWidgetProps> = ({
   onPress,
   onLongPress,
 }) => {
+  console.log(id, "ID");
   return (
     <View style={styles.apodWidgetContainer}>
-      <Image
-        style={styles.image}
-        source={imageSource}
-        placeholder={require("../../../assets/splash.png")}
-        cachePolicy={"memory"}
-      />
+      <SharedElement id={id!} style={styles.image}>
+        <Image
+          style={styles.image}
+          source={imageSource}
+          placeholder={require("../../../assets/splash.png")}
+          cachePolicy={"memory"}
+        />
+      </SharedElement>
       <Pressable
         style={styles.innerWrapper}
         onPress={onPress}

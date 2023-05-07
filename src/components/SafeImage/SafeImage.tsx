@@ -19,9 +19,8 @@ const SafeImage: FC<SafeImageProps> = ({
         style={[styles.image, imageStyle as ImageStyle]}
         source={source}
         placeholderContentFit={"cover"}
-        placeholder={blurhash}
         contentFit={"cover"}
-        cachePolicy={"memory"}
+        cachePolicy={"memory-disk"}
       />
     </View>
   );

@@ -15,21 +15,18 @@ import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSh
 import { CustomBottomSheetModalBackground } from "../../../../components/CustomBottomSheetModalBackground";
 import NasaAssetItemModal from "../../../../components/NasaAssetItemModal/NasaAssetItemModal";
 import { commonStyles } from "../../../../theming/commonStyles";
-import {
-  NasaAssetItemData,
-  NasaAssetItemResponse,
-} from "../../../../types/NasaAssetItemResponse";
-import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./NasaImages.styled";
 import { EmptySpace } from "../../../../components/EmptySpace";
 import { format } from "date-fns";
+import { NasaImagesStackNavigationProp } from "../../NasaImages.routes";
+import { NasaAssetTransformed } from "../../../../types/NasaAssetTransformed";
 
 enum NasaImagesScreenQueryKey {
   NasaImages = "NasaImages",
 }
 
 const NasaImagesScreen: FC = () => {
-  const navigation = useNavigation<RootStackNavigationProp>();
+  const navigation = useNavigation<NasaImagesStackNavigationProp>();
   const {
     data: nasaImagesResponse,
     isLoading: isNasaImagesLoading,
@@ -65,7 +62,7 @@ const NasaImagesScreen: FC = () => {
   };
 
   const [selectedNasaImageData, setSelectedNasaImageData] =
-    useState<NasaAssetItemData | null>(null);
+    useState<NasaAssetTransformed | null>(null);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = useCallback(() => {
@@ -80,31 +77,38 @@ const NasaImagesScreen: FC = () => {
     return <LoadingScreen />;
   }
 
-  const nasaImagesData: NasaAssetItemResponse[] = nasaImagesResponse?.pages
+  const nasaImagesData: NasaAssetTransformed[] = nasaImagesResponse?.pages
     .length
-    ? nasaImagesResponse.pages.flatMap(
-        (page) => page.data.data.collection.items
-      )
+    ? nasaImagesResponse.pages
+        .flatMap((page) => page.data.data.collection.items)
+        .map((item, index) => {
+          return {
+            id: index,
+            src: item.links[0].href,
+            title: item.data[0].title,
+            explanation: item.data[0].description,
+            author: item.data[0].center,
+            date: format(new Date(item.data[0].date_created), "yyy-MM-dd"),
+          };
+        })
     : [];
 
-  const renderItem = ({ item }: { item: NasaAssetItemResponse }) => {
-    const [imagePreview] = item.links;
+  const renderItem = ({ item }: { item: NasaAssetTransformed }) => {
     return (
       <ApodWidget
-        imageSource={{ uri: imagePreview.href }}
-        title={item.data[0].title}
-        date={format(new Date(item.data[0].date_created), "yyy-MM-dd")}
-        author={item.data[0].center}
+        id={`item.${item.id}.src`}
+        imageSource={{ uri: item.src }}
+        title={item.title}
+        date={format(new Date(item.date), "yyy-MM-dd")}
+        author={item.author}
         onLongPress={async () => {
-          setSelectedNasaImageData(item.data[0]);
+          setSelectedNasaImageData(item);
           handlePresentModalPress();
         }}
         onPress={() => {
-          navigation.navigate("AssetStack", {
-            screen: "AssetScreen",
-            params: {
-              asset: item,
-            },
+          navigation.navigate("NasaImageScreen", {
+            id: `item.${item.id}.src`,
+            item,
           });
         }}
       />
