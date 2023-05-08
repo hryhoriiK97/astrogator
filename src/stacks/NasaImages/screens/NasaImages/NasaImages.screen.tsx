@@ -3,12 +3,14 @@ import {
   Spacer,
   SpacerVariant,
   LoadingScreen,
+  useScrollToTopButton,
+  ScrollToTopButton,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useScrollToTop } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
 import React, { FC, useCallback, useRef, useState } from "react";
-import { View } from "react-native";
+import { Animated, FlatList, View } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
@@ -27,6 +29,29 @@ enum NasaImagesScreenQueryKey {
 
 const NasaImagesScreen: FC = () => {
   const navigation = useNavigation<NasaImagesStackNavigationProp>();
+
+  const flatListRef = useRef<FlatList>(null);
+
+  const { scrollY, buttonOpacity } = useScrollToTopButton();
+
+  const scrollToTop = (): void => {
+    if (flatListRef && flatListRef.current) {
+      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+    }
+  };
+
+  const [selectedNasaImageData, setSelectedNasaImageData] =
+    useState<NasaAssetTransformed | null>(null);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleCloseModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.dismiss();
+  }, []);
+
   const {
     data: nasaImagesResponse,
     isLoading: isNasaImagesLoading,
@@ -60,18 +85,6 @@ const NasaImagesScreen: FC = () => {
       fetchNasaImagesNextPage();
     }
   };
-
-  const [selectedNasaImageData, setSelectedNasaImageData] =
-    useState<NasaAssetTransformed | null>(null);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const handleCloseModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.dismiss();
-  }, []);
 
   if (isNasaImagesFetchedAfterMount && isNasaImagesLoading) {
     return <LoadingScreen />;
@@ -121,11 +134,11 @@ const NasaImagesScreen: FC = () => {
 
   return (
     <View style={styles.container}>
-      <FlashList
+      <Animated.FlatList
+        ref={flatListRef}
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaImagesData}
         showsVerticalScrollIndicator={false}
-        estimatedItemSize={145}
         renderItem={renderItem}
         ItemSeparatorComponent={renderItemSeparator}
         ListFooterComponent={
@@ -136,6 +149,10 @@ const NasaImagesScreen: FC = () => {
         }
         onEndReached={loadNextPageData}
         onEndReachedThreshold={0.2}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )}
       />
       <BottomSheetModal
         ref={bottomSheetModalRef}
@@ -153,6 +170,7 @@ const NasaImagesScreen: FC = () => {
       >
         <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
       </BottomSheetModal>
+      <ScrollToTopButton onPress={scrollToTop} buttonOpacity={buttonOpacity} />
     </View>
   );
 };
