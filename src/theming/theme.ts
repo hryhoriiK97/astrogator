@@ -6,4 +6,5 @@ export enum AstrogatorColor {
   Green = "#66FF00",
   Red = "#D10000",
   Silver = "#CACACA",
+  Transparent = "transparent",
 }

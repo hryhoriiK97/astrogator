@@ -43,6 +43,10 @@ const HomeScreen: FC = () => {
     )
   );
 
+  if (isApodLoading) {
+    return <LoadingScreen />;
+  }
+
   const apods: ApodResponse[] = apodsResponse?.data
     ? apodsResponse.data.map((apod: ApodResponse, index: number) => {
         return { ...apod, id: index };
@@ -93,19 +97,15 @@ const HomeScreen: FC = () => {
             }
           }}
         />
-        {isApodLoading ? (
-          <LoadingScreen />
-        ) : (
-          <FlashList
-            data={apods.reverse()}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.date}
-            ListFooterComponent={<EmptySpace />}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={renderItemSeparator}
-            estimatedItemSize={200 * bp}
-          />
-        )}
+        <FlashList
+          data={apods.reverse()}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.date}
+          ListFooterComponent={<EmptySpace />}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={renderItemSeparator}
+          estimatedItemSize={200 * bp}
+        />
       </View>
     </ImageBackground>
   );
