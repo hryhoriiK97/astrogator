@@ -10,8 +10,10 @@ const blurhash =
 
 const SafeImage: FC<SafeImageProps> = ({
   source,
+  defaultSource,
   imageStyle,
   imageWrapperStyle,
+  isBlurashApplied,
 }) => {
   return (
     <View style={[styles.imageWrapper, imageWrapperStyle]}>
@@ -19,6 +21,13 @@ const SafeImage: FC<SafeImageProps> = ({
         style={[styles.image, imageStyle as ImageStyle]}
         source={source}
         placeholderContentFit={"cover"}
+        placeholder={
+          isBlurashApplied
+            ? blurhash
+            : !!defaultSource
+            ? defaultSource
+            : undefined
+        }
         contentFit={"cover"}
         cachePolicy={"memory-disk"}
       />

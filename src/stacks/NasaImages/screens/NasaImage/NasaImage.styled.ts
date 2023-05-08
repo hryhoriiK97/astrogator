@@ -40,15 +40,6 @@ export const styles = StyleSheet.create({
   imageInfoWrapper: {
     marginBottom: 10 * bp,
   },
-  subheaderControlsWrapper: {
-    minWidth: 65 * bp,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  youtubePlayerWhiteSpace: {
-    height: 50 * bp,
-  },
   title: {
     fontSize: 25 * bp,
     marginTop: Platform.OS === MobilePlatform.IOS ? 40 * bp : 30 * bp,
@@ -69,17 +60,5 @@ export const styles = StyleSheet.create({
     paddingLeft: 5 * bp,
     fontFamily: Raleway.Medium,
     color: AstrogatorColor.VenetianNights,
-  },
-  pickButton: {
-    width: "100%",
-    marginTop: 15 * bp,
-    alignItems: "center",
-    borderRadius: 10 * bp,
-    backgroundColor: AstrogatorColor.VenetianNights,
-    paddingVertical: 10 * bp,
-    paddingHorizontal: 15 * bp,
-  },
-  pickTitle: {
-    color: "#ffffff",
   },
 });

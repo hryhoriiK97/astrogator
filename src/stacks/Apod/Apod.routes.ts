@@ -4,7 +4,7 @@ import { FullImageStackParamList } from "../FullImage/FullImage.routes";
 import { ApodResponse } from "../../types/ApodResponse";
 
 export type ApodStackParamList = {
-  ApodScreen: { apodDate?: string; apod?: ApodResponse; id: string };
+  ApodScreen: { id: string; apodDate?: string; apod?: ApodResponse };
   FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
