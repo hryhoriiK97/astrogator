@@ -49,7 +49,8 @@ const WelcomeScreen: FC = () => {
               style={styles.discoverButton}
               onPress={() =>
                 navigate("BottomTabStack", {
-                  screen: "HomeScreen",
+                  screen: "HomeStack",
+                  params: { screen: "HomeScreen" },
                 })
               }
             >

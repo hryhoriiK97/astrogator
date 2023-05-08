@@ -16,15 +16,14 @@ const ApodWidget: FC<ApodWidgetProps> = ({
   onPress,
   onLongPress,
 }) => {
-  console.log(id, "ID");
   return (
     <View style={styles.apodWidgetContainer}>
-      <SharedElement id={id!} style={styles.image}>
+      <SharedElement id={id} style={styles.image}>
         <Image
           style={styles.image}
           source={imageSource}
           placeholder={require("../../../assets/splash.png")}
-          cachePolicy={"memory"}
+          cachePolicy={"memory-disk"}
         />
       </SharedElement>
       <Pressable

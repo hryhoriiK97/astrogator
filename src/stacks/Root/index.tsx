@@ -9,6 +9,7 @@ import SelectedVideoStack from "../SelectedVideo";
 import WelcomeScreen from "./screens/Welcome/Welcome.screen";
 import NasaImageScreen from "../NasaImages/screens/NasaImage/NasaImage.screen";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import ApodScreen from "../Apod/screens/Apod/Apod.screen";
 
 const Stack = createSharedElementStackNavigator();
 
@@ -26,7 +27,14 @@ const RootStack: FC = () => {
         name={RootStackRoutes.BottomTabStack}
         component={BottomTabStack}
       />
-      <Stack.Screen name={RootStackRoutes.ApodStack} component={ApodStack} />
+      <Stack.Screen
+        name={RootStackRoutes.ApodStack}
+        component={ApodScreen}
+        sharedElements={(route) => {
+          const { item } = route.params;
+          return [{ id: `item.${item.id}.url`, animation: "fade" }];
+        }}
+      />
       <Stack.Screen
         name={RootStackRoutes.MarsRoversPhotosStack}
         component={MarsRoversPhotosStack}

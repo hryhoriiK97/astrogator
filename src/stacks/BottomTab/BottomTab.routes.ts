@@ -1,9 +1,10 @@
-import {NavigatorScreenParams} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {NasaAssetsStackParamList} from '../NasaAssets/NasaAssets.routes';
+import { NavigatorScreenParams } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { NasaAssetsStackParamList } from "../NasaAssets/NasaAssets.routes";
+import { HomeStackParamList } from "../Home/Home.routes";
 
 export type BottomTabParamList = {
-  HomeScreen: undefined;
+  HomeStack: NavigatorScreenParams<HomeStackParamList>;
   MarsRoversScreen: undefined;
   NasaAssetsStack: NavigatorScreenParams<NasaAssetsStackParamList>;
   AboutAppScreen: undefined;
@@ -15,8 +16,8 @@ export type BottomTabStackNavigationProp =
 export const BottomTabStackRoutes: {
   [route in keyof BottomTabParamList]: route;
 } = {
-  HomeScreen: 'HomeScreen',
-  MarsRoversScreen: 'MarsRoversScreen',
-  NasaAssetsStack: 'NasaAssetsStack',
-  AboutAppScreen: 'AboutAppScreen',
+  HomeStack: "HomeStack",
+  MarsRoversScreen: "MarsRoversScreen",
+  NasaAssetsStack: "NasaAssetsStack",
+  AboutAppScreen: "AboutAppScreen",
 };

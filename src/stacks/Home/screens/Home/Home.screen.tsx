@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
 import { format, subDays, isToday } from "date-fns";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
+
 import { ImageBackground, View } from "react-native";
 import Background from "../../../../../assets/images/Group.png";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
@@ -42,25 +43,24 @@ const HomeScreen: FC = () => {
     )
   );
 
-  if (isApodLoading) {
-    return <LoadingScreen />;
-  }
-
-  const apods = apodsResponse?.data;
+  const apods: ApodResponse[] = apodsResponse?.data
+    ? apodsResponse.data.map((apod: ApodResponse, index: number) => {
+        return { ...apod, id: index };
+      })
+    : [];
 
   const renderItem = ({ item }: { item: ApodResponse }) => {
     return (
       <ApodWidget
+        id={`item.${item.id}.url`}
         imageSource={{ uri: item.url }}
         title={item.title}
         date={item.date}
         author={item.copyright}
         onPress={() =>
           navigation.navigate("ApodStack", {
-            screen: "ApodScreen",
-            params: {
-              apodDate: item.date,
-            },
+            id: `item.${item.id}.url`,
+            item,
           })
         }
       />
@@ -86,23 +86,26 @@ const HomeScreen: FC = () => {
           onDatePicking={async (date) => {
             if (!isToday(date)) {
               navigation.navigate("ApodStack", {
-                screen: "ApodScreen",
-                params: {
-                  apodDate: format(date, "yyyy-MM-dd"),
-                },
+                id: "apod-id",
+                apodDate: format(date, "yyyy-MM-dd"),
+                item: {} as ApodResponse,
               });
             }
           }}
         />
-        <FlashList
-          data={apods.reverse()}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.date}
-          ListFooterComponent={<EmptySpace />}
-          showsVerticalScrollIndicator={false}
-          ItemSeparatorComponent={renderItemSeparator}
-          estimatedItemSize={200 * bp}
-        />
+        {isApodLoading ? (
+          <LoadingScreen />
+        ) : (
+          <FlashList
+            data={apods.reverse()}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.date}
+            ListFooterComponent={<EmptySpace />}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={renderItemSeparator}
+            estimatedItemSize={200 * bp}
+          />
+        )}
       </View>
     </ImageBackground>
   );

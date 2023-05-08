@@ -7,11 +7,16 @@ import { MarsRoversPhotosStackParamList } from "../MarsRoversPhotos/MarsRoversPh
 import { NasaAssetsStackParamList } from "../NasaAssets/NasaAssets.routes";
 import { SelectedVideoStackParamList } from "../SelectedVideo/SelectedVideo.routes";
 import { NasaAssetTransformed } from "../../types/NasaAssetTransformed";
+import { ApodResponse } from "../../types/ApodResponse";
 
 export type RootParamList = {
   WelcomeScreen: undefined;
   BottomTabStack: NavigatorScreenParams<BottomTabParamList>;
-  ApodStack: NavigatorScreenParams<ApodStackParamList>;
+  ApodStack: {
+    id: string;
+    apodDate?: string;
+    item: ApodResponse;
+  };
   MarsRoversPhotosStack: NavigatorScreenParams<MarsRoversPhotosStackParamList>;
   NasaAssetsStack: NavigatorScreenParams<NasaAssetsStackParamList>;
   NasaImageScreen: {
