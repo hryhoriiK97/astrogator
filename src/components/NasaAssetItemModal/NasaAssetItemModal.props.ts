@@ -1,5 +1,5 @@
-import {NasaAssetItemData} from '../../types/NasaAssetItemResponse';
+import { NasaAssetTransformed } from "../../types/NasaAssetTransformed";
 
 export interface NasaAssetItemModalProps {
-  nasaAssetItemData: NasaAssetItemData;
+  nasaAssetItemData: NasaAssetTransformed;
 }

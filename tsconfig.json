@@ -3,5 +3,10 @@
   "compilerOptions": {
     "strict": true
   },
-  "include": ["App.tsx", "src", "env.d.ts", "images.d.ts"]
+  "include": [
+    "App.tsx",
+    "src",
+    "env.d.ts",
+    "images.d.ts"
+  ]
 }

@@ -1,14 +1,16 @@
 import {
   ApodWidget,
-  Divider,
-  DividerVariant,
+  Spacer,
+  SpacerVariant,
   LoadingScreen,
+  useScrollToTopButton,
+  ScrollToTopButton,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
-import { FlashList } from "@shopify/flash-list";
+
 import React, { FC, useCallback, useRef, useState } from "react";
-import { View } from "react-native";
+import { FlatList, View, Animated } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
@@ -33,6 +35,16 @@ enum NasaVideosScreenQueryKey {
 
 const NasaVideosScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
+
+  const flatListRef = useRef<FlatList>(null);
+
+  const { scrollY, buttonOpacity } = useScrollToTopButton();
+
+  const scrollToTop = (): void => {
+    if (flatListRef && flatListRef.current) {
+      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+    }
+  };
 
   const [selectedNasaVideoData, setSelectedNasaVideoData] =
     useState<NasaAssetItemData | null>(null);
@@ -96,6 +108,7 @@ const NasaVideosScreen: FC = () => {
     const [imagePreview] = item.links;
     return (
       <ApodWidget
+        id={item.data[0].nasa_id}
         title={item.data[0].title}
         date={item.data[0].date_created}
         author={item.data[0].secondary_creator || "-"}
@@ -117,16 +130,16 @@ const NasaVideosScreen: FC = () => {
   };
 
   const renderItemSeparator = () => {
-    return <Divider variant={DividerVariant.Divider_10_Vertical} />;
+    return <Spacer variant={SpacerVariant.Spacer_10_Vertical} />;
   };
 
   return (
     <View style={styles.container}>
-      <FlashList
+      <Animated.FlatList
+        ref={flatListRef}
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaVideosData}
         showsVerticalScrollIndicator={false}
-        estimatedItemSize={145}
         renderItem={renderItem}
         ItemSeparatorComponent={renderItemSeparator}
         ListFooterComponent={
@@ -137,6 +150,10 @@ const NasaVideosScreen: FC = () => {
         }
         onEndReached={loadNextPageData}
         onEndReachedThreshold={0.2}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )}
       />
 
       <BottomSheetModal
@@ -155,6 +172,7 @@ const NasaVideosScreen: FC = () => {
       >
         <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />
       </BottomSheetModal>
+      <ScrollToTopButton onPress={scrollToTop} buttonOpacity={buttonOpacity} />
     </View>
   );
 };

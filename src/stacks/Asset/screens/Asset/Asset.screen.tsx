@@ -1,6 +1,6 @@
 import {
-  Divider,
-  DividerVariant,
+  Spacer,
+  SpacerVariant,
   SafeImage,
   Typography,
 } from "../../../../components";
@@ -86,7 +86,7 @@ const AssetScreen: FC = () => {
             <Typography style={styles.subheaderText}>
               Author: {asset.data[0].secondary_creator || "-"}
             </Typography>
-            <Divider variant={DividerVariant.Divider_2_Vertical} />
+            <Spacer variant={SpacerVariant.Spacer_2_Vertical} />
             <Typography style={styles.subheaderText}>
               Date: {format(new Date(asset.data[0].date_created), "yyyy-MM-dd")}
             </Typography>

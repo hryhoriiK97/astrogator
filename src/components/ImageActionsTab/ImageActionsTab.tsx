@@ -1,4 +1,4 @@
-import { Divider, DividerVariant } from "../Divider";
+import { Spacer, SpacerVariant } from "../Spacer";
 import React, { FC } from "react";
 import { Pressable, View } from "react-native";
 import { MagnifierIcon } from "../../../assets/svgs/MagnifierIcon";
@@ -22,7 +22,7 @@ const ImageActionsTab: FC<ImageActionsTabProps> = ({
         >
           <ShareIcon />
         </Pressable>
-        <Divider variant={DividerVariant.Divider_3_Horizontal} />
+        <Spacer variant={SpacerVariant.Spacer_3_Horizontal} />
         <Pressable
           style={styles.showMoreButton}
           onPress={onMagnifierButtonPress}

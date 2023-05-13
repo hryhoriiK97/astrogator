@@ -1,12 +1,14 @@
 import React, { FC } from "react";
-import { ImageBackground, Pressable, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { Chevron } from "../../../assets/svgs/Chevron";
 import { Image } from "expo-image";
 import { Typography } from "../Typography";
 import { ApodWidgetProps } from "./ApodWidget.props";
 import { styles } from "./ApodWidget.styled";
+import { SharedElement } from "react-navigation-shared-element";
 
 const ApodWidget: FC<ApodWidgetProps> = ({
+  id,
   imageSource,
   title,
   date,
@@ -16,11 +18,14 @@ const ApodWidget: FC<ApodWidgetProps> = ({
 }) => {
   return (
     <View style={styles.apodWidgetContainer}>
-      <Image
-        style={styles.image}
-        source={imageSource}
-        placeholder={require("../../../assets/splash.png")}
-      />
+      <SharedElement id={id} style={styles.image}>
+        <Image
+          style={styles.image}
+          source={imageSource}
+          placeholder={require("../../../assets/splash.png")}
+          cachePolicy={"memory-disk"}
+        />
+      </SharedElement>
       <Pressable
         style={styles.innerWrapper}
         onPress={onPress}
@@ -35,7 +40,11 @@ const ApodWidget: FC<ApodWidgetProps> = ({
         </View>
         <View style={styles.apodInfoWrapper}>
           <View style={styles.dateAuthorInfo}>
-            <Typography style={styles.infoTitle}>
+            <Typography
+              style={styles.infoTitle}
+              numberOfLines={2}
+              ellipsizeMode={"tail"}
+            >
               Author: {author ? author : " -"}
             </Typography>
             <Typography style={styles.infoTitle}>Date: {date}</Typography>

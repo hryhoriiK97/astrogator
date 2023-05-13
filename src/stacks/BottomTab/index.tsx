@@ -1,7 +1,7 @@
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { HomeIcon } from "../../../assets/svgs/tabBarIcons/HomeIcon";
 import { ExploreIcon } from "../../../assets/svgs/tabBarIcons/ExploreIcon";
 import { UFOIcon } from "../../../assets/svgs/tabBarIcons/UFOIcon";
@@ -10,9 +10,8 @@ import { AstrogatorColor } from "../../theming/theme";
 import NasaAssetsStack from "../NasaAssets";
 import { BottomTabStackRoutes } from "./BottomTab.routes";
 import AboutAppScreen from "./screens/AboutApp/AboutApp.screen";
-import HomeScreen from "./screens/Home/Home.screen";
 import MarsRoversScreen from "./screens/MarsRovers/MarsRovers.screen";
-import Background from "../../../assets/images/Group.png";
+import HomeStack from "../Home";
 
 const { bp } = getRelativeUnits();
 
@@ -60,7 +59,7 @@ const BottomTabStack = () => {
       }}
     >
       <Tab.Screen
-        name={BottomTabStackRoutes.HomeScreen}
+        name={BottomTabStackRoutes.HomeStack}
         options={{
           tabBarIcon: (props) => (
             <HomeIcon
@@ -72,7 +71,7 @@ const BottomTabStack = () => {
             />
           ),
         }}
-        component={HomeScreen}
+        component={HomeStack}
       />
       <Tab.Screen
         name={BottomTabStackRoutes.MarsRoversScreen}

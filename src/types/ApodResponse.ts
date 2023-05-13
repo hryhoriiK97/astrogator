@@ -1,4 +1,5 @@
 export interface ApodResponse {
+  id: string;
   copyright: string;
   date: string;
   explanation: string;

@@ -1,19 +1,19 @@
-import Share from 'react-native-share';
-import {captureScreen} from 'react-native-view-shot';
+import Share from "react-native-share";
+import { captureScreen } from "react-native-view-shot";
 
 export const share = () => {
   captureScreen({
-    format: 'jpg',
+    format: "jpg",
     quality: 1,
   }).then(
-    uri => {
+    (uri) => {
       Share.open({
         filename: uri,
         url: uri,
-      }).catch(err => {
+      }).catch((err) => {
         err && console.log(err);
       });
     },
-    error => console.error('Oops, snapshot failed', error),
+    (error) => console.error("Oops, snapshot failed", error)
   );
 };

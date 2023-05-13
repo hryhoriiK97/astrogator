@@ -12,10 +12,9 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { NetInfoConnectionProvider } from "./src/providers/NetInfoConnection";
 import RootStack from "./src/stacks/Root";
 import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
 import { Logs } from "expo";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "react-native";
+import { LoadingScreen } from "./src/components";
 
 Logs.enableExpoCliLogging();
 
@@ -31,10 +30,10 @@ export default function App() {
     "Raleway-Light": require("./assets/fonts/Raleway-Light.ttf"),
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
+  if (fontsLoaded) {
     setTimeout(SplashScreen.hideAsync, 3000);
+  } else {
+    return <LoadingScreen />;
   }
   return (
     <NetInfoConnectionProvider>
