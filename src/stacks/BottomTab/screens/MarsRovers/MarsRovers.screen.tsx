@@ -62,9 +62,14 @@ const MarsRoversScreen: FC = () => {
         </Typography>
         <MarsRovers
           marsRoversData={marsRoversData}
-          onRoverItemPress={(rover) => {
+          onLearnMorePress={(rover) => {
             handlePresentModalPress();
             setSelectedRover(rover);
+          }}
+          onGalleryPress={() => {
+            navigate("MarsRoversPhotosStack", {
+              screen: "MarsRoverPhotosScreen",
+            });
           }}
         />
         <MarsRoverSettingsModal
