@@ -6,6 +6,5 @@ export * from "./NasaImageItem";
 export * from "./SafeImage";
 export * from "./SafeTextInput";
 export * from "./Typography";
-export * from "./MarsPhotoNavigationTopBar";
 export * from "./Modals";
 export * from "./ScrollToTopButton";

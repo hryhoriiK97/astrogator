@@ -1,12 +1,19 @@
 import { NASA_API_KEY } from "@env";
 import React, { FC, useCallback, useEffect, useRef } from "react";
-import { Animated, Dimensions, StatusBar, View, FlatList } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  View,
+  FlatList,
+  ImageBackground,
+} from "react-native";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "react-query";
 
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
+import Background from "../../../../../assets/images/Group.png";
 import {
   MarsRoversPhotosStackNavigationProp,
   MarsRoversPhotosStackRoutes,
@@ -20,7 +27,6 @@ import {
   SpacerVariant,
   LoadingScreen,
   MarsPhotoItem,
-  MarsPhotoNavigationTopBar,
   MarsRoverSettingsModal,
 } from "../../../../components";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
@@ -135,6 +141,12 @@ const MarsRoverPhotosScreen: FC = () => {
             },
           });
         }}
+        onBackButtonPress={goBack}
+        onListButtonPRess={() => {
+          navigate("MarsRoverPhotosFullList", {
+            marsPhotos: marsRoverPhotosData,
+          });
+        }}
         onMarsAvatarPress={handlePresentModalPress}
       />
     );
@@ -145,21 +157,18 @@ const MarsRoverPhotosScreen: FC = () => {
   };
 
   return (
-    <>
-      <StatusBar barStyle={"dark-content"} />
+    <ImageBackground
+      source={Background}
+      resizeMode={"cover"}
+      progressiveRenderingEnabled={true}
+      resizeMethod={"resize"}
+      style={styles.backgroundImage}
+      imageStyle={styles.imageStyle}
+    >
+      <View style={styles.overlay} />
       <View style={styles.screen}>
-        <MarsPhotoNavigationTopBar
-          onBackButtonPress={goBack}
-          onListButtonPRess={() => {
-            navigate("MarsRoverPhotosFullList", {
-              marsPhotos: marsRoverPhotosData,
-            });
-          }}
-        />
-
         <Animated.FlatList
           ref={flatListRef}
-          contentContainerStyle={styles.contentContainerStyle}
           data={marsRoverPhotosData}
           getItemLayout={getItemLayout}
           renderItem={renderItem}
@@ -181,7 +190,7 @@ const MarsRoverPhotosScreen: FC = () => {
           }}
         />
       </View>
-    </>
+    </ImageBackground>
   );
 };
 

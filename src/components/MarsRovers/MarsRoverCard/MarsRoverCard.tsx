@@ -85,7 +85,11 @@ const MarsRoverCard = ({
     <View style={styles.container} pointerEvents="box-none">
       <PanGestureHandler onGestureEvent={onGestureEvent} minDist={0}>
         <Animated.View style={[styles.card, style]}>
-          <Image source={source} style={styles.image}>
+          <Image
+            source={source}
+            style={styles.image}
+            cachePolicy={"memory-disk"}
+          >
             <View style={styles.cardHeader}>
               <View style={styles.marsRoverNameWrapper}>
                 <Typography variant={Raleway.Bold} style={styles.marsRoverName}>

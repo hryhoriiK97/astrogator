@@ -7,22 +7,24 @@ const { bp } = getRelativeUnits();
 const { width } = Dimensions.get("screen");
 
 export const ITEM_WIDTH = width * 0.76;
-export const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
+export const ITEM_HEIGHT = ITEM_WIDTH * 1.57;
 
 export const styles = StyleSheet.create({
   container: {
+    position: "relative",
     width: width,
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
-  roverNameWrapper: {
+  header: {
+    width: ITEM_WIDTH + 40 * bp,
+    flexDirection: "row",
     paddingVertical: 15 * bp,
     paddingHorizontal: 10 * bp,
-    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 30 * bp,
+    justifyContent: "space-between",
+    borderRadius: ITEM_WIDTH + (40 * bp) / 2,
     backgroundColor: AstrogatorColor.White,
     shadowColor: AstrogatorColor.Black,
     shadowOffset: {
@@ -33,6 +35,18 @@ export const styles = StyleSheet.create({
     shadowRadius: 10.32,
 
     elevation: 16,
+  },
+  roverNameWrapper: {
+    maxWidth: 200 * bp,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  roverName: {
+    fontSize: 16 * bp,
+  },
+  cameraInfo: {
+    fontSize: 12 * bp,
+    textAlign: "center",
   },
   outerWrapper: {
     borderRadius: 18,
@@ -67,7 +81,7 @@ export const styles = StyleSheet.create({
   },
   avatarWrapper: {
     position: "absolute",
-    bottom: 100 * bp,
+    bottom: (ITEM_HEIGHT / 14) * bp,
     right: 60 * bp,
   },
   avatar: {
@@ -77,5 +91,21 @@ export const styles = StyleSheet.create({
     resizeMode: "cover",
     borderWidth: 6 * bp,
     borderColor: "white",
+  },
+  headerButton: {
+    width: 40 * bp,
+    height: 40 * bp,
+    borderRadius: 40 * bp,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: AstrogatorColor.White,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
   },
 });
