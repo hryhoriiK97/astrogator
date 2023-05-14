@@ -21,6 +21,7 @@ import { styles } from "./MarsRoverCard.styled";
 import { MarsRoverCardProps } from "./MarsRoverCard.props";
 import { Raleway, Typography } from "../../Typography";
 import { Spacer, SpacerVariant } from "../../Spacer";
+import { AstrogatorColor } from "../../../theming/theme";
 
 const MarsRoverCard = ({
   card: { source, height },
@@ -103,14 +104,28 @@ const MarsRoverCard = ({
                 <Heart />
               </Pressable>
             </View>
-            <View>
-              <View>
+            <View style={styles.wrapper}>
+              <View style={styles.marsInfoWrapper}>
                 <Typography variant={Raleway.Bold} style={styles.detailsText}>
-                  Status: {marsStatus}
+                  Status:{"  "}
+                  {
+                    <Typography
+                      variant={Raleway.Medium}
+                      color={
+                        marsStatus === "active"
+                          ? AstrogatorColor.Green
+                          : AstrogatorColor.Red
+                      }
+                      style={styles.statusText}
+                    >
+                      {marsStatus}
+                    </Typography>
+                  }
                 </Typography>
                 <Spacer variant={SpacerVariant.Spacer_2_Vertical} />
                 <Typography variant={Raleway.Bold} style={styles.detailsText}>
-                  Launch Date: {launchDate}
+                  Launch Date:{"  "}
+                  {launchDate}
                 </Typography>
               </View>
               <Spacer variant={SpacerVariant.Spacer_5_Vertical} />

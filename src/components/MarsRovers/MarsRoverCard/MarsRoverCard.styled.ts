@@ -57,9 +57,22 @@ export const styles = StyleSheet.create({
     padding: 6 * bp,
     borderRadius: 4 * bp,
   },
+  wrapper: {
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+  },
+  marsInfoWrapper: {
+    backgroundColor: "rgba(11, 11, 11, 0.66)",
+    padding: 6 * bp,
+    borderRadius: 4 * bp,
+  },
   detailsText: {
     fontSize: 12 * bp,
     color: AstrogatorColor.White,
+  },
+  statusText: {
+    textTransform: "capitalize",
+    marginLeft: 5 * bp,
   },
   buttonsWrapper: {
     flexDirection: "row",
