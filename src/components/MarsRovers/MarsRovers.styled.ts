@@ -7,6 +7,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "transparent",
-    paddingVertical: 50 * bp,
+    paddingTop: 24 * bp,
   },
 });

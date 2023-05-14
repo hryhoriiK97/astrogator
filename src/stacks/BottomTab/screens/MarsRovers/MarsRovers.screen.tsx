@@ -1,11 +1,17 @@
-import { LoadingScreen, Raleway, Typography } from "../../../../components";
+import {
+  LoadingScreen,
+  Raleway,
+  Spacer,
+  SpacerVariant,
+  Typography,
+} from "../../../../components";
 import { NASA_API_KEY } from "@env";
 import { MarsRovers } from "../../../../components/MarsRovers";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import React, { FC, useCallback, useRef } from "react";
-import { SafeAreaView, ImageBackground, View } from "react-native";
+import { ImageBackground, View } from "react-native";
 import { useQuery } from "react-query";
 import Background from "../../../../../assets/images/Group.png";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
@@ -56,10 +62,16 @@ const MarsRoversScreen: FC = () => {
       imageStyle={styles.imageStyle}
     >
       <View style={styles.backdropWrapper} />
-      <SafeAreaView style={styles.container}>
-        <Typography variant={Raleway.Bold} style={styles.title}>
-          Mars Rovers
-        </Typography>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Typography variant={Raleway.Bold} style={styles.title}>
+            Mars Rovers
+          </Typography>
+          <Spacer variant={SpacerVariant.Spacer_8_Vertical} />
+          <Typography style={styles.subtitle}>
+            Explore space managing updates directly from NASA
+          </Typography>
+        </View>
         <MarsRovers
           marsRoversData={marsRoversData}
           onLearnMorePress={(rover) => {
@@ -80,7 +92,7 @@ const MarsRoversScreen: FC = () => {
             });
           }}
         />
-      </SafeAreaView>
+      </View>
     </ImageBackground>
   );
 };

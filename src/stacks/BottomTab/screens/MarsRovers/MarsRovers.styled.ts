@@ -1,6 +1,7 @@
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
+import { Raleway } from "../../../../components";
 
 const { bp } = getRelativeUnits();
 
@@ -32,11 +33,21 @@ export const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: "rgba(0,0,0,0.45)",
   },
-  title: {
-    fontSize: 34 * bp,
-    color: AstrogatorColor.White,
-    marginBottom: 16 * bp,
+  header: {
+    paddingTop: 24 * bp,
     paddingLeft: 16 * bp,
+  },
+  title: {
+    fontSize: 24 * bp,
+    color: AstrogatorColor.White,
+    lineHeight: 28 * bp,
+  },
+  subtitle: {
+    maxWidth: 259 * bp,
+    fontFamily: Raleway.Light,
+    fontSize: 14 * bp,
+    lineHeight: 19 * bp,
+    color: AstrogatorColor.Silver,
   },
   modalContainer: {
     flex: 1,
