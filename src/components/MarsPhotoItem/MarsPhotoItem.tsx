@@ -58,6 +58,7 @@ const MarsRoverItem: FC<MarsPhotoItemProps> = ({
                 transform: [{ translateX: translateX }],
               },
             ]}
+            cachePolicy={"memory-disk"}
           />
         </Pressable>
       </View>

@@ -6,6 +6,7 @@ import { MarsRoverPhotoItemResponse } from "../../types/MarsRoverPhotoItemRespon
 export type MarsRoversPhotosStackParamList = {
   MarsRoverPhotosScreen: undefined;
   MarsRoverPhotosFullList: {
+    marsRoverName: string;
     marsPhotos: MarsRoverPhotoItemResponse[];
   };
   MarsFullImageStack: NavigatorScreenParams<MarsFullImageStackParamList>;

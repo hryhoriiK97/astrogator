@@ -144,6 +144,7 @@ const MarsRoverPhotosScreen: FC = () => {
         onBackButtonPress={goBack}
         onListButtonPRess={() => {
           navigate("MarsRoverPhotosFullList", {
+            marsRoverName: selectedRover?.name!,
             marsPhotos: marsRoverPhotosData,
           });
         }}
