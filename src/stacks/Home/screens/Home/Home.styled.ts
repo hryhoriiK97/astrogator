@@ -1,14 +1,16 @@
-import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
+import {
+  moderateScale,
+  moderateVerticalScale,
+  verticalScale,
+} from "react-native-size-matters";
 import { AstrogatorColor } from "../../../../theming/theme";
-
-const { bp } = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24 * bp,
-    paddingHorizontal: 16 * bp,
+    paddingTop: verticalScale(24),
+    paddingHorizontal: verticalScale(16),
   },
   backgroundImage: {
     position: "relative",

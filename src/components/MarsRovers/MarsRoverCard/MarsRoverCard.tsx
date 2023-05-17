@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Pressable, View } from "react-native";
 import { Image } from "expo-image";
 import { Heart } from "../../../../assets/svgs/Heart";
+import { moderateScale } from "react-native-size-matters";
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
@@ -36,7 +37,10 @@ const MarsRoverCard = ({
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(-(height + index * CARD_HEIGHT));
   useEffect(() => {
-    translateY.value = withDelay(150 * index, withTiming(-190 * index));
+    translateY.value = withDelay(
+      150 * index,
+      withTiming(-moderateScale(200) * index)
+    );
   }, [index, translateY]);
   useAnimatedReaction(
     () => shuffleBack.value,

@@ -10,9 +10,10 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AstrogatorColor.Black,
+    paddingTop: 20 * bp,
   },
   apodHeader: {
-    height: 89 * bp,
+    height: 40 * bp,
   },
   contentContainerStyle: {
     paddingVertical: 10 * bp,

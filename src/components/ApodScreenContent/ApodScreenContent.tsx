@@ -75,7 +75,7 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
       )}
       <Typography style={styles.title}>{item.title}</Typography>
       <View style={styles.subheader}>
-        <View style={styles.imageInfoWrapper}>
+        <View>
           <Typography
             style={[styles.subheaderText, styles.authorText]}
             numberOfLines={2}
@@ -101,9 +101,7 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
         />
       </View>
       <Typography style={styles.explanation} ellipsizeMode={"clip"}>
-        {apodExplanationArray
-          .slice(0, Platform.OS === MobilePlatform.Android ? 70 : 90)
-          .join(" ")}{" "}
+        {apodExplanationArray.slice(0, 70).join(" ")}{" "}
         {((Platform.OS === MobilePlatform.IOS &&
           apodExplanationArray.length >= 90) ||
           (Platform.OS === MobilePlatform.Android &&

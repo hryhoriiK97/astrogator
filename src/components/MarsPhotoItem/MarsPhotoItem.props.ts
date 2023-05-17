@@ -5,10 +5,6 @@ export interface MarsPhotoItemProps {
   cameraFullName: string;
   cameraAbbreviation: string;
   imageSource: ImageProps["source"];
-  roverImageSource: ImageProps["source"];
   onPress: () => void;
-  onMarsAvatarPress: () => void;
-  onBackButtonPress: () => void;
-  onListButtonPRess: () => void;
   translateX: Animated.AnimatedInterpolation<string | number>;
 }

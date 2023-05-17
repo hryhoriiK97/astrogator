@@ -2,6 +2,11 @@ import { StyleSheet } from "react-native";
 import { CARD_HEIGHT, CARD_WIDTH } from "./MarsRoverCard.utils";
 import { getRelativeUnits } from "../../../utils/getRelativeUnits";
 import { AstrogatorColor } from "../../../theming/theme";
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
@@ -12,7 +17,7 @@ export const styles = StyleSheet.create({
   },
   card: {
     position: "relative",
-    backgroundColor: "white",
+    backgroundColor: AstrogatorColor.Transparent,
     borderRadius: 8 * bp,
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
@@ -24,7 +29,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: "rgba(255, 255, 255, 0.11)",
     borderStyle: "solid",
   },
@@ -35,8 +40,8 @@ export const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-between",
     borderRadius: 8 * bp,
-    paddingHorizontal: 16 * bp,
-    paddingVertical: 20 * bp,
+    paddingHorizontal: moderateScale(16),
+    paddingVertical: moderateVerticalScale(20),
   },
   cardHeader: {
     flexDirection: "row",
@@ -46,15 +51,15 @@ export const styles = StyleSheet.create({
   marsRoverNameWrapper: {
     backgroundColor: "rgba(11, 11, 11, 0.66)",
     borderRadius: 4 * bp,
-    padding: 6 * bp,
+    padding: moderateScale(6),
   },
   marsRoverName: {
-    fontSize: 14 * bp,
+    fontSize: scale(14),
     color: AstrogatorColor.White,
   },
   addToFavouritesButton: {
     backgroundColor: "rgba(11, 11, 11, 0.66)",
-    padding: 6 * bp,
+    padding: scale(6),
     borderRadius: 4 * bp,
   },
   wrapper: {
@@ -63,16 +68,16 @@ export const styles = StyleSheet.create({
   },
   marsInfoWrapper: {
     backgroundColor: "rgba(11, 11, 11, 0.66)",
-    padding: 6 * bp,
+    padding: moderateScale(6),
     borderRadius: 4 * bp,
   },
   detailsText: {
-    fontSize: 12 * bp,
+    fontSize: moderateScale(12),
     color: AstrogatorColor.White,
   },
   statusText: {
     textTransform: "capitalize",
-    marginLeft: 5 * bp,
+    marginLeft: moderateScale(6),
   },
   buttonsWrapper: {
     flexDirection: "row",
@@ -80,8 +85,8 @@ export const styles = StyleSheet.create({
   },
   button: {
     width: "50%",
-    paddingVertical: 12 * bp,
-    paddingHorizontal: 15 * bp,
+    paddingVertical: moderateVerticalScale(12),
+    paddingHorizontal: moderateScale(15),
     borderRadius: 4 * bp,
     display: "flex",
     alignItems: "center",
@@ -92,7 +97,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "rgba(114, 79, 255, 0.75)",
   },
   buttonTitle: {
-    fontSize: 16 * bp,
+    fontSize: moderateScale(16),
     color: AstrogatorColor.White,
   },
 });

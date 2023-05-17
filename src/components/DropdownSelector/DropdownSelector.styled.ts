@@ -2,12 +2,13 @@ import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
 import { Raleway } from "../Typography";
+import { scale, verticalScale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   dropdown: {
-    height: 50 * bp,
+    height: verticalScale(45),
     borderColor: AstrogatorColor.VenetianNights,
     borderWidth: 2 * bp,
     borderRadius: 8 * bp,
@@ -24,25 +25,25 @@ export const styles = StyleSheet.create({
     left: 22 * bp,
     top: 8 * bp,
     zIndex: 999,
-    paddingHorizontal: 8 * bp,
+    paddingHorizontal: scale(8),
     fontSize: 14 * bp,
   },
   textStyle: {
-    fontSize: 16 * bp,
+    fontSize: scale(16),
     fontFamily: Raleway.Bold,
   },
   iconStyle: {
-    width: 20 * bp,
-    height: 20 * bp,
+    width: scale(20),
+    height: scale(20),
   },
   inputSearchStyle: {
-    height: 40 * bp,
-    fontSize: 16 * bp,
+    height: verticalScale(40),
+    fontSize: scale(16),
     borderColor: AstrogatorColor.VenetianNights,
     borderRadius: 5 * bp,
   },
   dropdownContainer: {
-    marginTop: 15 * bp,
-    height: 200 * bp,
+    marginTop: verticalScale(15),
+    height: verticalScale(150),
   },
 });

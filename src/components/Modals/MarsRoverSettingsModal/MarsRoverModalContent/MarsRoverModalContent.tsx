@@ -11,6 +11,8 @@ import { styles } from "./MarsRoverModalContent.styled";
 
 const MarsRoverModalContent: FC<MarsRoverModalContentProps> = ({
   rover,
+  selectedMarsSol,
+  selectedCamera,
   onCameraSelection,
   onMarsSolSelection,
   onExploreButtonPress,
@@ -77,6 +79,7 @@ const MarsRoverModalContent: FC<MarsRoverModalContentProps> = ({
         {`Last earth date / mars sol: ${rover.max_date} / ${rover.max_sol}`}
       </Typography>
       <SafeTextInput
+        currentValue={selectedMarsSol!}
         inputTypeCheckVariant={SafeInputTypeCheck.Number}
         setTextValue={onMarsSolSelection}
         errorTexts={inputErrorTexts}
@@ -85,6 +88,7 @@ const MarsRoverModalContent: FC<MarsRoverModalContentProps> = ({
       <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
       <DropdownSelector
         data={cameras}
+        currentValue={selectedCamera!}
         placeholderText={"Select rover camera"}
         onItemSelection={onCameraSelection}
       />

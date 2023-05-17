@@ -6,6 +6,7 @@ import { handleOnChangeText } from "./SafeTextInput.utils";
 import { styles } from "./SafeTextInput.styled";
 
 const SafeTextInput: FC<SafeTextInputProps> = ({
+  currentValue,
   inputTypeCheckVariant,
   setTextValue,
   maxValue,
@@ -38,6 +39,7 @@ const SafeTextInput: FC<SafeTextInputProps> = ({
       <TextInput
         style={[styles.input, inputStyles]}
         placeholder={placeholder}
+        value={currentValue}
         onChangeText={handleOnTypingText}
         onEndEditing={(event) => {
           handleOnTypingText(event.nativeEvent.text);

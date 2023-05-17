@@ -36,7 +36,9 @@ export const MarsRovers: FC<MarsRoversProps> = ({
             onLearnMorePress={() => {
               onLearnMorePress(rover);
             }}
-            onGalleryPress={onGalleryPress}
+            onGalleryPress={() => {
+              onGalleryPress(rover);
+            }}
             index={index}
             shuffleBack={shuffleBack}
           />

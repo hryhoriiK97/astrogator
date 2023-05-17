@@ -5,11 +5,12 @@ import { AstrogatorColor } from "../../theming/theme";
 import { styles } from "./DropdownSelector.styled";
 
 const DropdownSelector: FC<DropdownSelectorProps> = ({
+  currentValue,
   data,
   placeholderText,
   onItemSelection,
 }) => {
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState<string | null>(currentValue);
   const [isFocus, setIsFocus] = useState(false);
   return (
     <Dropdown

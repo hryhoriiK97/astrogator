@@ -67,19 +67,21 @@ const MarsRoversScreen: FC = () => {
           <Typography variant={Raleway.Bold} style={styles.title}>
             Mars Rovers
           </Typography>
-          <Spacer variant={SpacerVariant.Spacer_8_Vertical} />
+          <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
           <Typography style={styles.subtitle}>
             Explore space managing updates directly from NASA
           </Typography>
         </View>
+        <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
         <MarsRovers
           marsRoversData={marsRoversData}
           onLearnMorePress={(rover) => {
-            handlePresentModalPress();
             setSelectedRover(rover);
+            handlePresentModalPress();
           }}
-          onGalleryPress={() => {
-            navigate("MarsRoversPhotosStack", {
+          onGalleryPress={async (rover) => {
+            await setSelectedRover(rover);
+            await navigate("MarsRoversPhotosStack", {
               screen: "MarsRoverPhotosScreen",
             });
           }}

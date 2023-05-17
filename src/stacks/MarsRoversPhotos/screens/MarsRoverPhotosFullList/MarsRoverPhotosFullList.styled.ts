@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
+import { scale, verticalScale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
@@ -29,9 +30,9 @@ export const styles = StyleSheet.create({
     height: "100%",
   },
   header: {
-    paddingTop: 48 * bp,
-    paddingHorizontal: 8 * bp,
-    paddingBottom: 40 * bp,
+    paddingTop: verticalScale(48),
+    paddingHorizontal: scale(8),
+    paddingBottom: verticalScale(40),
   },
   title: {
     fontSize: 24 * bp,
@@ -48,9 +49,9 @@ export const styles = StyleSheet.create({
   marsPhotoItem: {
     width: "100%",
     aspectRatio: 1,
-    borderRadius: 10 * bp,
+    borderRadius: 8 * bp,
   },
   contentContainerStyle: {
-    paddingHorizontal: 8 * bp,
+    paddingHorizontal: scale(8),
   },
 });

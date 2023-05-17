@@ -1,17 +1,15 @@
-import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { Raleway } from "../../../../components";
-
-const { bp } = getRelativeUnits();
+import { scale, verticalScale } from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24 * bp,
+    paddingTop: verticalScale(48),
   },
   contentContainerStyle: {
-    marginHorizontal: 16 * bp,
+    marginHorizontal: scale(16),
   },
   backgroundImage: {
     position: "relative",
@@ -34,19 +32,18 @@ export const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.45)",
   },
   header: {
-    paddingTop: 24 * bp,
-    paddingLeft: 16 * bp,
+    paddingLeft: scale(16),
   },
   title: {
-    fontSize: 24 * bp,
+    fontSize: scale(24),
     color: AstrogatorColor.White,
-    lineHeight: 28 * bp,
+    lineHeight: verticalScale(28),
   },
   subtitle: {
-    maxWidth: 259 * bp,
+    maxWidth: scale(259),
     fontFamily: Raleway.Light,
-    fontSize: 14 * bp,
-    lineHeight: 19 * bp,
+    fontSize: scale(14),
+    lineHeight: verticalScale(19),
     color: AstrogatorColor.Silver,
   },
   modalContainer: {
