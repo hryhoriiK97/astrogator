@@ -22,15 +22,15 @@ import { commonStyles } from "../../../../theming/commonStyles";
 import { styles } from "./NasaImages.styled";
 import { EmptySpace } from "../../../../components/EmptySpace";
 import { format } from "date-fns";
-import { NasaImagesStackNavigationProp } from "../../NasaImages.routes";
 import { NasaAssetTransformed } from "../../../../types/NasaAssetTransformed";
+import { RootStackNavigationProp } from "../../../Root/Root.routes";
 
 enum NasaImagesScreenQueryKey {
   NasaImages = "NasaImages",
 }
 
 const NasaImagesScreen: FC = () => {
-  const navigation = useNavigation<NasaImagesStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   const flatListRef = useRef<FlatList>(null);
 

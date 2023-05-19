@@ -5,4 +5,5 @@ export type NasaAssetTransformed = {
   explanation: string;
   author: string;
   date: string;
+  videoUrl?: string;
 };

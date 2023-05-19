@@ -16,8 +16,7 @@ const NasaAssetsStack: FC = () => {
         initialRouteName={NasaAssetsStackRoutes.NasaImagesStack}
         screenOptions={(props) => {
           return {
-            title:
-              props.route.name === "NasaVideosScreen" ? "Videos" : "Images",
+            title: props.route.name === "NasaVideosStack" ? "Videos" : "Images",
             tabBarStyle: {
               backgroundColor: AstrogatorColor.Black,
             },

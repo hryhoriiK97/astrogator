@@ -23,6 +23,10 @@ export type RootParamList = {
     id: string;
     item: NasaAssetTransformed;
   };
+  NasaVideoScreen: {
+    id: string;
+    item: NasaAssetTransformed;
+  };
   SelectedVideoStack: NavigatorScreenParams<SelectedVideoStackParamList>;
   FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
@@ -38,6 +42,7 @@ export const RootStackRoutes: {
   MarsRoversPhotosStack: "MarsRoversPhotosStack",
   NasaAssetsStack: "NasaAssetsStack",
   NasaImageScreen: "NasaImageScreen",
+  NasaVideoScreen: "NasaVideoScreen",
   SelectedVideoStack: "SelectedVideoStack",
   FullImageStack: "FullImageStack",
 };

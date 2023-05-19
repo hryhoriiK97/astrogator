@@ -5,10 +5,6 @@ import { NasaAssetTransformed } from "../../types/NasaAssetTransformed";
 
 export type NasaImagesStackParamList = {
   NasaImagesScreen: undefined;
-  NasaImageScreen: {
-    id: string;
-    item: NasaAssetTransformed;
-  };
   FullImageStack: NavigatorScreenParams<FullImageStackParamList>;
 };
 
@@ -19,6 +15,5 @@ export const NasaImagesStackRoutes: {
   [route in keyof NasaImagesStackParamList]: route;
 } = {
   NasaImagesScreen: "NasaImagesScreen",
-  NasaImageScreen: "NasaImageScreen",
   FullImageStack: "FullImageStack",
 };

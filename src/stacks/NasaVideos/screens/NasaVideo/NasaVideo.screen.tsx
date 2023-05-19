@@ -17,19 +17,21 @@ import { HomeTileModal } from "../../../../components/HomeTileModal";
 import { ImageActionsTab } from "../../../../components/ImageActionsTab";
 import { commonStyles } from "../../../../theming/commonStyles";
 import { getBottomModalSnapPoint } from "../../../../utils/getBottomModalSnapPoint";
-import { styles } from "./NasaImage.styled";
+import { styles } from "./NasaVideo.styled";
 import { MobilePlatform } from "../../../../enums/MobilePlatform";
 import {
   RootParamList,
   RootStackNavigationProp,
 } from "../../../Root/Root.routes";
 
-const NasaImageScreen: FC = () => {
+const NasaVideoScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
-  const route = useRoute<RouteProp<RootParamList, "NasaImageScreen">>();
+  const route = useRoute<RouteProp<RootParamList, "NasaVideoScreen">>();
 
   const { id, item } = route.params;
+
+  console.log(id);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -117,4 +119,4 @@ const NasaImageScreen: FC = () => {
   );
 };
 
-export default NasaImageScreen;
+export default NasaVideoScreen;
