@@ -5,7 +5,6 @@ import {
   Dimensions,
   View,
   FlatList,
-  ImageBackground,
   Pressable,
   SafeAreaView,
 } from "react-native";
@@ -15,7 +14,6 @@ import { useQuery } from "react-query";
 
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
-import Background from "../../../../../assets/images/Group.png";
 import {
   MarsRoversPhotosStackNavigationProp,
   MarsRoversPhotosStackRoutes,
@@ -28,6 +26,7 @@ import {
   MarsRoverSettingsModal,
   Typography,
   Raleway,
+  ScreenWrapper,
 } from "../../../../components";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { styles } from "./MarsRoverPhotos.styled";
@@ -161,15 +160,7 @@ const MarsRoverPhotosScreen: FC = () => {
   };
 
   return (
-    <ImageBackground
-      source={Background}
-      resizeMode={"cover"}
-      progressiveRenderingEnabled={true}
-      resizeMethod={"resize"}
-      style={styles.backgroundImage}
-      imageStyle={styles.imageStyle}
-    >
-      <View style={styles.overlay} />
+    <ScreenWrapper>
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.screen}>
           <View style={styles.header}>
@@ -254,7 +245,7 @@ const MarsRoverPhotosScreen: FC = () => {
           />
         </View>
       </SafeAreaView>
-    </ImageBackground>
+    </ScreenWrapper>
   );
 };
 

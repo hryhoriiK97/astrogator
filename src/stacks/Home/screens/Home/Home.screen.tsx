@@ -1,26 +1,27 @@
-import {
-  ApodWidget,
-  Spacer,
-  SpacerVariant,
-  LoadingScreen,
-} from "../../../../components";
-import { isError, useQuery } from "react-query";
+import { View } from "react-native";
+import { useQuery } from "react-query";
 import React, { FC } from "react";
 import { NASA_API_KEY } from "@env";
 import { useNavigation } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
 import { format, subDays, isToday } from "date-fns";
+
+import {
+  ApodWidget,
+  Spacer,
+  SpacerVariant,
+  LoadingScreen,
+  ScreenWrapper,
+} from "../../../../components";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 
-import { ImageBackground, View } from "react-native";
-import Background from "../../../../../assets/images/Group.png";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { EmptySpace } from "../../../../components/EmptySpace";
 import { HomeHeader } from "../../../../components/HomeHeader";
+import { EmptyDataScreen } from "../../../../components/EmptyDataScreen";
 import { ApodResponse } from "../../../../types/ApodResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./Home.styled";
-import { EmptyDataScreen } from "../../../../components/EmptyDataScreen";
 
 const { bp } = getRelativeUnits();
 
@@ -79,15 +80,7 @@ const HomeScreen: FC = () => {
   };
 
   return (
-    <ImageBackground
-      source={Background}
-      resizeMode={"cover"}
-      progressiveRenderingEnabled={true}
-      resizeMethod={"resize"}
-      style={styles.backgroundImage}
-      imageStyle={styles.imageStyle}
-    >
-      <View style={styles.backdropWrapper} />
+    <ScreenWrapper>
       <View style={styles.container}>
         <HomeHeader
           onDatePicking={async (date) => {
@@ -118,7 +111,7 @@ const HomeScreen: FC = () => {
           }
         />
       </View>
-    </ImageBackground>
+    </ScreenWrapper>
   );
 };
 

@@ -5,13 +5,14 @@ import {
   LoadingScreen,
   useScrollToTopButton,
   ScrollToTopButton,
+  ScreenWrapper,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useNavigation, useScrollToTop } from "@react-navigation/native";
-import { FlashList } from "@shopify/flash-list";
+import { useNavigation } from "@react-navigation/native";
+
 import React, { FC, useCallback, useRef, useState } from "react";
-import Background from "../../../../../assets/images/Group.png";
-import { Animated, FlatList, ImageBackground, View } from "react-native";
+
+import { Animated, FlatList } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
@@ -134,15 +135,7 @@ const NasaImagesScreen: FC = () => {
   };
 
   return (
-    <ImageBackground
-      source={Background}
-      resizeMode={"cover"}
-      progressiveRenderingEnabled={true}
-      resizeMethod={"resize"}
-      style={styles.backgroundImage}
-      imageStyle={styles.imageStyle}
-    >
-      <View style={styles.backdropWrapper} />
+    <ScreenWrapper>
       <Animated.FlatList
         ref={flatListRef}
         contentContainerStyle={styles.contentContainerStyle}
@@ -180,7 +173,7 @@ const NasaImagesScreen: FC = () => {
         <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
       </BottomSheetModal>
       <ScrollToTopButton onPress={scrollToTop} buttonOpacity={buttonOpacity} />
-    </ImageBackground>
+    </ScreenWrapper>
   );
 };
 

@@ -8,3 +8,4 @@ export * from "./SafeTextInput";
 export * from "./Typography";
 export * from "./Modals";
 export * from "./ScrollToTopButton";
+export * from "./ScreenWrapper";

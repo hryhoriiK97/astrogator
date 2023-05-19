@@ -1,19 +1,19 @@
 import {
   LoadingScreen,
   Raleway,
+  ScreenWrapper,
   Spacer,
   SpacerVariant,
   Typography,
 } from "../../../../components";
+import { View } from "react-native";
 import { NASA_API_KEY } from "@env";
 import { MarsRovers } from "../../../../components/MarsRovers";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import React, { FC, useCallback, useRef } from "react";
-import { ImageBackground, View } from "react-native";
 import { useQuery } from "react-query";
-import Background from "../../../../../assets/images/Group.png";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { MarsRoverItemResponse } from "../../../../types/MarsRoverItemResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
@@ -53,15 +53,7 @@ const MarsRoversScreen: FC = () => {
     marsRovesResponse?.data.rovers;
 
   return (
-    <ImageBackground
-      source={Background}
-      resizeMode={"cover"}
-      progressiveRenderingEnabled={true}
-      resizeMethod={"resize"}
-      style={styles.backgroundImage}
-      imageStyle={styles.imageStyle}
-    >
-      <View style={styles.backdropWrapper} />
+    <ScreenWrapper>
       <View style={styles.container}>
         <View style={styles.header}>
           <Typography variant={Raleway.Bold} style={styles.title}>
@@ -95,7 +87,7 @@ const MarsRoversScreen: FC = () => {
           }}
         />
       </View>
-    </ImageBackground>
+    </ScreenWrapper>
   );
 };
 

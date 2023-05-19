@@ -15,6 +15,7 @@ import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
 import Background from "../../../../../assets/images/Group.png";
 import {
+  ScreenWrapper,
   ScrollToTopButton,
   Spacer,
   SpacerVariant,
@@ -72,15 +73,7 @@ const MarsRoverPhotosFullListScreen: FC = () => {
   );
 
   return (
-    <ImageBackground
-      source={Background}
-      resizeMode={"cover"}
-      progressiveRenderingEnabled={true}
-      resizeMethod={"resize"}
-      style={styles.backgroundImage}
-      imageStyle={styles.imageStyle}
-    >
-      <View style={styles.overlay} />
+    <ScreenWrapper>
       <SafeAreaView style={styles.safeAreaContainer}>
         <Animated.FlatList
           ref={flatListRef}
@@ -113,7 +106,7 @@ const MarsRoverPhotosFullListScreen: FC = () => {
           buttonOpacity={buttonOpacity}
         />
       </SafeAreaView>
-    </ImageBackground>
+    </ScreenWrapper>
   );
 };
 
