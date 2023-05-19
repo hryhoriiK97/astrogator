@@ -8,11 +8,11 @@ const { bp } = getRelativeUnits();
 export const styles = StyleSheet.create({
   buttonWrapper: {
     position: "absolute",
-    bottom: 50 * bp,
-    left: 30 * bp,
-    width: scale(60),
-    height: scale(60),
-    borderRadius: scale(60 / 2),
+    bottom: 20 * bp,
+    right: 20 * bp,
+    width: scale(45),
+    height: scale(45),
+    borderRadius: scale(45 / 2),
     backgroundColor: AstrogatorColor.VenetianNights,
   },
   button: {

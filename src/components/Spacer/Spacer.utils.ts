@@ -1,66 +1,86 @@
 import { ViewStyle } from "react-native";
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
-import { scale, verticalScale } from "react-native-size-matters";
+import {
+  moderateVerticalScale,
+  scale,
+  verticalScale,
+} from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
 export enum SpacerVariant {
   Spacer_2_Vertical = "Spacer_2_Vertical",
+  Spacer_3_Vertical = "Spacer_3_Vertical",
+  Spacer_4_Vertical = "Spacer_4_Vertical",
   Spacer_5_Vertical = "Spacer_5_Vertical",
+  Spacer_8_Vertical = "Spacer_8_Vertical",
+  Spacer_9_Vertical = "Spacer_9_Vertical",
+  Spacer_10_Vertical = "Spacer_10_Vertical",
+  Spacer_12_Vertical = "Spacer_12_Vertical",
+  Spacer_15_Vertical = "Spacer_15_Vertical",
+  Spacer_20_Vertical = "Spacer_20_Vertical",
+  Spacer_50_Vertical = "Spacer_50_Vertical",
   Spacer_3_Horizontal = "Spacer_3_Horizontal",
   Spacer_5_Horizontal = "Spacer_5_Horizontal",
   Spacer_6_Horizontal = "Spacer_6_Horizontal",
   Spacer_7_Horizontal = "Spacer_7_Horizontal",
   Spacer_10_Horizontal = "Spacer_10_Horizontal",
-  Spacer_8_Vertical = "Spacer_8_Vertical",
-  Spacer_10_Vertical = "Spacer_10_Vertical",
-  Spacer_15_Vertical = "Spacer_15_Vertical",
-  Spacer_20_Vertical = "Spacer_20_Vertical",
 }
 
 export type SpacerStyle = {
   [key in SpacerVariant]: {
-    marginVertical?: ViewStyle["marginVertical"];
-    marginHorizontal?: ViewStyle["marginHorizontal"];
-    marginTop?: ViewStyle["marginTop"];
-    marginBottom?: ViewStyle["marginBottom"];
-    marginLeft?: ViewStyle["marginLeft"];
-    marginRight?: ViewStyle["marginRight"];
+    width?: ViewStyle["width"];
+    height?: ViewStyle["height"];
   };
 };
 
 export const spacerStyle: SpacerStyle = {
   [SpacerVariant.Spacer_2_Vertical]: {
-    marginVertical: verticalScale(2),
+    height: moderateVerticalScale(2),
+  },
+  [SpacerVariant.Spacer_3_Vertical]: {
+    height: moderateVerticalScale(3),
+  },
+  [SpacerVariant.Spacer_4_Vertical]: {
+    height: moderateVerticalScale(4),
   },
   [SpacerVariant.Spacer_5_Vertical]: {
-    marginVertical: verticalScale(5),
-  },
-  [SpacerVariant.Spacer_3_Horizontal]: {
-    marginHorizontal: scale(3),
-  },
-  [SpacerVariant.Spacer_5_Horizontal]: {
-    marginHorizontal: scale(5),
-  },
-  [SpacerVariant.Spacer_6_Horizontal]: {
-    marginHorizontal: scale(6),
-  },
-  [SpacerVariant.Spacer_7_Horizontal]: {
-    marginHorizontal: scale(7),
-  },
-  [SpacerVariant.Spacer_10_Horizontal]: {
-    marginHorizontal: scale(10),
+    height: moderateVerticalScale(5),
   },
   [SpacerVariant.Spacer_8_Vertical]: {
-    marginVertical: verticalScale(8),
+    height: moderateVerticalScale(8),
+  },
+  [SpacerVariant.Spacer_9_Vertical]: {
+    height: moderateVerticalScale(9),
   },
   [SpacerVariant.Spacer_10_Vertical]: {
-    marginVertical: verticalScale(10),
+    height: moderateVerticalScale(10),
+  },
+  [SpacerVariant.Spacer_12_Vertical]: {
+    height: moderateVerticalScale(10),
   },
   [SpacerVariant.Spacer_15_Vertical]: {
-    marginVertical: verticalScale(15),
+    height: moderateVerticalScale(15),
   },
   [SpacerVariant.Spacer_20_Vertical]: {
-    marginVertical: verticalScale(20),
+    height: moderateVerticalScale(20),
+  },
+  [SpacerVariant.Spacer_50_Vertical]: {
+    height: moderateVerticalScale(50),
+  },
+  [SpacerVariant.Spacer_3_Horizontal]: {
+    width: scale(3),
+  },
+  [SpacerVariant.Spacer_5_Horizontal]: {
+    width: scale(5),
+  },
+  [SpacerVariant.Spacer_6_Horizontal]: {
+    width: scale(6),
+  },
+  [SpacerVariant.Spacer_7_Horizontal]: {
+    width: scale(7),
+  },
+  [SpacerVariant.Spacer_10_Horizontal]: {
+    width: scale(10),
   },
 };
