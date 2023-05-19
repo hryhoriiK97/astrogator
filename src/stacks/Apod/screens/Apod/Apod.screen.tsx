@@ -22,7 +22,7 @@ const ApodScreen: FC = () => {
 
   const selectedApodDate = new Date(apodDate!);
 
-  if (item) {
+  if (item.id) {
     return <ApodScreenContent id={id} item={item} />;
   } else {
     const {

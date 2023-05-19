@@ -4,7 +4,7 @@ import {
   SpacerVariant,
   LoadingScreen,
 } from "../../../../components";
-import { useQuery } from "react-query";
+import { isError, useQuery } from "react-query";
 import React, { FC } from "react";
 import { NASA_API_KEY } from "@env";
 import { useNavigation } from "@react-navigation/native";
@@ -20,6 +20,7 @@ import { HomeHeader } from "../../../../components/HomeHeader";
 import { ApodResponse } from "../../../../types/ApodResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./Home.styled";
+import { EmptyDataScreen } from "../../../../components/EmptyDataScreen";
 
 const { bp } = getRelativeUnits();
 
@@ -52,6 +53,8 @@ const HomeScreen: FC = () => {
         return { ...apod, id: index };
       })
     : [];
+
+  const isEmptyApodsList = !apods.length;
 
   const renderItem = ({ item }: { item: ApodResponse }) => {
     return (
@@ -89,6 +92,7 @@ const HomeScreen: FC = () => {
         <HomeHeader
           onDatePicking={async (date) => {
             if (!isToday(date)) {
+              console.log(format(date, "yyyy-MM-dd"));
               navigation.navigate("ApodStack", {
                 id: "apod-id",
                 apodDate: format(date, "yyyy-MM-dd"),
@@ -105,6 +109,13 @@ const HomeScreen: FC = () => {
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={renderItemSeparator}
           estimatedItemSize={200 * bp}
+          ListEmptyComponent={
+            isEmptyApodsList ? (
+              <EmptyDataScreen text={"No data"} />
+            ) : isApodError ? (
+              <EmptyDataScreen text={"No data"} />
+            ) : undefined
+          }
         />
       </View>
     </ImageBackground>

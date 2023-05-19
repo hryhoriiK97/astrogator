@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     lineHeight: 16 * bp,
   },
   authorText: {
-    maxWidth: scale(250),
+    maxWidth: scale(230),
   },
   subheaderControlsWrapper: {
     minWidth: scale(65),
@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: scale(25),
     marginTop: moderateVerticalScale(30),
-    marginBottom: 16 * bp,
+    marginBottom: moderateVerticalScale(20),
     color: AstrogatorColor.White,
   },
   explanation: {
