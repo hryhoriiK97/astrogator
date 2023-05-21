@@ -5,7 +5,6 @@ import {
   SafeAreaView,
   View,
   FlatList,
-  ImageBackground,
 } from "react-native";
 import { Image } from "expo-image";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -13,7 +12,6 @@ import { MarsRoversPhotosStackParamList } from "../../MarsRoversPhotos.routes";
 import { styles } from "./MarsRoverPhotosFullList.styled";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
-import Background from "../../../../../assets/images/Group.png";
 import {
   ScreenWrapper,
   ScrollToTopButton,

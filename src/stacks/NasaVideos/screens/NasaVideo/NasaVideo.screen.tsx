@@ -3,6 +3,11 @@ import {
   SpacerVariant,
   SafeImage,
   Typography,
+  CustomBottomSheetBackdrop,
+  CustomBottomSheetModalBackground,
+  BackButton,
+  HomeTileModal,
+  ImageActionsTab,
 } from "../../../../components";
 import { SharedElement } from "react-navigation-shared-element";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -10,11 +15,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { format } from "date-fns";
 import React, { FC, useCallback, useRef } from "react";
 import { Platform, ScrollView, View } from "react-native";
-import { BackButton } from "../../../../components/BackButton";
-import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
-import { CustomBottomSheetModalBackground } from "../../../../components/CustomBottomSheetModalBackground";
-import { HomeTileModal } from "../../../../components/HomeTileModal";
-import { ImageActionsTab } from "../../../../components/ImageActionsTab";
+
 import { commonStyles } from "../../../../theming/commonStyles";
 import { getBottomModalSnapPoint } from "../../../../utils/getBottomModalSnapPoint";
 import { styles } from "./NasaVideo.styled";

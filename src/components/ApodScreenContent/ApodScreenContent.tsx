@@ -25,8 +25,7 @@ import { CustomBottomSheetBackdrop } from "../CustomBottomSheetBackdrop";
 import { commonStyles } from "../../theming/commonStyles";
 import { HomeTileModal } from "../HomeTileModal";
 import { SharedElement } from "react-navigation-shared-element";
-import { getYouTubeVideoId, addHttpsToUrl, getVimeoVideoId } from "../../utils";
-import WebView from "react-native-webview";
+import { getYouTubeVideoId, getVimeoVideoId } from "../../utils";
 
 const YOUTUBE_PLAYER_HEIGHT = Dimensions.get("window").width * (9 / 16);
 

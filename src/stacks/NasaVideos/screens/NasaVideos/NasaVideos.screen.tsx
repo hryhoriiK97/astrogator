@@ -6,6 +6,8 @@ import {
   useScrollToTopButton,
   ScrollToTopButton,
   ScreenWrapper,
+  CustomBottomSheetBackdrop,
+  CustomBottomSheetModalBackground,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
@@ -14,9 +16,8 @@ import React, { FC, useCallback, useRef, useState } from "react";
 import { FlatList, Animated } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
-import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
-import { CustomBottomSheetModalBackground } from "../../../../components/CustomBottomSheetModalBackground";
-import { NasaAssetItemModal } from "../../../../components/NasaAssetItemModal";
+
+import { NasaAssetItemModal } from "../../../../components/Modals/NasaAssetItemModal";
 import { commonStyles } from "../../../../theming/commonStyles";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./NasaVideos.styled";

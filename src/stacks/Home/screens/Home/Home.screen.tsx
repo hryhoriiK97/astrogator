@@ -12,13 +12,14 @@ import {
   SpacerVariant,
   LoadingScreen,
   ScreenWrapper,
+  EmptySpace,
+  HomeHeader,
+  EmptyDataScreen,
 } from "../../../../components";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
-import { EmptySpace } from "../../../../components/EmptySpace";
-import { HomeHeader } from "../../../../components/HomeHeader";
-import { EmptyDataScreen } from "../../../../components/EmptyDataScreen";
+
 import { ApodResponse } from "../../../../types/ApodResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./Home.styled";

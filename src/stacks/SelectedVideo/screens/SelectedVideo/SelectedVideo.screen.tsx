@@ -1,9 +1,8 @@
-import { LoadingScreen } from "../../../../components";
+import { LoadingScreen, VideoPlayer } from "../../../../components";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import axios from "axios";
 import React, { FC } from "react";
 import { useQuery } from "react-query";
-import { LiveVideoPlayer } from "../../../../components/VideoPlayer";
 import {
   SelectedVideoStackNavigationProp,
   SelectedVideoStackParamList,
@@ -43,10 +42,7 @@ const SelectedVideoScreen: FC = () => {
   const handledUriHttp = handledUriWhiteSpaces?.replace("http", "https");
 
   return (
-    <LiveVideoPlayer
-      videoUri={handledUriHttp!}
-      onBackPress={navigation.goBack}
-    />
+    <VideoPlayer videoUri={handledUriHttp!} onBackPress={navigation.goBack} />
   );
 };
 

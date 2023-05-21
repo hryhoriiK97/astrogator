@@ -3,6 +3,11 @@ import {
   SpacerVariant,
   SafeImage,
   Typography,
+  CustomBottomSheetBackdrop,
+  CustomBottomSheetModalBackground,
+  BackButton,
+  HomeTileModal,
+  ImageActionsTab,
 } from "../../../../components";
 import { SharedElement } from "react-navigation-shared-element";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -10,11 +15,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { format } from "date-fns";
 import React, { FC, useCallback, useRef } from "react";
 import { Platform, ScrollView, View } from "react-native";
-import { BackButton } from "../../../../components/BackButton";
-import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
-import { CustomBottomSheetModalBackground } from "../../../../components/CustomBottomSheetModalBackground";
-import { HomeTileModal } from "../../../../components/HomeTileModal";
-import { ImageActionsTab } from "../../../../components/ImageActionsTab";
+
 import { commonStyles } from "../../../../theming/commonStyles";
 import { getBottomModalSnapPoint } from "../../../../utils/getBottomModalSnapPoint";
 import { styles } from "./NasaImage.styled";
@@ -41,7 +42,7 @@ const NasaImageScreen: FC = () => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
 
-  const apodExplanationArray = item.explanation.split(" ");
+  const apodExplanationArray = item.explanation?.split(" ") ?? [];
   return (
     <ScrollView
       style={styles.container}
@@ -97,22 +98,24 @@ const NasaImageScreen: FC = () => {
           </Typography>
         )}
       </Typography>
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
-        backdropComponent={(props) => (
-          <CustomBottomSheetBackdrop
-            {...props}
-            onPress={handleCloseModalPress}
-          />
-        )}
-        backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={[getBottomModalSnapPoint(item.explanation.length)]}
-        enableOverDrag={false}
-        enableDismissOnClose={true}
-      >
-        <HomeTileModal title={item.title} description={item.explanation} />
-      </BottomSheetModal>
+      {item.explanation && (
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
+          backdropComponent={(props) => (
+            <CustomBottomSheetBackdrop
+              {...props}
+              onPress={handleCloseModalPress}
+            />
+          )}
+          backgroundComponent={CustomBottomSheetModalBackground}
+          snapPoints={[getBottomModalSnapPoint(item?.explanation?.length)]}
+          enableOverDrag={false}
+          enableDismissOnClose={true}
+        >
+          <HomeTileModal title={item.title} description={item.explanation} />
+        </BottomSheetModal>
+      )}
     </ScrollView>
   );
 };
