@@ -5,10 +5,11 @@ import {
   Spacer,
   SpacerVariant,
   Typography,
+  MarsRovers,
+  MarsRoverSettingsModal,
 } from "../../../../components";
 import { View } from "react-native";
 import { NASA_API_KEY } from "@env";
-import { MarsRovers } from "../../../../components/MarsRovers";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +18,6 @@ import { useQuery } from "react-query";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { MarsRoverItemResponse } from "../../../../types/MarsRoverItemResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
-import { MarsRoverSettingsModal } from "../../../../components/Modals";
 import { styles } from "./MarsRovers.styled";
 
 enum MarsRoverPhotosQueryKey {

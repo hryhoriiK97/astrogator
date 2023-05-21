@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
     height: "100%",
   },
   label: {
+    fontSize: 10 * bp,
     color: AstrogatorColor.White,
     textAlign: "center",
   },
@@ -42,17 +43,6 @@ const BottomTabStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        // tabBarBackground: () => (
-        //   <ImageBackground
-        //     source={Background}
-        //     resizeMode={"cover"}
-        //     progressiveRenderingEnabled={true}
-        //     resizeMethod={"resize"}
-        //     style={styles.backgroundImage}
-        //     imageStyle={styles.imageStyle}
-        //   />
-        // ),
-
         tabBarShowLabel: true,
         headerShown: false,
         tabBarActiveTintColor: AstrogatorColor.VenetianNights,

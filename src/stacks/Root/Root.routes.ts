@@ -1,6 +1,5 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ApodStackParamList } from "../Apod/Apod.routes";
 import { BottomTabParamList } from "../BottomTab/BottomTab.routes";
 import { FullImageStackParamList } from "../FullImage/FullImage.routes";
 import { MarsRoversPhotosStackParamList } from "../MarsRoversPhotos/MarsRoversPhotos.routes";

@@ -66,7 +66,6 @@ const NasaImagesScreen: FC = () => {
     isLoading: isNasaImagesLoading,
     fetchNextPage: fetchNasaImagesNextPage,
     hasNextPage: hasNasaImagesNextPage,
-    isFetchedAfterMount,
     isFetchingNextPage: isNasaImagesFetchingNextPage,
     isError: isImagesRoversError,
   } = useInfiniteQuery(
@@ -95,7 +94,7 @@ const NasaImagesScreen: FC = () => {
     }
   };
 
-  if (isNasaImagesLoading && isFetchedAfterMount) {
+  if (isNasaImagesLoading) {
     return <LoadingScreen />;
   }
 
