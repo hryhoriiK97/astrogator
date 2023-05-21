@@ -31,8 +31,6 @@ const NasaVideoScreen: FC = () => {
 
   const { id, item } = route.params;
 
-  console.log(id);
-
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = useCallback(() => {
@@ -43,7 +41,7 @@ const NasaVideoScreen: FC = () => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
 
-  const apodExplanationArray = item.explanation.split(" ");
+  const apodExplanationArray = item.explanation?.split(" ") ?? [];
   return (
     <ScrollView
       style={styles.container}
@@ -54,9 +52,13 @@ const NasaVideoScreen: FC = () => {
       </View>
       <SharedElement id={id}>
         <SafeImage
-          source={{
-            uri: item.src,
-          }}
+          source={
+            item.src
+              ? {
+                  uri: item.src,
+                }
+              : require("../../../../../assets/images/apod-tile.webp")
+          }
           defaultSource={require("../../../../../assets/images/apod-tile.webp")}
           imageStyle={styles.image}
           imageWrapperStyle={styles.imageWrapper}
@@ -75,11 +77,10 @@ const NasaVideoScreen: FC = () => {
         </View>
         <ImageActionsTab
           onMagnifierButtonPress={() =>
-            navigation.navigate("FullImageStack", {
-              screen: "FullImageScreen",
+            navigation.navigate("SelectedVideoStack", {
+              screen: "SelectedVideoScreen",
               params: {
-                photoUri: item.src,
-                title: item.title,
+                videoCollectionUri: item.videoUrl!,
               },
             })
           }
@@ -99,22 +100,24 @@ const NasaVideoScreen: FC = () => {
           </Typography>
         )}
       </Typography>
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
-        backdropComponent={(props) => (
-          <CustomBottomSheetBackdrop
-            {...props}
-            onPress={handleCloseModalPress}
-          />
-        )}
-        backgroundComponent={CustomBottomSheetModalBackground}
-        snapPoints={[getBottomModalSnapPoint(item.explanation.length)]}
-        enableOverDrag={false}
-        enableDismissOnClose={true}
-      >
-        <HomeTileModal title={item.title} description={item.explanation} />
-      </BottomSheetModal>
+      {item.explanation && (
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          handleIndicatorStyle={commonStyles.bottomSheetModalIndicator}
+          backdropComponent={(props) => (
+            <CustomBottomSheetBackdrop
+              {...props}
+              onPress={handleCloseModalPress}
+            />
+          )}
+          backgroundComponent={CustomBottomSheetModalBackground}
+          snapPoints={[getBottomModalSnapPoint(item.explanation?.length)]}
+          enableOverDrag={false}
+          enableDismissOnClose={true}
+        >
+          <HomeTileModal title={item.title} description={item.explanation} />
+        </BottomSheetModal>
+      )}
     </ScrollView>
   );
 };

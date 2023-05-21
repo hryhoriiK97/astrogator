@@ -2,8 +2,8 @@ export type NasaAssetTransformed = {
   id: string | number;
   src: string;
   title: string;
-  explanation: string;
-  author: string;
+  author?: string;
   date: string;
   videoUrl?: string;
+  explanation?: string;
 };

@@ -1,14 +1,11 @@
 import { Raleway } from "../Typography";
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
-import { getRelativeUnits } from "../../utils/getRelativeUnits";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-
-const { bp } = getRelativeUnits();
+import { scale, verticalScale } from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingTop: verticalScale(24),
+    paddingTop: verticalScale(48),
     paddingBottom: verticalScale(20),
   },
   title: {

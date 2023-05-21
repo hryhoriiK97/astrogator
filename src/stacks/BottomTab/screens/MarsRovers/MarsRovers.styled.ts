@@ -12,12 +12,12 @@ export const styles = StyleSheet.create({
     marginHorizontal: scale(16),
   },
   header: {
-    paddingLeft: scale(16),
+    paddingLeft: verticalScale(16),
   },
   title: {
     fontSize: scale(24),
     color: AstrogatorColor.White,
-    lineHeight: verticalScale(28),
+    lineHeight: scale(28),
   },
   subtitle: {
     maxWidth: scale(259),

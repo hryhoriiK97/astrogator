@@ -12,6 +12,13 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  mask: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   backdropWrapper: {
     position: "absolute",
     width: "100%",
@@ -20,6 +27,6 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.45)",
+    backgroundColor: "rgba(0,0,0,0.60)",
   },
 });

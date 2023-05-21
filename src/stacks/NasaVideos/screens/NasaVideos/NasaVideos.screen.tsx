@@ -37,7 +37,7 @@ const NasaVideosScreen: FC = () => {
 
   const scrollToTop = (): void => {
     if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+      flatListRef.current.scrollToIndex({ index: 0 });
     }
   };
 
@@ -59,7 +59,6 @@ const NasaVideosScreen: FC = () => {
     isLoading: isNasaVideosLoading,
     fetchNextPage: fetchNasaVideosNextPage,
     hasNextPage: hasNasaVideosNextPage,
-    isFetchedAfterMount: isNasaVideosFetchedAfterMount,
     isFetchingNextPage: isNasaVideosFetchingNextPage,
     isError: isNasaVideosError,
   } = useInfiniteQuery(
@@ -88,7 +87,7 @@ const NasaVideosScreen: FC = () => {
     }
   };
 
-  if (isNasaVideosFetchedAfterMount && isNasaVideosLoading) {
+  if (isNasaVideosLoading) {
     return <LoadingScreen />;
   }
 

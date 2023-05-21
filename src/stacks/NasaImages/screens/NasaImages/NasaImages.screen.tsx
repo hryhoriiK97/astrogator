@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import React, { FC, useCallback, useRef, useState } from "react";
 
-import { Animated, FlatList } from "react-native";
+import { Animated } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
@@ -24,21 +24,27 @@ import { EmptySpace } from "../../../../components/EmptySpace";
 import { format } from "date-fns";
 import { NasaAssetTransformed } from "../../../../types/NasaAssetTransformed";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
+import { FlashList } from "@shopify/flash-list";
+import { scale } from "react-native-size-matters";
 
 enum NasaImagesScreenQueryKey {
   NasaImages = "NasaImages",
 }
 
+const AnimatedFlashList = Animated.createAnimatedComponent(
+  FlashList<NasaAssetTransformed>
+);
+
 const NasaImagesScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
-  const flatListRef = useRef<FlatList>(null);
+  const flatListRef = useRef<FlashList<NasaAssetTransformed>>(null);
 
   const { scrollY, buttonOpacity } = useScrollToTopButton();
 
   const scrollToTop = (): void => {
     if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+      flatListRef.current.scrollToIndex({ index: 0 });
     }
   };
 
@@ -59,7 +65,7 @@ const NasaImagesScreen: FC = () => {
     isLoading: isNasaImagesLoading,
     fetchNextPage: fetchNasaImagesNextPage,
     hasNextPage: hasNasaImagesNextPage,
-    isFetchedAfterMount: isNasaImagesFetchedAfterMount,
+    isFetchedAfterMount,
     isFetchingNextPage: isNasaImagesFetchingNextPage,
     isError: isImagesRoversError,
   } = useInfiniteQuery(
@@ -88,7 +94,7 @@ const NasaImagesScreen: FC = () => {
     }
   };
 
-  if (isNasaImagesFetchedAfterMount && isNasaImagesLoading) {
+  if (isNasaImagesLoading && isFetchedAfterMount) {
     return <LoadingScreen />;
   }
 
@@ -136,12 +142,13 @@ const NasaImagesScreen: FC = () => {
 
   return (
     <ScreenWrapper>
-      <Animated.FlatList
+      <AnimatedFlashList
         ref={flatListRef}
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaImagesData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
+        estimatedItemSize={scale(216)}
         ItemSeparatorComponent={renderItemSeparator}
         ListFooterComponent={
           <EmptySpace
