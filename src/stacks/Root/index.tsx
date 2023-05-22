@@ -10,6 +10,7 @@ import NasaImageScreen from "../NasaImages/screens/NasaImage/NasaImage.screen";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import ApodScreen from "../Apod/screens/Apod/Apod.screen";
 import NasaVideoScreen from "../NasaVideos/screens/NasaVideo/NasaVideo.screen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createSharedElementStackNavigator();
 
@@ -17,7 +18,11 @@ const RootStack: FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={RootStackRoutes.WelcomeScreen}
+      initialRouteName={
+        !!AsyncStorage.getItem("@wasFirstInteraction")
+          ? RootStackRoutes.BottomTabStack
+          : RootStackRoutes.WelcomeScreen
+      }
     >
       <Stack.Screen
         name={RootStackRoutes.WelcomeScreen}

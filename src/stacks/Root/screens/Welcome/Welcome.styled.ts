@@ -86,7 +86,6 @@ export const styles = StyleSheet.create({
   discoverButton: {
     width: "100%",
     height: 52 * bp,
-    borderRadius: 12 * bp,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -94,13 +93,8 @@ export const styles = StyleSheet.create({
     borderColor: "rgba(145,145,145, 0.33)",
     overflow: "hidden",
   },
-  blurViewStyle: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    borderRadius: 12 * bp,
+  blurWrapper: {
+    width: "100%",
   },
   discoverButtonTitle: {
     fontSize: 14 * bp,

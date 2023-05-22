@@ -3,6 +3,7 @@ import { Pressable, View } from "react-native";
 import { Image } from "expo-image";
 import { Heart } from "../../../../assets/svgs/Heart";
 import { moderateScale } from "react-native-size-matters";
+import { BlurView } from "expo-blur";
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
@@ -134,16 +135,30 @@ const MarsRoverCard = ({
               </View>
               <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
               <View style={styles.buttonsWrapper}>
-                <Pressable style={styles.button} onPress={onLearnMorePress}>
-                  <Typography style={styles.buttonTitle}>Learn More</Typography>
-                </Pressable>
-                <Spacer variant={SpacerVariant.Spacer_5_Horizontal} />
-                <Pressable
-                  style={[styles.button, styles.purpleButton]}
-                  onPress={onGalleryPress}
+                <BlurView
+                  tint="light"
+                  intensity={10}
+                  style={styles.blurWrapper}
                 >
-                  <Typography style={styles.buttonTitle}>Gallery</Typography>
-                </Pressable>
+                  <Pressable style={styles.button} onPress={onLearnMorePress}>
+                    <Typography style={styles.buttonTitle}>
+                      Learn More
+                    </Typography>
+                  </Pressable>
+                </BlurView>
+                <Spacer variant={SpacerVariant.Spacer_5_Horizontal} />
+                <BlurView
+                  tint="light"
+                  intensity={10}
+                  style={styles.blurWrapper}
+                >
+                  <Pressable
+                    style={[styles.button, styles.purpleButton]}
+                    onPress={onGalleryPress}
+                  >
+                    <Typography style={styles.buttonTitle}>Gallery</Typography>
+                  </Pressable>
+                </BlurView>
               </View>
             </View>
           </Image>

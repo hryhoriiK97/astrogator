@@ -83,8 +83,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  button: {
+  blurWrapper: {
     width: "50%",
+  },
+  button: {
+    width: "100%",
     paddingVertical: moderateVerticalScale(12),
     paddingHorizontal: moderateScale(15),
     borderRadius: 4 * bp,

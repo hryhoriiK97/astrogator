@@ -2,7 +2,7 @@ import { Typography } from "../../../../components";
 //TODO
 // import { BlurView } from "expo-blur";
 import { useNavigation } from "@react-navigation/native";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { ImageBackground, Pressable, StatusBar, View } from "react-native";
 import Background from "../../../../../assets/images/Group.png";
 import { Astronaut } from "../../../../../assets/svgs/Astronaut";
@@ -10,9 +10,15 @@ import { RedPlanet } from "../../../../../assets/svgs/RedPlanet";
 import { SmallPlanet } from "../../../../../assets/svgs/SmallPlanet";
 import { RootStackNavigationProp } from "../../Root.routes";
 import { styles } from "./Welcome.styled";
+import { BlurView } from "expo-blur";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const WelcomeScreen: FC = () => {
   const { navigate } = useNavigation<RootStackNavigationProp>();
+
+  useEffect(() => {
+    AsyncStorage.setItem("@wasFirstInteraction", "true");
+  }, []);
 
   return (
     <>
@@ -45,24 +51,21 @@ const WelcomeScreen: FC = () => {
               Explore the vastness of space with our new mobile app! learn about
               the planets and stars, and admire stunning space photos.
             </Typography>
-            <Pressable
-              style={styles.discoverButton}
-              onPress={() =>
-                navigate("BottomTabStack", {
-                  screen: "HomeStack",
-                  params: { screen: "HomeScreen" },
-                })
-              }
-            >
-              {/* <BlurView
-                // blurType={"dark"}
-                // blurAmount={3}
-                style={styles.blurViewStyle}
-              /> */}
-              <Typography style={styles.discoverButtonTitle}>
-                Start Discovery
-              </Typography>
-            </Pressable>
+            <BlurView intensity={10} tint={"light"} style={styles.blurWrapper}>
+              <Pressable
+                style={styles.discoverButton}
+                onPress={() =>
+                  navigate("BottomTabStack", {
+                    screen: "HomeStack",
+                    params: { screen: "HomeScreen" },
+                  })
+                }
+              >
+                <Typography style={styles.discoverButtonTitle}>
+                  Start Discovery
+                </Typography>
+              </Pressable>
+            </BlurView>
           </View>
         </View>
       </ImageBackground>
