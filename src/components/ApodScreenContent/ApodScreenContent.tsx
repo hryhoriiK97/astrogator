@@ -16,7 +16,7 @@ import { ApodScreenContentProps } from "./ApodScreenContent.props";
 import { BackButton } from "../BackButton";
 import { SafeImage } from "../SafeImage";
 import { styles } from "./ApodScreenContent.styled";
-import { ImageActionsTab } from "../ImageActionsTab";
+import { ImageActionTab } from "../ImageActionTab";
 import { Spacer, SpacerVariant } from "../Spacer";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { CustomBottomSheetModalBackground } from "../CustomBottomSheetModalBackground";
@@ -37,7 +37,7 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
 }) => {
   const navigation = useNavigation<ApodStackNavigationProp>();
 
-  const apodExplanationArray = item.explanation.split(" ");
+  const apodExplanationArray = item?.explanation.split(" ") ?? [];
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -62,20 +62,20 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
       <View style={styles.apodHeader}>
         <BackButton onPress={() => navigation.goBack()} />
       </View>
-      {item.media_type === "image" ? (
+      {item?.media_type === "image" ? (
         <SharedElement id={id}>
           <SafeImage
             source={{
               uri: item.url,
             }}
-            defaultSource={require("../../../assets/images/apod-tile.webp")}
+            defaultSource={require("../../../assets/splash.png")}
             imageStyle={styles.image}
             imageWrapperStyle={styles.imageWrapper}
           />
         </SharedElement>
       ) : (
         <>
-          {item.url.includes("youtube") ? (
+          {item?.url.includes("youtube") ? (
             <YoutubePlayer
               height={YOUTUBE_PLAYER_HEIGHT}
               videoId={getYouTubeVideoId(item.url)}
@@ -83,14 +83,14 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
           ) : (
             <View style={{ height: 200, backgroundColor: "red" }}>
               <Vimeo
-                videoId={getVimeoVideoId(item.url)!}
+                videoId={getVimeoVideoId(item?.url)!}
                 style={{ height: YOUTUBE_PLAYER_HEIGHT }}
               />
             </View>
           )}
         </>
       )}
-      <Typography style={styles.title}>{item.title}</Typography>
+      <Typography style={styles.title}>{item?.title}</Typography>
       <View style={styles.subheader}>
         <View>
           <Typography
@@ -105,12 +105,13 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
             Date: {item.date}
           </Typography>
         </View>
-        <ImageActionsTab
-          onMagnifierButtonPress={() =>
+        <ImageActionTab
+          type={"image"}
+          onButtonPress={() =>
             navigation.navigate("FullImageStack", {
               screen: "FullImageScreen",
               params: {
-                photoUri: item.hdurl,
+                photoUri: item.url,
                 title: item.title,
               },
             })

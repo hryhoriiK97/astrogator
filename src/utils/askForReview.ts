@@ -10,7 +10,7 @@ export const askForReview = async () => {
 
     // If there is no recorded date, or if it has been 3-4 days since the last review request
     if (
-      !lastReviewDate ||
+      lastReviewDate &&
       Math.floor(
         (now.getTime() - new Date(lastReviewDate).getTime()) /
           (1000 * 60 * 60 * 24)

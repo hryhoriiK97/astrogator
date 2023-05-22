@@ -1,4 +1,5 @@
-import { Spacer, SpacerVariant, Typography } from "../..";
+import { Typography } from "../../Typography";
+import { Spacer, SpacerVariant } from "../../Spacer";
 import { FlashList } from "@shopify/flash-list";
 import { format } from "date-fns";
 import React, { FC } from "react";

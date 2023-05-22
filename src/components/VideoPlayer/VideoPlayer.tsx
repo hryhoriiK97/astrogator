@@ -58,6 +58,7 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ videoUri, onBackPress }) => {
       </View>
       <Video
         ref={videoRef}
+        
         source={{
           uri: videoUri,
         }}

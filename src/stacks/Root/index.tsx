@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { RootStackRoutes } from "./Root.routes";
-import ApodStack from "../Apod";
 import BottomTabStack from "../BottomTab";
 import FullImageStack from "../FullImage";
 import MarsRoversPhotosStack from "../MarsRoversPhotos";

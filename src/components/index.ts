@@ -16,7 +16,7 @@ export * from "./BackButton";
 export * from "./CustomBottomSheetBackdrop";
 export * from "./CustomBottomSheetModalBackground";
 export * from "./HomeTileModal";
-export * from "./ImageActionsTab";
+export * from "./ImageActionTab";
 export * from "./Modals/NasaAssetItemModal";
 export * from "./DropdownSelector";
 export * from "./EmptyDataScreen";

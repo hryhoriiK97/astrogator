@@ -7,7 +7,7 @@ import {
   CustomBottomSheetModalBackground,
   BackButton,
   HomeTileModal,
-  ImageActionsTab,
+  ImageActionTab,
 } from "../../../../components";
 import { SharedElement } from "react-navigation-shared-element";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -63,7 +63,7 @@ const NasaImageScreen: FC = () => {
       </SharedElement>
       <Typography style={styles.title}>{item.title}</Typography>
       <View style={styles.subheader}>
-        <View style={styles.imageInfoWrapper}>
+        <View>
           <Typography style={styles.subheaderText}>
             Author: {item.author || "-"}
           </Typography>
@@ -72,8 +72,9 @@ const NasaImageScreen: FC = () => {
             Date: {format(new Date(item.date), "yyyy-MM-dd")}
           </Typography>
         </View>
-        <ImageActionsTab
-          onMagnifierButtonPress={() =>
+        <ImageActionTab
+          type={"image"}
+          onButtonPress={() =>
             navigation.navigate("FullImageStack", {
               screen: "FullImageScreen",
               params: {

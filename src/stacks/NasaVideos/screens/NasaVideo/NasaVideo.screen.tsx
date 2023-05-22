@@ -7,7 +7,7 @@ import {
   CustomBottomSheetModalBackground,
   BackButton,
   HomeTileModal,
-  ImageActionsTab,
+  ImageActionTab,
 } from "../../../../components";
 import { SharedElement } from "react-navigation-shared-element";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -67,7 +67,7 @@ const NasaVideoScreen: FC = () => {
       </SharedElement>
       <Typography style={styles.title}>{item.title}</Typography>
       <View style={styles.subheader}>
-        <View style={styles.imageInfoWrapper}>
+        <View>
           <Typography style={styles.subheaderText}>
             Author: {item.author || "-"}
           </Typography>
@@ -76,8 +76,9 @@ const NasaVideoScreen: FC = () => {
             Date: {format(new Date(item.date), "yyyy-MM-dd")}
           </Typography>
         </View>
-        <ImageActionsTab
-          onMagnifierButtonPress={() =>
+        <ImageActionTab
+          type={"video"}
+          onButtonPress={() =>
             navigation.navigate("SelectedVideoStack", {
               screen: "SelectedVideoScreen",
               params: {

@@ -64,8 +64,6 @@ const MarsRoverPhotosScreen: FC = () => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  console.log(selectedMarsSol, selectedRover?.max_sol);
-
   const {
     data: marsRoverPhotosResponse,
     isLoading: isMarsRoverPhotosLoading,
@@ -138,7 +136,6 @@ const MarsRoverPhotosScreen: FC = () => {
         imageSource={{ uri: item.img_src }}
         translateX={translateX}
         onPress={() => {
-          bottomSheetModalRef.current?.close();
           navigate(MarsRoversPhotosStackRoutes.MarsFullImageStack, {
             screen: "MarsFullImageScreen",
             params: {
@@ -241,6 +238,12 @@ const MarsRoverPhotosScreen: FC = () => {
               marsRoverPhotosRefetch({
                 queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
               });
+              if (flatListRef && flatListRef.current) {
+                flatListRef.current?.scrollToIndex({
+                  index: 0,
+                  animated: false,
+                });
+              }
             }}
           />
         </View>

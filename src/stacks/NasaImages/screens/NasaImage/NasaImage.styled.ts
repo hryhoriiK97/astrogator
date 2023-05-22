@@ -43,9 +43,6 @@ export const styles = StyleSheet.create({
     fontFamily: Raleway.Light,
     lineHeight: 16 * bp,
   },
-  imageInfoWrapper: {
-    marginBottom: 10 * bp,
-  },
   title: {
     fontSize: scale(25),
     marginTop: moderateVerticalScale(30),
