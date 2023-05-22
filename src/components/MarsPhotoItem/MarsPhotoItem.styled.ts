@@ -1,22 +1,37 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
+import { AstrogatorColor } from "../../theming/theme";
+import { moderateVerticalScale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
 const { width } = Dimensions.get("screen");
 
-const ITEM_WIDTH = width * 0.76;
-const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
+export const ITEM_WIDTH = width * 0.86;
+export const ITEM_HEIGHT = moderateVerticalScale(ITEM_WIDTH * 1.17);
 
 export const styles = StyleSheet.create({
   container: {
+    position: "relative",
     width: width,
     height: "100%",
     alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  roverNameWrapper: {
+    maxWidth: 200 * bp,
+    alignItems: "center",
     justifyContent: "center",
   },
+  roverName: {
+    fontSize: 16 * bp,
+  },
+  cameraInfo: {
+    fontSize: 12 * bp,
+    textAlign: "center",
+  },
   outerWrapper: {
-    borderRadius: 18,
+    borderRadius: 8 * bp,
     shadowColor: "black",
     shadowOffset: {
       width: 0,
@@ -24,20 +39,16 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.6,
     shadowRadius: 30,
-    padding: 12,
-    backgroundColor: "white",
+    borderWidth: 2,
+    borderColor: "rgba(255, 255, 255, 0.11)",
+    borderStyle: "solid",
   },
   innerWrapper: {
     width: ITEM_WIDTH,
     height: ITEM_HEIGHT,
     overflow: "hidden",
     alignItems: "center",
-    borderRadius: 14,
-  },
-  title: {
-    width: "50%",
-    textAlign: "center",
-    fontSize: 20 * bp,
+    borderRadius: 8 * bp,
   },
   image: {
     width: ITEM_WIDTH,
@@ -46,15 +57,20 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 5 * bp,
     borderBottomRightRadius: 5 * bp,
   },
-  avatar: {
-    width: 60 * bp,
-    height: 60 * bp,
-    borderRadius: 60,
-    resizeMode: "cover",
-    borderWidth: 6 * bp,
-    borderColor: "white",
-    position: "absolute",
-    bottom: 150 * bp,
-    right: 60 * bp,
+  headerButton: {
+    width: 40 * bp,
+    height: 40 * bp,
+    borderRadius: 40 * bp,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: AstrogatorColor.White,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
   },
 });

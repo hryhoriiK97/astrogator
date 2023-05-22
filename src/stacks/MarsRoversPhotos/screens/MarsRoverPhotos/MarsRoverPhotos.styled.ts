@@ -1,76 +1,86 @@
-import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
-import { StyleSheet } from "react-native";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { AstrogatorColor } from "../../../../theming/theme";
+import { StyleSheet } from "react-native";
+import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 
 const { bp } = getRelativeUnits();
 
-export const styles = (headerHeight?: number) =>
-  StyleSheet.create({
-    wrapper: {
-      position: "relative",
-      backgroundColor: AstrogatorColor.Black,
-      width: "100%",
-      height: "100%",
-      marginTop: headerHeight,
-      marginBottom: 20,
-    },
-    blurView: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    },
-    backdropWrapper: {
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0,0,0,0.25)",
-    },
-    renderItemWrapper: {
-      paddingHorizontal: 16,
-    },
-    imageWrapper: {
-      position: "relative",
-    },
-    footer: {
-      height: 50 * bp,
-    },
-    modalContainer: {
-      alignItems: "center",
-      padding: 10 * bp,
-    },
-    pickerTitle: {
-      maxWidth: 250 * bp,
-      fontSize: 20 * bp,
-      textAlign: "center",
-      marginBottom: 10 * bp,
-    },
-    picker: {
-      width: 250 * bp,
-      height: 150 * bp,
-      marginTop: 20 * bp,
-      borderRadius: 20 * bp,
-    },
-    getButton: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: 250 * bp,
-      height: 40 * bp,
-      borderRadius: 5 * bp,
-      marginTop: 30 * bp,
-      backgroundColor: AstrogatorColor.VenetianNights,
-    },
-    disabledGetButton: {
-      backgroundColor: AstrogatorColor.Gray,
-    },
-    getButtonTitle: {
-      fontSize: 16 * bp,
-      color: AstrogatorColor.White,
-    },
-  });
+export const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+  },
+  screen: {
+    flex: 1,
+    position: "relative",
+    paddingTop: scale(20),
+  },
+  header: {
+    width: "100%",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    background: "red",
+    paddingHorizontal: scale(16),
+  },
+  title: {
+    width: "50%",
+    fontSize: scale(24),
+    color: AstrogatorColor.White,
+    lineHeight: verticalScale(28),
+  },
+  subtitle: {
+    fontSize: moderateScale(14),
+    lineHeight: verticalScale(19),
+    color: AstrogatorColor.Silver,
+  },
+  navigationBar: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  backButtonContainer: {
+    width: moderateScale(34),
+    height: moderateScale(34),
+    borderWidth: 1,
+    borderColor: "rgba(203, 203, 203, 0.22)",
+    borderStyle: "solid",
+    borderRadius: 8 * bp,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: AstrogatorColor.Black,
+  },
+  datePickerWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  datePickerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderRadius: 8 * bp,
+    width: moderateScale(109),
+    padding: moderateScale(8),
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.11)",
+    backgroundColor: "rgba(255, 255, 255, 0.11)",
+    borderStyle: "solid",
+  },
+  datePickerText: {
+    fontSize: scale(12),
+    color: AstrogatorColor.White,
+  },
+  fullListButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 8 * bp,
+    width: moderateScale(34),
+    height: moderateScale(36),
+    padding: moderateScale(8),
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.11)",
+    backgroundColor: "rgba(255, 255, 255, 0.11)",
+    borderStyle: "solid",
+  },
+});

@@ -8,7 +8,7 @@ import { DatePickerIcon } from "../../../assets/svgs/DatePickerIcon";
 import { Star } from "../../../assets/svgs/Star";
 import { HomeHeaderProps } from "./HomeHeader.props";
 import { Typography } from "../Typography";
-import { Divider, DividerVariant } from "../Divider";
+import { Spacer, SpacerVariant } from "../Spacer";
 import { styles } from "./HomeHeader.styled";
 
 const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
@@ -18,12 +18,12 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
   return (
     <>
       <View style={styles.container}>
-        <Typography style={styles.title}>Space Viewer</Typography>
-        <Divider variant={DividerVariant.Divider_8_Vertical} />
+        <Typography style={styles.title}>Astrogator</Typography>
+        <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
         <Typography style={styles.subtitle}>
           Explore space managing updates directly from NASA
         </Typography>
-        <Divider variant={DividerVariant.Divider_20_Vertical} />
+        <Spacer variant={SpacerVariant.Spacer_15_Vertical} />
         <View style={styles.homeHeaderActionsWrapper}>
           <View style={styles.latestUpdatesTitleWrapper}>
             <Star />
@@ -61,7 +61,7 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
               <Typography style={styles.datePickerTitle}>
                 Date Picker
               </Typography>
-              <Divider variant={DividerVariant.Divider_5_Horizontal} />
+              <Spacer variant={SpacerVariant.Spacer_5_Horizontal} />
               <View style={styles.datePickerButton}>
                 <DatePickerIcon />
               </View>

@@ -7,7 +7,11 @@ export interface MarsRoverCardProps {
     height: number;
     source: ImageProps["source"];
   };
-  onPress: () => void;
+  marsRoverName: string;
+  marsStatus: string;
+  launchDate: string;
+  onLearnMorePress: () => void;
+  onGalleryPress: () => void;
   shuffleBack: Animated.SharedValue<boolean>;
   index: number;
 }

@@ -1,5 +1,11 @@
+interface DropdownItem {
+  value: string;
+  label: string;
+}
+
 export interface DropdownSelectorProps {
-    data: {value: string; label: string}[];
-    labelText: string;
-    placeholderText: string;
+  currentValue: string | null;
+  data: DropdownItem[];
+  placeholderText: string;
+  onItemSelection: (item: string) => void;
 }

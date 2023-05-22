@@ -1,8 +1,8 @@
-import NetInfo from '@react-native-community/netinfo';
-import React, {FC, useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {NetInfoErrorConnection} from '../../components/NetInfoErrorConnection';
-import {AstrogatorColor} from '../../theming/theme';
+import NetInfo from "@react-native-community/netinfo";
+import React, { FC, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { NetInfoErrorConnection } from "../../components/NetInfoErrorConnection";
+import { AstrogatorColor } from "../../theming/theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,18 +24,18 @@ const NetInfoConnectionProvider: FC<NetInfoConnectionProviderProps> = ({
   const getNetInfo = async () => {
     setIsNetInfoFetching(true);
 
-    await NetInfo.fetch().then(state => {
+    await NetInfo.fetch().then((state) => {
       setIsNetAvailable(
-        (state.isConnected || state.isInternetReachable) ?? false,
+        (state.isConnected || state.isInternetReachable) ?? false
       );
     });
 
     await setIsNetInfoFetching(false);
   };
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       setIsNetAvailable(
-        (state.isConnected || state.isInternetReachable) ?? false,
+        (state.isConnected || state.isInternetReachable) ?? false
       );
     });
     return () => {
@@ -49,8 +49,9 @@ const NetInfoConnectionProvider: FC<NetInfoConnectionProviderProps> = ({
         children
       ) : (
         <NetInfoErrorConnection
-          isRefreshing={isNetInfoFetching}
-          onRefresh={getNetInfo}
+          onReload={async () => {
+            getNetInfo();
+          }}
         />
       )}
     </View>

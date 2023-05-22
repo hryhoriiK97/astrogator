@@ -1,53 +1,49 @@
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 
 import { MarsRoverCard } from "./MarsRoverCard";
 import { useSharedValue } from "react-native-reanimated";
-import { MarsRoverItemResponse } from "../../types/MarsRoverItemResponse";
-import { FC, useState } from "react";
+import { FC } from "react";
+import { format } from "date-fns";
 import { MarsRoversProps } from "./MarsRovers.props";
 import {
   MarsRover,
   marsRoverImages,
 } from "../../stacks/BottomTab/screens/MarsRovers/MarsRovers.utils";
-import { useNavigation } from "@react-navigation/native";
-import {
-  RootStackNavigationProp,
-} from "../../stacks/Root/Root.routes";
 import { styles } from "./MarsRovers.styled";
 
-
-export const MarsRovers: FC<MarsRoversProps> = ({ marsRoversData, onRoverItemPress }) => {
-  const { navigate } = useNavigation<RootStackNavigationProp>();
+export const MarsRovers: FC<MarsRoversProps> = ({
+  marsRoversData,
+  onLearnMorePress,
+  onGalleryPress,
+}) => {
   const shuffleBack = useSharedValue(false);
 
   return (
-      <View style={styles.container}>
-        {marsRoversData.map((rover, index) => {
-          const roverItem = {
-            width: 300,
-            height: 541,
-            source: marsRoverImages[rover.name.toLowerCase() as MarsRover],
-          };
-          return (
-            <MarsRoverCard
-              card={roverItem}
-              key={index * 10}
-              onPress={() => {
-                onRoverItemPress(rover);
-                // handlePresentModalPress();
-                // setSelectedRover(rover);
-                // navigate(RootStackRoutes.MarsRoversPhotosStack, {
-                //   screen: "MarsRoverPhotosScreen",
-                //   params: {
-                //     rover: rover,
-                //   },
-                // });
-              }}
-              index={index}
-              shuffleBack={shuffleBack}
-            />
-          );
-        })}
-      </View>
+    <View style={styles.container}>
+      {marsRoversData.map((rover, index) => {
+        const roverItem = {
+          width: 300,
+          height: 541,
+          source: marsRoverImages[rover.name.toLowerCase() as MarsRover],
+        };
+        return (
+          <MarsRoverCard
+            card={roverItem}
+            key={index}
+            marsRoverName={rover.name}
+            marsStatus={rover.status}
+            launchDate={format(new Date(rover.launch_date), "yyyy-MM-dd")}
+            onLearnMorePress={() => {
+              onLearnMorePress(rover);
+            }}
+            onGalleryPress={() => {
+              onGalleryPress(rover);
+            }}
+            index={index}
+            shuffleBack={shuffleBack}
+          />
+        );
+      })}
+    </View>
   );
 };

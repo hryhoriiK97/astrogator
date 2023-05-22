@@ -2,21 +2,35 @@ import React, { FC, useState } from "react";
 import { TextInput, View } from "react-native";
 import { Raleway, Typography } from "../Typography";
 import { SafeTextInputProps } from "./SafeTextInput.props";
-import { styles } from "./SafeTextInput.styled";
 import { handleOnChangeText } from "./SafeTextInput.utils";
+import { styles } from "./SafeTextInput.styled";
 
 const SafeTextInput: FC<SafeTextInputProps> = ({
+  currentValue,
   inputTypeCheckVariant,
   setTextValue,
-  isError,
-  setIsError,
   maxValue,
   minValue,
   errorTexts,
   inputWrapperStyles,
   inputStyles,
+  placeholder,
 }) => {
+  const [isError, setIsError] = useState<boolean>();
   const [errorText, setErrorText] = useState<string | null>(null);
+
+  const handleOnTypingText = (text: string) => {
+    handleOnChangeText({
+      text,
+      inputTypeCheckVariant,
+      setIsError,
+      setErrorText,
+      errorTexts,
+      maxValue,
+      minValue,
+    });
+    setTextValue(text);
+  };
   return (
     <View style={[styles.container, inputWrapperStyles]}>
       <Typography variant={Raleway.Bold} style={styles.errorText}>
@@ -24,17 +38,11 @@ const SafeTextInput: FC<SafeTextInputProps> = ({
       </Typography>
       <TextInput
         style={[styles.input, inputStyles]}
-        onChangeText={(text) => {
-          handleOnChangeText({
-            text,
-            inputTypeCheckVariant,
-            setIsError,
-            setErrorText,
-            errorTexts,
-            maxValue,
-            minValue,
-          });
-          setTextValue(text);
+        placeholder={placeholder}
+        value={currentValue}
+        onChangeText={handleOnTypingText}
+        onEndEditing={(event) => {
+          handleOnTypingText(event.nativeEvent.text);
         }}
       />
     </View>

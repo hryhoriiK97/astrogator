@@ -1,33 +1,15 @@
-import {StyleSheet} from 'react-native';
-import {getRelativeUnits} from '../../utils/getRelativeUnits';
+import { StyleSheet } from "react-native";
+import { verticalScale } from "react-native-size-matters";
 
-const {bp} = getRelativeUnits();
-
-export const styles = ({
-  indicatorValue,
-  loadingIndicatorHeight,
-}: {
-  indicatorValue?: number;
-  loadingIndicatorHeight?: number;
-}) =>
-  StyleSheet.create({
-    imageWrapper: {
-      width: '100%',
-    },
-    imageIndicatorWrapper: {
-      width: '100%',
-      height: loadingIndicatorHeight! * bp,
-    },
-    indicator: {
-      width: `${indicatorValue}%`,
-      height: `100%`,
-      backgroundColor: 'red',
-    },
-    image: {
-      width: '100%',
-      height: 300 * bp,
-    },
-    imageInfoWrapper: {
-      marginBottom: 30 * bp,
-    },
-  });
+export const styles = StyleSheet.create({
+  imageWrapper: {
+    width: "100%",
+  },
+  image: {
+    width: "100%",
+    height: verticalScale(300),
+  },
+  imageInfoWrapper: {
+    marginBottom: verticalScale(30),
+  },
+});

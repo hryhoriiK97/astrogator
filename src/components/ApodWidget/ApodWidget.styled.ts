@@ -1,5 +1,11 @@
 import { StyleSheet } from "react-native";
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+  verticalScale,
+} from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
@@ -8,7 +14,7 @@ export const styles = StyleSheet.create({
     position: "relative",
     width: "100%",
     flexDirection: "row",
-    height: 200 * bp,
+    height: scale(200),
     borderWidth: 2,
     borderColor: "rgba(255, 255, 255, 0.11)",
     borderStyle: "solid",
@@ -26,20 +32,20 @@ export const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-between",
     flex: 1,
-    paddingHorizontal: 16 * bp,
-    paddingTop: 20 * bp,
-    paddingBottom: 29 * bp,
+    paddingHorizontal: scale(16),
+    paddingTop: verticalScale(20),
+    paddingBottom: verticalScale(29),
     borderRadius: 8 * bp,
   },
   titleWrapper: {
     width: "auto",
     alignSelf: "flex-start",
-    padding: 6 * bp,
+    padding: scale(6),
     backgroundColor: "rgba(11, 11, 11, 0.66)",
     borderRadius: 4 * bp,
   },
   title: {
-    fontSize: 14 * bp,
+    fontSize: scale(14),
     color: "#ffffff",
   },
   apodInfoWrapper: {
@@ -48,16 +54,17 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   dateAuthorInfo: {
-    padding: 6 * bp,
+    maxWidth: scale(250),
+    padding: scale(6),
     backgroundColor: "rgba(11, 11, 11, 0.66)",
   },
   infoTitle: {
-    fontSize: 12 * bp,
+    fontSize: scale(12),
     color: "#ffffff",
   },
   moreInfoButton: {
-    width: 34 * bp,
-    height: 34 * bp,
+    width: moderateScale(34),
+    height: moderateVerticalScale(34),
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

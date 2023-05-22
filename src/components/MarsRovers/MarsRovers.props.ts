@@ -2,5 +2,6 @@ import { MarsRoverItemResponse } from "../../types/MarsRoverItemResponse";
 
 export interface MarsRoversProps {
   marsRoversData: MarsRoverItemResponse[];
-  onRoverItemPress: (rover: MarsRoverItemResponse) => void;
+  onLearnMorePress: (rover: MarsRoverItemResponse) => void;
+  onGalleryPress: (rover: MarsRoverItemResponse) => void;
 }
