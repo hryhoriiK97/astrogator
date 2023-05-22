@@ -1,15 +1,16 @@
-import { getRelativeUnits } from "../../utils/getRelativeUnits";
+import { getRelativeUnits } from "../../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
-import { AstrogatorColor } from "../../theming/theme";
+import { AstrogatorColor } from "../../../theming/theme";
+import { scale, verticalScale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 15 * bp,
+    padding: scale(16),
   },
   title: {
-    fontSize: 20 * bp,
+    fontSize: scale(20),
     color: AstrogatorColor.White,
   },
   imageInfoWrapper: {
@@ -19,29 +20,29 @@ export const styles = StyleSheet.create({
     marginVertical: 10 * bp,
   },
   imageInfoText: {
-    maxWidth: 200 * bp,
-    fontSize: 10 * bp,
+    maxWidth: scale(200),
+    fontSize: scale(10),
     color: AstrogatorColor.White,
   },
   description: {
-    fontSize: 14 * bp,
+    fontSize: scale(14),
     color: AstrogatorColor.White,
   },
   keywordsWrapper: {
     width: "100%",
-    marginTop: 20 * bp,
+    marginTop: verticalScale(20),
     flexDirection: "row",
     flexWrap: "wrap",
   },
   keywordItem: {
-    padding: 5 * bp,
+    padding: scale(5),
     borderRadius: 3 * bp,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: AstrogatorColor.VenetianNights,
   },
   keywordItemText: {
-    fontSize: 12 * bp,
+    fontSize: scale(12),
     color: AstrogatorColor.White,
   },
 });

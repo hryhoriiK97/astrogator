@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { MarsRoverCard } from "./MarsRoverCard";
 import { useSharedValue } from "react-native-reanimated";
 import { FC } from "react";
+import { format } from "date-fns";
 import { MarsRoversProps } from "./MarsRovers.props";
 import {
   MarsRover,
@@ -12,7 +13,8 @@ import { styles } from "./MarsRovers.styled";
 
 export const MarsRovers: FC<MarsRoversProps> = ({
   marsRoversData,
-  onRoverItemPress,
+  onLearnMorePress,
+  onGalleryPress,
 }) => {
   const shuffleBack = useSharedValue(false);
 
@@ -28,8 +30,14 @@ export const MarsRovers: FC<MarsRoversProps> = ({
           <MarsRoverCard
             card={roverItem}
             key={index}
-            onPress={() => {
-              onRoverItemPress(rover);
+            marsRoverName={rover.name}
+            marsStatus={rover.status}
+            launchDate={format(new Date(rover.launch_date), "yyyy-MM-dd")}
+            onLearnMorePress={() => {
+              onLearnMorePress(rover);
+            }}
+            onGalleryPress={() => {
+              onGalleryPress(rover);
             }}
             index={index}
             shuffleBack={shuffleBack}

@@ -1,8 +1,6 @@
-import { getRelativeUnits } from "../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
-
-const { bp } = getRelativeUnits();
+import { scale, verticalScale } from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
   container: {
@@ -17,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 500 * bp,
+    height: verticalScale(320),
   },
   title: {
     display: "flex",
@@ -29,6 +27,6 @@ export const styles = StyleSheet.create({
   },
   instagramStoriesShareButton: {
     position: "absolute",
-    bottom: 40 * bp,
+    bottom: scale(40),
   },
 });

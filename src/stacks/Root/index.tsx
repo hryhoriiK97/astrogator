@@ -10,6 +10,7 @@ import WelcomeScreen from "./screens/Welcome/Welcome.screen";
 import NasaImageScreen from "../NasaImages/screens/NasaImage/NasaImage.screen";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import ApodScreen from "../Apod/screens/Apod/Apod.screen";
+import NasaVideoScreen from "../NasaVideos/screens/NasaVideo/NasaVideo.screen";
 
 const Stack = createSharedElementStackNavigator();
 
@@ -48,6 +49,15 @@ const RootStack: FC = () => {
         component={NasaImageScreen}
         sharedElements={(route) => {
           const { item } = route.params;
+          return [{ id: `item.${item.id}.src`, animation: "fade" }];
+        }}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.NasaVideoScreen}
+        component={NasaVideoScreen}
+        sharedElements={(route) => {
+          const { item } = route.params;
+          console.log(item.id, "ITEM");
           return [{ id: `item.${item.id}.src`, animation: "fade" }];
         }}
       />

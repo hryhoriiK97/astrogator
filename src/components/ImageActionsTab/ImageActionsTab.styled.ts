@@ -1,6 +1,7 @@
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
+import { scale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
@@ -13,11 +14,11 @@ export const styles = StyleSheet.create({
   },
   showMoreButton: {
     backgroundColor: AstrogatorColor.Black,
-    width: 40 * bp,
-    height: 40 * bp,
+    width: scale(40),
+    height: scale(40),
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20 * bp,
+    borderRadius: scale(40 / 2),
   },
 });

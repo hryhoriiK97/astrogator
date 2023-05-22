@@ -1,8 +1,6 @@
-import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
-
-const { bp } = getRelativeUnits();
+import { scale, verticalScale } from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,7 +8,8 @@ export const styles = StyleSheet.create({
     backgroundColor: AstrogatorColor.Black,
   },
   contentContainerStyle: {
-    backgroundColor: AstrogatorColor.Black,
-    paddingVertical: 15 * bp,
+    backgroundColor: AstrogatorColor.Transparent,
+    paddingVertical: verticalScale(20),
+    paddingHorizontal: scale(8),
   },
 });

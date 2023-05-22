@@ -4,8 +4,8 @@ import React, { FC } from "react";
 import { SafeAreaView } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
 import { NasaAssetsStackRoutes } from "./NasaAssets.routes";
-import NasaVideosScreen from "./screens/NasaVideos/NasaVideos.screen";
 import NasaImagesStack from "../NasaImages";
+import NasaVideosStack from "../NasaVideos";
 
 const Stack = createMaterialTopTabNavigator();
 
@@ -16,12 +16,10 @@ const NasaAssetsStack: FC = () => {
         initialRouteName={NasaAssetsStackRoutes.NasaImagesStack}
         screenOptions={(props) => {
           return {
-            title:
-              props.route.name === "NasaVideosScreen" ? "Videos" : "Images",
+            title: props.route.name === "NasaVideosStack" ? "Videos" : "Images",
             tabBarStyle: {
               backgroundColor: AstrogatorColor.Black,
             },
-
             tabBarIndicatorStyle: {
               backgroundColor: AstrogatorColor.VenetianNights,
               height: 5,
@@ -38,8 +36,8 @@ const NasaAssetsStack: FC = () => {
           component={NasaImagesStack}
         />
         <Stack.Screen
-          name={NasaAssetsStackRoutes.NasaVideosScreen}
-          component={NasaVideosScreen}
+          name={NasaAssetsStackRoutes.NasaVideosStack}
+          component={NasaVideosStack}
         />
       </Stack.Navigator>
     </SafeAreaView>

@@ -30,6 +30,11 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  label: {
+    fontSize: 10 * bp,
+    color: AstrogatorColor.White,
+    textAlign: "center",
+  },
 });
 
 const Tab = createBottomTabNavigator();
@@ -38,20 +43,9 @@ const BottomTabStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        // tabBarBackground: () => (
-        //   <ImageBackground
-        //     source={Background}
-        //     resizeMode={"cover"}
-        //     progressiveRenderingEnabled={true}
-        //     resizeMethod={"resize"}
-        //     style={styles.backgroundImage}
-        //     imageStyle={styles.imageStyle}
-        //   />
-        // ),
-
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
         headerShown: false,
-        tabBarActiveTintColor: "#F60081",
+        tabBarActiveTintColor: AstrogatorColor.VenetianNights,
         tabBarStyle: {
           backgroundColor: AstrogatorColor.Black,
           borderTopColor: "transparent",
@@ -70,6 +64,8 @@ const BottomTabStack = () => {
               }
             />
           ),
+          tabBarLabel: "Home",
+          tabBarLabelStyle: styles.label,
         }}
         component={HomeStack}
       />
@@ -85,6 +81,8 @@ const BottomTabStack = () => {
               }
             />
           ),
+          tabBarLabel: "Mars Rovers",
+          tabBarLabelStyle: styles.label,
         }}
         component={MarsRoversScreen}
       />
@@ -100,6 +98,8 @@ const BottomTabStack = () => {
               }
             />
           ),
+          tabBarLabel: "NASA",
+          tabBarLabelStyle: styles.label,
         }}
         component={NasaAssetsStack}
       />
@@ -115,6 +115,8 @@ const BottomTabStack = () => {
               }
             />
           ),
+          tabBarLabel: "About",
+          tabBarLabelStyle: styles.label,
         }}
         component={AboutAppScreen}
       />

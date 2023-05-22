@@ -1,8 +1,13 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
-import { MobilePlatform } from "../../../../enums/MobilePlatform";
 import { Raleway } from "../../../../components/Typography";
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+  verticalScale,
+} from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
@@ -10,17 +15,18 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AstrogatorColor.Black,
+    paddingTop: verticalScale(40),
   },
   apodHeader: {
-    height: 89 * bp,
+    height: verticalScale(40),
   },
   contentContainerStyle: {
-    paddingVertical: 10 * bp,
-    paddingHorizontal: 16 * bp,
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: scale(16),
   },
   image: {
     width: "100%",
-    height: 219 * bp,
+    height: moderateVerticalScale(219),
     borderRadius: 8 * bp,
   },
   imageWrapper: {
@@ -33,26 +39,17 @@ export const styles = StyleSheet.create({
   },
   subheaderText: {
     color: AstrogatorColor.Silver,
-    fontSize: 14 * bp,
+    fontSize: moderateScale(14),
     fontFamily: Raleway.Light,
     lineHeight: 16 * bp,
   },
   imageInfoWrapper: {
     marginBottom: 10 * bp,
   },
-  subheaderControlsWrapper: {
-    minWidth: 65 * bp,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  youtubePlayerWhiteSpace: {
-    height: 50 * bp,
-  },
   title: {
-    fontSize: 25 * bp,
-    marginTop: Platform.OS === MobilePlatform.IOS ? 40 * bp : 30 * bp,
-    marginBottom: 16 * bp,
+    fontSize: scale(25),
+    marginTop: moderateVerticalScale(30),
+    marginBottom: moderateVerticalScale(20),
     color: AstrogatorColor.White,
   },
   explanation: {
@@ -62,24 +59,12 @@ export const styles = StyleSheet.create({
     color: AstrogatorColor.White,
     fontSize: 14 * bp,
     lineHeight: 21 * bp,
-    marginTop: Platform.OS === MobilePlatform.IOS ? 30 * bp : 20 * bp,
+    marginTop: moderateVerticalScale(20),
   },
   readMoreButton: {
     alignSelf: "center",
-    paddingLeft: 5 * bp,
+    paddingLeft: moderateScale(5),
     fontFamily: Raleway.Medium,
     color: AstrogatorColor.VenetianNights,
-  },
-  pickButton: {
-    width: "100%",
-    marginTop: 15 * bp,
-    alignItems: "center",
-    borderRadius: 10 * bp,
-    backgroundColor: AstrogatorColor.VenetianNights,
-    paddingVertical: 10 * bp,
-    paddingHorizontal: 15 * bp,
-  },
-  pickTitle: {
-    color: "#ffffff",
   },
 });

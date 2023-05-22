@@ -1,7 +1,5 @@
 import { StyleSheet } from "react-native";
-import { getRelativeUnits } from "../../utils/getRelativeUnits";
-
-const { bp } = getRelativeUnits();
+import { verticalScale } from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
   imageWrapper: {
@@ -9,9 +7,9 @@ export const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 300 * bp,
+    height: verticalScale(300),
   },
   imageInfoWrapper: {
-    marginBottom: 30 * bp,
+    marginBottom: verticalScale(30),
   },
 });

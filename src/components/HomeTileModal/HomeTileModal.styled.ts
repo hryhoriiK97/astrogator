@@ -2,20 +2,21 @@ import { getRelativeUnits } from "../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
 import { Raleway } from "../Typography";
 import { AstrogatorColor } from "../../theming/theme";
+import { scale, verticalScale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 20 * bp,
+    padding: scale(20),
   },
   title: {
-    fontSize: 20 * bp,
-    marginBottom: 25 * bp,
+    fontSize: scale(20),
+    marginBottom: verticalScale(25),
   },
   description: {
-    fontSize: 13 * bp,
-    lineHeight: 21 * bp,
+    fontSize: scale(13),
+    lineHeight: verticalScale(21),
     fontFamily: Raleway.Medium,
     color: AstrogatorColor.White,
   },

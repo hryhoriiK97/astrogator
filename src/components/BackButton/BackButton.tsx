@@ -1,7 +1,7 @@
 import { Typography, Raleway } from "../Typography";
 import React, { FC } from "react";
 import { Pressable } from "react-native";
-import { Arrow } from "../../../assets/svgs/Arrow";
+import { Chevron } from "../../../assets/svgs/Chevron";
 import { AstrogatorColor } from "../../theming/theme";
 import { BackButtonProps } from "./BackButton.props";
 import { styles } from "./BackButton.styled";
@@ -9,7 +9,7 @@ import { styles } from "./BackButton.styled";
 const BackButton: FC<BackButtonProps> = ({ onPress }) => {
   return (
     <Pressable style={styles.backButton} onPress={onPress}>
-      <Arrow fillColor={AstrogatorColor.White} />
+      <Chevron rotate={180} />
       <Typography
         variant={Raleway.Medium}
         style={styles.backButtonTitle}

@@ -1,15 +1,26 @@
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
+import { scale, verticalScale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
 export const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: AstrogatorColor.White,
-  },
   safeAreaContainer: {
     height: "100%",
+  },
+  header: {
+    paddingTop: verticalScale(48),
+    paddingHorizontal: scale(8),
+    paddingBottom: verticalScale(40),
+  },
+  title: {
+    fontSize: 24 * bp,
+    color: AstrogatorColor.White,
+  },
+  roverName: {
+    fontSize: 14 * bp,
+    color: AstrogatorColor.White,
   },
   marsPhotoItemWrapper: {
     flex: 1,
@@ -18,9 +29,9 @@ export const styles = StyleSheet.create({
   marsPhotoItem: {
     width: "100%",
     aspectRatio: 1,
-    borderRadius: 10 * bp,
+    borderRadius: 8 * bp,
   },
   contentContainerStyle: {
-    paddingHorizontal: 8 * bp,
+    paddingHorizontal: scale(8),
   },
 });

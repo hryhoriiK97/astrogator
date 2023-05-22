@@ -1,4 +1,4 @@
-import { LoadingScreen } from "../../../../components";
+import { LoadingScreen, ApodScreenContent } from "../../../../components";
 import { NASA_API_KEY } from "@env";
 
 import { RouteProp, useRoute } from "@react-navigation/native";
@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 
 import { ApodResponse } from "../../../../types/ApodResponse";
-import ApodScreenContent from "../../../../components/ApodScreenContent/ApodScreenContent";
 import { RootParamList } from "../../../Root/Root.routes";
 
 enum ApodScreenQueryKey {
@@ -22,7 +21,7 @@ const ApodScreen: FC = () => {
 
   const selectedApodDate = new Date(apodDate!);
 
-  if (item) {
+  if (item.id) {
     return <ApodScreenContent id={id} item={item} />;
   } else {
     const {

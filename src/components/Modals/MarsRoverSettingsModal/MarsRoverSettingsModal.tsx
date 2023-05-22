@@ -11,12 +11,19 @@ const MarsRoverSettings: FC<MarsRoverSettingsProps> = ({
   bottomSheetModalRef,
   onExploreButtonPress,
 }) => {
-  const [setSelectedCamera, setSelectedMarsSol, selectedRover] =
-    useMarsRoversStore((state) => [
-      state.setSelectedCamera,
-      state.setSelectedMarsSol,
-      state.selectedRover,
-    ]);
+  const [
+    selectedMarsSol,
+    selectedCamera,
+    setSelectedCamera,
+    setSelectedMarsSol,
+    selectedRover,
+  ] = useMarsRoversStore((state) => [
+    state.selectedMarsSol,
+    state.selectedCamera,
+    state.setSelectedCamera,
+    state.setSelectedMarsSol,
+    state.selectedRover,
+  ]);
 
   const bottomSheetSnapPoints = useMemo(() => ["75%"], []);
 
@@ -39,6 +46,8 @@ const MarsRoverSettings: FC<MarsRoverSettingsProps> = ({
       {selectedRover && (
         <MarsRoverModalContent
           rover={selectedRover}
+          selectedMarsSol={selectedMarsSol}
+          selectedCamera={selectedCamera}
           onCameraSelection={setSelectedCamera}
           onMarsSolSelection={setSelectedMarsSol}
           onExploreButtonPress={() => {

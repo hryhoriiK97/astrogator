@@ -1,2 +1,4 @@
-export {getYouTubeVideoId} from './getYouTubeVideoId';
-export {replaceHttpWithHttps} from './replaceHttpWithHttps';
+export { getVimeoVideoId } from "./getVimeoVideoId";
+export { addHttpsToUrl } from "./addHttpsToUrl";
+export { getYouTubeVideoId } from "./getYouTubeVideoId";
+export { replaceHttpWithHttps } from "./replaceHttpWithHttps";

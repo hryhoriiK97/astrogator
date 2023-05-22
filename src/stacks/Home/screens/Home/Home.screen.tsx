@@ -1,22 +1,25 @@
-import {
-  ApodWidget,
-  Spacer,
-  SpacerVariant,
-  LoadingScreen,
-} from "../../../../components";
+import { View } from "react-native";
 import { useQuery } from "react-query";
 import React, { FC } from "react";
 import { NASA_API_KEY } from "@env";
 import { useNavigation } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
 import { format, subDays, isToday } from "date-fns";
+
+import {
+  ApodWidget,
+  Spacer,
+  SpacerVariant,
+  LoadingScreen,
+  ScreenWrapper,
+  EmptySpace,
+  HomeHeader,
+  EmptyDataScreen,
+} from "../../../../components";
 import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
 
-import { ImageBackground, View } from "react-native";
-import Background from "../../../../../assets/images/Group.png";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
-import { EmptySpace } from "../../../../components/EmptySpace";
-import { HomeHeader } from "../../../../components/HomeHeader";
+
 import { ApodResponse } from "../../../../types/ApodResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./Home.styled";
@@ -53,6 +56,8 @@ const HomeScreen: FC = () => {
       })
     : [];
 
+  const isEmptyApodsList = !apods.length;
+
   const renderItem = ({ item }: { item: ApodResponse }) => {
     return (
       <ApodWidget
@@ -76,19 +81,12 @@ const HomeScreen: FC = () => {
   };
 
   return (
-    <ImageBackground
-      source={Background}
-      resizeMode={"cover"}
-      progressiveRenderingEnabled={true}
-      resizeMethod={"resize"}
-      style={styles.backgroundImage}
-      imageStyle={styles.imageStyle}
-    >
-      <View style={styles.backdropWrapper} />
+    <ScreenWrapper>
       <View style={styles.container}>
         <HomeHeader
           onDatePicking={async (date) => {
             if (!isToday(date)) {
+              console.log(format(date, "yyyy-MM-dd"));
               navigation.navigate("ApodStack", {
                 id: "apod-id",
                 apodDate: format(date, "yyyy-MM-dd"),
@@ -105,9 +103,16 @@ const HomeScreen: FC = () => {
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={renderItemSeparator}
           estimatedItemSize={200 * bp}
+          ListEmptyComponent={
+            isEmptyApodsList ? (
+              <EmptyDataScreen text={"No data"} />
+            ) : isApodError ? (
+              <EmptyDataScreen text={"No data"} />
+            ) : undefined
+          }
         />
       </View>
-    </ImageBackground>
+    </ScreenWrapper>
   );
 };
 

@@ -1,6 +1,14 @@
 import React, { FC, useCallback, useRef } from "react";
 import { Typography } from "../Typography";
-import { Platform, RefreshControl, ScrollView, View } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  RefreshControl,
+  ScrollView,
+  View,
+} from "react-native";
+import YoutubePlayer from "react-native-youtube-iframe";
+import { Vimeo } from "react-native-vimeo-iframe";
 import { MobilePlatform } from "../../enums/MobilePlatform";
 import { useNavigation } from "@react-navigation/native";
 import { ApodStackNavigationProp } from "../../stacks/Apod/Apod.routes";
@@ -17,8 +25,9 @@ import { CustomBottomSheetBackdrop } from "../CustomBottomSheetBackdrop";
 import { commonStyles } from "../../theming/commonStyles";
 import { HomeTileModal } from "../HomeTileModal";
 import { SharedElement } from "react-navigation-shared-element";
+import { getYouTubeVideoId, getVimeoVideoId } from "../../utils";
 
-// const YOUTUBE_PLAYER_HEIGHT = Dimensions.get("window").width * (9 / 16);
+const YOUTUBE_PLAYER_HEIGHT = Dimensions.get("window").width * (9 / 16);
 
 const ApodScreenContent: FC<ApodScreenContentProps> = ({
   id,
@@ -66,16 +75,24 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
         </SharedElement>
       ) : (
         <>
-          {/* <View style={styles.youtubePlayerWhiteSpace} /> */}
-          {/* <YoutubePlayer
+          {item.url.includes("youtube") ? (
+            <YoutubePlayer
               height={YOUTUBE_PLAYER_HEIGHT}
-              videoId={getYouTubeVideoId(apodData.url)}
-            /> */}
+              videoId={getYouTubeVideoId(item.url)}
+            />
+          ) : (
+            <View style={{ height: 200, backgroundColor: "red" }}>
+              <Vimeo
+                videoId={getVimeoVideoId(item.url)!}
+                style={{ height: YOUTUBE_PLAYER_HEIGHT }}
+              />
+            </View>
+          )}
         </>
       )}
       <Typography style={styles.title}>{item.title}</Typography>
       <View style={styles.subheader}>
-        <View style={styles.imageInfoWrapper}>
+        <View>
           <Typography
             style={[styles.subheaderText, styles.authorText]}
             numberOfLines={2}
@@ -101,9 +118,7 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
         />
       </View>
       <Typography style={styles.explanation} ellipsizeMode={"clip"}>
-        {apodExplanationArray
-          .slice(0, Platform.OS === MobilePlatform.Android ? 70 : 90)
-          .join(" ")}{" "}
+        {apodExplanationArray.slice(0, 70).join(" ")}{" "}
         {((Platform.OS === MobilePlatform.IOS &&
           apodExplanationArray.length >= 90) ||
           (Platform.OS === MobilePlatform.Android &&

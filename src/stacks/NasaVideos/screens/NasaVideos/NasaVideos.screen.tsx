@@ -5,29 +5,25 @@ import {
   LoadingScreen,
   useScrollToTopButton,
   ScrollToTopButton,
+  ScreenWrapper,
+  CustomBottomSheetBackdrop,
+  CustomBottomSheetModalBackground,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 
 import React, { FC, useCallback, useRef, useState } from "react";
-import { FlatList, View, Animated } from "react-native";
+import { FlatList, Animated } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
-import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
-import { CustomBottomSheetModalBackground } from "../../../../components/CustomBottomSheetModalBackground";
-import { NasaAssetItemModal } from "../../../../components/NasaAssetItemModal";
+
+import { NasaAssetItemModal } from "../../../../components/Modals/NasaAssetItemModal";
 import { commonStyles } from "../../../../theming/commonStyles";
-import {
-  NasaAssetItemData,
-  NasaAssetItemResponse,
-} from "../../../../types/NasaAssetItemResponse";
-import {
-  RootStackNavigationProp,
-  RootStackRoutes,
-} from "../../../Root/Root.routes";
-import { SelectedVideoStackRoutes } from "../../../SelectedVideo/SelectedVideo.routes";
+import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./NasaVideos.styled";
 import { EmptySpace } from "../../../../components/EmptySpace";
+import { NasaAssetTransformed } from "../../../../types/NasaAssetTransformed";
+import { format } from "date-fns";
 
 enum NasaVideosScreenQueryKey {
   NasaVideos = "NasaVideos",
@@ -42,12 +38,12 @@ const NasaVideosScreen: FC = () => {
 
   const scrollToTop = (): void => {
     if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+      flatListRef.current.scrollToIndex({ index: 0 });
     }
   };
 
   const [selectedNasaVideoData, setSelectedNasaVideoData] =
-    useState<NasaAssetItemData | null>(null);
+    useState<NasaAssetTransformed | null>(null);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -64,7 +60,6 @@ const NasaVideosScreen: FC = () => {
     isLoading: isNasaVideosLoading,
     fetchNextPage: fetchNasaVideosNextPage,
     hasNextPage: hasNasaVideosNextPage,
-    isFetchedAfterMount: isNasaVideosFetchedAfterMount,
     isFetchingNextPage: isNasaVideosFetchingNextPage,
     isError: isNasaVideosError,
   } = useInfiniteQuery(
@@ -93,36 +88,43 @@ const NasaVideosScreen: FC = () => {
     }
   };
 
-  if (isNasaVideosFetchedAfterMount && isNasaVideosLoading) {
+  if (isNasaVideosLoading) {
     return <LoadingScreen />;
   }
 
-  const nasaVideosData: NasaAssetItemResponse[] = nasaVideosResponse?.pages
-    .length
-    ? nasaVideosResponse.pages.flatMap(
-        (page) => page.data.data.collection.items
-      )
+  const nasaVideoItemsResponse = nasaVideosResponse?.pages.length
+    ? nasaVideosResponse.pages
     : [];
+  const nasaVideosData: NasaAssetTransformed[] = nasaVideoItemsResponse
+    .flatMap((page) => page.data.data.collection.items)
+    .map((item, index) => {
+      return {
+        id: index,
+        src: item.links[0].href,
+        title: item.data[0].title,
+        explanation: item.data[0].description,
+        author: item.data[0].secondary_creator,
+        date: format(new Date(item.data[0].date_created), "yyy-MM-dd"),
+        videoUrl: item.href,
+      };
+    });
 
-  const renderItem = ({ item }: { item: NasaAssetItemResponse }) => {
-    const [imagePreview] = item.links;
+  const renderItem = ({ item }: { item: NasaAssetTransformed }) => {
     return (
       <ApodWidget
-        id={item.data[0].nasa_id}
-        title={item.data[0].title}
-        date={item.data[0].date_created}
-        author={item.data[0].secondary_creator || "-"}
-        imageSource={{ uri: imagePreview.href }}
+        id={`item.${item.id}.src`}
+        title={item.title}
+        date={item.date}
+        author={item.author || "-"}
+        imageSource={{ uri: item.src }}
         onLongPress={async () => {
-          setSelectedNasaVideoData(item.data[0]);
+          setSelectedNasaVideoData(item!);
           handlePresentModalPress();
         }}
         onPress={() => {
-          navigation.navigate(RootStackRoutes.SelectedVideoStack, {
-            screen: SelectedVideoStackRoutes.SelectedVideoScreen,
-            params: {
-              videoCollectionUri: item.href,
-            },
+          navigation.navigate("NasaVideoScreen", {
+            id: `item.${item.id}.src`,
+            item: item,
           });
         }}
       />
@@ -134,7 +136,7 @@ const NasaVideosScreen: FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScreenWrapper>
       <Animated.FlatList
         ref={flatListRef}
         contentContainerStyle={styles.contentContainerStyle}
@@ -173,7 +175,7 @@ const NasaVideosScreen: FC = () => {
         <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />
       </BottomSheetModal>
       <ScrollToTopButton onPress={scrollToTop} buttonOpacity={buttonOpacity} />
-    </View>
+    </ScreenWrapper>
   );
 };
 

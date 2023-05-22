@@ -5,38 +5,47 @@ import {
   LoadingScreen,
   useScrollToTopButton,
   ScrollToTopButton,
+  ScreenWrapper,
+  CustomBottomSheetBackdrop,
+  CustomBottomSheetModalBackground,
+  NasaAssetItemModal,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useNavigation, useScrollToTop } from "@react-navigation/native";
-import { FlashList } from "@shopify/flash-list";
+import { useNavigation } from "@react-navigation/native";
+
 import React, { FC, useCallback, useRef, useState } from "react";
-import { Animated, FlatList, View } from "react-native";
+
+import { Animated } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
-import { CustomBottomSheetBackdrop } from "../../../../components/CustomBottomSheetBackdrop";
-import { CustomBottomSheetModalBackground } from "../../../../components/CustomBottomSheetModalBackground";
-import NasaAssetItemModal from "../../../../components/NasaAssetItemModal/NasaAssetItemModal";
+
 import { commonStyles } from "../../../../theming/commonStyles";
 import { styles } from "./NasaImages.styled";
 import { EmptySpace } from "../../../../components/EmptySpace";
 import { format } from "date-fns";
-import { NasaImagesStackNavigationProp } from "../../NasaImages.routes";
 import { NasaAssetTransformed } from "../../../../types/NasaAssetTransformed";
+import { RootStackNavigationProp } from "../../../Root/Root.routes";
+import { FlashList } from "@shopify/flash-list";
+import { scale } from "react-native-size-matters";
 
 enum NasaImagesScreenQueryKey {
   NasaImages = "NasaImages",
 }
 
-const NasaImagesScreen: FC = () => {
-  const navigation = useNavigation<NasaImagesStackNavigationProp>();
+const AnimatedFlashList = Animated.createAnimatedComponent(
+  FlashList<NasaAssetTransformed>
+);
 
-  const flatListRef = useRef<FlatList>(null);
+const NasaImagesScreen: FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp>();
+
+  const flatListRef = useRef<FlashList<NasaAssetTransformed>>(null);
 
   const { scrollY, buttonOpacity } = useScrollToTopButton();
 
   const scrollToTop = (): void => {
     if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+      flatListRef.current.scrollToIndex({ index: 0 });
     }
   };
 
@@ -57,7 +66,6 @@ const NasaImagesScreen: FC = () => {
     isLoading: isNasaImagesLoading,
     fetchNextPage: fetchNasaImagesNextPage,
     hasNextPage: hasNasaImagesNextPage,
-    isFetchedAfterMount: isNasaImagesFetchedAfterMount,
     isFetchingNextPage: isNasaImagesFetchingNextPage,
     isError: isImagesRoversError,
   } = useInfiniteQuery(
@@ -86,7 +94,7 @@ const NasaImagesScreen: FC = () => {
     }
   };
 
-  if (isNasaImagesFetchedAfterMount && isNasaImagesLoading) {
+  if (isNasaImagesLoading) {
     return <LoadingScreen />;
   }
 
@@ -133,13 +141,14 @@ const NasaImagesScreen: FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Animated.FlatList
+    <ScreenWrapper>
+      <AnimatedFlashList
         ref={flatListRef}
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaImagesData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
+        estimatedItemSize={scale(216)}
         ItemSeparatorComponent={renderItemSeparator}
         ListFooterComponent={
           <EmptySpace
@@ -171,7 +180,7 @@ const NasaImagesScreen: FC = () => {
         <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
       </BottomSheetModal>
       <ScrollToTopButton onPress={scrollToTop} buttonOpacity={buttonOpacity} />
-    </View>
+    </ScreenWrapper>
   );
 };
 

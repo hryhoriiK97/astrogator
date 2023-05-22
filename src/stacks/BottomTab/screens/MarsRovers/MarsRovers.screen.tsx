@@ -1,17 +1,23 @@
-import { LoadingScreen, Raleway, Typography } from "../../../../components";
+import {
+  LoadingScreen,
+  Raleway,
+  ScreenWrapper,
+  Spacer,
+  SpacerVariant,
+  Typography,
+  MarsRovers,
+  MarsRoverSettingsModal,
+} from "../../../../components";
+import { View } from "react-native";
 import { NASA_API_KEY } from "@env";
-import { MarsRovers } from "../../../../components/MarsRovers";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import React, { FC, useCallback, useRef } from "react";
-import { SafeAreaView, ImageBackground, View } from "react-native";
 import { useQuery } from "react-query";
-import Background from "../../../../../assets/images/Group.png";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { MarsRoverItemResponse } from "../../../../types/MarsRoverItemResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
-import { MarsRoverSettingsModal } from "../../../../components/Modals";
 import { styles } from "./MarsRovers.styled";
 
 enum MarsRoverPhotosQueryKey {
@@ -47,24 +53,29 @@ const MarsRoversScreen: FC = () => {
     marsRovesResponse?.data.rovers;
 
   return (
-    <ImageBackground
-      source={Background}
-      resizeMode={"cover"}
-      progressiveRenderingEnabled={true}
-      resizeMethod={"resize"}
-      style={styles.backgroundImage}
-      imageStyle={styles.imageStyle}
-    >
-      <View style={styles.backdropWrapper} />
-      <SafeAreaView style={styles.container}>
-        <Typography variant={Raleway.Bold} style={styles.title}>
-          Mars Rovers
-        </Typography>
+    <ScreenWrapper>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Typography variant={Raleway.Bold} style={styles.title}>
+            Mars Rovers
+          </Typography>
+          <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
+          <Typography style={styles.subtitle}>
+            Explore space managing updates directly from NASA
+          </Typography>
+        </View>
+        <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
         <MarsRovers
           marsRoversData={marsRoversData}
-          onRoverItemPress={(rover) => {
-            handlePresentModalPress();
+          onLearnMorePress={(rover) => {
             setSelectedRover(rover);
+            handlePresentModalPress();
+          }}
+          onGalleryPress={async (rover) => {
+            await setSelectedRover(rover);
+            await navigate("MarsRoversPhotosStack", {
+              screen: "MarsRoverPhotosScreen",
+            });
           }}
         />
         <MarsRoverSettingsModal
@@ -75,8 +86,8 @@ const MarsRoversScreen: FC = () => {
             });
           }}
         />
-      </SafeAreaView>
-    </ImageBackground>
+      </View>
+    </ScreenWrapper>
   );
 };
 

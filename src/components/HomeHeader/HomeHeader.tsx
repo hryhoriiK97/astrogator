@@ -18,12 +18,12 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
   return (
     <>
       <View style={styles.container}>
-        <Typography style={styles.title}>Space Viewer</Typography>
-        <Spacer variant={SpacerVariant.Spacer_8_Vertical} />
+        <Typography style={styles.title}>Astrogator</Typography>
+        <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
         <Typography style={styles.subtitle}>
           Explore space managing updates directly from NASA
         </Typography>
-        <Spacer variant={SpacerVariant.Spacer_20_Vertical} />
+        <Spacer variant={SpacerVariant.Spacer_15_Vertical} />
         <View style={styles.homeHeaderActionsWrapper}>
           <View style={styles.latestUpdatesTitleWrapper}>
             <Star />

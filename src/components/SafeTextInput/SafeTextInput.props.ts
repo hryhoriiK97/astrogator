@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle, ViewStyle } from "react-native";
+import { StyleProp, TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 export enum SafeInputTypeError {
   Number = "number",
@@ -18,6 +18,7 @@ export enum SafeInputTypeCheck {
 }
 
 export type SafeTextInputProps = {
+  currentValue: TextInputProps["value"];
   inputTypeCheckVariant: SafeInputTypeCheck;
   setTextValue: (value: string) => void;
   errorTexts: SafeInputErrorTexts;

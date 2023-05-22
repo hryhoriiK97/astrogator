@@ -13,9 +13,14 @@ import { styles } from "./MarsRoverPhotosFullList.styled";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
 import {
+  ScreenWrapper,
   ScrollToTopButton,
+  Spacer,
+  SpacerVariant,
+  Typography,
   useScrollToTopButton,
 } from "../../../../components";
+import { AstrogatorColor } from "../../../../theming/theme";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -26,9 +31,7 @@ const MarsRoverPhotosFullListScreen: FC = () => {
     useRoute<
       RouteProp<MarsRoversPhotosStackParamList, "MarsRoverPhotosFullList">
     >();
-  const { marsPhotos } = route.params;
-
-  console.log(marsPhotos.length);
+  const { marsPhotos, marsRoverName } = route.params;
 
   const flatListRef = useRef<FlatList<MarsRoverPhotoItemResponse>>(null);
 
@@ -62,13 +65,13 @@ const MarsRoverPhotosFullListScreen: FC = () => {
         style={styles.marsPhotoItem}
         source={{ uri: item.img_src }}
         placeholder={blurhash}
-        cachePolicy={"memory"}
+        cachePolicy={"memory-disk"}
       />
     </Pressable>
   );
 
   return (
-    <View style={styles.screen}>
+    <ScreenWrapper>
       <SafeAreaView style={styles.safeAreaContainer}>
         <Animated.FlatList
           ref={flatListRef}
@@ -77,6 +80,20 @@ const MarsRoverPhotosFullListScreen: FC = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={renderItem}
+          ListHeaderComponent={() => (
+            <View style={styles.header}>
+              <View>
+                <Typography style={styles.title}>Gallery</Typography>
+                <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
+                <Typography style={styles.roverName}>
+                  {marsRoverName}
+                </Typography>
+              </View>
+              <Pressable onPress={goBack}>
+                <Typography color={AstrogatorColor.White}>Back</Typography>
+              </Pressable>
+            </View>
+          )}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollY } } }],
             { useNativeDriver: true }
@@ -87,7 +104,7 @@ const MarsRoverPhotosFullListScreen: FC = () => {
           buttonOpacity={buttonOpacity}
         />
       </SafeAreaView>
-    </View>
+    </ScreenWrapper>
   );
 };
 

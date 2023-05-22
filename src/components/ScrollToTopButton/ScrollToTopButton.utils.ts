@@ -7,7 +7,7 @@ export const useScrollToTopButton = () => {
 
   useEffect(() => {
     const listenerId = scrollY.addListener(({ value }) => {
-      if (value >= 300) {
+      if (value >= 500) {
         Animated.timing(buttonOpacity, {
           toValue: 1,
           duration: 50,
