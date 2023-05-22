@@ -12,7 +12,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AstrogatorColor.Black,
   },
-
+  safeAreaView: {
+    flex: 1,
+    position: "relative",
+  },
   logoShuttle: {
     position: "absolute",
     top: height < 700 ? 95 : 125,
