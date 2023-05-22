@@ -3,12 +3,13 @@ import { NASA_API_KEY } from "@env";
 
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { format, isFuture, isToday } from "date-fns";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useQuery } from "react-query";
 import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 
 import { ApodResponse } from "../../../../types/ApodResponse";
 import { RootParamList } from "../../../Root/Root.routes";
+import { askForReview } from "../../../../utils/askForReview";
 
 enum ApodScreenQueryKey {
   Apod = "apod",
@@ -21,7 +22,11 @@ const ApodScreen: FC = () => {
 
   const selectedApodDate = new Date(apodDate!);
 
-  if (item.id) {
+  if (item) {
+    useEffect(() => {
+      askForReview();
+    }, []);
+
     return <ApodScreenContent id={id} item={item} />;
   } else {
     const {
@@ -41,6 +46,7 @@ const ApodScreen: FC = () => {
         );
       }
     });
+
     if (isApodLoading || isApodRefetching) {
       return <LoadingScreen />;
     }

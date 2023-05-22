@@ -66,12 +66,13 @@ const HomeScreen: FC = () => {
         title={item.title}
         date={item.date}
         author={item.copyright}
-        onPress={() =>
+        onPress={() => {
           navigation.navigate("ApodStack", {
             id: `item.${item.id}.url`,
+            apodDate: undefined,
             item,
-          })
-        }
+          });
+        }}
       />
     );
   };
