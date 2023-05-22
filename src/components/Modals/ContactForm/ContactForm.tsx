@@ -50,7 +50,7 @@ const ContactForm: FC<ContactFormProps> = ({
               style={[styles.button, styles.sendEmailButton]}
               onPress={() => onWriteEmailButtonPress(selectedSubject)}
             >
-              <Typography variant={Raleway.Bold} style={styles.textStyle}>
+              <Typography variant={Raleway.Bold} style={styles.buttonTitle}>
                 Send Email
               </Typography>
             </Pressable>
@@ -59,7 +59,7 @@ const ContactForm: FC<ContactFormProps> = ({
               style={[styles.button, styles.buttonClose]}
               onPress={() => onCloseModal()}
             >
-              <Typography variant={Raleway.Bold} style={styles.textStyle}>
+              <Typography variant={Raleway.Bold} style={styles.buttonTitle}>
                 Hide
               </Typography>
             </Pressable>

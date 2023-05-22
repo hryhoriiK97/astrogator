@@ -40,6 +40,11 @@ export const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: AstrogatorColor.Gray,
   },
+  buttonTitle: {
+    fontSize: moderateScale(14),
+    color: AstrogatorColor.White,
+    textAlign: "center",
+  },
   title: {
     fontSize: moderateScale(24),
     color: AstrogatorColor.White,
