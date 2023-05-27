@@ -1,17 +1,23 @@
 import { Typography } from "../../../../components";
-//TODO
-// import { BlurView } from "expo-blur";
 import { useNavigation } from "@react-navigation/native";
+import { BlurView } from "@react-native-community/blur";
+import { MobilePlatform } from "../../../../enums/MobilePlatform";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { FC, useEffect } from "react";
-import { ImageBackground, Pressable, StatusBar, View } from "react-native";
+import {
+  ImageBackground,
+  Platform,
+  Pressable,
+  StatusBar,
+  View,
+} from "react-native";
 import Background from "../../../../../assets/images/Group.png";
 import { Astronaut } from "../../../../../assets/svgs/Astronaut";
 import { RedPlanet } from "../../../../../assets/svgs/RedPlanet";
 import { SmallPlanet } from "../../../../../assets/svgs/SmallPlanet";
 import { RootStackNavigationProp } from "../../Root.routes";
 import { styles } from "./Welcome.styled";
-import { BlurView } from "expo-blur";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const WelcomeScreen: FC = () => {
   const { navigate } = useNavigation<RootStackNavigationProp>();
@@ -51,7 +57,11 @@ const WelcomeScreen: FC = () => {
               Explore the vastness of space with our new mobile app! learn about
               the planets and stars, and admire stunning space photos.
             </Typography>
-            <BlurView intensity={10} tint={"light"} style={styles.blurWrapper}>
+            <BlurView
+              blurAmount={Platform.OS === MobilePlatform.IOS ? 3.5 : 10}
+              blurType={"dark"}
+              style={styles.blurWrapper}
+            >
               <Pressable
                 style={styles.discoverButton}
                 onPress={() =>

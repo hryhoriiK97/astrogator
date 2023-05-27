@@ -85,6 +85,7 @@ export const styles = StyleSheet.create({
   },
   blurWrapper: {
     width: "50%",
+    borderRadius: 4 * bp,
   },
   button: {
     width: "100%",

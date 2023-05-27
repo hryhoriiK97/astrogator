@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { Pressable, View } from "react-native";
+import { Platform, Pressable, View } from "react-native";
 import { Image } from "expo-image";
-import { Heart } from "../../../../assets/svgs/Heart";
+// import { Heart } from "../../../../assets/svgs/Heart";
 import { moderateScale } from "react-native-size-matters";
-import { BlurView } from "expo-blur";
+import { BlurView } from "@react-native-community/blur";
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
@@ -17,13 +17,14 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { CARD_HEIGHT, SNAP_POINTS } from "./MarsRoverCard.utils";
-import { snapPoint } from "react-native-redash";
-import { styles } from "./MarsRoverCard.styled";
 import { MarsRoverCardProps } from "./MarsRoverCard.props";
 import { Raleway, Typography } from "../../Typography";
 import { Spacer, SpacerVariant } from "../../Spacer";
 import { AstrogatorColor } from "../../../theming/theme";
+import { MobilePlatform } from "../../../enums/MobilePlatform";
+import { CARD_HEIGHT, SNAP_POINTS } from "./MarsRoverCard.utils";
+import { snapPoint } from "react-native-redash";
+import { styles } from "./MarsRoverCard.styled";
 
 const MarsRoverCard = ({
   card: { source, height },
@@ -136,8 +137,8 @@ const MarsRoverCard = ({
               <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
               <View style={styles.buttonsWrapper}>
                 <BlurView
-                  tint="light"
-                  intensity={10}
+                  blurType="light"
+                  blurAmount={Platform.OS === MobilePlatform.IOS ? 3.5 : 10}
                   style={styles.blurWrapper}
                 >
                   <Pressable style={styles.button} onPress={onLearnMorePress}>
@@ -148,8 +149,8 @@ const MarsRoverCard = ({
                 </BlurView>
                 <Spacer variant={SpacerVariant.Spacer_5_Horizontal} />
                 <BlurView
-                  tint="light"
-                  intensity={10}
+                  blurType="light"
+                  blurAmount={Platform.OS === MobilePlatform.IOS ? 3.5 : 10}
                   style={styles.blurWrapper}
                 >
                   <Pressable
