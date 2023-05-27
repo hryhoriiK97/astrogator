@@ -7,6 +7,7 @@ import {
   Typography,
   MarsRovers,
   MarsRoverSettingsModal,
+  EmptyDataIndicator,
 } from "../../../../components";
 import { View } from "react-native";
 import { NASA_API_KEY } from "@env";
@@ -37,8 +38,15 @@ const MarsRoversScreen: FC = () => {
     isError: isMarsRoversError,
     refetch: marsRoversRefetch,
     isRefetching: isMarsRoversRefetching,
-  } = useQuery(MarsRoverPhotosQueryKey.MarsRovers, () =>
-    apodAxiosInstance.get(`/mars-photos/api/v1/rovers?api_key=${NASA_API_KEY}`)
+  } = useQuery(
+    MarsRoverPhotosQueryKey.MarsRovers,
+    () =>
+      apodAxiosInstance.get(
+        `/mars-photos/api/v1/rovers?api_key=${NASA_API_KEY}`
+      ),
+    {
+      refetchOnWindowFocus: true,
+    }
   );
 
   const handlePresentModalPress = useCallback(() => {
@@ -49,8 +57,16 @@ const MarsRoversScreen: FC = () => {
     return <LoadingScreen />;
   }
 
+  if (isMarsRoversError || !marsRovesResponse?.data.rovers.length) {
+    <EmptyDataIndicator
+      onRefreshButtonPress={() =>
+        marsRoversRefetch({ queryKey: MarsRoverPhotosQueryKey.MarsRovers })
+      }
+    />;
+  }
+
   const marsRoversData: MarsRoverItemResponse[] =
-    marsRovesResponse?.data.rovers;
+    marsRovesResponse?.data.rovers ?? [];
 
   return (
     <ScreenWrapper>
@@ -65,27 +81,41 @@ const MarsRoversScreen: FC = () => {
           </Typography>
         </View>
         <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
-        <MarsRovers
-          marsRoversData={marsRoversData}
-          onLearnMorePress={(rover) => {
-            setSelectedRover(rover);
-            handlePresentModalPress();
-          }}
-          onGalleryPress={async (rover) => {
-            await setSelectedRover(rover);
-            await navigate("MarsRoversPhotosStack", {
-              screen: "MarsRoverPhotosScreen",
-            });
-          }}
-        />
-        <MarsRoverSettingsModal
-          bottomSheetModalRef={bottomSheetModalRef}
-          onExploreButtonPress={(): void => {
-            navigate("MarsRoversPhotosStack", {
-              screen: "MarsRoverPhotosScreen",
-            });
-          }}
-        />
+        {marsRoversData.length && !isMarsRoversError ? (
+          <>
+            <MarsRovers
+              marsRoversData={marsRoversData}
+              onLearnMorePress={(rover) => {
+                setSelectedRover(rover);
+                handlePresentModalPress();
+              }}
+              onGalleryPress={async (rover) => {
+                await setSelectedRover(rover);
+                await navigate("MarsRoversPhotosStack", {
+                  screen: "MarsRoverPhotosScreen",
+                });
+              }}
+            />
+            <MarsRoverSettingsModal
+              bottomSheetModalRef={bottomSheetModalRef}
+              onExploreButtonPress={(): void => {
+                navigate("MarsRoversPhotosStack", {
+                  screen: "MarsRoverPhotosScreen",
+                });
+              }}
+            />
+          </>
+        ) : (
+          <View style={styles.emptyDataIndicatorWrapper}>
+            <EmptyDataIndicator
+              onRefreshButtonPress={() =>
+                marsRoversRefetch({
+                  queryKey: MarsRoverPhotosQueryKey.MarsRovers,
+                })
+              }
+            />
+          </View>
+        )}
       </View>
     </ScreenWrapper>
   );

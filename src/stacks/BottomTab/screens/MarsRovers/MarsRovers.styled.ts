@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { Raleway } from "../../../../components";
-import { scale, verticalScale } from "react-native-size-matters";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     paddingTop: verticalScale(48),
   },
   contentContainerStyle: {
-    marginHorizontal: scale(16),
+    marginHorizontal: moderateScale(16),
   },
   header: {
     paddingLeft: verticalScale(16),
@@ -34,5 +34,11 @@ export const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     alignItems: "center",
+  },
+  emptyDataIndicatorWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: verticalScale(16),
+    flex: 1,
   },
 });

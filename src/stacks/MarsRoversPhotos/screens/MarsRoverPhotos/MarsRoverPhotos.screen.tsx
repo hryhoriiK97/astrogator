@@ -34,7 +34,7 @@ import { DatePickerIcon } from "../../../../../assets/svgs/DatePickerIcon";
 import { Chevron } from "../../../../../assets/svgs/Chevron";
 import { List } from "../../../../../assets/svgs/List";
 import { format } from "date-fns";
-import { EmptyDataScreen } from "../../../../components/EmptyDataScreen";
+import { EmptyDataIndicator } from "../../../../components";
 
 const { width } = Dimensions.get("screen");
 
@@ -228,7 +228,13 @@ const MarsRoverPhotosScreen: FC = () => {
             ItemSeparatorComponent={renderItemSeparator}
             ListEmptyComponent={
               isEmptyPhotosList ? (
-                <EmptyDataScreen text={"No data for this search input"} />
+                <EmptyDataIndicator
+                  onRefreshButtonPress={() =>
+                    marsRoverPhotosRefetch({
+                      queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
+                    })
+                  }
+                />
               ) : undefined
             }
           />

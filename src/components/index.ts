@@ -19,7 +19,7 @@ export * from "./HomeTileModal";
 export * from "./ImageActionTab";
 export * from "./Modals/NasaAssetItemModal";
 export * from "./DropdownSelector";
-export * from "./EmptyDataScreen";
+export * from "./EmptyDataIndicator";
 export * from "./HomeHeader";
 export * from "./EmptySpace";
 export * from "./MarsRovers";

@@ -8,12 +8,13 @@ import {
   ScreenWrapper,
   CustomBottomSheetBackdrop,
   CustomBottomSheetModalBackground,
+  EmptyDataIndicator,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 
 import React, { FC, useCallback, useRef, useState } from "react";
-import { FlatList, Animated } from "react-native";
+import { FlatList, Animated, View } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 
@@ -58,6 +59,8 @@ const NasaVideosScreen: FC = () => {
   const {
     data: nasaVideosResponse,
     isLoading: isNasaVideosLoading,
+    refetch: nasaVideosRefetch,
+    isRefetching: isNasaVideosRefetching,
     fetchNextPage: fetchNasaVideosNextPage,
     hasNextPage: hasNasaVideosNextPage,
     isFetchingNextPage: isNasaVideosFetchingNextPage,
@@ -79,6 +82,7 @@ const NasaVideosScreen: FC = () => {
           return lastPage.nextPage;
         }
       },
+      refetchOnWindowFocus: true,
     }
   );
 
@@ -88,8 +92,20 @@ const NasaVideosScreen: FC = () => {
     }
   };
 
-  if (isNasaVideosLoading) {
+  if (isNasaVideosLoading || isNasaVideosRefetching) {
     return <LoadingScreen />;
+  }
+
+  if (isNasaVideosError) {
+    return (
+      <View style={styles.emptyDataIndicatorWrapper}>
+        <EmptyDataIndicator
+          onRefreshButtonPress={() =>
+            nasaVideosRefetch({ queryKey: NasaVideosScreenQueryKey.NasaVideos })
+          }
+        />
+      </View>
+    );
   }
 
   const nasaVideoItemsResponse = nasaVideosResponse?.pages.length

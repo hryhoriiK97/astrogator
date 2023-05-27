@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
-import { scale, verticalScale } from "react-native-size-matters";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,5 +11,12 @@ export const styles = StyleSheet.create({
     backgroundColor: AstrogatorColor.Transparent,
     paddingVertical: verticalScale(20),
     paddingHorizontal: scale(8),
+  },
+  emptyDataIndicatorWrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: AstrogatorColor.Black,
+    paddingHorizontal: moderateScale(16),
   },
 });

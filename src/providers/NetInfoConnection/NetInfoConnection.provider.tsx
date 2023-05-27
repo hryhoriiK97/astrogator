@@ -1,8 +1,15 @@
 import NetInfo from "@react-native-community/netinfo";
 import React, { FC, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import {
+  AppState,
+  AppStateStatus,
+  Platform,
+  StyleSheet,
+  View,
+} from "react-native";
 import { NetInfoErrorConnection } from "../../components/NetInfoErrorConnection";
 import { AstrogatorColor } from "../../theming/theme";
+import { focusManager, onlineManager } from "react-query";
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +48,26 @@ const NetInfoConnectionProvider: FC<NetInfoConnectionProviderProps> = ({
     return () => {
       unsubscribe();
     };
+  }, []);
+
+  useEffect(() => {
+    onlineManager.setEventListener((setOnline) => {
+      return NetInfo.addEventListener((state) => {
+        setOnline(!!state.isConnected);
+      });
+    });
+  }, []);
+
+  function onAppStateChange(status: AppStateStatus) {
+    if (Platform.OS !== "web") {
+      focusManager.setFocused(status === "active");
+    }
+  }
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener("change", onAppStateChange);
+
+    return () => subscription.remove();
   }, []);
 
   return (

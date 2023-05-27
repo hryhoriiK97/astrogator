@@ -9,13 +9,14 @@ import {
   CustomBottomSheetBackdrop,
   CustomBottomSheetModalBackground,
   NasaAssetItemModal,
+  EmptyDataIndicator,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 
 import React, { FC, useCallback, useRef, useState } from "react";
 
-import { Animated } from "react-native";
+import { Animated, View } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 
@@ -64,15 +65,17 @@ const NasaImagesScreen: FC = () => {
   const {
     data: nasaImagesResponse,
     isLoading: isNasaImagesLoading,
+    refetch: nasaImagesRefetch,
+    isRefetching: isNasaImagesRefetching,
     fetchNextPage: fetchNasaImagesNextPage,
     hasNextPage: hasNasaImagesNextPage,
     isFetchingNextPage: isNasaImagesFetchingNextPage,
-    isError: isImagesRoversError,
+    isError: isNasaImagesError,
   } = useInfiniteQuery(
     NasaImagesScreenQueryKey.NasaImages,
     async ({ pageParam = 1 }) => {
       const data = await nasaAssetsAxiosInstance.get(
-        `/search?media_type=image&page=${pageParam}&year_start=2023&keywords=space,mars,saturn,venera,moon,milky way`
+        `/search?media_type=image&page=${pageParam}&year_start=2023&keywords=space,mars,saturn,venera,moon,milky`
       );
       return {
         data: data,
@@ -85,6 +88,7 @@ const NasaImagesScreen: FC = () => {
           return lastPage.nextPage;
         }
       },
+      refetchOnWindowFocus: true,
     }
   );
 
@@ -94,8 +98,20 @@ const NasaImagesScreen: FC = () => {
     }
   };
 
-  if (isNasaImagesLoading) {
+  if (isNasaImagesLoading || isNasaImagesRefetching) {
     return <LoadingScreen />;
+  }
+
+  if (isNasaImagesError) {
+    return (
+      <View style={styles.emptyDataIndicatorWrapper}>
+        <EmptyDataIndicator
+          onRefreshButtonPress={() =>
+            nasaImagesRefetch({ queryKey: NasaImagesScreenQueryKey.NasaImages })
+          }
+        />
+      </View>
+    );
   }
 
   const nasaImagesData: NasaAssetTransformed[] = nasaImagesResponse?.pages

@@ -102,12 +102,12 @@ const MarsRoverCard = ({
                   {marsRoverName}
                 </Typography>
               </View>
-              <Pressable
+              {/* <Pressable
                 style={styles.addToFavouritesButton}
                 onPress={() => {}}
               >
                 <Heart />
-              </Pressable>
+              </Pressable> */}
             </View>
             <View style={styles.wrapper}>
               <View style={styles.marsInfoWrapper}>
