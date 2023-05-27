@@ -8,6 +8,7 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
+import { format } from "date-fns";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "react-query";
@@ -27,13 +28,13 @@ import {
   Typography,
   Raleway,
   ScreenWrapper,
+  MarsPhotosGalleryHeader,
 } from "../../../../components";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { styles } from "./MarsRoverPhotos.styled";
 import { DatePickerIcon } from "../../../../../assets/svgs/DatePickerIcon";
 import { Chevron } from "../../../../../assets/svgs/Chevron";
 import { List } from "../../../../../assets/svgs/List";
-import { format } from "date-fns";
 import { EmptyDataIndicator } from "../../../../components";
 
 const { width } = Dimensions.get("screen");
@@ -160,56 +161,21 @@ const MarsRoverPhotosScreen: FC = () => {
     <ScreenWrapper>
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.screen}>
-          <View style={styles.header}>
-            <Typography variant={Raleway.Bold} style={styles.title}>
-              Gallery
-            </Typography>
-            <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
-            <Typography variant={Raleway.Regular} style={styles.subtitle}>
-              {!isEmptyPhotosList
-                ? `${
-                    currentDate
-                      ? format(new Date(currentDate), "yyyy-MM-dd")
-                      : "-"
-                  } - ${marsRoverPhotosData.length} photos`
-                : ""}
-            </Typography>
-            <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
-            <View style={styles.navigationBar}>
-              <Pressable style={styles.backButtonContainer} onPress={goBack}>
-                <Chevron rotate={180} />
-              </Pressable>
-              <View style={styles.datePickerWrapper}>
-                <Pressable
-                  style={styles.datePickerContainer}
-                  onPress={handlePresentModalPress}
-                >
-                  <Typography
-                    variant={Raleway.Medium}
-                    style={styles.datePickerText}
-                  >
-                    Date Picker
-                  </Typography>
-                  <Spacer variant={SpacerVariant.Spacer_3_Horizontal} />
-                  <DatePickerIcon />
-                </Pressable>
-                <Spacer variant={SpacerVariant.Spacer_7_Horizontal} />
-                <Pressable
-                  style={styles.fullListButtonContainer}
-                  disabled={isEmptyPhotosList}
-                  android_disableSound={true}
-                  onPress={() => {
-                    navigate("MarsRoverPhotosFullList", {
-                      marsRoverName: selectedRover?.name!,
-                      marsPhotos: marsRoverPhotosData,
-                    });
-                  }}
-                >
-                  <List />
-                </Pressable>
-              </View>
-            </View>
-          </View>
+          <MarsPhotosGalleryHeader
+            roverName={selectedRover?.name}
+            date={format(new Date(currentDate), "yyyy-MM-dd")}
+            photosCount={marsRoverPhotosData.length}
+            onGoBackButtonPress={goBack}
+            onSettingsModalPress={handlePresentModalPress}
+            onFullListPress={() => {
+              navigate("MarsRoverPhotosFullList", {
+                marsRoverName: selectedRover?.name!,
+                marsPhotos: marsRoverPhotosData,
+                date: format(new Date(currentDate), "yyyy-MM-dd"),
+              });
+            }}
+            isFullListButtonDisabled={isEmptyPhotosList}
+          />
           <Animated.FlatList
             ref={flatListRef}
             data={marsRoverPhotosData}
@@ -228,13 +194,15 @@ const MarsRoverPhotosScreen: FC = () => {
             ItemSeparatorComponent={renderItemSeparator}
             ListEmptyComponent={
               isEmptyPhotosList ? (
-                <EmptyDataIndicator
-                  onRefreshButtonPress={() =>
-                    marsRoverPhotosRefetch({
-                      queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
-                    })
-                  }
-                />
+                <View style={styles.emptyDataIndicatorWrapper}>
+                  <EmptyDataIndicator
+                    onRefreshButtonPress={() =>
+                      marsRoverPhotosRefetch({
+                        queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
+                      })
+                    }
+                  />
+                </View>
               ) : undefined
             }
           />
@@ -244,7 +212,11 @@ const MarsRoverPhotosScreen: FC = () => {
               marsRoverPhotosRefetch({
                 queryKey: MarsRoverPhotosQueryKey.MarsRoverPhotos,
               });
-              if (flatListRef && flatListRef.current) {
+              if (
+                flatListRef &&
+                flatListRef.current &&
+                !!marsRoverPhotosData.length
+              ) {
                 flatListRef.current?.scrollToIndex({
                   index: 0,
                   animated: false,

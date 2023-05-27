@@ -1,20 +1,11 @@
-import { EmptyDataIndicatorProps } from "./../../../../components/EmptyDataIndicator/EmptyDataIndicator.props";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { AstrogatorColor } from "../../../../theming/theme";
 import { StyleSheet } from "react-native";
-import { getRelativeUnits } from "../../../../utils/getRelativeUnits";
+import { AstrogatorColor } from "../../theming/theme";
+import { getRelativeUnits } from "../../utils/getRelativeUnits";
 
 const { bp } = getRelativeUnits();
 
 export const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
-  screen: {
-    flex: 1,
-    position: "relative",
-    paddingTop: scale(20),
-  },
   header: {
     width: "100%",
     alignItems: "flex-start",
@@ -83,12 +74,5 @@ export const styles = StyleSheet.create({
     borderColor: "rgba(255, 255, 255, 0.11)",
     backgroundColor: "rgba(255, 255, 255, 0.11)",
     borderStyle: "solid",
-  },
-  emptyDataIndicatorWrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 16,
-    paddingBottom: 70,
   },
 });

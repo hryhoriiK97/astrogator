@@ -23,3 +23,4 @@ export * from "./EmptyDataIndicator";
 export * from "./HomeHeader";
 export * from "./EmptySpace";
 export * from "./MarsRovers";
+export * from "./MarsPhotosGalleryHeader";

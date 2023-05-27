@@ -9,18 +9,26 @@ export const styles = StyleSheet.create({
   safeAreaContainer: {
     height: "100%",
   },
+  screen: {
+    paddingTop: scale(20),
+  },
   header: {
-    paddingTop: verticalScale(48),
-    paddingHorizontal: scale(8),
-    paddingBottom: verticalScale(40),
+    paddingTop: verticalScale(22),
   },
   title: {
     fontSize: 24 * bp,
     color: AstrogatorColor.White,
   },
-  roverName: {
+  infoText: {
     fontSize: 14 * bp,
-    color: AstrogatorColor.White,
+    color: AstrogatorColor.Silver,
+  },
+  navigationBar: {
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  backButton: {
+    borderWidth: 1,
   },
   marsPhotoItemWrapper: {
     flex: 1,
@@ -32,6 +40,6 @@ export const styles = StyleSheet.create({
     borderRadius: 8 * bp,
   },
   contentContainerStyle: {
-    paddingHorizontal: scale(8),
+    paddingHorizontal: scale(16),
   },
 });

@@ -3,8 +3,8 @@ import {
   Animated,
   Pressable,
   SafeAreaView,
-  View,
   FlatList,
+  View,
 } from "react-native";
 import { Image } from "expo-image";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -13,14 +13,14 @@ import { styles } from "./MarsRoverPhotosFullList.styled";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
 import {
+  EmptySpace,
+  MarsPhotosGalleryHeader,
   ScreenWrapper,
   ScrollToTopButton,
   Spacer,
   SpacerVariant,
-  Typography,
   useScrollToTopButton,
 } from "../../../../components";
-import { AstrogatorColor } from "../../../../theming/theme";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -31,7 +31,7 @@ const MarsRoverPhotosFullListScreen: FC = () => {
     useRoute<
       RouteProp<MarsRoversPhotosStackParamList, "MarsRoverPhotosFullList">
     >();
-  const { marsPhotos, marsRoverName } = route.params;
+  const { marsPhotos, marsRoverName, date } = route.params;
 
   const flatListRef = useRef<FlatList<MarsRoverPhotoItemResponse>>(null);
 
@@ -73,36 +73,33 @@ const MarsRoverPhotosFullListScreen: FC = () => {
   return (
     <ScreenWrapper>
       <SafeAreaView style={styles.safeAreaContainer}>
-        <Animated.FlatList
-          ref={flatListRef}
-          data={marsPhotos}
-          numColumns={3}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainerStyle}
-          renderItem={renderItem}
-          ListHeaderComponent={() => (
-            <View style={styles.header}>
-              <View>
-                <Typography style={styles.title}>Gallery</Typography>
-                <Spacer variant={SpacerVariant.Spacer_5_Vertical} />
-                <Typography style={styles.roverName}>
-                  {marsRoverName}
-                </Typography>
-              </View>
-              <Pressable onPress={goBack}>
-                <Typography color={AstrogatorColor.White}>Back</Typography>
-              </Pressable>
-            </View>
-          )}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: true }
-          )}
-        />
-        <ScrollToTopButton
-          onPress={scrollToTop}
-          buttonOpacity={buttonOpacity}
-        />
+        <View style={styles.screen}>
+          <MarsPhotosGalleryHeader
+            roverName={marsRoverName}
+            photosCount={marsPhotos.length}
+            date={date}
+            onGoBackButtonPress={goBack}
+            onSettingsModalPress={() => {}}
+          />
+          <Spacer variant={SpacerVariant.Spacer_20_Vertical} />
+          <Animated.FlatList
+            ref={flatListRef}
+            data={marsPhotos}
+            numColumns={4}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.contentContainerStyle}
+            renderItem={renderItem}
+            ListFooterComponent={<EmptySpace height={120} />}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+              { useNativeDriver: true }
+            )}
+          />
+          <ScrollToTopButton
+            onPress={scrollToTop}
+            buttonOpacity={buttonOpacity}
+          />
+        </View>
       </SafeAreaView>
     </ScreenWrapper>
   );

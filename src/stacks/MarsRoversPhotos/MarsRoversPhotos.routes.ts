@@ -7,6 +7,7 @@ export type MarsRoversPhotosStackParamList = {
   MarsRoverPhotosScreen: undefined;
   MarsRoverPhotosFullList: {
     marsRoverName: string;
+    date: string;
     marsPhotos: MarsRoverPhotoItemResponse[];
   };
   MarsFullImageStack: NavigatorScreenParams<MarsFullImageStackParamList>;
