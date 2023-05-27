@@ -27,7 +27,6 @@ const ContactForm: FC<ContactFormProps> = ({
         transparent={true}
         visible={isVisible}
         onDismiss={() => onCloseModal()}
-        style={{ backgroundColor: "red" }}
         onRequestClose={() => onCloseModal()}
       >
         <View style={styles.centeredView}>

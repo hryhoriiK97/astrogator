@@ -29,11 +29,17 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  titleWrapper: {
+    flexDirection: "row",
+  },
   latestUpdatesTitle: {
     fontSize: scale(16),
     fontFamily: Raleway.Medium,
     color: AstrogatorColor.White,
     marginLeft: scale(4),
+  },
+  apodsTitle: {
+    color: AstrogatorColor.VenetianNights,
   },
   datePickerWrapper: {
     flexDirection: "row",
