@@ -1,7 +1,7 @@
 import { View, FlatList } from "react-native";
 import { useQuery } from "react-query";
 import React, { FC } from "react";
-import { NASA_API_KEY } from "@env";
+import { NASA_API_KEY, SPACE_FLIGHT_NEWS_API_URL } from "@env";
 import { useNavigation } from "@react-navigation/native";
 import { format, subDays, isToday } from "date-fns";
 
@@ -21,13 +21,29 @@ import { apodAxiosInstance } from "../../../../api/apodAxiosInstance";
 import { ApodResponse } from "../../../../types/ApodResponse";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./Home.styled";
+import { spaceFlightNewsAxiosInstance } from "../../../../api/spaceFlightNewsAxiosInstance";
 
 enum HomeScreenQueryKey {
   Apod = "Apod",
+  SpaceFlightNews = "SpaceNewsFlight",
 }
 
 const HomeScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
+
+  const {
+    data: spaceFlightNewsResponse,
+    isLoading: isSpaceFlightNewsLoading,
+    isRefetching: isSpaceFlightNewsRefetching,
+    refetch: spaceFlightNewsRefetch,
+    isError: isSpaceFlightNewsError,
+  } = useQuery(
+    HomeScreenQueryKey.SpaceFlightNews,
+    () => spaceFlightNewsAxiosInstance.get(`/v3/articles`),
+    {
+      refetchOnWindowFocus: true,
+    }
+  );
 
   const {
     data: apodsResponse,
@@ -55,7 +71,12 @@ const HomeScreen: FC = () => {
       })
     : [];
 
-  if (isApodsLoading || isApodsRefetching) {
+  if (
+    isApodsLoading ||
+    isApodsRefetching ||
+    isSpaceFlightNewsLoading ||
+    isSpaceFlightNewsRefetching
+  ) {
     return <LoadingScreen />;
   }
 

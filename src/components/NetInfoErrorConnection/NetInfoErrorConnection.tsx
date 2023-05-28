@@ -1,6 +1,7 @@
 import { Raleway, Typography } from "../Typography";
-import React, { FC, useEffect } from "react";
-import { Pressable, SafeAreaView, View } from "react-native";
+import React, { FC } from "react";
+import { Pressable, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ReloadIcon } from "../../../assets/svgs/ReloadIcon";
 import { NetInfoErrorConnectionMask } from "../../../assets/svgs/NetInfoErrorConnectionMask";
 import { Image } from "expo-image";

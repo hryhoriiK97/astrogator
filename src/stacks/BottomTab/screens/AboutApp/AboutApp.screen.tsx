@@ -9,7 +9,8 @@ import {
 import React, { FC, useState } from "react";
 import * as StoreReview from "expo-store-review";
 import * as MailComposer from "expo-mail-composer";
-import { Pressable, SafeAreaView, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Pressable, View } from "react-native";
 import { AboutAppMask } from "../../../../../assets/svgs/AboutAppMask";
 import { LogoShuttle } from "../../../../../assets/svgs/LogoShuttle";
 import { styles } from "./AboutApp.styled";

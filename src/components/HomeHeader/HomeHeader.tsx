@@ -13,10 +13,12 @@ import { Spacer, SpacerVariant } from "../Spacer";
 import { styles } from "./HomeHeader.styled";
 
 const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date()
   );
+
   return (
     <>
       <InfoModal
@@ -70,15 +72,13 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
           ) : (
             <Pressable
               style={styles.datePickerWrapper}
-              onPress={() =>
+              onPress={() => {
+                setIsDatePickerOpen(true);
                 DateTimePickerAndroid.open({
                   value: new Date(),
-                })
-              }
+                });
+              }}
             >
-              <Typography style={styles.datePickerTitle}>
-                Date Picker
-              </Typography>
               <Spacer variant={SpacerVariant.Spacer_5_Horizontal} />
               <View style={styles.datePickerButton}>
                 <DatePickerIcon />
@@ -87,7 +87,7 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
           )}
         </View>
       </View>
-      {Platform.OS === MobilePlatform.Android && (
+      {Platform.OS === MobilePlatform.Android && isDatePickerOpen && (
         <DateTimePicker
           mode={"date"}
           display="calendar"
@@ -96,9 +96,10 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
           maximumDate={new Date()}
           onChange={(event, date) => {
             setSelectedDate(date);
-            if (event.type === "dismissed") {
-              onDatePicking(selectedDate || new Date()).then(() => {
-                setSelectedDate(undefined);
+            if (event.type === "dismissed" || event.type === "set") {
+              onDatePicking(date || new Date()).then(async () => {
+                // await setSelectedDate(undefined);
+                setIsDatePickerOpen(false);
               });
             }
           }}

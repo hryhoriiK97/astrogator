@@ -1,17 +1,12 @@
 import React, { FC, useRef } from "react";
-import {
-  Animated,
-  Pressable,
-  SafeAreaView,
-  FlatList,
-  View,
-} from "react-native";
+import { Animated, Pressable, FlatList, View } from "react-native";
 import { Image } from "expo-image";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { MarsRoversPhotosStackParamList } from "../../MarsRoversPhotos.routes";
 import { styles } from "./MarsRoverPhotosFullList.styled";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { MarsRoverPhotoItemResponse } from "../../../../types/MarsRoverPhotoItemResponse";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   EmptySpace,
   MarsPhotosGalleryHeader,

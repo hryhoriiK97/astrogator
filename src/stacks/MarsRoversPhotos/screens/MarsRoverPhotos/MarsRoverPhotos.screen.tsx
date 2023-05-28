@@ -1,13 +1,6 @@
 import { NASA_API_KEY } from "@env";
 import React, { FC, useCallback, useEffect, useRef } from "react";
-import {
-  Animated,
-  Dimensions,
-  View,
-  FlatList,
-  Pressable,
-  SafeAreaView,
-} from "react-native";
+import { Animated, Dimensions, View, FlatList, Pressable } from "react-native";
 import { format } from "date-fns";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
@@ -36,6 +29,7 @@ import { DatePickerIcon } from "../../../../../assets/svgs/DatePickerIcon";
 import { Chevron } from "../../../../../assets/svgs/Chevron";
 import { List } from "../../../../../assets/svgs/List";
 import { EmptyDataIndicator } from "../../../../components";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("screen");
 

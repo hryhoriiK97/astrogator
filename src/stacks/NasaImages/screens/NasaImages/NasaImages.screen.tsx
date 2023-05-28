@@ -164,7 +164,7 @@ const NasaImagesScreen: FC = () => {
         data={nasaImagesData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
-        estimatedItemSize={scale(216)}
+        estimatedItemSize={scale(200)}
         ItemSeparatorComponent={renderItemSeparator}
         ListFooterComponent={
           <EmptySpace

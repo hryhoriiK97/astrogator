@@ -20,16 +20,6 @@ export const styles = StyleSheet.create({
     height: 36 * bp,
     width: 36 * bp,
   },
-  backgroundImage: {
-    position: "relative",
-    backgroundColor: AstrogatorColor.Black,
-    width: "100%",
-    height: "100%",
-  },
-  imageStyle: {
-    width: "100%",
-    height: "100%",
-  },
   label: {
     fontSize: 10 * bp,
     color: AstrogatorColor.White,

@@ -1,12 +1,12 @@
 import { Raleway } from "../../components";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React, { FC } from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { AstrogatorColor } from "../../theming/theme";
 import { NasaAssetsStackRoutes } from "./NasaAssets.routes";
 import NasaImagesStack from "../NasaImages";
 import NasaVideosStack from "../NasaVideos";
-
 const Stack = createMaterialTopTabNavigator();
 
 const NasaAssetsStack: FC = () => {

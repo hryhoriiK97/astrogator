@@ -11,13 +11,22 @@ import { createSharedElementStackNavigator } from "react-navigation-shared-eleme
 import ApodScreen from "../Apod/screens/Apod/Apod.screen";
 import NasaVideoScreen from "../NasaVideos/screens/NasaVideo/NasaVideo.screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Platform } from "react-native";
+import { CardStyleInterpolators } from "@react-navigation/stack";
+import { MobilePlatform } from "../../enums/MobilePlatform";
 
 const Stack = createSharedElementStackNavigator();
 
 const RootStack: FC = () => {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator:
+          Platform.OS === MobilePlatform.Android
+            ? CardStyleInterpolators.forFadeFromBottomAndroid
+            : undefined,
+      }}
       initialRouteName={
         !!AsyncStorage.getItem("@wasFirstInteraction")
           ? RootStackRoutes.BottomTabStack
@@ -61,7 +70,6 @@ const RootStack: FC = () => {
         component={NasaVideoScreen}
         sharedElements={(route) => {
           const { item } = route.params;
-          console.log(item.id, "ITEM");
           return [{ id: `item.${item.id}.src`, animation: "fade" }];
         }}
       />

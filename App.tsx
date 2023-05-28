@@ -13,8 +13,9 @@ import { NetInfoConnectionProvider } from "./src/providers/NetInfoConnection";
 import RootStack from "./src/stacks/Root";
 import { useFonts } from "expo-font";
 import { Logs } from "expo";
-import { StatusBar } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { LoadingScreen } from "./src/components";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 Logs.enableExpoCliLogging();
 
@@ -38,20 +39,21 @@ export default function App() {
   return (
     <NetInfoConnectionProvider>
       <StatusBar
-        barStyle={"light-content"}
+        style={"light"}
         translucent={true}
-        backgroundColor={"rgba(0,0,0, 0.31)"}
-        showHideTransition={"fade"}
+        backgroundColor={"rgba(0,0,0, 0.11)"}
       />
-      <QueryClientProvider client={queryClient}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <BottomSheetModalProvider>
-            <NavigationContainer>
-              <RootStack />
-            </NavigationContainer>
-          </BottomSheetModalProvider>
-        </GestureHandlerRootView>
-      </QueryClientProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <QueryClientProvider client={queryClient}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <BottomSheetModalProvider>
+              <NavigationContainer>
+                <RootStack />
+              </NavigationContainer>
+            </BottomSheetModalProvider>
+          </GestureHandlerRootView>
+        </QueryClientProvider>
+      </SafeAreaView>
     </NetInfoConnectionProvider>
   );
 }
