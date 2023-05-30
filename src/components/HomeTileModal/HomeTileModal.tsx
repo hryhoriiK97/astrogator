@@ -1,13 +1,13 @@
 import { Raleway, Typography } from "../Typography";
 import React, { FC } from "react";
-import { View } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
 import { HomeTileModalProps } from "./HomeTileModal.props";
 import { styles } from "./HomeTileModal.styled";
+import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 const HomeTileModal: FC<HomeTileModalProps> = ({ title, description }) => {
   return (
-    <View style={styles.container}>
+    <BottomSheetScrollView contentContainerStyle={styles.contentContainerstyle}>
       <Typography
         variant={Raleway.Bold}
         color={AstrogatorColor.White}
@@ -19,10 +19,11 @@ const HomeTileModal: FC<HomeTileModalProps> = ({ title, description }) => {
         variant={Raleway.Bold}
         color={AstrogatorColor.White}
         style={styles.description}
+        overflow={"scroll"}
       >
         {description}
       </Typography>
-    </View>
+    </BottomSheetScrollView>
   );
 };
 

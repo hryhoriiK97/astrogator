@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
 import { Raleway } from "../Typography";
@@ -8,6 +8,7 @@ import {
   scale,
   verticalScale,
 } from "react-native-size-matters";
+import { MobilePlatform } from "../../enums/MobilePlatform";
 
 const { bp } = getRelativeUnits();
 
@@ -15,13 +16,15 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AstrogatorColor.Black,
-    paddingTop: verticalScale(40),
+    paddingTop: verticalScale(Platform.OS === MobilePlatform.IOS ? 40 : 15),
+    paddingBottom: verticalScale(Platform.OS === MobilePlatform.IOS ? 20 : 20),
   },
   apodHeader: {
     height: verticalScale(40),
   },
   contentContainerStyle: {
-    paddingVertical: verticalScale(10),
+    // paddingVertical: verticalScale(10),
+    paddingBottom: verticalScale(30),
     paddingHorizontal: scale(16),
   },
   image: {

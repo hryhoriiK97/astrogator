@@ -1,9 +1,10 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import {
   moderateScale,
   moderateVerticalScale,
 } from "react-native-size-matters";
+import { MobilePlatform } from "../../../../enums/MobilePlatform";
 
 const height = Dimensions.get("screen").height;
 
@@ -31,7 +32,9 @@ export const styles = StyleSheet.create({
   },
   screen: {
     flex: 1,
-    paddingTop: moderateVerticalScale(15),
+    paddingTop: moderateVerticalScale(
+      Platform.OS === MobilePlatform.IOS ? 15 : 25
+    ),
     paddingBottom: moderateVerticalScale(40),
     paddingHorizontal: moderateScale(16),
     justifyContent: "space-between",
