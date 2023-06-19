@@ -98,7 +98,7 @@ const NasaImagesScreen: FC = () => {
     }
   };
 
-  if (isNasaImagesLoading || isNasaImagesRefetching) {
+  if (isNasaImagesLoading) {
     return <LoadingScreen />;
   }
 

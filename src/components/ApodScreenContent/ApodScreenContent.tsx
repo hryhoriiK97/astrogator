@@ -27,6 +27,8 @@ import { HomeTileModal } from "../HomeTileModal";
 import { SharedElement } from "react-navigation-shared-element";
 import { getYouTubeVideoId, getVimeoVideoId } from "../../utils";
 
+const screenHeight = Dimensions.get("screen").height;
+
 const YOUTUBE_PLAYER_HEIGHT = Dimensions.get("window").width * (9 / 16);
 
 const ApodScreenContent: FC<ApodScreenContentProps> = ({
@@ -105,21 +107,23 @@ const ApodScreenContent: FC<ApodScreenContentProps> = ({
             Date: {item.date}
           </Typography>
         </View>
-        <ImageActionTab
-          type={"image"}
-          onButtonPress={() =>
-            navigation.navigate("FullImageStack", {
-              screen: "FullImageScreen",
-              params: {
-                photoUri: item.url,
-                title: item.title,
-              },
-            })
-          }
-        />
+        {item.media_type === "image" && (
+          <ImageActionTab
+            type={"image"}
+            onButtonPress={() =>
+              navigation.navigate("FullImageStack", {
+                screen: "FullImageScreen",
+                params: {
+                  photoUri: item.url,
+                  title: item.title,
+                },
+              })
+            }
+          />
+        )}
       </View>
       <Typography style={styles.explanation} ellipsizeMode={"clip"}>
-        {apodExplanationArray.slice(0, 70).join(" ")}{" "}
+        {apodExplanationArray.slice(0, screenHeight > 700 ? 90 : 70).join(" ")}{" "}
         {((Platform.OS === MobilePlatform.IOS &&
           apodExplanationArray.length >= 90) ||
           (Platform.OS === MobilePlatform.Android &&

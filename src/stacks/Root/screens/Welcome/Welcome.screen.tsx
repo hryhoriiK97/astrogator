@@ -3,8 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "@react-native-community/blur";
 import { MobilePlatform } from "../../../../enums/MobilePlatform";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { ImageBackground, Platform, Pressable, View } from "react-native";
 import Background from "../../../../../assets/images/Group.png";
 import { Astronaut } from "../../../../../assets/svgs/Astronaut";
@@ -15,10 +14,6 @@ import { styles } from "./Welcome.styled";
 
 const WelcomeScreen: FC = () => {
   const { navigate } = useNavigation<RootStackNavigationProp>();
-
-  useEffect(() => {
-    AsyncStorage.setItem("@wasFirstInteraction", "true");
-  }, []);
 
   return (
     <ImageBackground

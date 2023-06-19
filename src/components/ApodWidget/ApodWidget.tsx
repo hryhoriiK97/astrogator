@@ -22,6 +22,7 @@ const ApodWidget: FC<ApodWidgetProps> = ({
         <Image
           style={styles.image}
           source={imageSource}
+          placeholderContentFit={"cover"}
           placeholder={require("../../../assets/splash.png")}
           cachePolicy={"memory-disk"}
         />

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { RootStackRoutes } from "./Root.routes";
 import BottomTabStack from "../BottomTab";
 import FullImageStack from "../FullImage";
@@ -10,7 +10,6 @@ import NasaImageScreen from "../NasaImages/screens/NasaImage/NasaImage.screen";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import ApodScreen from "../Apod/screens/Apod/Apod.screen";
 import NasaVideoScreen from "../NasaVideos/screens/NasaVideo/NasaVideo.screen";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import { CardStyleInterpolators } from "@react-navigation/stack";
 import { MobilePlatform } from "../../enums/MobilePlatform";
@@ -27,11 +26,7 @@ const RootStack: FC = () => {
             ? CardStyleInterpolators.forFadeFromBottomAndroid
             : undefined,
       }}
-      initialRouteName={
-        !!AsyncStorage.getItem("@wasFirstInteraction")
-          ? RootStackRoutes.BottomTabStack
-          : RootStackRoutes.WelcomeScreen
-      }
+      initialRouteName={RootStackRoutes.WelcomeScreen}
     >
       <Stack.Screen
         name={RootStackRoutes.WelcomeScreen}

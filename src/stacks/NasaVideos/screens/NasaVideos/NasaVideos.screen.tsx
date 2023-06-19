@@ -92,7 +92,7 @@ const NasaVideosScreen: FC = () => {
     }
   };
 
-  if (isNasaVideosLoading || isNasaVideosRefetching) {
+  if (isNasaVideosLoading) {
     return <LoadingScreen />;
   }
 
