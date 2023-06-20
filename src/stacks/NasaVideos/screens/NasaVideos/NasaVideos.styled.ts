@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../../../theming/theme";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import { NASA_ASSETS_HEADER_HEIGHT } from "../../../../components";
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,7 +10,8 @@ export const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     backgroundColor: AstrogatorColor.Transparent,
-    paddingVertical: verticalScale(20),
+    paddingTop: NASA_ASSETS_HEADER_HEIGHT + 20,
+    paddingBottom: verticalScale(20),
     paddingHorizontal: scale(8),
   },
   emptyDataIndicatorWrapper: {

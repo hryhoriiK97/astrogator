@@ -11,6 +11,7 @@ import {
   NasaAssetItemModal,
   EmptyDataIndicator,
   useNasaAssetsHeader,
+  NasaAssetsInfoModal,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
@@ -49,6 +50,11 @@ const NasaImagesScreen: FC = () => {
   const [selectedNasaImageData, setSelectedNasaImageData] =
     useState<NasaAssetTransformed | null>(null);
 
+  const [keywords, setKeywords] = useState<string | undefined>(undefined);
+
+  const [isKeywordsQueryError, setIsKeywordsQueryError] =
+    useState<boolean>(false);
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = useCallback(() => {
@@ -59,7 +65,7 @@ const NasaImagesScreen: FC = () => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
 
-  const flatListRef = useRef<FlashList<NasaAssetTransformed>>(null);
+  const flashListRef = useRef<FlashList<NasaAssetTransformed>>(null);
 
   const scrollY = useSharedValue(0);
   const buttonOpacity = useSharedValue(0);
@@ -67,8 +73,11 @@ const NasaImagesScreen: FC = () => {
   const { scrollHandler, animatedHeaderStyle } = useNasaAssetsHeader(scrollY);
 
   const scrollToTop = (): void => {
-    if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+    if (flashListRef && flashListRef.current) {
+      flashListRef.current.scrollToOffset({
+        animated: true,
+        offset: 0,
+      });
     }
   };
 
@@ -89,7 +98,6 @@ const NasaImagesScreen: FC = () => {
     data: nasaImagesResponse,
     isLoading: isNasaImagesLoading,
     refetch: nasaImagesRefetch,
-    isRefetching: isNasaImagesRefetching,
     fetchNextPage: fetchNasaImagesNextPage,
     hasNextPage: hasNasaImagesNextPage,
     isFetchingNextPage: isNasaImagesFetchingNextPage,
@@ -98,7 +106,9 @@ const NasaImagesScreen: FC = () => {
     NasaImagesScreenQueryKey.NasaImages,
     async ({ pageParam = 1 }) => {
       const data = await nasaAssetsAxiosInstance.get(
-        `/search?media_type=image&page=${pageParam}&year_start=2023&keywords=space,mars,saturn,venera,moon,milky`
+        `/search?media_type=image&page=${pageParam}&keywords=${
+          !!keywords ? keywords : "space,mars,saturn,venera,moon,milky"
+        }`
       );
       return {
         data: data,
@@ -107,20 +117,18 @@ const NasaImagesScreen: FC = () => {
     },
     {
       getNextPageParam: (lastPage) => {
-        if (!!lastPage.data.data.collection.links[0].prompt) {
+        if (
+          lastPage.data.data.collection.links &&
+          !!lastPage.data.data.collection.links[0].prompt
+        ) {
           return lastPage.nextPage;
+        } else {
+          return false;
         }
       },
       refetchOnWindowFocus: true,
     }
   );
-
-  const loadNextPageData = () => {
-    if (hasNasaImagesNextPage) {
-      fetchNasaImagesNextPage();
-    }
-  };
-
   if (isNasaImagesLoading) {
     return <LoadingScreen />;
   }
@@ -153,6 +161,14 @@ const NasaImagesScreen: FC = () => {
         })
     : [];
 
+  const loadNextPageData = () => {
+    if (hasNasaImagesNextPage && nasaImagesData.length) {
+      fetchNasaImagesNextPage();
+    } else if (!nasaImagesData.length) {
+      setIsKeywordsQueryError(true);
+    }
+  };
+
   const renderItem = ({ item }: { item: NasaAssetTransformed }) => {
     return (
       <ApodWidget
@@ -181,9 +197,17 @@ const NasaImagesScreen: FC = () => {
 
   return (
     <ScreenWrapper>
-      <NasaAssetsHeader headerAnimatedStyle={animatedHeaderStyle} />
+      <NasaAssetsHeader
+        headerAnimatedStyle={animatedHeaderStyle}
+        currentInputValue={keywords}
+        onInputValueChange={setKeywords}
+        onSearchButtonPress={() =>
+          nasaImagesRefetch({ queryKey: [NasaImagesScreenQueryKey.NasaImages] })
+        }
+      />
+
       <AnimatedFlashList
-        ref={flatListRef}
+        ref={flashListRef}
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaImagesData}
         showsVerticalScrollIndicator={false}
@@ -192,7 +216,7 @@ const NasaImagesScreen: FC = () => {
         ItemSeparatorComponent={renderItemSeparator}
         ListFooterComponent={
           <EmptySpace
-            height={90}
+            height={10}
             isLoaderShown={isNasaImagesFetchingNextPage}
           />
         }
@@ -218,6 +242,16 @@ const NasaImagesScreen: FC = () => {
         <NasaAssetItemModal nasaAssetItemData={selectedNasaImageData!} />
       </BottomSheetModal>
       <ScrollToTopButton onPress={scrollToTop} buttonOpacity={buttonOpacity} />
+      <NasaAssetsInfoModal
+        isVisible={isKeywordsQueryError}
+        onCloseModal={async () => {
+          await setIsKeywordsQueryError(false);
+          await setKeywords(undefined);
+          await nasaImagesRefetch({
+            queryKey: [NasaImagesScreenQueryKey.NasaImages],
+          });
+        }}
+      />
     </ScreenWrapper>
   );
 };

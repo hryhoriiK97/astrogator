@@ -10,6 +10,7 @@ import {
   EmptyDataIndicator,
   NasaAssetsHeader,
   useNasaAssetsHeader,
+  NasaAssetsInfoModal,
 } from "../../../../components";
 import { format } from "date-fns";
 import Animated, {
@@ -45,6 +46,14 @@ const AnimatedFlashList = Animated.createAnimatedComponent(
 const NasaVideosScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
+  const [selectedNasaVideoData, setSelectedNasaVideoData] =
+    useState<NasaAssetTransformed | null>(null);
+
+  const [keywords, setKeywords] = useState<string | undefined>(undefined);
+
+  const [isKeywordsQueryError, setIsKeywordsQueryError] =
+    useState<boolean>(false);
+
   const flashListRef = useRef<FlashList<NasaAssetTransformed>>(null);
 
   const scrollY = useSharedValue(0);
@@ -54,7 +63,10 @@ const NasaVideosScreen: FC = () => {
 
   const scrollToTop = (): void => {
     if (flashListRef && flashListRef.current) {
-      flashListRef.current.scrollToIndex({ index: 0, animated: true });
+      flashListRef.current.scrollToOffset({
+        animated: true,
+        offset: 0,
+      });
     }
   };
 
@@ -71,9 +83,6 @@ const NasaVideosScreen: FC = () => {
     }
   );
 
-  const [selectedNasaVideoData, setSelectedNasaVideoData] =
-    useState<NasaAssetTransformed | null>(null);
-
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = useCallback(() => {
@@ -88,7 +97,6 @@ const NasaVideosScreen: FC = () => {
     data: nasaVideosResponse,
     isLoading: isNasaVideosLoading,
     refetch: nasaVideosRefetch,
-    isRefetching: isNasaVideosRefetching,
     fetchNextPage: fetchNasaVideosNextPage,
     hasNextPage: hasNasaVideosNextPage,
     isFetchingNextPage: isNasaVideosFetchingNextPage,
@@ -97,7 +105,9 @@ const NasaVideosScreen: FC = () => {
     NasaVideosScreenQueryKey.NasaVideos,
     async ({ pageParam = 1 }) => {
       const data = await nasaAssetsAxiosInstance.get(
-        `/search?media_type=video&page=${pageParam}&year_start=2023&keywords=space,mars,saturn,venera,moon,milky way`
+        `/search?media_type=video&page=${pageParam}&year_start=2023&keywords=${
+          !!keywords ? keywords : "space,mars,saturn,venera,moon,milky"
+        }`
       );
       return {
         data: data,
@@ -106,19 +116,18 @@ const NasaVideosScreen: FC = () => {
     },
     {
       getNextPageParam: (lastPage) => {
-        if (!!lastPage.data.data.collection.links[0].prompt) {
+        if (
+          lastPage.data.data.collection.links &&
+          !!lastPage.data.data.collection.links[0].prompt
+        ) {
           return lastPage.nextPage;
+        } else {
+          return false;
         }
       },
       refetchOnWindowFocus: true,
     }
   );
-
-  const loadNextPageData = () => {
-    if (hasNasaVideosNextPage) {
-      fetchNasaVideosNextPage();
-    }
-  };
 
   if (isNasaVideosLoading) {
     return <LoadingScreen />;
@@ -153,6 +162,14 @@ const NasaVideosScreen: FC = () => {
       };
     });
 
+  const loadNextPageData = () => {
+    if (hasNasaVideosNextPage && nasaVideosData.length) {
+      fetchNasaVideosNextPage();
+    } else if (!nasaVideosData.length) {
+      setIsKeywordsQueryError(true);
+    }
+  };
+
   const renderItem = ({ item }: { item: NasaAssetTransformed }) => {
     return (
       <ApodWidget
@@ -181,7 +198,14 @@ const NasaVideosScreen: FC = () => {
 
   return (
     <ScreenWrapper>
-      <NasaAssetsHeader headerAnimatedStyle={animatedHeaderStyle} />
+      <NasaAssetsHeader
+        headerAnimatedStyle={animatedHeaderStyle}
+        currentInputValue={keywords}
+        onInputValueChange={setKeywords}
+        onSearchButtonPress={() =>
+          nasaVideosRefetch({ queryKey: [NasaVideosScreenQueryKey.NasaVideos] })
+        }
+      />
       <AnimatedFlashList
         ref={flashListRef}
         contentContainerStyle={styles.contentContainerStyle}
@@ -192,7 +216,7 @@ const NasaVideosScreen: FC = () => {
         estimatedItemSize={scale(200)}
         ListFooterComponent={
           <EmptySpace
-            height={90}
+            height={10}
             isLoaderShown={isNasaVideosFetchingNextPage}
           />
         }
@@ -218,6 +242,16 @@ const NasaVideosScreen: FC = () => {
         <NasaAssetItemModal nasaAssetItemData={selectedNasaVideoData!} />
       </BottomSheetModal>
       <ScrollToTopButton onPress={scrollToTop} buttonOpacity={buttonOpacity} />
+      <NasaAssetsInfoModal
+        isVisible={isKeywordsQueryError}
+        onCloseModal={async () => {
+          await setIsKeywordsQueryError(false);
+          await setKeywords(undefined);
+          await nasaVideosRefetch({
+            queryKey: [NasaVideosScreenQueryKey.NasaVideos],
+          });
+        }}
+      />
     </ScreenWrapper>
   );
 };
