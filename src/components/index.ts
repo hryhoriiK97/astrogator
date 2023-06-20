@@ -24,3 +24,4 @@ export * from "./HomeHeader";
 export * from "./EmptySpace";
 export * from "./MarsRovers";
 export * from "./MarsPhotosGalleryHeader";
+export * from "./NasaAssetsHeader";

@@ -3,18 +3,27 @@ import {
   Spacer,
   SpacerVariant,
   LoadingScreen,
-  useScrollToTopButton,
   ScrollToTopButton,
   ScreenWrapper,
   CustomBottomSheetBackdrop,
   CustomBottomSheetModalBackground,
   EmptyDataIndicator,
+  NasaAssetsHeader,
+  useNasaAssetsHeader,
 } from "../../../../components";
+import { format } from "date-fns";
+import Animated, {
+  useAnimatedReaction,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { FlashList } from "@shopify/flash-list";
+import { scale } from "react-native-size-matters";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 
 import React, { FC, useCallback, useRef, useState } from "react";
-import { FlatList, Animated, View } from "react-native";
+import { View } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 
@@ -24,24 +33,43 @@ import { RootStackNavigationProp } from "../../../Root/Root.routes";
 import { styles } from "./NasaVideos.styled";
 import { EmptySpace } from "../../../../components/EmptySpace";
 import { NasaAssetTransformed } from "../../../../types/NasaAssetTransformed";
-import { format } from "date-fns";
 
 enum NasaVideosScreenQueryKey {
   NasaVideos = "NasaVideos",
 }
 
+const AnimatedFlashList = Animated.createAnimatedComponent(
+  FlashList<NasaAssetTransformed>
+);
+
 const NasaVideosScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
-  const flatListRef = useRef<FlatList>(null);
+  const flashListRef = useRef<FlashList<NasaAssetTransformed>>(null);
 
-  const { scrollY, buttonOpacity } = useScrollToTopButton();
+  const scrollY = useSharedValue(0);
+  const buttonOpacity = useSharedValue(0);
+
+  const { scrollHandler, animatedHeaderStyle } = useNasaAssetsHeader(scrollY);
 
   const scrollToTop = (): void => {
-    if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0 });
+    if (flashListRef && flashListRef.current) {
+      flashListRef.current.scrollToIndex({ index: 0, animated: true });
     }
   };
+
+  useAnimatedReaction(
+    () => {
+      return scrollY.value;
+    },
+    (scrollYValue) => {
+      if (scrollYValue >= 500) {
+        buttonOpacity.value = withTiming(1);
+      } else {
+        buttonOpacity.value = withTiming(0);
+      }
+    }
+  );
 
   const [selectedNasaVideoData, setSelectedNasaVideoData] =
     useState<NasaAssetTransformed | null>(null);
@@ -153,13 +181,15 @@ const NasaVideosScreen: FC = () => {
 
   return (
     <ScreenWrapper>
-      <Animated.FlatList
-        ref={flatListRef}
+      <NasaAssetsHeader headerAnimatedStyle={animatedHeaderStyle} />
+      <AnimatedFlashList
+        ref={flashListRef}
         contentContainerStyle={styles.contentContainerStyle}
         data={nasaVideosData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
         ItemSeparatorComponent={renderItemSeparator}
+        estimatedItemSize={scale(200)}
         ListFooterComponent={
           <EmptySpace
             height={90}
@@ -168,10 +198,7 @@ const NasaVideosScreen: FC = () => {
         }
         onEndReached={loadNextPageData}
         onEndReachedThreshold={0.2}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
-        )}
+        onScroll={scrollHandler}
       />
 
       <BottomSheetModal

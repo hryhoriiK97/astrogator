@@ -1,22 +1,30 @@
 import {
   ApodWidget,
   Spacer,
+  NasaAssetsHeader,
   SpacerVariant,
   LoadingScreen,
-  useScrollToTopButton,
   ScrollToTopButton,
   ScreenWrapper,
   CustomBottomSheetBackdrop,
   CustomBottomSheetModalBackground,
   NasaAssetItemModal,
   EmptyDataIndicator,
+  useNasaAssetsHeader,
 } from "../../../../components";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
+import { FlashList } from "@shopify/flash-list";
+import { scale } from "react-native-size-matters";
+import Animated, {
+  useAnimatedReaction,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 import React, { FC, useCallback, useRef, useState } from "react";
 
-import { Animated, View } from "react-native";
+import { View } from "react-native";
 import { useInfiniteQuery } from "react-query";
 import { nasaAssetsAxiosInstance } from "../../../../api/nasaAssetsAxiosInstance";
 
@@ -26,8 +34,6 @@ import { EmptySpace } from "../../../../components/EmptySpace";
 import { format } from "date-fns";
 import { NasaAssetTransformed } from "../../../../types/NasaAssetTransformed";
 import { RootStackNavigationProp } from "../../../Root/Root.routes";
-import { FlashList } from "@shopify/flash-list";
-import { scale } from "react-native-size-matters";
 
 enum NasaImagesScreenQueryKey {
   NasaImages = "NasaImages",
@@ -40,18 +46,9 @@ const AnimatedFlashList = Animated.createAnimatedComponent(
 const NasaImagesScreen: FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
-  const flatListRef = useRef<FlashList<NasaAssetTransformed>>(null);
-
-  const { scrollY, buttonOpacity } = useScrollToTopButton();
-
-  const scrollToTop = (): void => {
-    if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0 });
-    }
-  };
-
   const [selectedNasaImageData, setSelectedNasaImageData] =
     useState<NasaAssetTransformed | null>(null);
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = useCallback(() => {
@@ -61,6 +58,32 @@ const NasaImagesScreen: FC = () => {
   const handleCloseModalPress = useCallback(() => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
+
+  const flatListRef = useRef<FlashList<NasaAssetTransformed>>(null);
+
+  const scrollY = useSharedValue(0);
+  const buttonOpacity = useSharedValue(0);
+
+  const { scrollHandler, animatedHeaderStyle } = useNasaAssetsHeader(scrollY);
+
+  const scrollToTop = (): void => {
+    if (flatListRef && flatListRef.current) {
+      flatListRef.current.scrollToIndex({ index: 0, animated: true });
+    }
+  };
+
+  useAnimatedReaction(
+    () => {
+      return scrollY.value;
+    },
+    (scrollYValue) => {
+      if (scrollYValue >= 500) {
+        buttonOpacity.value = withTiming(1);
+      } else {
+        buttonOpacity.value = withTiming(0);
+      }
+    }
+  );
 
   const {
     data: nasaImagesResponse,
@@ -158,6 +181,7 @@ const NasaImagesScreen: FC = () => {
 
   return (
     <ScreenWrapper>
+      <NasaAssetsHeader headerAnimatedStyle={animatedHeaderStyle} />
       <AnimatedFlashList
         ref={flatListRef}
         contentContainerStyle={styles.contentContainerStyle}
@@ -174,10 +198,8 @@ const NasaImagesScreen: FC = () => {
         }
         onEndReached={loadNextPageData}
         onEndReachedThreshold={0.2}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
-        )}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
       />
       <BottomSheetModal
         ref={bottomSheetModalRef}
