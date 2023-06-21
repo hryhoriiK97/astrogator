@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
   screenView: {
     flex: 1,
     justifyContent: "flex-end",
+    paddingVertical: moderateVerticalScale(30),
   },
   safeAreaView: {
     flex: 1,

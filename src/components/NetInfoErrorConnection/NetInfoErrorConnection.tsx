@@ -29,7 +29,7 @@ const NetInfoErrorConnection: FC<NetInfoErrorConnectionProps> = ({
               </Typography>
               <Spacer variant={SpacerVariant.Spacer_10_Vertical} />
               <Typography style={styles.subtitle} variant={Raleway.Light}>
-                Please try to check your internet connection, reload app
+                Please, check your internet connection, and try to reload app
               </Typography>
             </View>
             <Spacer variant={SpacerVariant.Spacer_50_Vertical} />
