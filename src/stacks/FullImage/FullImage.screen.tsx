@@ -18,14 +18,14 @@ const FullImageScreen: FC = () => {
   const [makeStories, setMakeStories] = useState<boolean>(false);
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ width: "100%", height: "100%" }}>
+      <SafeAreaView style={styles.safeAreaView}>
+        <Pressable
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Chevron rotate={180} />
+        </Pressable>
         <View style={styles.container}>
-          <Pressable
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Chevron rotate={180} />
-          </Pressable>
           <ViewShot
             style={styles.imageWrapper}
             captureMode={"update"}
@@ -39,7 +39,6 @@ const FullImageScreen: FC = () => {
             <Image
               style={styles.image}
               source={{ uri: photoUri }}
-              resizeMode={"cover"}
               cachePolicy={"memory"}
               contentFit={"contain"}
             />

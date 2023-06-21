@@ -1,6 +1,7 @@
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
 import { StyleSheet } from "react-native";
 import { AstrogatorColor } from "../../theming/theme";
+import { scale } from "react-native-size-matters";
 
 const { bp } = getRelativeUnits();
 
@@ -11,6 +12,18 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  safeAreaView: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: AstrogatorColor.Black,
+  },
+  backButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: scale(50),
+    height: scale(50),
+    borderRadius: scale(4),
   },
   imageWrapper: {
     width: "100%",

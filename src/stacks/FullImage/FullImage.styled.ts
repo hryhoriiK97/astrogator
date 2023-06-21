@@ -13,12 +13,11 @@ export const styles = StyleSheet.create({
   safeAreaView: {
     width: "100%",
     height: "100%",
+    backgroundColor: AstrogatorColor.Black,
   },
   backButton: {
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderColor: AstrogatorColor.VenetianNights,
     width: scale(50),
     height: scale(50),
     borderRadius: scale(4),
