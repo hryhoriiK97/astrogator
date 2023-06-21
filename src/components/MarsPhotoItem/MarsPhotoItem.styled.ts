@@ -8,7 +8,7 @@ const { bp } = getRelativeUnits();
 const { width } = Dimensions.get("screen");
 
 export const ITEM_WIDTH = width * 0.86;
-export const ITEM_HEIGHT = moderateVerticalScale(ITEM_WIDTH * 1.17);
+export const ITEM_HEIGHT = moderateVerticalScale(ITEM_WIDTH * 1.3);
 
 export const styles = StyleSheet.create({
   container: {
@@ -31,6 +31,9 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   outerWrapper: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 8 * bp,
     shadowColor: "black",
     shadowOffset: {
@@ -39,23 +42,23 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.6,
     shadowRadius: 30,
-    borderWidth: 2,
-    borderColor: "rgba(255, 255, 255, 0.11)",
-    borderStyle: "solid",
   },
   innerWrapper: {
+    alignSelf: "center",
     width: ITEM_WIDTH,
     height: ITEM_HEIGHT,
     overflow: "hidden",
     alignItems: "center",
     borderRadius: 8 * bp,
+    borderWidth: 2,
+    borderColor: "rgba(255, 255, 255, 0.11)",
+    borderStyle: "solid",
   },
   image: {
     width: ITEM_WIDTH,
     height: ITEM_HEIGHT,
     resizeMode: "cover",
-    borderTopRightRadius: 5 * bp,
-    borderBottomRightRadius: 5 * bp,
+    borderRadius: 8 * bp,
   },
   headerButton: {
     width: 40 * bp,
