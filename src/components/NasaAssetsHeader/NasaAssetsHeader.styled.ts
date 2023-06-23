@@ -27,9 +27,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 16,
-    borderWidth: 2,
-    borderColor: AstrogatorColor.VenetianNights,
     borderRadius: 4,
+  },
+  searchButton: {
+    backgroundColor: AstrogatorColor.VenetianNights,
+  },
+  closeButton: {
+    backgroundColor: AstrogatorColor.Gray,
   },
   buttonTitle: {
     color: AstrogatorColor.White,

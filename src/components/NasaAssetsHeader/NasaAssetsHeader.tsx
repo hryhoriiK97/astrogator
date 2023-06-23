@@ -25,12 +25,15 @@ const NasaAssetsHeader: FC<NasaAssetsHeaderProps> = ({
         placeholder="Type the keywords, separated by comma"
       />
       <View style={styles.buttonsWrapper}>
-        <Pressable style={styles.button} onPress={onSearchButtonPress}>
+        <Pressable
+          style={[styles.button, styles.searchButton]}
+          onPress={onSearchButtonPress}
+        >
           <Typography style={styles.buttonTitle}>Search</Typography>
         </Pressable>
         <Pressable
           onPress={() => onInputValueChange(undefined)}
-          style={styles.button}
+          style={[styles.button, styles.closeButton]}
         >
           <Typography style={styles.buttonTitle}>Clear</Typography>
         </Pressable>

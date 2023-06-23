@@ -14,7 +14,8 @@ export const useNasaAssetsHeader = (scrollY: Animated.SharedValue<number>) => {
       const currentScrollY = event.contentOffset.y;
       if (
         (currentScrollY < 0 && scrollY.value <= 0) ||
-        currentScrollY <= scrollY.value
+        currentScrollY < scrollY.value ||
+        (currentScrollY === 0 && scrollY.value === 0)
       ) {
         // User is scrolling up
         headerY.value = withTiming(0);
