@@ -1,6 +1,6 @@
 import { NASA_API_KEY } from "@env";
 import React, { FC, useCallback, useEffect, useRef } from "react";
-import { Animated, Dimensions, View, FlatList, Pressable } from "react-native";
+import { Animated, Dimensions, View, FlatList } from "react-native";
 import { format } from "date-fns";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
@@ -18,16 +18,11 @@ import {
   LoadingScreen,
   MarsPhotoItem,
   MarsRoverSettingsModal,
-  Typography,
-  Raleway,
   ScreenWrapper,
   MarsPhotosGalleryHeader,
 } from "../../../../components";
 import { useMarsRoversStore } from "../../../../stores/marsRovers.store";
 import { styles } from "./MarsRoverPhotos.styled";
-import { DatePickerIcon } from "../../../../../assets/svgs/DatePickerIcon";
-import { Chevron } from "../../../../../assets/svgs/Chevron";
-import { List } from "../../../../../assets/svgs/List";
 import { EmptyDataIndicator } from "../../../../components";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -125,9 +120,6 @@ const MarsRoverPhotosScreen: FC = () => {
     });
     return (
       <MarsPhotoItem
-        name={item.rover.name}
-        cameraFullName={item.camera.full_name}
-        cameraAbbreviation={item.camera.name}
         imageSource={{ uri: item.img_src }}
         translateX={translateX}
         onPress={() => {
