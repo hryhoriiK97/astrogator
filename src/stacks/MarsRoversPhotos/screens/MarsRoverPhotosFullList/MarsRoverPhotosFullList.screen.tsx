@@ -1,5 +1,5 @@
 import React, { FC, useRef } from "react";
-import { Animated, Pressable, FlatList, View } from "react-native";
+import { Pressable, FlatList, View } from "react-native";
 import { Image } from "expo-image";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { MarsRoversPhotosStackParamList } from "../../MarsRoversPhotos.routes";
@@ -11,10 +11,8 @@ import {
   EmptySpace,
   MarsPhotosGalleryHeader,
   ScreenWrapper,
-  ScrollToTopButton,
   Spacer,
   SpacerVariant,
-  useScrollToTopButton,
 } from "../../../../components";
 
 const blurhash =
@@ -28,19 +26,9 @@ const MarsRoverPhotosFullListScreen: FC = () => {
     >();
   const { marsPhotos, marsRoverName, date } = route.params;
 
-  const flatListRef = useRef<FlatList<MarsRoverPhotoItemResponse>>(null);
-
-  const { scrollY, buttonOpacity } = useScrollToTopButton();
-
   const [setSelectedPhotoIndex] = useMarsRoversStore((state) => [
     state.setSelectedPhotoIndex,
   ]);
-
-  const scrollToTop = (): void => {
-    if (flatListRef && flatListRef.current) {
-      flatListRef.current.scrollToIndex({ index: 0, animated: true });
-    }
-  };
 
   const renderItem = ({
     item,
@@ -77,22 +65,13 @@ const MarsRoverPhotosFullListScreen: FC = () => {
             onSettingsModalPress={() => {}}
           />
           <Spacer variant={SpacerVariant.Spacer_20_Vertical} />
-          <Animated.FlatList
-            ref={flatListRef}
+          <FlatList
             data={marsPhotos}
             numColumns={4}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.contentContainerStyle}
             renderItem={renderItem}
             ListFooterComponent={<EmptySpace height={120} />}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-              { useNativeDriver: true }
-            )}
-          />
-          <ScrollToTopButton
-            onPress={scrollToTop}
-            buttonOpacity={buttonOpacity}
           />
         </View>
       </SafeAreaView>
