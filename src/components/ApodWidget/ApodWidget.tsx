@@ -1,11 +1,11 @@
 import React, { FC } from "react";
+import { SharedElement } from "react-navigation-shared-element";
 import { Pressable, View } from "react-native";
 import { Chevron } from "../../../assets/svgs/Chevron";
 import { Image } from "expo-image";
 import { Typography } from "../Typography";
 import { ApodWidgetProps } from "./ApodWidget.props";
 import { styles } from "./ApodWidget.styled";
-import { SharedElement } from "react-navigation-shared-element";
 
 const ApodWidget: FC<ApodWidgetProps> = ({
   id,
@@ -43,7 +43,7 @@ const ApodWidget: FC<ApodWidgetProps> = ({
           <View style={styles.dateAuthorInfo}>
             <Typography
               style={styles.infoTitle}
-              numberOfLines={2}
+              numberOfLines={1}
               ellipsizeMode={"tail"}
             >
               Author: {author ? author : " -"}

@@ -47,7 +47,7 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
                 APODs
               </Typography>
               <Typography style={styles.latestUpdatesTitle}>
-                Latest Updates
+                latest updates
               </Typography>
             </View>
           </View>
@@ -55,7 +55,6 @@ const HomeHeader: FC<HomeHeaderProps> = ({ onDatePicking }) => {
             <DateTimePicker
               mode={"date"}
               display="default"
-              dateFormat="longdate"
               themeVariant="dark"
               minimumDate={new Date("1995-06-16")}
               value={selectedDate || new Date()}
