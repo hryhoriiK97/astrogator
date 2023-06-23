@@ -6,9 +6,9 @@ import {
   SpacerVariant,
   Typography,
 } from "../../../../components";
+import InAppReview from "react-native-in-app-review";
+import { openComposer } from "react-native-email-link";
 import React, { FC, useState } from "react";
-import * as StoreReview from "expo-store-review";
-import * as MailComposer from "expo-mail-composer";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Pressable, View } from "react-native";
 import { AboutAppMask } from "../../../../../assets/svgs/AboutAppMask";
@@ -19,10 +19,8 @@ const AboutAppScreen: FC = () => {
   const [isContactFormVisible, setIsContactFormVisible] =
     useState<boolean>(false);
 
-  const requestReview = async () => {
-    if (await StoreReview.hasAction()) {
-      StoreReview.requestReview();
-    }
+  const requestInAppReview = () => {
+    InAppReview.RequestInAppReview();
   };
   return (
     <ScreenWrapper>
@@ -43,11 +41,16 @@ const AboutAppScreen: FC = () => {
             </View>
             <Spacer variant={SpacerVariant.Spacer_50_Vertical} />
             <View>
-              <Pressable style={styles.reviewButton} onPress={requestReview}>
-                <Typography variant={Raleway.Bold} style={styles.buttonTitle}>
-                  Review
-                </Typography>
-              </Pressable>
+              {InAppReview.isAvailable() && (
+                <Pressable
+                  style={styles.reviewButton}
+                  onPress={requestInAppReview}
+                >
+                  <Typography variant={Raleway.Bold} style={styles.buttonTitle}>
+                    Review
+                  </Typography>
+                </Pressable>
+              )}
               <Spacer variant={SpacerVariant.Spacer_12_Vertical} />
               <Pressable
                 style={styles.contactButton}
@@ -64,9 +67,10 @@ const AboutAppScreen: FC = () => {
       <ContactForm
         isVisible={isContactFormVisible}
         onCloseModal={() => setIsContactFormVisible(false)}
-        onWriteEmailButtonPress={(subject) => {
-          MailComposer.composeAsync({
-            subject: subject,
+        onWriteEmailButtonPress={async (subject) => {
+          await openComposer({
+            to: "mosckalyuck@gmail.com",
+            subject: subject ?? "",
           });
         }}
       />
