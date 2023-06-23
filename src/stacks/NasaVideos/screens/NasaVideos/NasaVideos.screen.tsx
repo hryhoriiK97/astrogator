@@ -202,9 +202,12 @@ const NasaVideosScreen: FC = () => {
         headerAnimatedStyle={animatedHeaderStyle}
         currentInputValue={keywords}
         onInputValueChange={setKeywords}
-        onSearchButtonPress={() =>
-          nasaVideosRefetch({ queryKey: [NasaVideosScreenQueryKey.NasaVideos] })
-        }
+        onSearchButtonPress={async () => {
+          await nasaVideosRefetch({
+            queryKey: [NasaVideosScreenQueryKey.NasaVideos],
+          });
+          scrollToTop();
+        }}
       />
       <AnimatedFlashList
         ref={flashListRef}

@@ -201,9 +201,12 @@ const NasaImagesScreen: FC = () => {
         headerAnimatedStyle={animatedHeaderStyle}
         currentInputValue={keywords}
         onInputValueChange={setKeywords}
-        onSearchButtonPress={() =>
-          nasaImagesRefetch({ queryKey: [NasaImagesScreenQueryKey.NasaImages] })
-        }
+        onSearchButtonPress={async () => {
+          await nasaImagesRefetch({
+            queryKey: [NasaImagesScreenQueryKey.NasaImages],
+          });
+          scrollToTop();
+        }}
       />
 
       <AnimatedFlashList
