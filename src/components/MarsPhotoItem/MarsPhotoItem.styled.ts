@@ -8,7 +8,7 @@ const { bp } = getRelativeUnits();
 const { width } = Dimensions.get("screen");
 
 export const ITEM_WIDTH = width * 0.86;
-export const ITEM_HEIGHT = moderateVerticalScale(ITEM_WIDTH * 1.3);
+export const ITEM_HEIGHT = moderateVerticalScale(ITEM_WIDTH * 1.4);
 
 export const styles = StyleSheet.create({
   container: {
@@ -44,6 +44,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 30,
   },
   innerWrapper: {
+    position: "relative",
     alignSelf: "center",
     width: ITEM_WIDTH,
     height: ITEM_HEIGHT,
