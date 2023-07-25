@@ -1,5 +1,6 @@
+import { MobilePlatform } from "./../../enums/MobilePlatform";
 import { getRelativeUnits } from "../../utils/getRelativeUnits";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 const { bp } = getRelativeUnits();
 
@@ -43,7 +44,7 @@ export default StyleSheet.create({
   },
   goBackButtonWrapper: {
     zIndex: 100,
-    top: 0,
+    top: Platform.OS === MobilePlatform.IOS ? 55 : 70,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
@@ -63,5 +64,9 @@ export default StyleSheet.create({
     fontSize: 17 * bp,
     color: "#FFFFFF",
     marginLeft: 10 * bp,
+  },
+  video: {
+    height: "100%",
+    width: "100%",
   },
 });

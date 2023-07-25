@@ -1,8 +1,9 @@
 {
   "expo": {
+    "jsEngine": "hermes",
     "name": "Astrogator",
     "slug": "astrogator",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,11 +16,32 @@
       "**/*"
     ],
     "ios": {
+      "jsEngine": "jsc",
       "supportsTablet": true,
-      "bundleIdentifier": "com.astrogator"
+      "bundleIdentifier": "com.astrogator",
+      "buildNumber": "2",
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "instagram",
+          "instagram-stories",
+          "mailto",
+          "message",
+          "readdle-spark",
+          "airmail",
+          "ms-outlook",
+          "googlegmail",
+          "inbox-gmail",
+          "ymail",
+          "superhuman",
+          "yandexmail",
+          "fastmail",
+          "protonmail",
+          "szn-email"
+        ]
+      }
     },
     "android": {
-      "icon": "./assets/adaptive-icon.png",
+      "icon": "./assets/icon.png",
       "package": "com.astrogator"
     },
     "web": {
@@ -44,7 +66,8 @@
             "flipper": true
           }
         }
-      ]
+      ],
+      "react-native-email-link"
     ]
   }
 }

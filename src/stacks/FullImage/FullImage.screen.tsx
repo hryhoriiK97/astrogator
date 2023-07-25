@@ -3,9 +3,9 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React, { FC, useState } from "react";
 import { Pressable, SafeAreaView, View } from "react-native";
 import { Image } from "expo-image";
-import ViewShot from "react-native-view-shot";
-import { InstagramIcon } from "../../../assets/svgs/socialMediasIcons/InstagramIcon";
-import { shareOnInstagramStories } from "../../utils/sharing/shareOnInstagramStories";
+// import ViewShot from "react-native-view-shot";
+// import { InstagramIcon } from "../../../assets/svgs/socialMediasIcons/InstagramIcon";
+// import { shareOnInstagramStories } from "../../utils/sharing/shareOnInstagramStories";
 import { FullImageStackParamList } from "./FullImage.routes";
 import { styles } from "./FullImage.styled";
 import { Chevron } from "../../../assets/svgs/Chevron";
@@ -26,7 +26,7 @@ const FullImageScreen: FC = () => {
           <Chevron rotate={180} />
         </Pressable>
         <View style={styles.container}>
-          <ViewShot
+          {/* <ViewShot
             style={styles.imageWrapper}
             captureMode={"update"}
             onCapture={async (uri) => {
@@ -35,18 +35,18 @@ const FullImageScreen: FC = () => {
                 setMakeStories(false);
               }
             }}
-          >
-            <Image
-              style={styles.image}
-              source={{ uri: photoUri }}
-              cachePolicy={"memory"}
-              contentFit={"contain"}
-            />
-            <Typography style={styles.title}>{title}</Typography>
-          </ViewShot>
-          <Pressable onPress={() => setMakeStories(true)}>
+          > */}
+          <Image
+            style={styles.image}
+            source={{ uri: photoUri }}
+            cachePolicy={"memory"}
+            contentFit={"contain"}
+          />
+          <Typography style={styles.title}>{title}</Typography>
+          {/* </ViewShot> */}
+          {/* <Pressable onPress={() => setMakeStories(true)}>
             <InstagramIcon />
-          </Pressable>
+          </Pressable> */}
         </View>
       </SafeAreaView>
     </View>

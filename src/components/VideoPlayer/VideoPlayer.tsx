@@ -1,5 +1,5 @@
 import { Typography } from "../Typography";
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -14,40 +14,40 @@ import type { VideoPlayerProps } from "./VideoPlayerProps";
 
 const VideoPlayer: FC<VideoPlayerProps> = ({ videoUri, onBackPress }) => {
   const videoRef = useRef<Video>(null);
-  // const [errorOccurred, setErrorOccurred] = useState(false);
+  const [errorOccurred, setErrorOccurred] = useState(false);
 
-  // const [readyToDisplay, setReadyToDisplay] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const [readyToDisplay, setReadyToDisplay] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // if (errorOccurred) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <View style={styles.contentContainer}>
-  //         <Typography style={styles.errorHeading}>
-  //           An error occurred during video loading.
-  //         </Typography>
-  //         <Typography style={styles.subText}>Try again later.</Typography>
-  //         <TouchableOpacity
-  //           style={styles.goBackButtonContainer}
-  //           onPress={onBackPress}
-  //         >
-  //           <Arrow fillColor={"#ffffff"} />
-  //           <Typography style={styles.goBackText}>Go Back</Typography>
-  //         </TouchableOpacity>
-  //       </View>
-  //     </View>
-  //   );
-  // }
+  if (errorOccurred) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.contentContainer}>
+          <Typography style={styles.errorHeading}>
+            An error occurred during video loading.
+          </Typography>
+          <Typography style={styles.subText}>Try again later.</Typography>
+          <TouchableOpacity
+            style={styles.goBackButtonContainer}
+            onPress={onBackPress}
+          >
+            <Arrow fillColor={"#ffffff"} />
+            <Typography style={styles.goBackText}>Go Back</Typography>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      {/* <ActivityIndicator
+      <ActivityIndicator
         size="large"
         style={[
           styles.activityIndicator,
           { display: !loading && readyToDisplay ? "none" : "flex" },
         ]}
-      /> */}
+      />
       <View style={styles.goBackButtonWrapper}>
         <Pressable style={styles.goBackButton} onPress={onBackPress}>
           <Arrow />
@@ -58,15 +58,14 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ videoUri, onBackPress }) => {
       </View>
       <Video
         ref={videoRef}
-        
         source={{
           uri: videoUri,
         }}
+        onError={() => setErrorOccurred(true)}
+        onReadyForDisplay={(e) => setReadyToDisplay(!e.status?.isLoaded)}
         useNativeControls
-        style={{
-          height: "100%",
-          width: "100%",
-        }}
+        style={styles.video}
+        onLoad={(e) => setLoading(e.isLoaded)}
         shouldPlay
         rate={1}
         volume={1.0}

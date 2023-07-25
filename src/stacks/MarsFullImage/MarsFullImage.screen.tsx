@@ -3,9 +3,9 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React, { FC, useState } from "react";
 import { Pressable, SafeAreaView, View } from "react-native";
 import { Image } from "expo-image";
-import ViewShot from "react-native-view-shot";
-import { InstagramIcon } from "../../../assets/svgs/socialMediasIcons/InstagramIcon";
-import { shareOnInstagramStories } from "../../utils/sharing/shareOnInstagramStories";
+// import ViewShot from "react-native-view-shot";
+// import { InstagramIcon } from "../../../assets/svgs/socialMediasIcons/InstagramIcon";
+// import { shareOnInstagramStories } from "../../utils/sharing/shareOnInstagramStories";
 import { MarsFullImageStackParamList } from "./MarsFullImage.routes";
 import { styles } from "./MarsFullImage.styled";
 import { Chevron } from "../../../assets/svgs/Chevron";
@@ -29,7 +29,7 @@ const MarsFullImageScreen: FC = () => {
         <Chevron rotate={180} />
       </Pressable>
       <View style={styles.container}>
-        <ViewShot
+        {/* <ViewShot
           style={styles.imageWrapper}
           captureMode={"update"}
           onCapture={async (uri) => {
@@ -38,27 +38,27 @@ const MarsFullImageScreen: FC = () => {
               setMakeStories(false);
             }
           }}
-        >
-          <Image
-            style={styles.image}
-            source={{ uri: photoUri }}
-            contentFit={"contain"}
-          />
-          <View style={styles.imageInformation}>
-            <Typography style={styles.title}>
-              {roverName} {cameraName} ({cameraAbbreviation})
-            </Typography>
-            <Typography variant={Raleway.Bold} style={styles.dateTitle}>
-              {`Earth Date: ${earthDate}  Mars Sol: ${marsSol}`}
-            </Typography>
-          </View>
-        </ViewShot>
-        <Pressable
+        > */}
+        <Image
+          style={styles.image}
+          source={{ uri: photoUri }}
+          contentFit={"contain"}
+        />
+        <View style={styles.imageInformation}>
+          <Typography style={styles.title}>
+            {roverName} {cameraName} ({cameraAbbreviation})
+          </Typography>
+          <Typography variant={Raleway.Bold} style={styles.dateTitle}>
+            {`Earth Date: ${earthDate}  Mars Sol: ${marsSol}`}
+          </Typography>
+        </View>
+        {/* </ViewShot> */}
+        {/* <Pressable
           style={styles.instagramStoriesShareButton}
           onPress={() => setMakeStories(true)}
         >
           <InstagramIcon />
-        </Pressable>
+        </Pressable> */}
       </View>
     </SafeAreaView>
   );

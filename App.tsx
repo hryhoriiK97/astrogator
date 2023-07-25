@@ -3,7 +3,7 @@ import "expo-dev-client";
 import * as SplashScreen from "expo-splash-screen";
 import "react-native-gesture-handler";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { NavigationContainer } from "@react-navigation/native";
@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { NetInfoConnectionProvider } from "./src/providers/NetInfoConnection";
 import RootStack from "./src/stacks/Root";
 import { useFonts } from "expo-font";
+import { Audio } from "expo-av";
 import { Logs } from "expo";
 import { StatusBar } from "expo-status-bar";
 import { LoadingScreen } from "./src/components";
@@ -31,11 +32,18 @@ export default function App() {
     "Raleway-Light": require("./assets/fonts/Raleway-Light.ttf"),
   });
 
+  useEffect(() => {
+    Audio.setAudioModeAsync({
+      playsInSilentModeIOS: true,
+    });
+  }, []);
+
   if (fontsLoaded) {
     setTimeout(SplashScreen.hideAsync, 3000);
   } else {
     return <LoadingScreen />;
   }
+
   return (
     <NetInfoConnectionProvider>
       <StatusBar
